@@ -1,0 +1,135 @@
+<%= form_for(@todo, html: {class: 'form-horizontal'}) do |f| %>
+  <% if @todo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@todo.errors.count, "error") %> prohibited this todo from being saved:</h2>
+
+      <ul>
+      <% @todo.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field form-group">
+    <%= f.label :title, class: 'col-sm-2 control-label' %>
+    <div class="col-sm-7">
+      <%= f.text_field :title, class: 'form-control' %>
+    </div>
+  </div>
+  
+  <h2>Metadata</h2>
+  <div class="field form-group">
+    <%= f.label :Type, class: 'col-sm-2 control-label' %>
+    <div class="col-sm-3">
+    
+       <span class="has-tooltip" data-toggle="tooltip" title="Metadata Type from metadata tab of mapping file. E.g. (ID, Segment, Mindset)">
+       
+        <%= f.text_field :notes, class: 'form-control' %>
+     
+      </span>
+    </div>
+    <%= f.label :code, class: 'col-sm-1 control-label' %>
+    <div class="col-sm-3">
+      
+      <span class="has-tooltip" data-toggle="tooltip" title="Metadata Code from metadata tab of mapping file. E.g. S1, S2, ID">
+      <%= f.text_field :code, class: 'form-control' %>
+      </span>
+  
+    </div>
+    
+   </div>
+   <div class="field form-group">
+    <%= f.label :Column, class: 'col-sm-2 control-label' %>
+    <div class="col-sm-3">
+      <span class="has-tooltip" data-toggle="tooltip" title="Survey Column from metadata tab of mapping file. E.g. T1, T2">
+      <%= f.text_field :notes, class: 'form-control' %>
+      </span> 
+    </div>
+    <%= f.label :Label, class: 'col-sm-1 control-label' %>
+    <div class="col-sm-3">
+      <%= f.text_field :code, class: 'form-control' %>
+    </div>
+    
+   </div>
+    
+  <h2>Verbatim Data</h2>
+  <div class="field form-group">
+    <%= f.label :Column, class: 'col-sm-2 control-label' %>
+    <div class="col-sm-3">
+      <span class="has-tooltip" data-toggle="tooltip" title="Survey Column from metadata tab of mapping file. E.g. T1, T2">
+      <%= f.text_field :notes, class: 'form-control' %>
+      </span> 
+    </div>
+    <%= f.label :Type, class: 'col-sm-1 control-label' %>
+    <div class="col-sm-3">
+      <%= f.text_field :code, class: 'form-control' %>
+    </div>
+    
+   </div>
+  
+    <div class="field form-group">
+    <%= f.label :Code, class: 'col-sm-2 control-label' %>
+    <div class="col-sm-3">
+      <span class="has-tooltip" data-toggle="tooltip" title="Survey Column from metadata tab of mapping file. E.g. T1, T2">
+      <%= f.text_field :notes, class: 'form-control' %>
+      </span> 
+    </div>
+    <%= f.label :Title, class: 'col-sm-1 control-label' %>
+    <div class="col-sm-3">
+      <%= f.text_field :code, class: 'form-control' %>
+    </div>
+    
+   </div>
+    <div class="field form-group">
+    <%= f.label :Frame_Of_Reference, class: 'col-sm-2 control-label' %>
+    <div class="col-sm-3">
+      <span class="has-tooltip" data-toggle="tooltip" title="Survey Column from metadata tab of mapping file. E.g. T1, T2">
+      <%= f.text_field :notes, class: 'form-control' %>
+      </span> 
+    </div>
+    <%= f.label :Segment, class: 'col-sm-1 control-label' %>
+    <div class="col-sm-3">
+      <%= f.text_field :code, class: 'form-control' %>
+    </div>
+    
+   </div>
+   
+  
+  
+  
+  <h2>Graph Data</h2>
+  <div class="field form-group">
+    <%= f.label :Code, class: 'col-sm-2 control-label' %>
+    <div class="col-sm-3">
+      <span class="has-tooltip" data-toggle="tooltip" title="Survey Column from metadata tab of mapping file. E.g. T1, T2">
+      <%= f.text_field :notes, class: 'form-control' %>
+      </span> 
+    </div>
+    <%= f.label :Type, class: 'col-sm-1 control-label' %>
+    <div class="col-sm-3">
+      <%= f.text_field :code, class: 'form-control' %>
+    </div>
+    </div>
+    
+    <div class="field form-group">
+    <%= f.label :Topic, class: 'col-sm-2 control-label' %>
+    <div class="col-sm-3">
+      <span class="has-tooltip" data-toggle="tooltip" title="Survey Column from metadata tab of mapping file. E.g. T1, T2">
+      <%= f.text_field :notes, class: 'form-control' %>
+      </span> 
+    </div>
+    <%= f.label :Title, class: 'col-sm-1 control-label' %>
+    <div class="col-sm-3">
+      <%= f.text_field :code, class: 'form-control' %>
+    </div>
+  </div>
+  
+  
+  
+  <div class="actions form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= f.submit %>
+    </div>
+  </div>
+<% end %>
