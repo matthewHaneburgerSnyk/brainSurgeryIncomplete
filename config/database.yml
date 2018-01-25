@@ -35,3 +35,4 @@ production:
   database: db/production.sqlite3
   adapter: postgresql
   database: brain_surgery
+  host: localhost
