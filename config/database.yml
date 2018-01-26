@@ -32,8 +32,13 @@ test:
 
 production:
   <<: *default
- 
   adapter: postgresql
   database: brain_surgery
-  host: ""
+  host: localhost
+  pool: 5
+  timeout: 5000
+
+# adapter: postgresql
+# database: brain_surgery
+# host: ""
 
