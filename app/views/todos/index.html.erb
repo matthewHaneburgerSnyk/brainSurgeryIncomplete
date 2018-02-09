@@ -5,9 +5,10 @@
 
 <table class="table">
   <thead>
+ 
     <tr>
-      <th>Title</th>
-      <th>Notes</th>
+      <th>Project Name</th>
+      <th>Description</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -17,11 +18,11 @@
       <tr>
         <td>
           <span class="has-tooltip" data-toggle="tooltip" title="<%= "Created on #{todo.created_at.strftime("%m/%e/%Y at %w:%M %p")}, Last modified on #{todo.updated_at.strftime("%m/%e/%Y at %w:%M %p")}" %>">
-            <%= todo.title %>
+            <%= todo.project_name %>
           </span>
         </td>
         <td>
-          <% if todo.notes? %>
+          <% if todo.project_description? %>
             <!-- Button trigger modal -->
             <button class="btn btn-link" data-toggle="modal" data-target="#todo-<%= todo.id %>-notes">
               View notes
@@ -32,10 +33,10 @@
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h4 class="modal-title" id="todo-<%= todo.id %>-label">Notes</h4>
+                    <h4 class="modal-title" id="todo-<%= todo.id %>-label">Description</h4>
                   </div>
                   <div class="modal-body">
-                    <%= todo.notes %>
+                    <%= todo.project_description %>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>

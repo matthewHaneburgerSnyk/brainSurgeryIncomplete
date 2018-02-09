@@ -1,3 +1,4 @@
+
 <%= form_for(@todo, html: {class: 'form-horizontal'}) do |f| %>
   <% if @todo.errors.any? %>
     <div id="error_explanation">
@@ -11,125 +12,229 @@
     </div>
   <% end %>
 
+<!--   Project Title and description     -->
   <div class="field form-group">
-    <%= f.label :title, class: 'col-sm-2 control-label' %>
-    <div class="col-sm-7">
-      <%= f.text_field :title, class: 'form-control' %>
+    <%= f.label :project_name, class: 'col-sm-2 control-label' %>
+    <div class="col-sm-5">
+      <%= f.text_field :project_name, class: 'form-control' %>
     </div>
   </div>
   
-  <h2>Metadata</h2>
   <div class="field form-group">
-    <%= f.label :Type, class: 'col-sm-2 control-label' %>
-    <div class="col-sm-3">
-    
-       <span class="has-tooltip" data-toggle="tooltip" title="Metadata Type from metadata tab of mapping file. E.g. (ID, Segment, Mindset)">
+    <%= f.label :project_description, class: 'col-sm-2 control-label' %>
+    <div class="col-sm-5">
+      <%= f.text_area :project_description, class: 'form-control' %>
+    </div>
+  </div>
+  
+<!-- Repeatable Verbatim Data -->
+<div class="container">
+<h2>Verbatim Data</h2>
+<div class="field form-group">
+    <table id="myTable" class="table order-list">
+    <thead>
+        <tr>
+            <td>Topic Code</td>
+            <td>Topic Type</td>
+            <td>Survey Column</td>
+            <td>Topic title</td>
+            <td>Topic Frame of Reference</td>
+            <td>Segment</td>
+            <td>Product Mindset</td>
+            <td>Ranking Value</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
        
-        <%= f.text_field :notes, class: 'form-control' %>
+                <%= f.text_field :v_topic_code, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                        
+                <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
+       
+                <%= f.text_field :v_topic_type, class: 'form-control' %>
      
-      </span>
-    </div>
-    <%= f.label :code, class: 'col-sm-1 control-label' %>
-    <div class="col-sm-3">
-      
-      <span class="has-tooltip" data-toggle="tooltip" title="Metadata Code from metadata tab of mapping file. E.g. S1, S2, ID">
-      <%= f.text_field :code, class: 'form-control' %>
-      </span>
-  
-    </div>
+            </span>
+            
+            </td>
+            <td class="col-sm-1">
+            
+                 <span class="has-tooltip" data-toggle="tooltip" title="Column where the verbatim should begin grabbing data.">
+       
+                <%= f.text_field :v_survey_column, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+             
+                <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
+       
+                <%= f.text_field :v_topic_title, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
+       
+                <%= f.text_field :v_topic_frame, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
+       
+                <%= f.text_field :v_segment, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+                           <span class="has-tooltip" data-toggle="tooltip" title="Column to compare valence for separate product.">
+       
+                <%= f.text_field :v_product_mindset, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
+       
+                <%= f.text_field :v_ranking_num, class: 'form-control' %>
+                </span>
+            </td>
+                      
+            
+            <td class="col-sm-1"><a class="deleteRow"></a>
+
+            </td>
+        
+        
+
+        
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="8" style="text-align: left;">
+                <input type="button" class="btn btn-lg btn-block " id="addrow" value="Add Row" />
+                
+                
+            </td>
+        </tr>
+        <tr>
+        </tr>
+    </tfoot>
+</table>
+ </div>
+</div>
+
+
+
+<div class="container">
+<h2>Graph Data</h2>
+<div class="field form-group">
+    <table id="myTable1" class="table order-list1">
+    <thead>
+        <tr>
+            <td>Topic Code</td>
+            <td>Topic Type</td>
+            <td>Survey Column</td>
+            <td>Topic title</td>
+            <td>Topic Frame of Reference</td>
+            <td>Segment</td>
+            <td>Product Mindset</td>
+            <td>Ranking Value</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
+       
+                <%= f.text_field :g_topic_code, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                        
+                <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
+       
+                <%= f.text_field :g_topic_type, class: 'form-control' %>
+     
+            </span>
+            
+            </td>
+            <td class="col-sm-1">
+            
+                 <span class="has-tooltip" data-toggle="tooltip" title="Column where the verbatim should begin grabbing data.">
+       
+                <%= f.text_field :g_survey_column, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+             
+                <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
+       
+                <%= f.text_field :g_topic_title, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
+       
+                <%= f.text_field :g_topic_frame, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
+       
+                <%= f.text_field :g_segment, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+                           <span class="has-tooltip" data-toggle="tooltip" title="Column to compare valence for separate product.">
+       
+                <%= f.text_field :g_product_mindset, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
+       
+                <%= f.text_field :g_ranking_num, class: 'form-control' %>
+                </span>
+            </td>
+                      
+            
+            <td class="col-sm-1"><a class="deleteRow"></a>
+
+            </td>
+        
+        
+
+        
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="8" style="text-align: left;">
+                <input type="button" class="btn btn-lg btn-block " id="addrow1" value="Add Row" />
+                
+                
+            </td>
+        </tr>
+        <tr>
+        </tr>
+    </tfoot>
+</table>
+ </div>
+</div>
+
+
     
-   </div>
-   <div class="field form-group">
-    <%= f.label :Column, class: 'col-sm-2 control-label' %>
-    <div class="col-sm-3">
-      <span class="has-tooltip" data-toggle="tooltip" title="Survey Column from metadata tab of mapping file. E.g. T1, T2">
-      <%= f.text_field :notes, class: 'form-control' %>
-      </span> 
-    </div>
-    <%= f.label :Label, class: 'col-sm-1 control-label' %>
-    <div class="col-sm-3">
-      <%= f.text_field :code, class: 'form-control' %>
-    </div>
-    
-   </div>
-    
-  <h2>Verbatim Data</h2>
-  <div class="field form-group">
-    <%= f.label :Column, class: 'col-sm-2 control-label' %>
-    <div class="col-sm-3">
-      <span class="has-tooltip" data-toggle="tooltip" title="Survey Column from metadata tab of mapping file. E.g. T1, T2">
-      <%= f.text_field :notes, class: 'form-control' %>
-      </span> 
-    </div>
-    <%= f.label :Type, class: 'col-sm-1 control-label' %>
-    <div class="col-sm-3">
-      <%= f.text_field :code, class: 'form-control' %>
-    </div>
-    
-   </div>
-  
-    <div class="field form-group">
-    <%= f.label :Code, class: 'col-sm-2 control-label' %>
-    <div class="col-sm-3">
-      <span class="has-tooltip" data-toggle="tooltip" title="Survey Column from metadata tab of mapping file. E.g. T1, T2">
-      <%= f.text_field :notes, class: 'form-control' %>
-      </span> 
-    </div>
-    <%= f.label :Title, class: 'col-sm-1 control-label' %>
-    <div class="col-sm-3">
-      <%= f.text_field :code, class: 'form-control' %>
-    </div>
-    
-   </div>
-    <div class="field form-group">
-    <%= f.label :Frame_Of_Reference, class: 'col-sm-2 control-label' %>
-    <div class="col-sm-3">
-      <span class="has-tooltip" data-toggle="tooltip" title="Survey Column from metadata tab of mapping file. E.g. T1, T2">
-      <%= f.text_field :notes, class: 'form-control' %>
-      </span> 
-    </div>
-    <%= f.label :Segment, class: 'col-sm-1 control-label' %>
-    <div class="col-sm-3">
-      <%= f.text_field :code, class: 'form-control' %>
-    </div>
-    
-   </div>
-   
-  
-  
-  
-  <h2>Graph Data</h2>
-  <div class="field form-group">
-    <%= f.label :Code, class: 'col-sm-2 control-label' %>
-    <div class="col-sm-3">
-      <span class="has-tooltip" data-toggle="tooltip" title="Survey Column from metadata tab of mapping file. E.g. T1, T2">
-      <%= f.text_field :notes, class: 'form-control' %>
-      </span> 
-    </div>
-    <%= f.label :Type, class: 'col-sm-1 control-label' %>
-    <div class="col-sm-3">
-      <%= f.text_field :code, class: 'form-control' %>
-    </div>
-    </div>
-    
-    <div class="field form-group">
-    <%= f.label :Topic, class: 'col-sm-2 control-label' %>
-    <div class="col-sm-3">
-      <span class="has-tooltip" data-toggle="tooltip" title="Survey Column from metadata tab of mapping file. E.g. T1, T2">
-      <%= f.text_field :notes, class: 'form-control' %>
-      </span> 
-    </div>
-    <%= f.label :Title, class: 'col-sm-1 control-label' %>
-    <div class="col-sm-3">
-      <%= f.text_field :code, class: 'form-control' %>
-    </div>
-  </div>
-  
+ 
   
   
   <div class="actions form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <%= f.submit %>
+      
+      <%= f.submit :Submit %>
     </div>
   </div>
 <% end %>

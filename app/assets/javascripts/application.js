@@ -26,3 +26,91 @@ $(document).ready(function() {
     trigger: 'hover'
   });
 });
+
+$(document).ready(function () {
+    var counter = 0;
+
+    $("#addrow").on("click", function () {
+        var newRow = $("<tr>");
+        var cols = "";
+
+        cols += '<td><input type="text" class="form-control" name="todo[v_topic_code'+ counter + ']" id="todo_v_topic_code'+ counter +'"></td>';
+        //cols += '<td><input type="text" class="form-control" name="v_topic_code' + counter + '"/></td>'; 
+        cols += '<td><input type="text" class="form-control" name="todo[v_topic_type' + counter + ']" id="todo_v_topic_type'+ counter +'"/></td>';
+        cols += '<td><input type="text" class="form-control" name="todo[v_survey_column' + counter + ']" id="todo_v_survey_column'+ counter + '"/></td>';
+        cols += '<td><input type="text" class="form-control" name="todo[v_topic_title' + counter + ']" id="todo_v_topic_title' + counter + '" /></td>';
+        cols += '<td><input type="text" class="form-control" name="todo[v_topic_frame' + counter + ']" id="todo_v_topic_frame' + counter + '" /></td>';
+        cols += '<td><input type="text" class="form-control" name="todo[v_segment' + counter + ']" id="todo_v_segment' + counter + '"/></td>';
+        cols += '<td><input type="text" class="form-control" name="todo[v_product_mindset' + counter + ']" id="todo_v_product_mindset' + counter + '" /></td>';
+        cols += '<td><input type="text" class="form-control" name="todo[v_ranking_num' + counter + ']" id="todo_v_ranking_num' +counter + '"/></td>';
+       
+
+        cols += '<td><input type="button" class="ibtnDel btn btn-md btn-danger "  value="Delete"></td>';
+        newRow.append(cols);
+        $("table.order-list").append(newRow);
+        counter++;
+    });
+
+
+
+    $("table.order-list").on("click", ".ibtnDel", function (event) {
+        $(this).closest("tr").remove();       
+        counter -= 1
+    });
+
+
+});
+
+
+
+
+
+$(document).ready(function () {
+    var counter = 0;
+
+    $("#addrow1").on("click", function () {
+        var newRow = $("<tr>");
+        var cols = "";
+
+        cols += '<td><input type="text" class="form-control" name="todo[g_topic_code'+ counter + ']" id="todo_g_topic_code'+ counter +'"></td>';
+        //cols += '<td><input type="text" class="form-control" name="v_topic_code' + counter + '"/></td>'; 
+        cols += '<td><input type="text" class="form-control" name="todo[g_topic_type' + counter + ']" id="todo_g_topic_type'+ counter +'"/></td>';
+        cols += '<td><input type="text" class="form-control" name="todo[g_survey_column' + counter + ']" id="todo_g_survey_column'+ counter + '"/></td>';
+        cols += '<td><input type="text" class="form-control" name="todo[g_topic_title' + counter + ']" id="todo_g_topic_title' + counter + '" /></td>';
+        cols += '<td><input type="text" class="form-control" name="todo[g_topic_frame' + counter + ']" id="todo_g_topic_frame' + counter + '" /></td>';
+        cols += '<td><input type="text" class="form-control" name="todo[g_segment' + counter + ']" id="todo_g_segment' + counter + '"/></td>';
+        cols += '<td><input type="text" class="form-control" name="todo[g_product_mindset' + counter + ']" id="todo_g_product_mindset' + counter + '" /></td>';
+        cols += '<td><input type="text" class="form-control" name="todo[g_ranking_num' + counter + ']" id="todo_g_ranking_num' +counter + '"/></td>';
+       
+
+        cols += '<td><input type="button" class="ibtnDel btn btn-md btn-danger "  value="Delete"></td>';
+        newRow.append(cols);
+        $("table.order-list1").append(newRow);
+        counter++;
+    });
+
+
+
+    $("table.order-list1").on("click", ".ibtnDel", function (event) {
+        $(this).closest("tr").remove();       
+        counter -= 1
+    });
+
+
+});
+
+
+
+
+function calculateRow(row) {
+    var price = +row.find('input[name^="price"]').val();
+
+}
+
+function calculateGrandTotal() {
+    var grandTotal = 0;
+    $("table.order-list").find('input[name^="price"]').each(function () {
+        grandTotal += +$(this).val();
+    });
+    $("#grandtotal").text(grandTotal.toFixed(2));
+}
