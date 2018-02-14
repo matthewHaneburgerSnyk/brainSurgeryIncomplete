@@ -26,6 +26,18 @@
       <%= f.text_area :project_description, class: 'form-control' %>
     </div>
   </div>
+
+  
+ <div class="field form-group">
+    <%= f.label :upload_mapping_file,  class: 'col-sm-2 control-label' %>
+    <div class="col-sm-5">
+      <%= f.file_field :mapping_file, file_field: { hidden: true }, class: 'form-control' %>
+    </div>
+  </div>
+  
+  
+  
+  
   
 <!-- Repeatable Verbatim Data -->
 <div class="container">
