@@ -1,4 +1,4 @@
-
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 <%= form_for(@todo, html: {class: 'form-horizontal'}) do |f| %>
   <% if @todo.errors.any? %>
     <div id="error_explanation">
@@ -34,8 +34,8 @@
       <%= f.file_field :mapping_file, file_field: { hidden: true }, class: 'form-control' %>
     </div>
   </div>
-  
-  
+ 
+    
   
   
   
@@ -57,6 +57,7 @@
         </tr>
     </thead>
     <tbody>
+        
         <tr>
             <td class="col-sm-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
@@ -69,7 +70,7 @@
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
        
-                <%= f.text_field :v_topic_type, class: 'form-control' %>
+                <%= f.select :v_topic_type, ['standard_3x', 'standard_1x', 'ranking'], class: 'form-control'%>
      
             </span>
             
@@ -85,13 +86,13 @@
              
                 <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
        
-                <%= f.text_field :v_topic_title, class: 'form-control' %>
+                <%= f.text_field :v_topic_title, :maxlength => 25, class: 'form-control'  %>
                 </span>
             </td>
             <td class="col-sm-1">
                          <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
        
-                <%= f.text_field :v_topic_frame, class: 'form-control' %>
+                <%= f.text_field :v_topic_frame, class: 'form-control'  %>
                 </span>
             </td>
             <td class="col-sm-1">
@@ -122,6 +123,3420 @@
 
         
         </tr>
+    
+        
+        <% unless @todo.v_topic_code0.nil? %>
+        
+        <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
+       
+                <%= f.text_field :v_topic_code0, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                        
+                <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
+       
+                <%= f.select :v_topic_type0, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+            
+            </span>
+            
+            </td>
+            <td class="col-sm-1">
+            
+                 <span class="has-tooltip" data-toggle="tooltip" title="Column where the verbatim should begin grabbing data.">
+       
+                <%= f.text_field :v_survey_column0, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+             
+                <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
+       
+                <%= f.text_field :v_topic_title0, :maxlength => 25, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
+       
+                <%= f.text_field :v_topic_frame0, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
+       
+                <%= f.text_field :v_segment0, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+                           <span class="has-tooltip" data-toggle="tooltip" title="Column to compare valence for separate product.">
+       
+                <%= f.text_field :v_product_mindset0, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
+       
+                <%= f.text_field :v_ranking_num0, class: 'form-control' %>
+                </span>
+            </td>
+                      
+            
+            <td class="col-sm-1"><a class="deleteRow"></a>
+
+            </td>
+        
+       
+        </tr>
+        
+        <% end %>
+        
+        <% unless @todo.v_topic_code1.nil? %>
+        
+        <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
+       
+                <%= f.text_field :v_topic_code1, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                        
+                <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
+       
+                <%= f.select :v_topic_type1, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+            
+            </span>
+            
+            </td>
+            <td class="col-sm-1">
+            
+                 <span class="has-tooltip" data-toggle="tooltip" title="Column where the verbatim should begin grabbing data.">
+       
+                <%= f.text_field :v_survey_column1, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+             
+                <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
+       
+                <%= f.text_field :v_topic_title1, :maxlength => 25, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
+       
+                <%= f.text_field :v_topic_frame1, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
+       
+                <%= f.text_field :v_segment1, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+                           <span class="has-tooltip" data-toggle="tooltip" title="Column to compare valence for separate product.">
+       
+                <%= f.text_field :v_product_mindset1, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
+       
+                <%= f.text_field :v_ranking_num1, class: 'form-control' %>
+                </span>
+            </td>
+                      
+            
+            <td class="col-sm-1"><a class="deleteRow"></a>
+
+            </td>
+        
+       
+        </tr>
+        
+        <% end %>
+        
+        
+        <% unless @todo.v_topic_code2.nil? %>
+        
+        <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
+       
+                <%= f.text_field :v_topic_code2, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                        
+                <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
+       
+                <%= f.select :v_topic_type2, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+            
+            </span>
+            
+            </td>
+            <td class="col-sm-1">
+            
+                 <span class="has-tooltip" data-toggle="tooltip" title="Column where the verbatim should begin grabbing data.">
+       
+                <%= f.text_field :v_survey_column2, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+             
+                <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
+       
+                <%= f.text_field :v_topic_title2, :maxlength => 25, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
+       
+                <%= f.text_field :v_topic_frame2, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
+       
+                <%= f.text_field :v_segment2, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+                           <span class="has-tooltip" data-toggle="tooltip" title="Column to compare valence for separate product.">
+       
+                <%= f.text_field :v_product_mindset2, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
+       
+                <%= f.text_field :v_ranking_num2, class: 'form-control' %>
+                </span>
+            </td>
+                      
+            
+            <td class="col-sm-1"><a class="deleteRow"></a>
+
+            </td>
+        
+       
+        </tr>
+        
+        <% end %>
+        
+        <% unless @todo.v_topic_code3.nil? %>
+        
+        <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
+       
+                <%= f.text_field :v_topic_code3, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                        
+                <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
+       
+                <%= f.select :v_topic_type3, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+            
+            </span>
+            
+            </td>
+            <td class="col-sm-1">
+            
+                 <span class="has-tooltip" data-toggle="tooltip" title="Column where the verbatim should begin grabbing data.">
+       
+                <%= f.text_field :v_survey_column3, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+             
+                <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
+       
+                <%= f.text_field :v_topic_title3, :maxlength => 25, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
+       
+                <%= f.text_field :v_topic_frame3, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
+       
+                <%= f.text_field :v_segment3, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+                           <span class="has-tooltip" data-toggle="tooltip" title="Column to compare valence for separate product.">
+       
+                <%= f.text_field :v_product_mindset3, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
+       
+                <%= f.text_field :v_ranking_num3, class: 'form-control' %>
+                </span>
+            </td>
+                      
+            
+            <td class="col-sm-1"><a class="deleteRow"></a>
+
+            </td>
+        
+       
+        </tr>
+        
+        <% end %>
+        
+        <% unless @todo.v_topic_code4.nil? %>
+        
+        <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
+       
+                <%= f.text_field :v_topic_code4, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                        
+                <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
+       
+                <%= f.select :v_topic_type4, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+            
+            </span>
+            
+            </td>
+            <td class="col-sm-1">
+            
+                 <span class="has-tooltip" data-toggle="tooltip" title="Column where the verbatim should begin grabbing data.">
+       
+                <%= f.text_field :v_survey_column4, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+             
+                <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
+       
+                <%= f.text_field :v_topic_title4, :maxlength => 25, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
+       
+                <%= f.text_field :v_topic_frame4, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
+       
+                <%= f.text_field :v_segment4, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+                           <span class="has-tooltip" data-toggle="tooltip" title="Column to compare valence for separate product.">
+       
+                <%= f.text_field :v_product_mindset4, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
+       
+                <%= f.text_field :v_ranking_num4, class: 'form-control' %>
+                </span>
+            </td>
+                      
+            
+            <td class="col-sm-1"><a class="deleteRow"></a>
+
+            </td>
+        
+       
+        </tr>
+        
+        <% end %>
+        
+        <% unless @todo.v_topic_code5.nil? %>
+        
+        <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
+       
+                <%= f.text_field :v_topic_code5, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                        
+                <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
+       
+                <%= f.select :v_topic_type5, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+            
+            </span>
+            
+            </td>
+            <td class="col-sm-1">
+            
+                 <span class="has-tooltip" data-toggle="tooltip" title="Column where the verbatim should begin grabbing data.">
+       
+                <%= f.text_field :v_survey_column5, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+             
+                <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
+       
+                <%= f.text_field :v_topic_title5, :maxlength => 25, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
+       
+                <%= f.text_field :v_topic_frame5, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
+       
+                <%= f.text_field :v_segment5, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+                           <span class="has-tooltip" data-toggle="tooltip" title="Column to compare valence for separate product.">
+       
+                <%= f.text_field :v_product_mindset5, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
+       
+                <%= f.text_field :v_ranking_num5, class: 'form-control' %>
+                </span>
+            </td>
+                      
+            
+            <td class="col-sm-1"><a class="deleteRow"></a>
+
+            </td>
+        
+       
+        </tr>
+        
+        <% end %>
+        
+        <% unless @todo.v_topic_code6.nil? %>
+        
+        <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
+       
+                <%= f.text_field :v_topic_code6, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                        
+                <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
+       
+                <%= f.select :v_topic_type6, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+            
+            </span>
+            
+            </td>
+            <td class="col-sm-1">
+            
+                 <span class="has-tooltip" data-toggle="tooltip" title="Column where the verbatim should begin grabbing data.">
+       
+                <%= f.text_field :v_survey_column6, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+             
+                <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
+       
+                <%= f.text_field :v_topic_title6, :maxlength => 25, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
+       
+                <%= f.text_field :v_topic_frame6, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
+       
+                <%= f.text_field :v_segment6, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+                           <span class="has-tooltip" data-toggle="tooltip" title="Column to compare valence for separate product.">
+       
+                <%= f.text_field :v_product_mindset6, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
+       
+                <%= f.text_field :v_ranking_num6, class: 'form-control' %>
+                </span>
+            </td>
+                      
+            
+            <td class="col-sm-1"><a class="deleteRow"></a>
+
+            </td>
+        
+       
+        </tr>
+        
+        <% end %>
+        
+        
+        <% unless @todo.v_topic_code7.nil? %>
+        
+        <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
+       
+                <%= f.text_field :v_topic_code7, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                        
+                <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
+       
+                <%= f.select :v_topic_type7, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+            
+            </span>
+            
+            </td>
+            <td class="col-sm-1">
+            
+                 <span class="has-tooltip" data-toggle="tooltip" title="Column where the verbatim should begin grabbing data.">
+       
+                <%= f.text_field :v_survey_column7, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+             
+                <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
+       
+                <%= f.text_field :v_topic_title7, :maxlength => 25, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
+       
+                <%= f.text_field :v_topic_frame7, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
+       
+                <%= f.text_field :v_segment7, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+                           <span class="has-tooltip" data-toggle="tooltip" title="Column to compare valence for separate product.">
+       
+                <%= f.text_field :v_product_mindset7, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
+       
+                <%= f.text_field :v_ranking_num7, class: 'form-control' %>
+                </span>
+            </td>
+                      
+            
+            <td class="col-sm-1"><a class="deleteRow"></a>
+
+            </td>
+        
+       
+        </tr>
+        
+        <% end %>
+        
+        
+        <% unless @todo.v_topic_code8.nil? %>
+        
+        <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
+       
+                <%= f.text_field :v_topic_code8, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                        
+                <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
+       
+                <%= f.select :v_topic_type8, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+            
+            </span>
+            
+            </td>
+            <td class="col-sm-1">
+            
+                 <span class="has-tooltip" data-toggle="tooltip" title="Column where the verbatim should begin grabbing data.">
+       
+                <%= f.text_field :v_survey_column8, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+             
+                <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
+       
+                <%= f.text_field :v_topic_title8, :maxlength => 25, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
+       
+                <%= f.text_field :v_topic_frame8, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
+       
+                <%= f.text_field :v_segment8, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+                           <span class="has-tooltip" data-toggle="tooltip" title="Column to compare valence for separate product.">
+       
+                <%= f.text_field :v_product_mindset8, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
+       
+                <%= f.text_field :v_ranking_num8, class: 'form-control' %>
+                </span>
+            </td>
+                      
+            
+            <td class="col-sm-1"><a class="deleteRow"></a>
+
+            </td>
+        
+       
+        </tr>
+        
+        <% end %>
+        
+        
+        <% unless @todo.v_topic_code9.nil? %>
+        
+        <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
+       
+                <%= f.text_field :v_topic_code9, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                        
+                <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
+       
+                <%= f.select :v_topic_type9, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+            
+            </span>
+            
+            </td>
+            <td class="col-sm-1">
+            
+                 <span class="has-tooltip" data-toggle="tooltip" title="Column where the verbatim should begin grabbing data.">
+       
+                <%= f.text_field :v_survey_column9, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+             
+                <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
+       
+                <%= f.text_field :v_topic_title9, :maxlength => 25, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
+       
+                <%= f.text_field :v_topic_frame9, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
+       
+                <%= f.text_field :v_segment9, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+                           <span class="has-tooltip" data-toggle="tooltip" title="Column to compare valence for separate product.">
+       
+                <%= f.text_field :v_product_mindset9, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
+       
+                <%= f.text_field :v_ranking_num9, class: 'form-control' %>
+                </span>
+            </td>
+                      
+            
+            <td class="col-sm-1"><a class="deleteRow"></a>
+
+            </td>
+        
+       
+        </tr>
+        
+        <% end %>
+        
+        
+        <% unless @todo.v_topic_code10.nil? %>
+        
+        <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
+       
+                <%= f.text_field :v_topic_code10, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                        
+                <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
+       
+                <%= f.select :v_topic_type10, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+            
+            </span>
+            
+            </td>
+            <td class="col-sm-1">
+            
+                 <span class="has-tooltip" data-toggle="tooltip" title="Column where the verbatim should begin grabbing data.">
+       
+                <%= f.text_field :v_survey_column10, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+             
+                <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
+       
+                <%= f.text_field :v_topic_title10, :maxlength => 25, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
+       
+                <%= f.text_field :v_topic_frame10, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
+       
+                <%= f.text_field :v_segment10, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+                           <span class="has-tooltip" data-toggle="tooltip" title="Column to compare valence for separate product.">
+       
+                <%= f.text_field :v_product_mindset10, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
+       
+                <%= f.text_field :v_ranking_num10, class: 'form-control' %>
+                </span>
+            </td>
+                      
+            
+            <td class="col-sm-1"><a class="deleteRow"></a>
+
+            </td>
+        
+       
+        </tr>
+        
+        <% end %>
+        
+        <% unless @todo.v_topic_code11.nil? %>
+        
+        <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
+       
+                <%= f.text_field :v_topic_code11, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                        
+                <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
+       
+                <%= f.select :v_topic_type11, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+            
+            </span>
+            
+            </td>
+            <td class="col-sm-1">
+            
+                 <span class="has-tooltip" data-toggle="tooltip" title="Column where the verbatim should begin grabbing data.">
+       
+                <%= f.text_field :v_survey_column11, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+             
+                <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
+       
+                <%= f.text_field :v_topic_title11, :maxlength => 25, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
+       
+                <%= f.text_field :v_topic_frame11, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
+       
+                <%= f.text_field :v_segment11, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+                           <span class="has-tooltip" data-toggle="tooltip" title="Column to compare valence for separate product.">
+       
+                <%= f.text_field :v_product_mindset11, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
+       
+                <%= f.text_field :v_ranking_num11, class: 'form-control' %>
+                </span>
+            </td>
+                      
+            
+            <td class="col-sm-1"><a class="deleteRow"></a>
+
+            </td>
+        
+       
+        </tr>
+        
+        <% end %>
+        
+        <% unless @todo.v_topic_code12.nil? %>
+        
+        <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
+       
+                <%= f.text_field :v_topic_code12, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                        
+                <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
+       
+                <%= f.select :v_topic_type12, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+            
+            </span>
+            
+            </td>
+            <td class="col-sm-1">
+            
+                 <span class="has-tooltip" data-toggle="tooltip" title="Column where the verbatim should begin grabbing data.">
+       
+                <%= f.text_field :v_survey_column12, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+             
+                <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
+       
+                <%= f.text_field :v_topic_title12, :maxlength => 25, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
+       
+                <%= f.text_field :v_topic_frame12, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
+       
+                <%= f.text_field :v_segment12, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+                           <span class="has-tooltip" data-toggle="tooltip" title="Column to compare valence for separate product.">
+       
+                <%= f.text_field :v_product_mindset12, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
+       
+                <%= f.text_field :v_ranking_num12, class: 'form-control' %>
+                </span>
+            </td>
+                      
+            
+            <td class="col-sm-1"><a class="deleteRow"></a>
+
+            </td>
+        
+       
+        </tr>
+        
+        <% end %>
+        
+        
+        <% unless @todo.v_topic_code13.nil? %>
+        
+        <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
+       
+                <%= f.text_field :v_topic_code13, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                        
+                <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
+       
+                <%= f.select :v_topic_type13, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+            
+            </span>
+            
+            </td>
+            <td class="col-sm-1">
+            
+                 <span class="has-tooltip" data-toggle="tooltip" title="Column where the verbatim should begin grabbing data.">
+       
+                <%= f.text_field :v_survey_column13, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+             
+                <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
+       
+                <%= f.text_field :v_topic_title13, :maxlength => 25, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
+       
+                <%= f.text_field :v_topic_frame13, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
+       
+                <%= f.text_field :v_segment13, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+                           <span class="has-tooltip" data-toggle="tooltip" title="Column to compare valence for separate product.">
+       
+                <%= f.text_field :v_product_mindset13, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
+       
+                <%= f.text_field :v_ranking_num13, class: 'form-control' %>
+                </span>
+            </td>
+                      
+            
+            <td class="col-sm-1"><a class="deleteRow"></a>
+
+            </td>
+        
+       
+        </tr>
+        
+        <% end %>
+        
+        <% unless @todo.v_topic_code14.nil? %>
+        
+        <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
+       
+                <%= f.text_field :v_topic_code14, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                        
+                <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
+       
+                <%= f.select :v_topic_type14, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+            
+            </span>
+            
+            </td>
+            <td class="col-sm-1">
+            
+                 <span class="has-tooltip" data-toggle="tooltip" title="Column where the verbatim should begin grabbing data.">
+       
+                <%= f.text_field :v_survey_column14, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+             
+                <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
+       
+                <%= f.text_field :v_topic_title14, :maxlength => 25, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
+       
+                <%= f.text_field :v_topic_frame14, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
+       
+                <%= f.text_field :v_segment14, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+                           <span class="has-tooltip" data-toggle="tooltip" title="Column to compare valence for separate product.">
+       
+                <%= f.text_field :v_product_mindset14, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
+       
+                <%= f.text_field :v_ranking_num14, class: 'form-control' %>
+                </span>
+            </td>
+                      
+            
+            <td class="col-sm-1"><a class="deleteRow"></a>
+
+            </td>
+        
+       
+        </tr>
+        
+        <% end %>
+        
+        
+        <% unless @todo.v_topic_code15.nil? %>
+        
+        <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
+       
+                <%= f.text_field :v_topic_code15, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                        
+                <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
+       
+                <%= f.select :v_topic_type15, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+            
+            </span>
+            
+            </td>
+            <td class="col-sm-1">
+            
+                 <span class="has-tooltip" data-toggle="tooltip" title="Column where the verbatim should begin grabbing data.">
+       
+                <%= f.text_field :v_survey_column15, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+             
+                <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
+       
+                <%= f.text_field :v_topic_title15, :maxlength => 25, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
+       
+                <%= f.text_field :v_topic_frame15, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
+       
+                <%= f.text_field :v_segment15, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+                           <span class="has-tooltip" data-toggle="tooltip" title="Column to compare valence for separate product.">
+       
+                <%= f.text_field :v_product_mindset15, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
+       
+                <%= f.text_field :v_ranking_num15, class: 'form-control' %>
+                </span>
+            </td>
+                      
+            
+            <td class="col-sm-1"><a class="deleteRow"></a>
+
+            </td>
+        
+       
+        </tr>
+        
+        <% end %>
+        
+        <% unless @todo.v_topic_code16.nil? %>
+        
+        <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
+       
+                <%= f.text_field :v_topic_code16, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                        
+                <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
+       
+                <%= f.select :v_topic_type16, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+            
+            </span>
+            
+            </td>
+            <td class="col-sm-1">
+            
+                 <span class="has-tooltip" data-toggle="tooltip" title="Column where the verbatim should begin grabbing data.">
+       
+                <%= f.text_field :v_survey_column16, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+             
+                <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
+       
+                <%= f.text_field :v_topic_title16, :maxlength => 25, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
+       
+                <%= f.text_field :v_topic_frame16, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
+       
+                <%= f.text_field :v_segment16, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+                           <span class="has-tooltip" data-toggle="tooltip" title="Column to compare valence for separate product.">
+       
+                <%= f.text_field :v_product_mindset16, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
+       
+                <%= f.text_field :v_ranking_num16, class: 'form-control' %>
+                </span>
+            </td>
+                      
+            
+            <td class="col-sm-1"><a class="deleteRow"></a>
+
+            </td>
+        
+       
+        </tr>
+        
+        <% end %>
+        
+        
+        <% unless @todo.v_topic_code17.nil? %>
+        
+        <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
+       
+                <%= f.text_field :v_topic_code17, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                        
+                <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
+       
+                <%= f.select :v_topic_type17, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+            
+            </span>
+            
+            </td>
+            <td class="col-sm-1">
+            
+                 <span class="has-tooltip" data-toggle="tooltip" title="Column where the verbatim should begin grabbing data.">
+       
+                <%= f.text_field :v_survey_column17, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+             
+                <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
+       
+                <%= f.text_field :v_topic_title17, :maxlength => 25, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
+       
+                <%= f.text_field :v_topic_frame17, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
+       
+                <%= f.text_field :v_segment17, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+                           <span class="has-tooltip" data-toggle="tooltip" title="Column to compare valence for separate product.">
+       
+                <%= f.text_field :v_product_mindset17, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
+       
+                <%= f.text_field :v_ranking_num17, class: 'form-control' %>
+                </span>
+            </td>
+                      
+            
+            <td class="col-sm-1"><a class="deleteRow"></a>
+
+            </td>
+        
+       
+        </tr>
+        
+        <% end %>
+        
+        <% unless @todo.v_topic_code18.nil? %>
+        
+        <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
+       
+                <%= f.text_field :v_topic_code18, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                        
+                <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
+       
+                <%= f.select :v_topic_type18, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+            
+            </span>
+            
+            </td>
+            <td class="col-sm-1">
+            
+                 <span class="has-tooltip" data-toggle="tooltip" title="Column where the verbatim should begin grabbing data.">
+       
+                <%= f.text_field :v_survey_column18, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+             
+                <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
+       
+                <%= f.text_field :v_topic_title18, :maxlength => 25, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
+       
+                <%= f.text_field :v_topic_frame18, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
+       
+                <%= f.text_field :v_segment18, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+                           <span class="has-tooltip" data-toggle="tooltip" title="Column to compare valence for separate product.">
+       
+                <%= f.text_field :v_product_mindset18, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
+       
+                <%= f.text_field :v_ranking_num18, class: 'form-control' %>
+                </span>
+            </td>
+                      
+            
+            <td class="col-sm-1"><a class="deleteRow"></a>
+
+            </td>
+        
+       
+        </tr>
+        
+        <% end %>
+        
+        <% unless @todo.v_topic_code19.nil? %>
+        
+        <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
+       
+                <%= f.text_field :v_topic_code19, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                        
+                <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
+       
+                <%= f.select :v_topic_type19, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+            
+            </span>
+            
+            </td>
+            <td class="col-sm-1">
+            
+                 <span class="has-tooltip" data-toggle="tooltip" title="Column where the verbatim should begin grabbing data.">
+       
+                <%= f.text_field :v_survey_column19, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+             
+                <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
+       
+                <%= f.text_field :v_topic_title19, :maxlength => 25, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
+       
+                <%= f.text_field :v_topic_frame19, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
+       
+                <%= f.text_field :v_segment19, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+                           <span class="has-tooltip" data-toggle="tooltip" title="Column to compare valence for separate product.">
+       
+                <%= f.text_field :v_product_mindset19, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
+       
+                <%= f.text_field :v_ranking_num19, class: 'form-control' %>
+                </span>
+            </td>
+                      
+            
+            <td class="col-sm-1"><a class="deleteRow"></a>
+
+            </td>
+        
+       
+        </tr>
+        
+        <% end %>
+        
+        <% unless @todo.v_topic_code20.nil? %>
+        
+        <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
+       
+                <%= f.text_field :v_topic_code20, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                        
+                <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
+       
+                <%= f.select :v_topic_type20, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+            
+            </span>
+            
+            </td>
+            <td class="col-sm-1">
+            
+                 <span class="has-tooltip" data-toggle="tooltip" title="Column where the verbatim should begin grabbing data.">
+       
+                <%= f.text_field :v_survey_column20, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+             
+                <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
+       
+                <%= f.text_field :v_topic_title20, :maxlength => 25, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
+       
+                <%= f.text_field :v_topic_frame20, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
+       
+                <%= f.text_field :v_segment20, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+                           <span class="has-tooltip" data-toggle="tooltip" title="Column to compare valence for separate product.">
+       
+                <%= f.text_field :v_product_mindset20, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
+       
+                <%= f.text_field :v_ranking_num20, class: 'form-control' %>
+                </span>
+            </td>
+                      
+            
+            <td class="col-sm-1"><a class="deleteRow"></a>
+
+            </td>
+        
+       
+        </tr>
+        
+        <% end %>
+        
+        <% unless @todo.v_topic_code21.nil? %>
+        
+        <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
+       
+                <%= f.text_field :v_topic_code21, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                        
+                <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
+       
+                <%= f.select :v_topic_type21, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+            
+            </span>
+            
+            </td>
+            <td class="col-sm-1">
+            
+                 <span class="has-tooltip" data-toggle="tooltip" title="Column where the verbatim should begin grabbing data.">
+       
+                <%= f.text_field :v_survey_column21, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+             
+                <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
+       
+                <%= f.text_field :v_topic_title21, :maxlength => 25, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
+       
+                <%= f.text_field :v_topic_frame21, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
+       
+                <%= f.text_field :v_segment21, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+                           <span class="has-tooltip" data-toggle="tooltip" title="Column to compare valence for separate product.">
+       
+                <%= f.text_field :v_product_mindset21, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
+       
+                <%= f.text_field :v_ranking_num21, class: 'form-control' %>
+                </span>
+            </td>
+                      
+            
+            <td class="col-sm-1"><a class="deleteRow"></a>
+
+            </td>
+        
+       
+        </tr>
+        
+        <% end %>
+        
+        <% unless @todo.v_topic_code22.nil? %>
+        
+        <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
+       
+                <%= f.text_field :v_topic_code22, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                        
+                <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
+       
+                <%= f.select :v_topic_type22, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+            
+            </span>
+            
+            </td>
+            <td class="col-sm-1">
+            
+                 <span class="has-tooltip" data-toggle="tooltip" title="Column where the verbatim should begin grabbing data.">
+       
+                <%= f.text_field :v_survey_column22, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+             
+                <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
+       
+                <%= f.text_field :v_topic_title22, :maxlength => 25, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
+       
+                <%= f.text_field :v_topic_frame22, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
+       
+                <%= f.text_field :v_segment22, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+                           <span class="has-tooltip" data-toggle="tooltip" title="Column to compare valence for separate product.">
+       
+                <%= f.text_field :v_product_mindset22, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
+       
+                <%= f.text_field :v_ranking_num22, class: 'form-control' %>
+                </span>
+            </td>
+                      
+            
+            <td class="col-sm-1"><a class="deleteRow"></a>
+
+            </td>
+        
+       
+        </tr>
+        
+        <% end %>
+        
+        <% unless @todo.v_topic_code23.nil? %>
+        
+        <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
+       
+                <%= f.text_field :v_topic_code23, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                        
+                <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
+       
+                <%= f.select :v_topic_type23, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+            
+            </span>
+            
+            </td>
+            <td class="col-sm-1">
+            
+                 <span class="has-tooltip" data-toggle="tooltip" title="Column where the verbatim should begin grabbing data.">
+       
+                <%= f.text_field :v_survey_column23, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+             
+                <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
+       
+                <%= f.text_field :v_topic_title23, :maxlength => 25, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
+       
+                <%= f.text_field :v_topic_frame23, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
+       
+                <%= f.text_field :v_segment23, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+                           <span class="has-tooltip" data-toggle="tooltip" title="Column to compare valence for separate product.">
+       
+                <%= f.text_field :v_product_mindset23, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
+       
+                <%= f.text_field :v_ranking_num23, class: 'form-control' %>
+                </span>
+            </td>
+                      
+            
+            <td class="col-sm-1"><a class="deleteRow"></a>
+
+            </td>
+        
+       
+        </tr>
+        
+        <% end %>
+        
+        
+        <% unless @todo.v_topic_code24.nil? %>
+        
+        <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
+       
+                <%= f.text_field :v_topic_code24, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                        
+                <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
+       
+                <%= f.select :v_topic_type24, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+            
+            </span>
+            
+            </td>
+            <td class="col-sm-1">
+            
+                 <span class="has-tooltip" data-toggle="tooltip" title="Column where the verbatim should begin grabbing data.">
+       
+                <%= f.text_field :v_survey_column24, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+             
+                <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
+       
+                <%= f.text_field :v_topic_title24, :maxlength => 25, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
+       
+                <%= f.text_field :v_topic_frame24, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
+       
+                <%= f.text_field :v_segment24, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+                           <span class="has-tooltip" data-toggle="tooltip" title="Column to compare valence for separate product.">
+       
+                <%= f.text_field :v_product_mindset24, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
+       
+                <%= f.text_field :v_ranking_num24, class: 'form-control' %>
+                </span>
+            </td>
+                      
+            
+            <td class="col-sm-1"><a class="deleteRow"></a>
+
+            </td>
+        
+       
+        </tr>
+        
+        <% end %>
+        <% unless @todo.v_topic_code25.nil? %>
+        
+        <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
+       
+                <%= f.text_field :v_topic_code25, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                        
+                <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
+       
+                <%= f.select :v_topic_type25, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+            
+            </span>
+            
+            </td>
+            <td class="col-sm-1">
+            
+                 <span class="has-tooltip" data-toggle="tooltip" title="Column where the verbatim should begin grabbing data.">
+       
+                <%= f.text_field :v_survey_column25, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+             
+                <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
+       
+                <%= f.text_field :v_topic_title25, :maxlength => 25, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
+       
+                <%= f.text_field :v_topic_frame25, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
+       
+                <%= f.text_field :v_segment25, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+                           <span class="has-tooltip" data-toggle="tooltip" title="Column to compare valence for separate product.">
+       
+                <%= f.text_field :v_product_mindset25, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
+       
+                <%= f.text_field :v_ranking_num25, class: 'form-control' %>
+                </span>
+            </td>
+                      
+            
+            <td class="col-sm-1"><a class="deleteRow"></a>
+
+            </td>
+        
+       
+        </tr>
+        
+        <% end %>
+        
+        <% unless @todo.v_topic_code26.nil? %>
+        
+        <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
+       
+                <%= f.text_field :v_topic_code26, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                        
+                <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
+       
+                <%= f.select :v_topic_type26, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+            
+            </span>
+            
+            </td>
+            <td class="col-sm-1">
+            
+                 <span class="has-tooltip" data-toggle="tooltip" title="Column where the verbatim should begin grabbing data.">
+       
+                <%= f.text_field :v_survey_column26, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+             
+                <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
+       
+                <%= f.text_field :v_topic_title26, :maxlength => 25, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
+       
+                <%= f.text_field :v_topic_frame26, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
+       
+                <%= f.text_field :v_segment26, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+                           <span class="has-tooltip" data-toggle="tooltip" title="Column to compare valence for separate product.">
+       
+                <%= f.text_field :v_product_mindset26, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
+       
+                <%= f.text_field :v_ranking_num26, class: 'form-control' %>
+                </span>
+            </td>
+                      
+            
+            <td class="col-sm-1"><a class="deleteRow"></a>
+
+            </td>
+        
+       
+        </tr>
+        
+        <% end %>
+        
+        <% unless @todo.v_topic_code27.nil? %>
+        
+        <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
+       
+                <%= f.text_field :v_topic_code27, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                        
+                <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
+       
+                <%= f.select :v_topic_type27, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+            
+            </span>
+            
+            </td>
+            <td class="col-sm-1">
+            
+                 <span class="has-tooltip" data-toggle="tooltip" title="Column where the verbatim should begin grabbing data.">
+       
+                <%= f.text_field :v_survey_column27, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+             
+                <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
+       
+                <%= f.text_field :v_topic_title27, :maxlength => 25, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
+       
+                <%= f.text_field :v_topic_frame27, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
+       
+                <%= f.text_field :v_segment27, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+                           <span class="has-tooltip" data-toggle="tooltip" title="Column to compare valence for separate product.">
+       
+                <%= f.text_field :v_product_mindset27, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
+       
+                <%= f.text_field :v_ranking_num27, class: 'form-control' %>
+                </span>
+            </td>
+                      
+            
+            <td class="col-sm-1"><a class="deleteRow"></a>
+
+            </td>
+        
+       
+        </tr>
+        
+        <% end %>
+        
+        <% unless @todo.v_topic_code28.nil? %>
+        
+        <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
+       
+                <%= f.text_field :v_topic_code28, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                        
+                <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
+       
+                <%= f.select :v_topic_type28, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+            
+            </span>
+            
+            </td>
+            <td class="col-sm-1">
+            
+                 <span class="has-tooltip" data-toggle="tooltip" title="Column where the verbatim should begin grabbing data.">
+       
+                <%= f.text_field :v_survey_column28, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+             
+                <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
+       
+                <%= f.text_field :v_topic_title28, :maxlength => 25, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
+       
+                <%= f.text_field :v_topic_frame28, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
+       
+                <%= f.text_field :v_segment28, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+                           <span class="has-tooltip" data-toggle="tooltip" title="Column to compare valence for separate product.">
+       
+                <%= f.text_field :v_product_mindset28, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
+       
+                <%= f.text_field :v_ranking_num28, class: 'form-control' %>
+                </span>
+            </td>
+                      
+            
+            <td class="col-sm-1"><a class="deleteRow"></a>
+
+            </td>
+        
+       
+        </tr>
+        
+        <% end %>
+        
+        <% unless @todo.v_topic_code29.nil? %>
+        
+        <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
+       
+                <%= f.text_field :v_topic_code29, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                        
+                <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
+       
+                <%= f.select :v_topic_type29, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+            
+            </span>
+            
+            </td>
+            <td class="col-sm-1">
+            
+                 <span class="has-tooltip" data-toggle="tooltip" title="Column where the verbatim should begin grabbing data.">
+       
+                <%= f.text_field :v_survey_column29, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+             
+                <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
+       
+                <%= f.text_field :v_topic_title29, :maxlength => 25, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
+       
+                <%= f.text_field :v_topic_frame29, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
+       
+                <%= f.text_field :v_segment29, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+                           <span class="has-tooltip" data-toggle="tooltip" title="Column to compare valence for separate product.">
+       
+                <%= f.text_field :v_product_mindset29, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
+       
+                <%= f.text_field :v_ranking_num29, class: 'form-control' %>
+                </span>
+            </td>
+                      
+            
+            <td class="col-sm-1"><a class="deleteRow"></a>
+
+            </td>
+        
+       
+        </tr>
+        
+        <% end %>
+        
+        <% unless @todo.v_topic_code30.nil? %>
+        
+        <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
+       
+                <%= f.text_field :v_topic_code30, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                        
+                <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
+       
+                <%= f.select :v_topic_type30, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+            
+            </span>
+            
+            </td>
+            <td class="col-sm-1">
+            
+                 <span class="has-tooltip" data-toggle="tooltip" title="Column where the verbatim should begin grabbing data.">
+       
+                <%= f.text_field :v_survey_column30, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+             
+                <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
+       
+                <%= f.text_field :v_topic_title30, :maxlength => 25, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
+       
+                <%= f.text_field :v_topic_frame30, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
+       
+                <%= f.text_field :v_segment30, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+                           <span class="has-tooltip" data-toggle="tooltip" title="Column to compare valence for separate product.">
+       
+                <%= f.text_field :v_product_mindset30, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
+       
+                <%= f.text_field :v_ranking_num30, class: 'form-control' %>
+                </span>
+            </td>
+                      
+            
+            <td class="col-sm-1"><a class="deleteRow"></a>
+
+            </td>
+        
+       
+        </tr>
+        
+        <% end %>
+        
+        <% unless @todo.v_topic_code31.nil? %>
+        
+        <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
+       
+                <%= f.text_field :v_topic_code31, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                        
+                <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
+       
+                <%= f.select :v_topic_type31, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+            
+            </span>
+            
+            </td>
+            <td class="col-sm-1">
+            
+                 <span class="has-tooltip" data-toggle="tooltip" title="Column where the verbatim should begin grabbing data.">
+       
+                <%= f.text_field :v_survey_column31, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+             
+                <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
+       
+                <%= f.text_field :v_topic_title31, :maxlength => 25, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
+       
+                <%= f.text_field :v_topic_frame31, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
+       
+                <%= f.text_field :v_segment31, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+                           <span class="has-tooltip" data-toggle="tooltip" title="Column to compare valence for separate product.">
+       
+                <%= f.text_field :v_product_mindset31, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
+       
+                <%= f.text_field :v_ranking_num31, class: 'form-control' %>
+                </span>
+            </td>
+                      
+            
+            <td class="col-sm-1"><a class="deleteRow"></a>
+
+            </td>
+        
+       
+        </tr>
+        
+        <% end %>
+        
+        <% unless @todo.v_topic_code32.nil? %>
+        
+        <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
+       
+                <%= f.text_field :v_topic_code32, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                        
+                <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
+       
+                <%= f.select :v_topic_type32, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+            
+            </span>
+            
+            </td>
+            <td class="col-sm-1">
+            
+                 <span class="has-tooltip" data-toggle="tooltip" title="Column where the verbatim should begin grabbing data.">
+       
+                <%= f.text_field :v_survey_column32, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+             
+                <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
+       
+                <%= f.text_field :v_topic_title32, :maxlength => 25, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
+       
+                <%= f.text_field :v_topic_frame32, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
+       
+                <%= f.text_field :v_segment32, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+                           <span class="has-tooltip" data-toggle="tooltip" title="Column to compare valence for separate product.">
+       
+                <%= f.text_field :v_product_mindset32, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
+       
+                <%= f.text_field :v_ranking_num32, class: 'form-control' %>
+                </span>
+            </td>
+                      
+            
+            <td class="col-sm-1"><a class="deleteRow"></a>
+
+            </td>
+        
+       
+        </tr>
+        
+        <% end %>
+        
+        <% unless @todo.v_topic_code33.nil? %>
+        
+        <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
+       
+                <%= f.text_field :v_topic_code33, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                        
+                <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
+       
+                <%= f.select :v_topic_type33, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+            
+            </span>
+            
+            </td>
+            <td class="col-sm-1">
+            
+                 <span class="has-tooltip" data-toggle="tooltip" title="Column where the verbatim should begin grabbing data.">
+       
+                <%= f.text_field :v_survey_column33, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+             
+                <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
+       
+                <%= f.text_field :v_topic_title33, :maxlength => 25, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
+       
+                <%= f.text_field :v_topic_frame33, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
+       
+                <%= f.text_field :v_segment33, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+                           <span class="has-tooltip" data-toggle="tooltip" title="Column to compare valence for separate product.">
+       
+                <%= f.text_field :v_product_mindset33, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
+       
+                <%= f.text_field :v_ranking_num33, class: 'form-control' %>
+                </span>
+            </td>
+                      
+            
+            <td class="col-sm-1"><a class="deleteRow"></a>
+
+            </td>
+        
+       
+        </tr>
+        
+        <% end %>
+        
+        <% unless @todo.v_topic_code34.nil? %>
+        
+        <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
+       
+                <%= f.text_field :v_topic_code34, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                        
+                <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
+       
+                <%= f.select :v_topic_type34, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+            
+            </span>
+            
+            </td>
+            <td class="col-sm-1">
+            
+                 <span class="has-tooltip" data-toggle="tooltip" title="Column where the verbatim should begin grabbing data.">
+       
+                <%= f.text_field :v_survey_column34, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+             
+                <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
+       
+                <%= f.text_field :v_topic_title34, :maxlength => 25, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
+       
+                <%= f.text_field :v_topic_frame34, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
+       
+                <%= f.text_field :v_segment34, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+                           <span class="has-tooltip" data-toggle="tooltip" title="Column to compare valence for separate product.">
+       
+                <%= f.text_field :v_product_mindset34, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
+       
+                <%= f.text_field :v_ranking_num34, class: 'form-control' %>
+                </span>
+            </td>
+                      
+            
+            <td class="col-sm-1"><a class="deleteRow"></a>
+
+            </td>
+        
+       
+        </tr>
+        
+        <% end %>
+        
+        <% unless @todo.v_topic_code35.nil? %>
+        
+        <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
+       
+                <%= f.text_field :v_topic_code35, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                        
+                <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
+       
+                <%= f.select :v_topic_type35, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+            
+            </span>
+            
+            </td>
+            <td class="col-sm-1">
+            
+                 <span class="has-tooltip" data-toggle="tooltip" title="Column where the verbatim should begin grabbing data.">
+       
+                <%= f.text_field :v_survey_column35, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+             
+                <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
+       
+                <%= f.text_field :v_topic_title35, :maxlength => 25, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
+       
+                <%= f.text_field :v_topic_frame35, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
+       
+                <%= f.text_field :v_segment35, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+                           <span class="has-tooltip" data-toggle="tooltip" title="Column to compare valence for separate product.">
+       
+                <%= f.text_field :v_product_mindset35, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
+       
+                <%= f.text_field :v_ranking_num35, class: 'form-control' %>
+                </span>
+            </td>
+                      
+            
+            <td class="col-sm-1"><a class="deleteRow"></a>
+
+            </td>
+        
+       
+        </tr>
+        
+        <% end %>
+        
+        <% unless @todo.v_topic_code36.nil? %>
+        
+        <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
+       
+                <%= f.text_field :v_topic_code36, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                        
+                <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
+       
+                <%= f.select :v_topic_type36, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+            
+            </span>
+            
+            </td>
+            <td class="col-sm-1">
+            
+                 <span class="has-tooltip" data-toggle="tooltip" title="Column where the verbatim should begin grabbing data.">
+       
+                <%= f.text_field :v_survey_column36, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+             
+                <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
+       
+                <%= f.text_field :v_topic_title36, :maxlength => 25, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
+       
+                <%= f.text_field :v_topic_frame36, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
+       
+                <%= f.text_field :v_segment36, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+                           <span class="has-tooltip" data-toggle="tooltip" title="Column to compare valence for separate product.">
+       
+                <%= f.text_field :v_product_mindset36, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
+       
+                <%= f.text_field :v_ranking_num36, class: 'form-control' %>
+                </span>
+            </td>
+                      
+            
+            <td class="col-sm-1"><a class="deleteRow"></a>
+
+            </td>
+        
+       
+        </tr>
+        
+        <% end %>
+        
+        
+        <% unless @todo.v_topic_code37.nil? %>
+        
+        <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
+       
+                <%= f.text_field :v_topic_code37, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                        
+                <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
+       
+                <%= f.select :v_topic_type37, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+            
+            </span>
+            
+            </td>
+            <td class="col-sm-1">
+            
+                 <span class="has-tooltip" data-toggle="tooltip" title="Column where the verbatim should begin grabbing data.">
+       
+                <%= f.text_field :v_survey_column37, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+             
+                <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
+       
+                <%= f.text_field :v_topic_title37, :maxlength => 25, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
+       
+                <%= f.text_field :v_topic_frame37, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
+       
+                <%= f.text_field :v_segment37, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+                           <span class="has-tooltip" data-toggle="tooltip" title="Column to compare valence for separate product.">
+       
+                <%= f.text_field :v_product_mindset37, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
+       
+                <%= f.text_field :v_ranking_num37, class: 'form-control' %>
+                </span>
+            </td>
+                      
+            
+            <td class="col-sm-1"><a class="deleteRow"></a>
+
+            </td>
+        
+       
+        </tr>
+        
+        <% end %>
+        
+        <% unless @todo.v_topic_code38.nil? %>
+        
+        <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
+       
+                <%= f.text_field :v_topic_code38, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                        
+                <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
+       
+                <%= f.select :v_topic_type38, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+            
+            </span>
+            
+            </td>
+            <td class="col-sm-1">
+            
+                 <span class="has-tooltip" data-toggle="tooltip" title="Column where the verbatim should begin grabbing data.">
+       
+                <%= f.text_field :v_survey_column38, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+             
+                <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
+       
+                <%= f.text_field :v_topic_title38, :maxlength => 25, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
+       
+                <%= f.text_field :v_topic_frame38, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
+       
+                <%= f.text_field :v_segment38, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+                           <span class="has-tooltip" data-toggle="tooltip" title="Column to compare valence for separate product.">
+       
+                <%= f.text_field :v_product_mindset38, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
+       
+                <%= f.text_field :v_ranking_num38, class: 'form-control' %>
+                </span>
+            </td>
+                      
+            
+            <td class="col-sm-1"><a class="deleteRow"></a>
+
+            </td>
+        
+       
+        </tr>
+        
+        <% end %>
+        
+        
+        <% unless @todo.v_topic_code39.nil? %>
+        
+        <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
+       
+                <%= f.text_field :v_topic_code39, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                        
+                <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
+       
+                <%= f.select :v_topic_type39, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+            
+            </span>
+            
+            </td>
+            <td class="col-sm-1">
+            
+                 <span class="has-tooltip" data-toggle="tooltip" title="Column where the verbatim should begin grabbing data.">
+       
+                <%= f.text_field :v_survey_column39, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+             
+                <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
+       
+                <%= f.text_field :v_topic_title39, :maxlength => 25, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
+       
+                <%= f.text_field :v_topic_frame39, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
+       
+                <%= f.text_field :v_segment39, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+                           <span class="has-tooltip" data-toggle="tooltip" title="Column to compare valence for separate product.">
+       
+                <%= f.text_field :v_product_mindset39, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
+       
+                <%= f.text_field :v_ranking_num39, class: 'form-control' %>
+                </span>
+            </td>
+                      
+            
+            <td class="col-sm-1"><a class="deleteRow"></a>
+
+            </td>
+        
+       
+        </tr>
+        
+        <% end %>
+        
+        
+        <% unless @todo.v_topic_code40.nil? %>
+        
+        <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
+       
+                <%= f.text_field :v_topic_code40, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                        
+                <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
+       
+                <%= f.select :v_topic_type40, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+            
+            </span>
+            
+            </td>
+            <td class="col-sm-1">
+            
+                 <span class="has-tooltip" data-toggle="tooltip" title="Column where the verbatim should begin grabbing data.">
+       
+                <%= f.text_field :v_survey_column40, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+             
+                <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
+       
+                <%= f.text_field :v_topic_title40, :maxlength => 25, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
+       
+                <%= f.text_field :v_topic_frame40, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
+       
+                <%= f.text_field :v_segment40, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+                           <span class="has-tooltip" data-toggle="tooltip" title="Column to compare valence for separate product.">
+       
+                <%= f.text_field :v_product_mindset40, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
+       
+                <%= f.text_field :v_ranking_num40, class: 'form-control' %>
+                </span>
+            </td>
+                      
+            
+            <td class="col-sm-1"><a class="deleteRow"></a>
+
+            </td>
+        
+       
+        </tr>
+        
+        <% end %>
+        
+        <% unless @todo.v_topic_code41.nil? %>
+        
+        <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
+       
+                <%= f.text_field :v_topic_code41, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                        
+                <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
+       
+                <%= f.select :v_topic_type41, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+            
+            </span>
+            
+            </td>
+            <td class="col-sm-1">
+            
+                 <span class="has-tooltip" data-toggle="tooltip" title="Column where the verbatim should begin grabbing data.">
+       
+                <%= f.text_field :v_survey_column41, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+             
+                <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
+       
+                <%= f.text_field :v_topic_title41, :maxlength => 25, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
+       
+                <%= f.text_field :v_topic_frame41, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
+       
+                <%= f.text_field :v_segment41, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+                           <span class="has-tooltip" data-toggle="tooltip" title="Column to compare valence for separate product.">
+       
+                <%= f.text_field :v_product_mindset41, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
+       
+                <%= f.text_field :v_ranking_num41, class: 'form-control' %>
+                </span>
+            </td>
+                      
+            
+            <td class="col-sm-1"><a class="deleteRow"></a>
+
+            </td>
+        
+       
+        </tr>
+        
+        <% end %>
+        
+        
+        <% unless @todo.v_topic_code42.nil? %>
+        
+        <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
+       
+                <%= f.text_field :v_topic_code42, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                        
+                <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
+       
+                <%= f.select :v_topic_type42, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+            
+            </span>
+            
+            </td>
+            <td class="col-sm-1">
+            
+                 <span class="has-tooltip" data-toggle="tooltip" title="Column where the verbatim should begin grabbing data.">
+       
+                <%= f.text_field :v_survey_column42, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+             
+                <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
+       
+                <%= f.text_field :v_topic_title42, :maxlength => 25, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
+       
+                <%= f.text_field :v_topic_frame42, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
+       
+                <%= f.text_field :v_segment42, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+                           <span class="has-tooltip" data-toggle="tooltip" title="Column to compare valence for separate product.">
+       
+                <%= f.text_field :v_product_mindset42, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
+       
+                <%= f.text_field :v_ranking_num42, class: 'form-control' %>
+                </span>
+            </td>
+                      
+            
+            <td class="col-sm-1"><a class="deleteRow"></a>
+
+            </td>
+        
+       
+        </tr>
+        
+        <% end %>
+        
+        <% unless @todo.v_topic_code43.nil? %>
+        
+        <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
+       
+                <%= f.text_field :v_topic_code43, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                        
+                <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
+       
+                <%= f.select :v_topic_type43, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+            
+            </span>
+            
+            </td>
+            <td class="col-sm-1">
+            
+                 <span class="has-tooltip" data-toggle="tooltip" title="Column where the verbatim should begin grabbing data.">
+       
+                <%= f.text_field :v_survey_column43, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+             
+                <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
+       
+                <%= f.text_field :v_topic_title43, :maxlength => 25, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
+       
+                <%= f.text_field :v_topic_frame43, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
+       
+                <%= f.text_field :v_segment43, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+                           <span class="has-tooltip" data-toggle="tooltip" title="Column to compare valence for separate product.">
+       
+                <%= f.text_field :v_product_mindset43, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
+       
+                <%= f.text_field :v_ranking_num43, class: 'form-control' %>
+                </span>
+            </td>
+                      
+            
+            <td class="col-sm-1"><a class="deleteRow"></a>
+
+            </td>
+        
+       
+        </tr>
+        
+        <% end %>
+        
+        <% unless @todo.v_topic_code44.nil? %>
+        
+        <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
+       
+                <%= f.text_field :v_topic_code44, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                        
+                <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
+       
+                <%= f.select :v_topic_type44, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+            
+            </span>
+            
+            </td>
+            <td class="col-sm-1">
+            
+                 <span class="has-tooltip" data-toggle="tooltip" title="Column where the verbatim should begin grabbing data.">
+       
+                <%= f.text_field :v_survey_column44, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+             
+                <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
+       
+                <%= f.text_field :v_topic_title44, :maxlength => 25, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
+       
+                <%= f.text_field :v_topic_frame44, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
+       
+                <%= f.text_field :v_segment44, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+                           <span class="has-tooltip" data-toggle="tooltip" title="Column to compare valence for separate product.">
+       
+                <%= f.text_field :v_product_mindset44, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
+       
+                <%= f.text_field :v_ranking_num44, class: 'form-control' %>
+                </span>
+            </td>
+                      
+            
+            <td class="col-sm-1"><a class="deleteRow"></a>
+
+            </td>
+        
+       
+        </tr>
+        
+        <% end %>
+        
+        <% unless @todo.v_topic_code45.nil? %>
+        
+        <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
+       
+                <%= f.text_field :v_topic_code45, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                        
+                <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
+       
+                <%= f.select :v_topic_type45, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+            
+            </span>
+            
+            </td>
+            <td class="col-sm-1">
+            
+                 <span class="has-tooltip" data-toggle="tooltip" title="Column where the verbatim should begin grabbing data.">
+       
+                <%= f.text_field :v_survey_column45, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+             
+                <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
+       
+                <%= f.text_field :v_topic_title45, :maxlength => 25, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
+       
+                <%= f.text_field :v_topic_frame45, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
+       
+                <%= f.text_field :v_segment45, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+                           <span class="has-tooltip" data-toggle="tooltip" title="Column to compare valence for separate product.">
+       
+                <%= f.text_field :v_product_mindset45, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
+       
+                <%= f.text_field :v_ranking_num45, class: 'form-control' %>
+                </span>
+            </td>
+                      
+            
+            <td class="col-sm-1"><a class="deleteRow"></a>
+
+            </td>
+        
+       
+        </tr>
+        
+        <% end %>
+        
+        <% unless @todo.v_topic_code46.nil? %>
+        
+        <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
+       
+                <%= f.text_field :v_topic_code46, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                        
+                <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
+       
+                <%= f.select :v_topic_type46, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+            
+            </span>
+            
+            </td>
+            <td class="col-sm-1">
+            
+                 <span class="has-tooltip" data-toggle="tooltip" title="Column where the verbatim should begin grabbing data.">
+       
+                <%= f.text_field :v_survey_column46, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+             
+                <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
+       
+                <%= f.text_field :v_topic_title46, :maxlength => 25, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
+       
+                <%= f.text_field :v_topic_frame46, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
+       
+                <%= f.text_field :v_segment46, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+                           <span class="has-tooltip" data-toggle="tooltip" title="Column to compare valence for separate product.">
+       
+                <%= f.text_field :v_product_mindset46, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
+       
+                <%= f.text_field :v_ranking_num46, class: 'form-control' %>
+                </span>
+            </td>
+                      
+            
+            <td class="col-sm-1"><a class="deleteRow"></a>
+
+            </td>
+        
+       
+        </tr>
+        
+        <% end %>
+        
+        <% unless @todo.v_topic_code47.nil? %>
+        
+        <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
+       
+                <%= f.text_field :v_topic_code47, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                        
+                <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
+       
+                <%= f.select :v_topic_type47, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+            
+            </span>
+            
+            </td>
+            <td class="col-sm-1">
+            
+                 <span class="has-tooltip" data-toggle="tooltip" title="Column where the verbatim should begin grabbing data.">
+       
+                <%= f.text_field :v_survey_column47, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+             
+                <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
+       
+                <%= f.text_field :v_topic_title47, :maxlength => 25, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
+       
+                <%= f.text_field :v_topic_frame47, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
+       
+                <%= f.text_field :v_segment47, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+                           <span class="has-tooltip" data-toggle="tooltip" title="Column to compare valence for separate product.">
+       
+                <%= f.text_field :v_product_mindset47, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
+       
+                <%= f.text_field :v_ranking_num47, class: 'form-control' %>
+                </span>
+            </td>
+                      
+            
+            <td class="col-sm-1"><a class="deleteRow"></a>
+
+            </td>
+        
+       
+        </tr>
+        
+        <% end %>
+        
+        <% unless @todo.v_topic_code48.nil? %>
+        
+        <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
+       
+                <%= f.text_field :v_topic_code48, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                        
+                <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
+       
+                <%= f.select :v_topic_type48, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+            
+            </span>
+            
+            </td>
+            <td class="col-sm-1">
+            
+                 <span class="has-tooltip" data-toggle="tooltip" title="Column where the verbatim should begin grabbing data.">
+       
+                <%= f.text_field :v_survey_column48, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+             
+                <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
+       
+                <%= f.text_field :v_topic_title48, :maxlength => 25, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
+       
+                <%= f.text_field :v_topic_frame48, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
+       
+                <%= f.text_field :v_segment48, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+                           <span class="has-tooltip" data-toggle="tooltip" title="Column to compare valence for separate product.">
+       
+                <%= f.text_field :v_product_mindset48, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
+       
+                <%= f.text_field :v_ranking_num48, class: 'form-control' %>
+                </span>
+            </td>
+                      
+            
+            <td class="col-sm-1"><a class="deleteRow"></a>
+
+            </td>
+        
+       
+        </tr>
+        
+        <% end %>
+        
+        <% unless @todo.v_topic_code49.nil? %>
+        
+        <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="T1, R1, etc.  Note: Lableing it R will not cause it to be a ranking.">
+       
+                <%= f.text_field :v_topic_code49, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                        
+                <span class="has-tooltip" data-toggle="tooltip" title="Ranking or standard">
+       
+                <%= f.select :v_topic_type49, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+            
+            </span>
+            
+            </td>
+            <td class="col-sm-1">
+            
+                 <span class="has-tooltip" data-toggle="tooltip" title="Column where the verbatim should begin grabbing data.">
+       
+                <%= f.text_field :v_survey_column49, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+             
+                <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in excel.">
+       
+                <%= f.text_field :v_topic_title49, :maxlength => 25, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Detailed description of sheet in verbatim, appears at top of excel sheet.">
+       
+                <%= f.text_field :v_topic_frame49, class: 'form-control'  %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
+       
+                <%= f.text_field :v_segment49, class: 'form-control' %>
+                </span>
+            </td>
+             <td class="col-sm-1">
+                           <span class="has-tooltip" data-toggle="tooltip" title="Column to compare valence for separate product.">
+       
+                <%= f.text_field :v_product_mindset49, class: 'form-control' %>
+                </span>
+            </td>
+            <td class="col-sm-1">
+                         <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
+       
+                <%= f.text_field :v_ranking_num49, class: 'form-control' %>
+                </span>
+            </td>
+                      
+            
+            <td class="col-sm-1"><a class="deleteRow"></a>
+
+            </td>
+        
+       
+        </tr>
+        
+        <% end %>
+        
     </tbody>
     <tfoot>
         <tr>
@@ -245,7 +3660,7 @@
   
   <div class="actions form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      
+   
       <%= f.submit :Submit %>
     </div>
   </div>

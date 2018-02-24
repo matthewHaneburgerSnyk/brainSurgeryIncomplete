@@ -27,6 +27,11 @@ $(document).ready(function() {
   });
 });
 
+
+
+
+
+//function to load rows on click
 $(document).ready(function () {
     var counter = 0;
 
@@ -35,10 +40,9 @@ $(document).ready(function () {
         var cols = "";
 
         cols += '<td><input type="text" class="form-control" name="todo[v_topic_code'+ counter + ']" id="todo_v_topic_code'+ counter +'"></td>';
-        //cols += '<td><input type="text" class="form-control" name="v_topic_code' + counter + '"/></td>'; 
-        cols += '<td><input type="text" class="form-control" name="todo[v_topic_type' + counter + ']" id="todo_v_topic_type'+ counter +'"/></td>';
+        cols +='<td> <select name="todo[v_topic_type' + counter + ']" id="todo_v_topic_type' + counter + '"><option value="standard_3x">standard_3x</option>  <option value="standard_1x">standard_1x</option> <option value="ranking">ranking</option></select></td> ';   
         cols += '<td><input type="text" class="form-control" name="todo[v_survey_column' + counter + ']" id="todo_v_survey_column'+ counter + '"/></td>';
-        cols += '<td><input type="text" class="form-control" name="todo[v_topic_title' + counter + ']" id="todo_v_topic_title' + counter + '" /></td>';
+        cols += '<td><input maxlength="25" type="text" class="form-control" name="todo[v_topic_title' + counter + ']" id="todo_v_topic_title' + counter + '" /></td>';
         cols += '<td><input type="text" class="form-control" name="todo[v_topic_frame' + counter + ']" id="todo_v_topic_frame' + counter + '" /></td>';
         cols += '<td><input type="text" class="form-control" name="todo[v_segment' + counter + ']" id="todo_v_segment' + counter + '"/></td>';
         cols += '<td><input type="text" class="form-control" name="todo[v_product_mindset' + counter + ']" id="todo_v_product_mindset' + counter + '" /></td>';
@@ -62,9 +66,6 @@ $(document).ready(function () {
 });
 
 
-
-
-
 $(document).ready(function () {
     var counter = 0;
 
@@ -76,7 +77,7 @@ $(document).ready(function () {
         //cols += '<td><input type="text" class="form-control" name="v_topic_code' + counter + '"/></td>'; 
         cols += '<td><input type="text" class="form-control" name="todo[g_topic_type' + counter + ']" id="todo_g_topic_type'+ counter +'"/></td>';
         cols += '<td><input type="text" class="form-control" name="todo[g_survey_column' + counter + ']" id="todo_g_survey_column'+ counter + '"/></td>';
-        cols += '<td><input type="text" class="form-control" name="todo[g_topic_title' + counter + ']" id="todo_g_topic_title' + counter + '" /></td>';
+        cols += '<td><input maxlength="25" type="text" class="form-control" name="todo[g_topic_title' + counter + ']" id="todo_g_topic_title' + counter + '" /></td>';
         cols += '<td><input type="text" class="form-control" name="todo[g_topic_frame' + counter + ']" id="todo_g_topic_frame' + counter + '" /></td>';
         cols += '<td><input type="text" class="form-control" name="todo[g_segment' + counter + ']" id="todo_g_segment' + counter + '"/></td>';
         cols += '<td><input type="text" class="form-control" name="todo[g_product_mindset' + counter + ']" id="todo_g_product_mindset' + counter + '" /></td>';

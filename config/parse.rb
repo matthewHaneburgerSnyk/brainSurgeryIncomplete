@@ -2,13 +2,18 @@ require 'creek'
 require 'axlsx'
 require 'axlsx_rails'
 require 'rubygems'
+require 'fileutils'
 
 
 
 
 
+class Parser
+ 
+def initialize(mapping)
 #Parse doc incoming
-cworkbook = Creek::Book.new 'sample_mapping_5.xlsx'
+$file_name = mapping[1].to_s
+cworkbook = Creek::Book.new mapping[0]
 cworksheets = cworkbook.sheets
 puts "Found #{cworksheets.count} worksheets"
 
@@ -40,12 +45,12 @@ cworksheets.each do |cworksheet|
     
 
 
-
+end
 #######################################
 ######## make verbatim start ##########
 #######################################
 #def makeVerb(topic_code, topic_type, survey_column, topic_title, topic_frame_of_reference, segment, product_mindset , ranking_num)
-def makeVerb(values)
+def makeVerb( values )
 
 run_count = values.size
 
@@ -283,8 +288,10 @@ sheet.add_table "A3:I10"
 
 end # end while to catch all sheets
 
-p.serialize('test.xlsx')
- end
+p.serialize($file_name)
+file = $file_name.to_s
+FileUtils.mv $file_name, "./public/uploads/#{$file_name}/verbatim_#{$file_name}"
+end
 
 
 
@@ -481,9 +488,10 @@ end
 
 
 
-makeVerb([["R1", "ranking", "Q231_9", "Attributes" , "NUEDEXTA is the first and only FDA-approved treatment for PBA.", "SEG", "Q285", 5],["T1", "standard_3x", "Q24", "Impact of My Alz" , "When I think about the impact of Alzheimer’s/Dementia, I feel:", "SEG", "Q285", 5]])
+#makeVerb([["R1", "ranking", "Q231_9", "Attributes" , "NUEDEXTA is the first and only FDA-approved treatment for PBA.", "SEG", "Q285", 5],["T1", "standard_3x", "Q24", "Impact of My Alz" , "When I think about the impact of Alzheimer’s/Dementia, I feel:", "SEG", "Q285", 5]])
 
 
+
+
+end#end parser
 end
-
-
