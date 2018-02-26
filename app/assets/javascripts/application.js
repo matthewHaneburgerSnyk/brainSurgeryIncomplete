@@ -47,7 +47,8 @@ $(document).ready(function () {
         cols += '<td><input type="text" class="form-control" name="todo[v_segment' + counter + ']" id="todo_v_segment' + counter + '"/></td>';
         cols += '<td><input type="text" class="form-control" name="todo[v_product_mindset' + counter + ']" id="todo_v_product_mindset' + counter + '" /></td>';
         cols += '<td><input type="text" class="form-control" name="todo[v_ranking_num' + counter + ']" id="todo_v_ranking_num' +counter + '"/></td>';
-       
+        cols += '<td><input type="text" class="form-control" name="todo[v_ranking_total' + counter + ']" id="todo_v_ranking_total' +counter + '"/></td>';
+
 
         cols += '<td><input type="button" class="ibtnDel btn btn-md btn-danger "  value="Delete"></td>';
         newRow.append(cols);
@@ -82,7 +83,8 @@ $(document).ready(function () {
         cols += '<td><input type="text" class="form-control" name="todo[g_segment' + counter + ']" id="todo_g_segment' + counter + '"/></td>';
         cols += '<td><input type="text" class="form-control" name="todo[g_product_mindset' + counter + ']" id="todo_g_product_mindset' + counter + '" /></td>';
         cols += '<td><input type="text" class="form-control" name="todo[g_ranking_num' + counter + ']" id="todo_g_ranking_num' +counter + '"/></td>';
-       
+        cols += '<td><input type="text" class="form-control" name="todo[g_ranking_total' + counter + ']" id="todo_g_ranking_total' +counter + '"/></td>';
+
 
         cols += '<td><input type="button" class="ibtnDel btn btn-md btn-danger "  value="Delete"></td>';
         newRow.append(cols);

@@ -49,7 +49,7 @@ end
 #######################################
 ######## make verbatim start ##########
 #######################################
-#def makeVerb(topic_code, topic_type, survey_column, topic_title, topic_frame_of_reference, segment, product_mindset , ranking_num)
+#def makeVerb(topic_code, topic_type, survey_column, topic_title, topic_frame_of_reference, segment, product_mindset , ranking_num, ranking_total)
 def makeVerb( values )
 
 run_count = values.size
@@ -67,6 +67,7 @@ topic_frame_of_reference = verbatim_call[4]
 segment                  = verbatim_call[5]
 product_mindset          = verbatim_call[6]
 ranking_num              = verbatim_call[7]
+ranking_total            = verbatim_call[8]
 
 
 
@@ -80,7 +81,7 @@ $g_start_spot = distance_row.index(survey_column)
 segment_calc = distance_row.index(segment)
 product_start_spot = distance_row.index(product_mindset)
 $rank_num = ranking_num
-
+$rank_total = ranking_total
 
 
 
@@ -131,7 +132,8 @@ end
 def r_calc( col_val, statement_rank, type  )
     #gets types below from their respective columns
     #col_val = value in the column, 2, 3, 4 or whatever, tells the function which valence/statement to get
-    #statement_rank = number of statements
+    #statement_rank = number of statements, maps to ranking total
+    #statement_eval = number of statements evaluated
     #type = emotion/intensity/why/valence
     
     #type calc vals
@@ -146,7 +148,7 @@ def r_calc( col_val, statement_rank, type  )
         when type = "valence"
            type_val = 5
     end
-    
+    #leave that 6 in there, it corresponds to how the mapping files are setup
     find_att   = (col_val.to_i * 6) - 6
     att_offset = statement_rank.to_i + $g_start_spot
     
@@ -162,7 +164,7 @@ def r_mindset_calc( statement_rank, statement_count, row_num)
     #
     count = 0
     calc_total = 0
-    while count < statement_rank
+    while count < statement_rank.to_i
         
        r_calc_column = $g_start_spot + count
        
@@ -176,7 +178,7 @@ def r_mindset_calc( statement_rank, statement_count, row_num)
        count = count + 1
     end
     
-    mindsetc = calc_total / statement_count
+    mindsetc = calc_total / statement_count.to_i
     
     return map_mindset_value(mindsetc)
    
@@ -195,6 +197,12 @@ s31 = start_spot + 2   # Emotion
 s32 = start_spot + 12  # Intensity
 s33 = start_spot + 13  # Why
 s34 = start_spot + 14  # Valence
+
+# this is 1x only
+ss11 = start_spot       # Emotion
+ss12 = start_spot + 1   # Intensity
+ss13 = start_spot + 2   # Why
+ss14 = start_spot + 3   # Valence
 
 p14 = product_start_spot + 6   # Valence
 p24 = product_start_spot + 10  # Valence
@@ -247,14 +255,11 @@ case topic_type
     end
    pop_row_count = (row_count * 3) - 2
    
-   #Ranking
-   when "ranking"
+   
+   
+   # standard_1x
+   when "standard_1x"
    $data.each do |row|
-      data_row = $data[row_count].to_s.split("   ") # Parses individual rows from sheet
-      if ranking_num.to_i < data_row[s11].to_i
-          puts "Not evaluated statement, skipping"
-          row_count = row_count + 1
-          else
        if row == $data[0]
            
            puts "Skipping Main Row"
@@ -264,19 +269,109 @@ case topic_type
            puts "Skipping second row"
            row_count = row_count + 1
            else
+           data_row = $data[row_count].to_s.split("   ") # Parses individual rows from sheet
+           # increments count
            
-         
            
-           sheet.add_row [data_row[r_calc(data_row[s11], 8 , "emotion" )] , data_row[r_calc(data_row[s11], 8 , "intensity" )], data_row[r_calc(data_row[s11], 8 , "why" ) ], "", valence_calc(data_row[r_calc(data_row[s11], 8 , "valence" )]), r_mindset_calc( 8, $rank_num, row_count), data_row[segment_calc] , mindset_calc(data_row[p14],data_row[p24],data_row[p34]) , data_row[0] ], :sz => 10, :alignment => { :horizontal => :center, :vertical => :center , :wrap_text => true}
+           
+           sheet.add_row [ data_row[ss11] , data_row[ss12] , data_row[ss13] , data_row[ss14] , valence_calc(data_row[ss14]), data_row[s14], data_row[segment_calc] , mindset_calc(data_row[p14],data_row[p24],data_row[p34]) , data_row[0] ], :sz => 10, :alignment => { :horizontal => :center, :vertical => :center , :wrap_text => true}
+           
            
            
            row_count = row_count + 1
        end
-    
        
    end
-end
-    else puts "Not a known topic code"
+   pop_row_count = (row_count * 3) - 2
+   
+   
+   #Ranking
+   when "ranking"
+   original_start = s11
+   
+   while s11 <= original_start + $rank_total.to_i
+   puts "debug 2"
+   if s11 == original_start
+       
+       $data.each do |row|
+           data_row = $data[row_count].to_s.split("   ") # Parses individual rows from sheet
+           
+           if $rank_num.to_i < data_row[s11].to_i
+               puts "Not evaluated statement, skipping"
+               row_count = row_count + 1
+               
+               elsif row == $data[0]
+               
+               puts "Skipping Main Row"
+               row_count = row_count + 1
+               elsif row == $data[1]
+               
+               puts "Skipping second row"
+               row_count = row_count + 1
+               else
+               
+               
+               
+               sheet.add_row [data_row[r_calc(data_row[s11], $rank_total , "emotion" )] , data_row[r_calc(data_row[s11], $rank_total , "intensity" )], data_row[r_calc(data_row[s11], $rank_total , "why" ) ], "", valence_calc(data_row[r_calc(data_row[s11], $rank_total , "valence" )]), r_mindset_calc( $rank_total, $rank_num, row_count), data_row[segment_calc] , mindset_calc(data_row[p14],data_row[p24],data_row[p34]) , data_row[0] ], :sz => 10, :alignment => { :horizontal => :center, :vertical => :center , :wrap_text => true}
+               
+               
+               row_count = row_count + 1
+           end
+       end
+       
+   else
+   row_count = 0
+   wb.add_worksheet(:name=> "#{topic_code} - #{topic_title}_#{s11}") do |sheet|
+       
+       sheet.add_row [topic_title], :sz => 12, :b => true, :alignment => { :horizontal => :center, :vertical => :center , :wrap_text => true}
+       
+       sheet.add_row [topic_frame_of_reference], :sz => 12, :b => true, :alignment => { :horizontal => :center, :vertical => :center , :wrap_text => true}
+       sheet.add_row ["Emotion", "Intensity", "Why", "S" , "Valence", "Mindset", "Segment", "Product Mindset" ,"Response ID"]
+       
+       
+       $data.each do |row|
+           data_row = $data[row_count].to_s.split("   ") # Parses individual rows from sheet
+           
+           if $rank_num.to_i < data_row[s11].to_i
+               puts "Not evaluated statement, skipping"
+               row_count = row_count + 1
+               
+               elsif row == $data[0]
+               
+               puts "Skipping Main Row"
+               row_count = row_count + 1
+               elsif row == $data[1]
+               
+               puts "Skipping second row"
+               row_count = row_count + 1
+               else
+               
+               
+               
+               sheet.add_row [data_row[r_calc(data_row[s11], $rank_total , "emotion" )] , data_row[r_calc(data_row[s11], $rank_total , "intensity" )], data_row[r_calc(data_row[s11], $rank_total , "why" ) ], "", valence_calc(data_row[r_calc(data_row[s11], $rank_total , "valence" )]), r_mindset_calc( $rank_total, $rank_num, row_count), data_row[segment_calc] , mindset_calc(data_row[p14],data_row[p24],data_row[p34]) , data_row[0] ], :sz => 10, :alignment => { :horizontal => :center, :vertical => :center , :wrap_text => true}
+               
+               
+               row_count = row_count + 1
+           end
+       end
+       
+       
+       
+   end
+
+   
+
+  end
+   s11 = s11 + 1
+ end
+   
+   
+   
+   
+   else puts "Not a known topic code"
+
+
+
 
 end # end topic type case
 
