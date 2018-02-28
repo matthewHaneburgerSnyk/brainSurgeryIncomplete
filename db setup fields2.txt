@@ -3,7 +3,47 @@
 
 :v_ranking_total, :v_ranking_total0, :v_ranking_total1, :v_ranking_total2, :v_ranking_total3, :v_ranking_total4, :v_ranking_total5, :v_ranking_total6, :v_ranking_total7, :v_ranking_total8, :v_ranking_total9, :v_ranking_total10, :v_ranking_total11, :v_ranking_total12, :v_ranking_total13, :v_ranking_total14, :v_ranking_total15, :v_ranking_total16, :v_ranking_total17, :v_ranking_total18, :v_ranking_total19, :v_ranking_total20, :v_ranking_total21, :v_ranking_total22, :v_ranking_total23, :v_ranking_total24, :v_ranking_total25, :v_ranking_total26, :v_ranking_total27, :v_ranking_total28, :v_ranking_total29, :v_ranking_total30, :v_ranking_total31, :v_ranking_total32, :v_ranking_total33, :v_ranking_total34, :v_ranking_total35, :v_ranking_total36, :v_ranking_total37, :v_ranking_total38, :v_ranking_total39, :v_ranking_total40, :v_ranking_total41, :v_ranking_total42, :v_ranking_total43, :v_ranking_total44, :v_ranking_total45, :v_ranking_total46, :v_ranking_total47, :v_ranking_total48, :v_ranking_total49
 
-ALTER TABLE todos ADD COLUMN :g_ranking_total0 text, ADD COLUMN :g_ranking_total1 text, ADD COLUMN :g_ranking_total2 text, ADD COLUMN :g_ranking_total3 text, ADD COLUMN :g_ranking_total4 text, ADD COLUMN :g_ranking_total5 text, ADD COLUMN :g_ranking_total6 text, ADD COLUMN :g_ranking_total7 text, ADD COLUMN :g_ranking_total8 text, ADD COLUMN :g_ranking_total9 text, ADD COLUMN :g_ranking_total10 text, ADD COLUMN :g_ranking_total11 text, ADD COLUMN :g_ranking_total12 text, ADD COLUMN :g_ranking_total13 text, ADD COLUMN :g_ranking_total14 text, ADD COLUMN :g_ranking_total15 text, ADD COLUMN :g_ranking_total16 text, ADD COLUMN :g_ranking_total17 text, ADD COLUMN :g_ranking_total18 text, ADD COLUMN :g_ranking_total19 text, ADD COLUMN :g_ranking_total20 text, ADD COLUMN :g_ranking_total21 text, ADD COLUMN :g_ranking_total22 text, ADD COLUMN :g_ranking_total23 text, ADD COLUMN :g_ranking_total24 text, ADD COLUMN :g_ranking_total25 text, ADD COLUMN :g_ranking_total26 text, ADD COLUMN :g_ranking_total27 text, ADD COLUMN :g_ranking_total28 text, ADD COLUMN :g_ranking_total29 text, ADD COLUMN :g_ranking_total30 text, ADD COLUMN :g_ranking_total31 text, ADD COLUMN :g_ranking_total32 text, ADD COLUMN :g_ranking_total33 text, ADD COLUMN :g_ranking_total34 text, ADD COLUMN :g_ranking_total35 text, ADD COLUMN :g_ranking_total36 text, ADD COLUMN :g_ranking_total37 text, ADD COLUMN :g_ranking_total38 text, ADD COLUMN :g_ranking_total39 text, ADD COLUMN :g_ranking_total40 text, ADD COLUMN :g_ranking_total41 text, ADD COLUMN :g_ranking_total42 text, ADD COLUMN :g_ranking_total43 text, ADD COLUMN :g_ranking_total44 text, ADD COLUMN :g_ranking_total45 text, ADD COLUMN :g_ranking_total46 text, ADD COLUMN :g_ranking_total47 text, ADD COLUMN :g_ranking_total48 text, ADD COLUMN :g_ranking_total49 text;      
+ALTER TABLE todos ADD COLUMN g_ranking_total0 text, ADD COLUMN g_ranking_total1 text, ADD COLUMN g_ranking_total2 text, ADD COLUMN g_ranking_total3 text, ADD COLUMN g_ranking_total4 text, ADD COLUMN g_ranking_total5 text, ADD COLUMN g_ranking_total6 text, ADD COLUMN g_ranking_total7 text, ADD COLUMN g_ranking_total8 text, ADD COLUMN g_ranking_total9 text, ADD COLUMN g_ranking_total10 text, ADD COLUMN g_ranking_total11 text, ADD COLUMN g_ranking_total12 text, ADD COLUMN g_ranking_total13 text, ADD COLUMN g_ranking_total14 text, ADD COLUMN g_ranking_total15 text, ADD COLUMN g_ranking_total16 text, ADD COLUMN g_ranking_total17 text, ADD COLUMN g_ranking_total18 text, ADD COLUMN g_ranking_total19 text, ADD COLUMN g_ranking_total20 text, ADD COLUMN g_ranking_total21 text, ADD COLUMN g_ranking_total22 text, ADD COLUMN g_ranking_total23 text, ADD COLUMN g_ranking_total24 text, ADD COLUMN g_ranking_total25 text, ADD COLUMN g_ranking_total26 text, ADD COLUMN g_ranking_total27 text, ADD COLUMN g_ranking_total28 text, ADD COLUMN g_ranking_total29 text, ADD COLUMN g_ranking_total30 text, ADD COLUMN g_ranking_total31 text, ADD COLUMN g_ranking_total32 text, ADD COLUMN g_ranking_total33 text, ADD COLUMN g_ranking_total34 text, ADD COLUMN g_ranking_total35 text, ADD COLUMN g_ranking_total36 text, ADD COLUMN g_ranking_total37 text, ADD COLUMN g_ranking_total38 text, ADD COLUMN g_ranking_total39 text, ADD COLUMN g_ranking_total40 text, ADD COLUMN g_ranking_total41 text, ADD COLUMN g_ranking_total42 text, ADD COLUMN g_ranking_total43 text, ADD COLUMN g_ranking_total44 text, ADD COLUMN g_ranking_total45 text, ADD COLUMN g_ranking_total46 text, ADD COLUMN g_ranking_total47 text, ADD COLUMN g_ranking_total48 text, ADD COLUMN g_ranking_total49 text;      
 
 
-ALTER TABLE todos ADD COLUMN :v_ranking_total0 text, ADD COLUMN :v_ranking_total1 text, ADD COLUMN :v_ranking_total2 text, ADD COLUMN :v_ranking_total3 text, ADD COLUMN :v_ranking_total4 text, ADD COLUMN :v_ranking_total5 text, ADD COLUMN :v_ranking_total6 text, ADD COLUMN :v_ranking_total7 text, ADD COLUMN :v_ranking_total8 text, ADD COLUMN :v_ranking_total9 text, ADD COLUMN :v_ranking_total10 text, ADD COLUMN :v_ranking_total11 text, ADD COLUMN :v_ranking_total12 text, ADD COLUMN :v_ranking_total13 text, ADD COLUMN :v_ranking_total14 text, ADD COLUMN :v_ranking_total15 text, ADD COLUMN :v_ranking_total16 text, ADD COLUMN :v_ranking_total17 text, ADD COLUMN :v_ranking_total18 text, ADD COLUMN :v_ranking_total19 text, ADD COLUMN :v_ranking_total20 text, ADD COLUMN :v_ranking_total21 text, ADD COLUMN :v_ranking_total22 text, ADD COLUMN :v_ranking_total23 text, ADD COLUMN :v_ranking_total24 text, ADD COLUMN :v_ranking_total25 text, ADD COLUMN :v_ranking_total26 text, ADD COLUMN :v_ranking_total27 text, ADD COLUMN :v_ranking_total28 text, ADD COLUMN :v_ranking_total29 text, ADD COLUMN :v_ranking_total30 text, ADD COLUMN :v_ranking_total31 text, ADD COLUMN :v_ranking_total32 text, ADD COLUMN :v_ranking_total33 text, ADD COLUMN :v_ranking_total34 text, ADD COLUMN :v_ranking_total35 text, ADD COLUMN :v_ranking_total36 text, ADD COLUMN :v_ranking_total37 text, ADD COLUMN :v_ranking_total38 text, ADD COLUMN :v_ranking_total39 text, ADD COLUMN :v_ranking_total40 text, ADD COLUMN :v_ranking_total41 text, ADD COLUMN :v_ranking_total42 text, ADD COLUMN :v_ranking_total43 text, ADD COLUMN :v_ranking_total44 text, ADD COLUMN :v_ranking_total45 text, ADD COLUMN :v_ranking_total46 text, ADD COLUMN :v_ranking_total47 text, ADD COLUMN :v_ranking_total48 text, ADD COLUMN :v_ranking_total49 text;                
+ALTER TABLE todos ADD COLUMN v_ranking_total0 text, ADD COLUMN v_ranking_total1 text, ADD COLUMN v_ranking_total2 text, ADD COLUMN v_ranking_total3 text, ADD COLUMN v_ranking_total4 text, ADD COLUMN v_ranking_total5 text, ADD COLUMN v_ranking_total6 text, ADD COLUMN v_ranking_total7 text, ADD COLUMN v_ranking_total8 text, ADD COLUMN v_ranking_total9 text, ADD COLUMN v_ranking_total10 text, ADD COLUMN v_ranking_total11 text, ADD COLUMN v_ranking_total12 text, ADD COLUMN v_ranking_total13 text, ADD COLUMN v_ranking_total14 text, ADD COLUMN v_ranking_total15 text, ADD COLUMN v_ranking_total16 text, ADD COLUMN v_ranking_total17 text, ADD COLUMN v_ranking_total18 text, ADD COLUMN v_ranking_total19 text, ADD COLUMN v_ranking_total20 text, ADD COLUMN v_ranking_total21 text, ADD COLUMN v_ranking_total22 text, ADD COLUMN v_ranking_total23 text, ADD COLUMN v_ranking_total24 text, ADD COLUMN v_ranking_total25 text, ADD COLUMN v_ranking_total26 text, ADD COLUMN v_ranking_total27 text, ADD COLUMN v_ranking_total28 text, ADD COLUMN v_ranking_total29 text, ADD COLUMN v_ranking_total30 text, ADD COLUMN v_ranking_total31 text, ADD COLUMN v_ranking_total32 text, ADD COLUMN v_ranking_total33 text, ADD COLUMN v_ranking_total34 text, ADD COLUMN v_ranking_total35 text, ADD COLUMN v_ranking_total36 text, ADD COLUMN v_ranking_total37 text, ADD COLUMN v_ranking_total38 text, ADD COLUMN v_ranking_total39 text, ADD COLUMN v_ranking_total40 text, ADD COLUMN v_ranking_total41 text, ADD COLUMN v_ranking_total42 text, ADD COLUMN v_ranking_total43 text, ADD COLUMN v_ranking_total44 text, ADD COLUMN v_ranking_total45 text, ADD COLUMN v_ranking_total46 text, ADD COLUMN v_ranking_total47 text, ADD COLUMN v_ranking_total48 text, ADD COLUMN v_ranking_total49 text;   
+
+
+
+ALTER TABLE todos ADD COLUMN graph_topics0 text, ADD COLUMN graph_topics1 text, ADD COLUMN graph_topics2 text, ADD COLUMN graph_topics3 text, ADD COLUMN graph_topics4 text, ADD COLUMN graph_topics5 text, ADD COLUMN graph_topics6 text, ADD COLUMN graph_topics7 text, ADD COLUMN graph_topics8 text, ADD COLUMN graph_topics9 text, ADD COLUMN graph_topics10 text, ADD COLUMN graph_topics11 text, ADD COLUMN graph_topics12 text, ADD COLUMN graph_topics13 text, ADD COLUMN graph_topics14 text, ADD COLUMN graph_topics15 text, ADD COLUMN graph_topics16 text, ADD COLUMN graph_topics17 text, ADD COLUMN graph_topics18 text, ADD COLUMN graph_topics19 text, ADD COLUMN graph_topics20 text, ADD COLUMN graph_topics21 text, ADD COLUMN graph_topics22 text, ADD COLUMN graph_topics23 text, ADD COLUMN graph_topics24 text, ADD COLUMN graph_topics25 text, ADD COLUMN graph_topics26 text, ADD COLUMN graph_topics27 text, ADD COLUMN graph_topics28 text, ADD COLUMN graph_topics29 text, ADD COLUMN graph_topics30 text, ADD COLUMN graph_topics31 text, ADD COLUMN graph_topics32 text, ADD COLUMN graph_topics33 text, ADD COLUMN graph_topics34 text, ADD COLUMN graph_topics35 text, ADD COLUMN graph_topics36 text, ADD COLUMN graph_topics37 text, ADD COLUMN graph_topics38 text, ADD COLUMN graph_topics39 text, ADD COLUMN graph_topics40 text, ADD COLUMN graph_topics41 text, ADD COLUMN graph_topics42 text, ADD COLUMN graph_topics43 text, ADD COLUMN graph_topics44 text, ADD COLUMN graph_topics45 text, ADD COLUMN graph_topics46 text, ADD COLUMN graph_topics47 text, ADD COLUMN graph_topics48 text, ADD COLUMN graph_topics49 text;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

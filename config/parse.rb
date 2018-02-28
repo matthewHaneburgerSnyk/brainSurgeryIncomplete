@@ -290,7 +290,7 @@ case topic_type
    original_start = s11
    
    while s11 <= original_start + $rank_total.to_i
-   puts "debug 2"
+
    if s11 == original_start
        
        $data.each do |row|
@@ -394,10 +394,25 @@ end
 ########## make graph start ###########
 #######################################
 
-def makeGraph(graph_code, topic_type, survey_column, topic_title, topic_frame_of_reference, segment, product_mindset )
-
+#def makeGraph(g_topic_code, g_topic_type, graph_topics, g_topic_title, g_ranking_num, g_ranking_total )
+def makeGraph(values)
+    
+    
 p = Axlsx::Package.new
 wb = p.workbook
+
+values.each do |verbatim_call|
+    
+    g_topic_code          = verbatim_call[0]
+    g_topic_type          = verbatim_call[1]
+    graph_topics          = verbatim_call[2]
+    g_topic_title         = verbatim_call[3]
+    g_ranking_num         = verbatim_call[4]
+    g_ranking_total       = verbatim_call[5]
+  
+
+
+
 
 
 distance_counter = 0
@@ -410,6 +425,9 @@ product_start_spot = distance_row.index(product_mindset)
 
 
 
+    
+    
+    
 $s11 = start_spot       # Emotion
 $s12 = start_spot + 4   # Intensity
 $s13 = start_spot + 5   # Why
@@ -426,6 +444,12 @@ $s34 = start_spot + 14  # Valence
 $p14 = product_start_spot + 6   # Valence
 $p24 = product_start_spot + 10  # Valence
 $p34 = product_start_spot + 14  # Valence
+
+
+def segment_value
+    
+    
+end
 
 
 
@@ -469,6 +493,11 @@ def mindset_calc( valence1, valence2, valence3 )
     return map_mindset_value(mindsetc)
     
 end
+
+
+case topic_type
+    
+    when "standard_3x"
 
 def positive_calc()
     positive = 0
@@ -568,22 +597,24 @@ wb.add_worksheet(:name=> "#{graph_code} - #{topic_title}") do |sheet|
       end
 
 
-    
+
+#when "standard_1x"
+
+
+#when "ranking"
+
+
+
+end
     
     p.serialize('test_graph.xlsx')
 end
+end
 
 end
 
-#makeVerb("R1", "ranking", "Q231_9", "Attributes" , "NUEDEXTA is the first and only FDA-approved treatment for PBA.", "SEG", "Q285", 5)
 
 #makeGraph("P1", "standard_3x", "Q378", "Role in Caring for Patient" , "When I think about my role in caring for my patients with Pseudobulbar affect (PBA), I feel:", "SEG", "Q151")
-
-
-
-
-
-#makeVerb([["R1", "ranking", "Q231_9", "Attributes" , "NUEDEXTA is the first and only FDA-approved treatment for PBA.", "SEG", "Q285", 5],["T1", "standard_3x", "Q24", "Impact of My Alz" , "When I think about the impact of Alzheimer’s/Dementia, I feel:", "SEG", "Q285", 5]])
 
 
 

@@ -75,13 +75,9 @@ $(document).ready(function () {
         var cols = "";
 
         cols += '<td><input type="text" class="form-control" name="todo[g_topic_code'+ counter + ']" id="todo_g_topic_code'+ counter +'"></td>';
-        //cols += '<td><input type="text" class="form-control" name="v_topic_code' + counter + '"/></td>'; 
-        cols += '<td><input type="text" class="form-control" name="todo[g_topic_type' + counter + ']" id="todo_g_topic_type'+ counter +'"/></td>';
-        cols += '<td><input type="text" class="form-control" name="todo[g_survey_column' + counter + ']" id="todo_g_survey_column'+ counter + '"/></td>';
-        cols += '<td><input maxlength="25" type="text" class="form-control" name="todo[g_topic_title' + counter + ']" id="todo_g_topic_title' + counter + '" /></td>';
-        cols += '<td><input type="text" class="form-control" name="todo[g_topic_frame' + counter + ']" id="todo_g_topic_frame' + counter + '" /></td>';
-        cols += '<td><input type="text" class="form-control" name="todo[g_segment' + counter + ']" id="todo_g_segment' + counter + '"/></td>';
-        cols += '<td><input type="text" class="form-control" name="todo[g_product_mindset' + counter + ']" id="todo_g_product_mindset' + counter + '" /></td>';
+        cols +='<td> <select name="todo[g_topic_type' + counter + ']" id="todo_g_topic_type' + counter + '"><option value="Percent Positive">Percent Positive</option>  <option value="Mindset">Mindset</option> <option value="Ranking">Ranking</option></select></td> ';   
+        cols += '<td><input type="text" class="form-control" name="todo[graph_topics' + counter + ']" id="graph_topics'+ counter + '"/></td>';
+        cols += '<td><input maxlength="25" type="text" class="form-control" name="todo[g_topic_title' + counter + ']" id="todo_g_topic_title' + counter + '" /></td>'; 
         cols += '<td><input type="text" class="form-control" name="todo[g_ranking_num' + counter + ']" id="todo_g_ranking_num' +counter + '"/></td>';
         cols += '<td><input type="text" class="form-control" name="todo[g_ranking_total' + counter + ']" id="todo_g_ranking_total' +counter + '"/></td>';
 
