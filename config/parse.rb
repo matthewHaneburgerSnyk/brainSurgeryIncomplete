@@ -397,192 +397,238 @@ end
 #def makeGraph(g_topic_code, g_topic_type, graph_topics, g_topic_title, g_ranking_num, g_ranking_total )
 def makeGraph(values)
     
+    $segment_a = Array.new
+    ######### Array positions of values ########
+     #   valence = 4
+     #   mindset = 5
+     #   segment = 6
+     #   product_mindset = 7
     
-p = Axlsx::Package.new
-wb = p.workbook
-
-values.each do |verbatim_call|
-    
-    g_topic_code          = verbatim_call[0]
-    g_topic_type          = verbatim_call[1]
-    graph_topics          = verbatim_call[2]
-    g_topic_title         = verbatim_call[3]
-    g_ranking_num         = verbatim_call[4]
-    g_ranking_total       = verbatim_call[5]
-  
-
-
-
-
-
-distance_counter = 0
-distance = 3
-
-distance_row = $data[0].to_s.split("   ")
-start_spot = distance_row.index(survey_column)
-segment_calc = distance_row.index(segment)
-product_start_spot = distance_row.index(product_mindset)
-
-
-
+    #Open recently created verbatim and parse it
+    verbatim = File.open("./public/uploads/#{$file_name}/verbatim_#{$file_name}")
     
     
+    cworkbook = Creek::Book.new verbatim
+    cworksheets = cworkbook.sheets
+    puts "Found #{cworksheets.count} verbatim worksheets"
     
-$s11 = start_spot       # Emotion
-$s12 = start_spot + 4   # Intensity
-$s13 = start_spot + 5   # Why
-$s14 = start_spot + 6   # Valence
-$s21 = start_spot + 1   # Emotion
-$s22 = start_spot + 8   # Intensity
-$s23 = start_spot + 9   # Why
-$s24 = start_spot + 10  # Valence
-$s31 = start_spot + 2   # Emotion
-$s32 = start_spot + 12  # Intensity
-$s33 = start_spot + 13  # Why
-$s34 = start_spot + 14  # Valence
-
-$p14 = product_start_spot + 6   # Valence
-$p24 = product_start_spot + 10  # Valence
-$p34 = product_start_spot + 14  # Valence
-
-
-def segment_value
+    # Where everything lives for graphs
+    $gdata = Hash.new
+    $g_data_raw = Array.new
+    #################################   Percent Positive Calcs   ###############################
+    #Parse verbatim by sheet
+    cworksheets.each do |cworksheet|
+        puts "Reading verbatims for graph generation, sheet: #{cworksheet.name}"
+        num_rows = 0
     
-    
-end
-
-
-
-def valence_calc(value)
-    case value
-        when "1"
-        return "Very Pleasant"
-        when "2"
-        return "Mildly Pleasant"
-        when "3"
-        return "Neutral"
-        when "4"
-        return "Mildly Unpleasant"
-        when "5"
-        return "Very Unpleasant"
-    end
-end
-
-
-def map_mindset_value(mindset_value)
-    if mindset_value < 1.5
-        mindset = "Impassioned"
-        elsif mindset_value < 2.6
-        mindset = "Attracted"
-        elsif mindset_value < 3.5
-        mindset = "Apathetic"
-        else
-        mindset = "Unattracted"
-        
-        return mindset
-    end
-end
-
-
-def mindset_calc( valence1, valence2, valence3 )
-    
-    mindsetc = valence1.to_i + valence2.to_i + valence3.to_i
-    mindsetc = mindsetc / 3
-    
-    #return mindsetc
-    return map_mindset_value(mindsetc)
-    
-end
-
-
-case topic_type
-    
-    when "standard_3x"
-
-def positive_calc()
-    positive = 0
-    neutral = 0
-    negative = 0
-    
-    
-    row_count = 0
-    
-   
-    $data.each do |row|
-        if row == $data[0]
-            
-            row_count = row_count + 1
-            elsif row == $data[1]
-            
-            row_count = row_count + 1
-            else
-            
-            $data_g_row = $data[row_count].to_s.split("   ") # Parses individual rows from sheet
-        
-            if $data_g_row[$s14].to_i == 1
-                positive = positive + 1
-              elsif $data_g_row[$s14].to_i == 2
-                positive = positive + 1
-              elsif $data_g_row[$s14].to_i == 3
-                neutral = neutral + 1
-              elsif $data_g_row[$s14].to_i == 4
-                negative = negative + 1
-              elsif $data_g_row[$s14].to_i == 5
-                negative = negative + 1
-             end
-            if $data_g_row[$s24].to_i == 1
-                positive = positive + 1
-                elsif $data_g_row[$s24].to_i == 2
-                positive = positive + 1
-                elsif $data_g_row[$s24].to_i == 3
-                neutral = neutral + 1
-                elsif $data_g_row[$s24].to_i == 4
-                negative = negative + 1
-                elsif $data_g_row[$s24].to_i == 5
-                negative = negative + 1
-            end
-            if $data_g_row[$s34].to_i == 1
-                positive = positive + 1
-                elsif $data_g_row[$s34].to_i == 2
-                positive = positive + 1
-                elsif $data_g_row[$s34].to_i == 3
-                neutral = neutral + 1
-                elsif $data_g_row[$s34].to_i == 4
-                negative = negative + 1
-                elsif $data_g_row[$s34].to_i == 5
-                negative = negative + 1
-            end
-            
-        
-            row_count = row_count + 1
+        #get the contents of the sheet and put them in an array
+        cworksheet.rows.each do |row|
+            row_cells = row.values
+            num_rows += 1
+            $g_data_raw.push(row.values.join "   ")
         end
+        #Percent Positive start values
+        row_count = 0
+        positive = 0
+        neutral = 0
+        negative = 0
+        #parse array to get values for building graphs
+        $g_data_raw.each do |row|
+            
+            if row == $g_data_raw[0]
+                
+                puts "Skipping Main Row"
+                row_count = row_count + 1
+                elsif row == $g_data_raw[1]
+                
+                puts "Skipping second row"
+                row_count = row_count + 1
+                elsif row == $g_data_raw[2]
+                puts "Skipping third row"
+                row_count = row_count + 1
+                
+                else
+                data_row = $g_data_raw[row_count].to_s.split("   ") # Parses individual rows from sheet
+                
+                if data_row[4] == "Very Pleasant"
+                    positive = positive + 1
+                    elsif data_row[4] == "Mildly Pleasant"
+                    positive = positive + 1
+                    elsif data_row[4] == "Neutral"
+                    neutral = neutral + 1
+                    elsif data_row[4] == "Mildly Unpleasant"
+                    negative = negative + 1
+                    elsif data_row[4] == "Very Unpleasant"
+                    negative = negative + 1
+                end
+                #add segments to array so you can manipulate it later
+                
+                $segment_a.push(data_row[6])
+                
+                
+                row_count = row_count + 1
+            end
+            
+            
+        end # End for parsing calculation
+        $total = positive + neutral + negative
+        $per_positive = (positive.to_f / $total.to_f).round(2)
+        $per_neutral  = (neutral.to_f  / $total.to_f).round(2)
+        $per_negative = (negative.to_f / $total.to_f).round(2)
+        puts "per positive #{$per_positive}"
+        puts "per negative #{$per_negative}"
+        puts "per neutral  #{$per_neutral}"
         
-    end
-  
-    $total = positive + neutral + negative
-    $per_positive = (positive.to_f / $total.to_f).round(2)
-    $per_neutral  = (neutral.to_f  / $total.to_f).round(2)
-    $per_negative = (negative.to_f / $total.to_f).round(2)
-    puts "per positive #{$per_positive}"
-    puts "per negative #{$per_negative}"
-    puts "per neutral  #{$per_neutral}"
-end
+        
+        
+    
+        #################################   Segment Calcs   ###############################
+        #Run segment calcs, this is all dynamic and should work with any number of segments
+        row_count       = 0
+        $seg_array      = Array.new
+        $uniq_seg_names = Array.new
+        $uniq_segs      = Array.new
+        
+        
+        #how many segments are they and what are the unique vals
+        $num_of_segs     = $segment_a.uniq.length
+        $uniq_seg_names  = $segment_a.uniq
+        
+        
+        #turn segs values into a nested array
+        $uniq_seg_names.each do |seg|
+            array_spot = $uniq_seg_names.index(seg)
+            $uniq_segs[array_spot] = Array.new
+        end
 
+
+      #parse array to get values for building segment graphs
+      $g_data_raw.each do |row|
+            
+            
+            if row == $g_data_raw[0]
+
+                puts "Skipping Main Row"
+                row_count = row_count + 1
+                
+                elsif row == $g_data_raw[1]
+                puts "Skipping second row"
+                row_count = row_count + 1
+                
+                elsif row == $g_data_raw[2]
+                puts "Skipping third row"
+                row_count = row_count + 1
+                
+                else
+                data_row = $g_data_raw[row_count].to_s.split("   ") # Parses individual rows from sheet
+                
+             
+                $uniq_seg_names.each do |seg| # see what segment is on the row we're looking at
+                    array_spot = $uniq_seg_names.index(seg)
+                    if seg == data_row[6]
+                        
+                       $uniq_segs[array_spot].push(data_row[4]) # Put the valence into an array corresponding to the segment title
+                    end
+                
+               end
+                row_count = row_count + 1
+            end
+            
+      end # End segment row parsing
+      
+            $seg_values = Hash.new
+            $uniq_seg_names.each do |seg|
+               array_spot = $uniq_seg_names.index(seg)
+               positive = 0
+               neutral = 0
+               negative = 0
+               
+               
+                temp_array = Array.new
+                temp_array = $uniq_segs[array_spot]
+                #$uniq_segs[array_spot].each do |val|
+                temp_array.each do |val|
+                    if val == "Very Pleasant"
+                        positive = positive + 1
+                        elsif val == "Mildly Pleasant"
+                        positive = positive + 1
+                        elsif val == "Neutral"
+                        neutral = neutral + 1
+                        elsif val == "Mildly Unpleasant"
+                        negative = negative + 1
+                        elsif val == "Very Unpleasant"
+                        negative = negative + 1
+                    end
+                
+                
+               end
+                $s_total = positive + neutral + negative
+                $s_total_used = $total - $s_total
+                $s_per_positive = (positive.to_f / $s_total.to_f).round(2)
+                $s_per_neutral  = (neutral.to_f  / $s_total.to_f).round(2)
+                $s_per_negative = (negative.to_f / $s_total.to_f).round(2)
+               
+                
+                
+               
+                $seg_values[seg] = [$s_per_positive, $s_per_neutral, $s_per_negative, $s_total_used, $s_total]
+                
+                
+            end
+            
+            puts "Debugging seg_values hash, #{$seg_values}"
+            
+            # end # End for segment ID calculation
+        
+        
+        
+        
+        
+        ### That's what seg values looks like it's a hash with the key being the segment name
+        #$seg_values[unique_seg_names(seg)] = (per_positive, per_neutral, per_negative, total_used, total)
+        $seg_values
+        $ts = ["TS", $per_positive, $per_negative, $per_neutral, $total, $total]
+        $gdata[cworksheet.name[0..2]] = [$ts]
+        
+       
+        ##TODO - Filter out nil values from
+         $seg_values.each do |key, value|
+             $gdata[cworksheet.name[0..2]].push(key, value)
+             
+        end
+         
+      
+      end # End for each worksheet
+    
+    #create new xlsx doc
+    p = Axlsx::Package.new
+    wb = p.workbook
+    
+    values.each do |graph_call|
+        
+        g_topic_code          = graph_call[0]
+        g_topic_type          = graph_call[1]
+        graph_topics          = graph_call[2]
+        g_topic_title         = graph_call[3]
+        g_ranking_num         = graph_call[4]
+        g_ranking_total       = graph_call[5]
+        
+    
 
 
 
 row_count = 0
 
+#  TS
+wb.add_worksheet(:name=> "#{g_topic_code} (TS) - #{g_topic_title}") do |sheet|
+    
+    sheet.add_row [g_topic_title], :sz => 12, :b => true, :alignment => { :horizontal => :center, :vertical => :center , :wrap_text => true}
+    
+    sheet.add_row ["test"], :sz => 12, :b => true, :alignment => { :horizontal => :center, :vertical => :center , :wrap_text => true}
+    
+    
 
-wb.add_worksheet(:name=> "#{graph_code} - #{topic_title}") do |sheet|
-    
-    sheet.add_row [topic_title], :sz => 12, :b => true, :alignment => { :horizontal => :center, :vertical => :center , :wrap_text => true}
-    
-    sheet.add_row [topic_frame_of_reference], :sz => 12, :b => true, :alignment => { :horizontal => :center, :vertical => :center , :wrap_text => true}
-    
-    
 
-            positive_calc()
             sheet.add_row ["Condition"]
             sheet.add_row ["Positive" , $per_positive]
             sheet.add_row ["Neutral"  , $per_neutral]
@@ -598,16 +644,48 @@ wb.add_worksheet(:name=> "#{graph_code} - #{topic_title}") do |sheet|
 
 
 
-#when "standard_1x"
-
-
-#when "ranking"
-
-
 
 end
+
+
+#  Per Segments
+wb.add_worksheet(:name=> "#{g_topic_code} 2 - #{g_topic_title}") do |sheet|
     
-    p.serialize('test_graph.xlsx')
+    sheet.add_row [g_topic_title], :sz => 12, :b => true, :alignment => { :horizontal => :center, :vertical => :center , :wrap_text => true}
+    
+    sheet.add_row ["test2"], :sz => 12, :b => true, :alignment => { :horizontal => :center, :vertical => :center , :wrap_text => true}
+    
+    
+    
+    
+    sheet.add_row ["Condition"]
+    sheet.add_row ["Positive" , $per_positive]
+    sheet.add_row ["Neutral"  , $per_neutral]
+    sheet.add_row ["Negative" , $per_negative]
+    sheet.add_row ["Total"    , $total]
+    
+    
+    
+    %w(positive neutral negative).each #{ |label| sheet.add_row [label, rand(24)+1] }
+    sheet.add_chart(Axlsx::Bar3DChart, :start_at => "D9", :end_at => "H21",  :barDir => :col) do |chart|
+        chart.add_series :data => sheet["B4:B6"], :labels => sheet["A4:A6"], :colors => ['FF0000', '00FF00', '0000FF']
+    end
+    
+    
+    
+    
+end
+
+
+
+
+
+
+
+    #p.serialize('test_graph.xlsx')
+    p.serialize($file_name)
+    file = $file_name.to_s
+    FileUtils.mv $file_name, "./public/uploads/#{$file_name}/graphs_#{$file_name}"
 end
 end
 
@@ -620,4 +698,4 @@ end
 
 
 end#end parser
-end
+#end
