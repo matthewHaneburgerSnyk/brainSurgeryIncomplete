@@ -620,7 +620,8 @@ def makeGraph(values)
         
         $graph_topics_a = Array.new
         $graph_topics_a = graph_topics.split(",")
-
+        $graph_topics_s = Array.new
+        $graph_topics_s = graph_topics.split(",")
 
 row_count = 0
 $ts_positive    = Array.new
@@ -736,7 +737,7 @@ wb.add_worksheet(:name=> "#{g_topic_code} (TS) - #{g_topic_title}") do |sheet|
           chart.add_series :data => sheet[$p_cells], :title => "Positive", :colors => ['00FF00', '00FF00', '00FF00']
           chart.add_series :data => sheet[$neu_cells], :title => "Neutral", :colors => ['0000FF', '0000FF', '0000FF']
           chart.add_series :data => sheet[$neg_cells], :title => "Negative", :colors => ['FF0000', 'FF0000', 'FF0000']
-          # chart.add_series :data => sheet["B5:C5"], :labels => sheet["A4:A6"], :colors => ['00FF00', '0000FF', 'FF0000']
+        
       end
 
 
@@ -745,35 +746,187 @@ wb.add_worksheet(:name=> "#{g_topic_code} (TS) - #{g_topic_title}") do |sheet|
 end
 
 
+
+
+
+#determine how many times to iterate
+$topic_count = 0
+$graph_topics_s.each do |topic|
+    
+    ts_data = $gdata[topic.strip]
+    ts_data.delete_at(0)
+    count = ts_data.size
+    $num_of_segments = count / 2
+    $topic_count =+ 1
+    
+ end
+puts "Number of segments #{$num_of_segments}"
+$segment_name = Array.new
+$ts_data = Array.new
+$g_spot = 0
+$seg_count = 0
+
+while $seg_count < $num_of_segments
+    $graph_topics_s = Array.new
+    $graph_topics_s = graph_topics.split(",")
+   
+   
+    #clear out array of ts values
+    $ts_positive.clear
+    $ts_positive.push("Positive")
+    $ts_neutral.clear
+    $ts_neutral.push("Neutral")
+    $ts_negative.clear
+    $ts_negative.push("Negative")
+    $ts_total_used.clear
+    $ts_total_used.push("Message Index")
+    $ts_total.clear
+    $ts_total.push("Total")
+    #get values for segment
+    
+    
+    
+    $graph_topics_s.each do |topic|
+        $ts_data = $gdata[topic.strip]
+        puts "gdata for debuggin #{$gdata[topic.strip]}"
+        puts "TS data #{$ts_data}"
+        
+        if $seg_count == 0
+            $g_spot = 1
+            
+            else
+            
+           $g_spot = ($seg_count * 2) + 1
+        
+        end
+        puts "SEg count  #{$seg_count}"
+        puts $g_spot
+        puts $ts_data.class
+        ts_data_a = $ts_data[$g_spot.to_i]
+        puts "TS Data a for segments #{ts_data_a}"
+        
+        $ts_positive.push(ts_data_a[0])
+        $ts_neutral.push(ts_data_a[1])
+        $ts_negative.push(ts_data_a[2])
+        $ts_total_used.push(ts_data_a[3])
+        $ts_total.push(ts_data_a[4])
+        
+        $name_count = $seg_count * 2
+        
+        $segment_name.push($ts_data[$name_count.to_i])
+        $segment_name = $segment_name.uniq
+
+        puts "segment name array #{$segment_name}"
+    end
+    $seg_title = "#{g_topic_code} #{$segment_name[$seg_count]} - #{g_topic_title}"
+    $seg_title = $seg_title.truncate(30)
+    
+    
+
 #  Per Segments
-wb.add_worksheet(:name=> "#{g_topic_code} 2 - #{g_topic_title}") do |sheet|
+wb.add_worksheet(:name=> "#{$seg_title}") do |sheet|
     
     sheet.add_row [g_topic_title], :sz => 12, :b => true, :alignment => { :horizontal => :center, :vertical => :center , :wrap_text => true}
     
-    sheet.add_row ["test2"], :sz => 12, :b => true, :alignment => { :horizontal => :center, :vertical => :center , :wrap_text => true}
+    sheet.add_row [$seg_title], :sz => 12, :b => true, :alignment => { :horizontal => :center, :vertical => :center , :wrap_text => true}
     
     
     
     
-    sheet.add_row ["Condition"]
-    sheet.add_row ["Positive" , $per_positive]
-    sheet.add_row ["Neutral"  , $per_neutral]
-    sheet.add_row ["Negative" , $per_negative]
-    sheet.add_row ["Total"    , $total]
+    sheet.add_row  $graph_topics_s.unshift("")
+    sheet.add_row  $ts_positive #positive
+    sheet.add_row  $ts_neutral #neutral
+    sheet.add_row  $ts_negative #negative
+    sheet.add_row  $ts_total #total
+    sheet.add_row  $ts_total_used #message index
     
     
     
    
-    #  sheet.add_chart(Axlsx::Bar3DChart, :start_at => "D9", :end_at => "H21",  :barDir => :col) do |chart|
-    #     chart.add_series :data => sheet["B4:B6"], :labels => sheet["A4:A6"], :colors => ['FF0000', '00FF00', '0000FF']
-    #end
+    num_of_topics = $graph_topics_s.size - 1
+
     
+    case num_of_topics
+        when 1
+        $p_cells   = "B4"
+        $neu_cells = "B5"
+        $neg_cells = "B6"
+        when 2
+        $p_cells   = "B4:C4"
+        $neu_cells = "B5:C5"
+        $neg_cells = "B6:C6"
+        when 3
+        $p_cells   = "B4:D4"
+        $neu_cells = "B5:D5"
+        $neg_cells = "B6:D6"
+        when 4
+        $p_cells   = "B4:E4"
+        $neu_cells = "B5:E5"
+        $neg_cells = "B6:E6"
+        when 5
+        $p_cells   = "B4:F4"
+        $neu_cells = "B5:F5"
+        $neg_cells = "B6:F6"
+        when 6
+        $p_cells   = "B4:G4"
+        $neu_cells = "B5:G5"
+        $neg_cells = "B6:G6"
+        when 7
+        $p_cells   = "B4:H4"
+        $neu_cells = "B5:H5"
+        $neg_cells = "B6:H6"
+        when 8
+        $p_cells   = "B4:I4"
+        $neu_cells = "B5:I5"
+        $neg_cells = "B6:I6"
+        when 9
+        $p_cells   = "B4:J4"
+        $neu_cells = "B5:J5"
+        $neg_cells = "B6:J6"
+        when 10
+        $p_cells   = "B4:K4"
+        $neu_cells = "B5:K5"
+        $neg_cells = "B6:K6"
+        when 11
+        $p_cells   = "B4:L4"
+        $neu_cells = "B5:L5"
+        $neg_cells = "B6:L6"
+        when 12
+        $p_cells   = "B4:M4"
+        $neu_cells = "B5:M5"
+        $neg_cells = "B6:M6"
+        when 13
+        $p_cells   = "B4:N4"
+        $neu_cells = "B5:N5"
+        $neg_cells = "B6:N6"
+        when 14
+        $p_cells   = "B4:O4"
+        $neu_cells = "B5:O5"
+        $neg_cells = "B6:O6"
+        when 15
+        $p_cells   = "B4:P4"
+        $neu_cells = "B5:P5"
+        $neg_cells = "B6:P6"
+        
+        else
+        puts "Out of bounds, double check number of permitted topics per graph."
+    end
+  
     
-    
-    
+    sheet.add_chart(Axlsx::Bar3DChart, :start_at => "D9", :end_at => "H21",  :barDir => :col, :grouping => :percentStacked) do |chart|
+        chart.add_series :data => sheet[$p_cells], :title => "Positive", :colors => ['00FF00', '00FF00', '00FF00']
+        chart.add_series :data => sheet[$neu_cells], :title => "Neutral", :colors => ['0000FF', '0000FF', '0000FF']
+        chart.add_series :data => sheet[$neg_cells], :title => "Negative", :colors => ['FF0000', 'FF0000', 'FF0000']
+        
+       $seg_count += 1
+      
+    end
+
+
 end
 
 
+end
 
 
 
