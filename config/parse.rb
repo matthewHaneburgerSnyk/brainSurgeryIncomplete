@@ -53,6 +53,7 @@ end
 def makeVerb( values )
 
 run_count = values.size
+$run_count_table = run_count
 
 p = Axlsx::Package.new
 wb = p.workbook
@@ -219,7 +220,7 @@ pop_row_count = 0
      sheet.add_row [topic_title], :sz => 12, :b => true, :alignment => { :horizontal => :center, :vertical => :center , :wrap_text => true}
 
      sheet.add_row [topic_frame_of_reference], :sz => 12, :b => true, :alignment => { :horizontal => :center, :vertical => :center , :wrap_text => true}
-     sheet.add_row ["Emotion", "Intensity", "Why", "S" , "Valence", "Mindset", "Segment", "Product Mindset" ,"Response ID"]
+     sheet.add_row ["Emotion", "Intensity", "Why", "S" , "Valence", "Mindset", "Segment", "Product Mindset" ,"Response ID"], :widths=>[ 20, 20, :ignore, 5, 15, 15, 15, 15, 15 ]
      
      #i_value = $data.size.to_i
      #i_value = i_value - 2
@@ -320,6 +321,7 @@ case topic_type
        end
        
    else
+   
    row_count = 0
    wb.add_worksheet(:name=> "#{topic_code} - #{topic_title}_#{s11}") do |sheet|
        
@@ -363,6 +365,7 @@ case topic_type
 
   end
    s11 = s11 + 1
+   pop_row_count = (row_count * 3) - 2
  end
    
    
@@ -376,7 +379,7 @@ case topic_type
 end # end topic type case
 
 #sheet.auto_filter = "A3:I52"
-sheet.add_table "A3:I10"
+sheet.add_table "A3:I#{pop_row_count}"
  end # end worksheet creator
 #test commit number 2
 
@@ -734,10 +737,12 @@ wb.add_worksheet(:name=> "#{g_topic_code} (TS) - #{g_topic_title}") do |sheet|
       
      
           sheet.add_chart(Axlsx::Bar3DChart, :start_at => "D9", :end_at => "H21",  :barDir => :col, :grouping => :percentStacked) do |chart|
-          chart.add_series :data => sheet[$p_cells], :title => "Positive", :colors => ['00FF00', '00FF00', '00FF00']
-          chart.add_series :data => sheet[$neu_cells], :title => "Neutral", :colors => ['0000FF', '0000FF', '0000FF']
-          chart.add_series :data => sheet[$neg_cells], :title => "Negative", :colors => ['FF0000', 'FF0000', 'FF0000']
-        
+          chart.add_series :data => sheet[$p_cells], :title => "Positive", :colors => ['365e92', '365e92', '365e92']
+          chart.add_series :data => sheet[$neu_cells], :title => "Neutral", :colors => ['a5a5a5', 'a5a5a5', 'a5a5a5']
+          chart.add_series :data => sheet[$neg_cells], :title => "Negative", :colors => ['be0712', 'be0712', 'be0712']
+          chart.valAxis.gridlines = false
+          chart.catAxis.gridlines = false
+          chart.catAxis.title = "#{$segment_name}"
       end
 
 
@@ -914,10 +919,13 @@ wb.add_worksheet(:name=> "#{$seg_title}") do |sheet|
   
     
     sheet.add_chart(Axlsx::Bar3DChart, :start_at => "D9", :end_at => "H21",  :barDir => :col, :grouping => :percentStacked) do |chart|
-        chart.add_series :data => sheet[$p_cells], :title => "Positive", :colors => ['00FF00', '00FF00', '00FF00']
-        chart.add_series :data => sheet[$neu_cells], :title => "Neutral", :colors => ['0000FF', '0000FF', '0000FF']
-        chart.add_series :data => sheet[$neg_cells], :title => "Negative", :colors => ['FF0000', 'FF0000', 'FF0000']
-        
+        chart.add_series :data => sheet[$p_cells], :title => "Positive", :colors => ['365e92', '365e92', '365e92']
+        chart.add_series :data => sheet[$neu_cells], :title => "Neutral", :colors => ['a5a5a5', 'a5a5a5', 'a5a5a5']
+        chart.add_series :data => sheet[$neg_cells], :title => "Negative", :colors => ['be0712', 'be0712', 'be0712']
+        chart.valAxis.gridlines = false
+        chart.catAxis.gridlines = false
+        chart.catAxis.title = "#{$segment_name[0]}"
+       
        $seg_count += 1
       
     end
