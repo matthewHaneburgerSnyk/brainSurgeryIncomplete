@@ -27,6 +27,7 @@ class TodosController < ApplicationController
 
   # GET /todos/1/edit
   def edit
+      
   end
 
   # POST /todos
@@ -35,10 +36,9 @@ class TodosController < ApplicationController
      
      #create new todo
    @todo = Todo.new(todo_params)
-   #Get original filename and put it where it goes
    filename = todo_params[:mapping_file].original_filename
    @todo.mapping_file_name = todo_params[:mapping_file].original_filename
-   foldername = filename.split(".")[0]
+   
    #Generate json/html and insert all the form values into the DB
     respond_to do |format|
       if @todo.save
@@ -51,7 +51,10 @@ class TodosController < ApplicationController
         format.json { render json: @todo.errors, status: :unprocessable_entity }
       end
     end
+    #Get original filename and put it where it goes
     
+    puts "mapping filename #{todo_params[:mapping_file].original_filename}"
+    foldername = filename.split(".")[0]
     #put mapping file where it goes
     map = File.open("././public/uploads/#{filename}/#{filename}")
     
@@ -59,6 +62,8 @@ class TodosController < ApplicationController
     graph_path    = "././public/uploads/#{filename}/Graph_#{filename}"
    
     p_data = [map, filename]
+    
+  
     
     
     #new Parser and generate verbatim file
@@ -89,15 +94,52 @@ class TodosController < ApplicationController
   # PATCH/PUT /todos/1
   # PATCH/PUT /todos/1.json
   def update
-    respond_to do |format|
+      
+      respond_to do |format|
       if @todo.update(todo_params)
         format.html { redirect_to @todo, notice: 'Project was successfully updated.' }
         format.json { render :show, status: :ok, location: @todo }
+        #uploader = MappingUploader.new
+        #uploader.retrieve_from_store!(@todo.mapping_file_name)
       else
         format.html { render :edit }
         format.json { render json: @todo.errors, status: :unprocessable_entity }
       end
     end
+    
+    
+    #Get original filename and put it where it goes
+    #filename = @todo.mapping_file_name
+    #filename = @todo[:mapping_file_name]
+    filename = todo_params[:mapping_file_name]
+    puts " filename #{filename}"
+    #put mapping file where it goes
+    map = File.open("././public/uploads/#{filename}/#{filename}")
+   
+    verbatim_path = "././public/uploads/#{filename}/Verbatim_#{filename}"
+    graph_path    = "././public/uploads/#{filename}/Graph_#{filename}"
+    
+    p_data = [map, filename]
+    
+    
+    #new Parser and generate verbatim file
+    @parser = Parser.new(p_data)
+    todosV  = v_todo_params
+    todosVH = eval(todosV.to_s)
+    todosVH = todosVH.collect { |k, v| v }
+    todosVH = todosVH.each_slice(9).to_a
+    @parser.makeVerb(todosVH)
+    
+    #Generate graphs with existing parser
+    
+    
+    todosG  = g_todo_params
+    todosGH = eval(todosG.to_s)
+    todosGH = todosGH.collect { |k, v| v }
+    todosGH = todosGH.each_slice(6).to_a
+    puts "todosGH #{todosGH}"
+    @parser.makeGraph(todosGH)
+    
   end
 
   # DELETE /todos/1

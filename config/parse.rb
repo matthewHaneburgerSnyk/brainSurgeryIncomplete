@@ -642,6 +642,7 @@ $ts_total_used.push("Message Index")
 $graph_topics_a.each do |topic|
     ts_data = $gdata[topic.strip]
     ts_data_a = ts_data[0]
+    puts "ts data [0]  #{ts_data[0]}"
     
     $ts_positive.push(ts_data_a[0])
     $ts_neutral.push(ts_data_a[1])

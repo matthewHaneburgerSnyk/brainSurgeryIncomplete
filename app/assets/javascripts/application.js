@@ -33,7 +33,11 @@ $(document).ready(function() {
 
 //function to load rows on click
 $(document).ready(function () {
-    var counter = 0;
+    var counter = $('#verbatim_body tr').length;
+        //$('#counter').html(counter);
+
+
+   // var counter = 0;
 
     $("#addrow").on("click", function () {
         var newRow = $("<tr>");
@@ -68,7 +72,9 @@ $(document).ready(function () {
 
 
 $(document).ready(function () {
-    var counter = 0;
+   // var counter = 0;
+  var counter = $('#graph_body tr').length;
+
 
     $("#addrow1").on("click", function () {
         var newRow = $("<tr>");

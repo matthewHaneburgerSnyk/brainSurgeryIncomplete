@@ -31,7 +31,8 @@
  <div class="field form-group">
     <%= f.label :upload_mapping_file,  class: 'col-sm-2 control-label' %>
     <div class="col-sm-5">
-      <%= f.file_field :mapping_file, file_field: { hidden: true }, class: 'form-control' %>
+      <%= f.file_field :mapping_file, file_field: { hidden: false }, class: 'form-control' %>
+      <%= f.hidden_field :mapping_file_name %>
     </div>
   </div>
  
@@ -48,7 +49,7 @@
         <tr>
             <td>Topic Code</td>
             <td>Topic Type</td>
-            <td>Survey Column</td>
+            <td>Survey Column</td> 
             <td>Topic title</td>
             <td>Topic Frame of Reference</td>
             <td>Segment</td>
@@ -57,7 +58,7 @@
             <td>Ranking Total</td>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="verbatim_body">
         
         <tr>
             <td class="col-sm-1">
@@ -3841,7 +3842,7 @@
             <td>Ranking Total</td>
         </tr>
     </thead>
-<tbody>
+<tbody id="graph_body">
         
         <tr>
             <td class="col-sm-1">
