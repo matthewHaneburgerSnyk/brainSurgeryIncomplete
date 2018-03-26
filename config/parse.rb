@@ -13,6 +13,7 @@ class Parser
 def initialize(mapping)
 #Parse doc incoming
 $file_name = mapping[1].to_s
+$file_name = $file_name.gsub(" ", "_")
 cworkbook = Creek::Book.new mapping[0]
 cworksheets = cworkbook.sheets
 puts "Found #{cworksheets.count} worksheets"
@@ -653,9 +654,10 @@ $graph_topics_a.each do |topic|
 end
 
 
-
+g_worksheet_name = "#{g_topic_code} (TS) - #{g_topic_title}"
+g_worksheet_name = g_worksheet_name.truncate(30)
 #  TS
-wb.add_worksheet(:name=> "#{g_topic_code} (TS) - #{g_topic_title}") do |sheet|
+wb.add_worksheet(:name=> "#{g_worksheet_name}") do |sheet|
     
     sheet.add_row [g_topic_title], :sz => 12, :b => true, :alignment => { :horizontal => :center, :vertical => :center , :wrap_text => true}
     

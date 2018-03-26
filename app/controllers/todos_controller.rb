@@ -37,7 +37,8 @@ class TodosController < ApplicationController
      #create new todo
    @todo = Todo.new(todo_params)
    filename = todo_params[:mapping_file].original_filename
-   @todo.mapping_file_name = todo_params[:mapping_file].original_filename
+   filename = filename.gsub(" ", "_")
+   @todo.mapping_file_name = filename#todo_params[:mapping_file].original_filename
    
    #Generate json/html and insert all the form values into the DB
     respond_to do |format|
@@ -99,8 +100,8 @@ class TodosController < ApplicationController
       if @todo.update(todo_params)
         format.html { redirect_to @todo, notice: 'Project was successfully updated.' }
         format.json { render :show, status: :ok, location: @todo }
-        #uploader = MappingUploader.new
-        #uploader.retrieve_from_store!(@todo.mapping_file_name)
+        uploader = MappingUploader.new
+        uploader.retrieve_from_store!(@todo.mapping_file_name)
       else
         format.html { render :edit }
         format.json { render json: @todo.errors, status: :unprocessable_entity }
