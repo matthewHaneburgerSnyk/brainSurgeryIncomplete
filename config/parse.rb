@@ -215,8 +215,9 @@ p34 = product_start_spot + 14  # Valence
 row_count = 0
 pop_row_count = 0
 
-
- wb.add_worksheet(:name=> "#{topic_code} - #{topic_title}") do |sheet|
+ worksheet_name = "#{topic_code} - #{topic_title}"
+ worksheet_name = worksheet_name.truncate(30)
+ wb.add_worksheet(:name=> "#{worksheet_name}") do |sheet|
      
      sheet.add_row [topic_title], :sz => 12, :b => true, :alignment => { :horizontal => :center, :vertical => :center , :wrap_text => true}
 
@@ -244,7 +245,8 @@ case topic_type
                               # increments count
         
         
-        
+        puts "row count #{row_count}"
+        puts "data row count #{data_row}"
         sheet.add_row [ data_row[s11] , data_row[s12] , data_row[s13] , data_row[s14] , valence_calc(data_row[s14]), mindset_calc(data_row[s14],data_row[s24],data_row[s34]), data_row[segment_calc] , mindset_calc(data_row[p14],data_row[p24],data_row[p34]) , data_row[0] ], :sz => 10, :alignment => { :horizontal => :center, :vertical => :center , :wrap_text => true}
         
         sheet.add_row [ data_row[s21] , data_row[s22] , data_row[s23] , data_row[s24] , valence_calc(data_row[s24]), mindset_calc(data_row[s14],data_row[s24],data_row[s34]), data_row[segment_calc] , mindset_calc(data_row[p14],data_row[p24],data_row[p34]) , data_row[0] ], :sz => 10, :alignment => { :horizontal => :center, :vertical => :center , :wrap_text => true}
@@ -324,7 +326,9 @@ case topic_type
    else
    
    row_count = 0
-   wb.add_worksheet(:name=> "#{topic_code} - #{topic_title}_#{s11}") do |sheet|
+   worksheet_name = "#{topic_code} - #{topic_title}_#{s11}"
+   worksheet_name = worksheet_name.truncate(30)
+   wb.add_worksheet(:name=> "#{worksheet_name}") do |sheet|
        
        sheet.add_row [topic_title], :sz => 12, :b => true, :alignment => { :horizontal => :center, :vertical => :center , :wrap_text => true}
        
@@ -672,11 +676,12 @@ wb.add_worksheet(:name=> "#{g_worksheet_name}") do |sheet|
             sheet.add_row  $ts_total_used #message index
             
             num_of_topics = $graph_topics_a.size - 1
+            puts "Graph topics array size #{$graph_topics_a}"
             case num_of_topics
                 when 1
-                   $p_cells   = "B4"
-                   $neu_cells = "B5"
-                   $neg_cells = "B6"
+                   $p_cells   = "B4:B4"
+                   $neu_cells = "B5:B5"
+                   $neg_cells = "B6:B6"
                 when 2
                    $p_cells   = "B4:C4"
                    $neu_cells = "B5:C5"
@@ -856,9 +861,9 @@ wb.add_worksheet(:name=> "#{$seg_title}") do |sheet|
     
     case num_of_topics
         when 1
-        $p_cells   = "B4"
-        $neu_cells = "B5"
-        $neg_cells = "B6"
+        $p_cells   = "B4:B4"
+        $neu_cells = "B5:B5"
+        $neg_cells = "B6:B6"
         when 2
         $p_cells   = "B4:C4"
         $neu_cells = "B5:C5"
