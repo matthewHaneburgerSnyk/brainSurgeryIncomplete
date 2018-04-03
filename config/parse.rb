@@ -14,6 +14,8 @@ def initialize(mapping)
 #Parse doc incoming
 $file_name = mapping[1].to_s
 $file_name = $file_name.gsub(" ", "_")
+$file_name = $file_name.gsub("(", "")
+$file_name = $file_name.gsub(")", "")
 cworkbook = Creek::Book.new mapping[0]
 cworksheets = cworkbook.sheets
 puts "Found #{cworksheets.count} worksheets"
@@ -33,13 +35,16 @@ cworksheets.each do |cworksheet|
     cworksheet.rows.each do |row|
         row_cells = row.values
         num_rows += 1
-        $data.push(row.values.join "   ")
+        #puts "Full row for debugging #{row_cells}"
+        $data.push(row.values.join "          ")
+        
         # uncomment to print out row values
-        #puts row_cells.join "   "
+        #puts row_cells.join "    "
         
     end
   
-   
+    puts "data #{$data}"
+  
     data_col = Array.new
     col_one = Array.new
     
@@ -51,8 +56,8 @@ end
 ######## make verbatim start ##########
 #######################################
 #def makeVerb(topic_code, topic_type, survey_column, topic_title, topic_frame_of_reference, segment, product_mindset , ranking_num, ranking_total)
-def makeVerb( values )
 
+def makeVerb( values )
 run_count = values.size
 $run_count_table = run_count
 
@@ -77,7 +82,7 @@ ranking_total            = verbatim_call[8]
 distance_counter = 0
 distance = 3
 
-distance_row = $data[0].to_s.split("   ")
+distance_row = $data[0].to_s.split("          ")
 start_spot = distance_row.index(survey_column)
 $g_start_spot = distance_row.index(survey_column)
 segment_calc = distance_row.index(segment)
@@ -161,7 +166,7 @@ end
 
 
 def r_mindset_calc( statement_rank, statement_count, row_num)
-    data_row = $data[row_num].to_s.split("   ") # Parses individual rows from sheet
+    data_row = $data[row_num].to_s.split("          ") # Parses individual rows from sheet
     #type is always valence
     #
     count = 0
@@ -241,7 +246,7 @@ case topic_type
         puts "Skipping second row"
         row_count = row_count + 1
         else
-        data_row = $data[row_count].to_s.split("   ") # Parses individual rows from sheet
+        data_row = $data[row_count].to_s.split("          ") # Parses individual rows from sheet
                               # increments count
         
         
@@ -273,7 +278,7 @@ case topic_type
            puts "Skipping second row"
            row_count = row_count + 1
            else
-           data_row = $data[row_count].to_s.split("   ") # Parses individual rows from sheet
+           data_row = $data[row_count].to_s.split("          ") # Parses individual rows from sheet
            # increments count
            
            
@@ -298,7 +303,7 @@ case topic_type
    if s11 == original_start
        
        $data.each do |row|
-           data_row = $data[row_count].to_s.split("   ") # Parses individual rows from sheet
+           data_row = $data[row_count].to_s.split("          ") # Parses individual rows from sheet
            
            if $rank_num.to_i < data_row[s11].to_i
                puts "Not evaluated statement, skipping"
@@ -337,7 +342,7 @@ case topic_type
        
        
        $data.each do |row|
-           data_row = $data[row_count].to_s.split("   ") # Parses individual rows from sheet
+           data_row = $data[row_count].to_s.split("          ") # Parses individual rows from sheet
            
            if $rank_num.to_i < data_row[s11].to_i
                puts "Not evaluated statement, skipping"
@@ -433,7 +438,7 @@ def makeGraph(values)
         cworksheet.rows.each do |row|
             row_cells = row.values
             num_rows += 1
-            $g_data_raw.push(row.values.join "   ")
+            $g_data_raw.push(row.values.join "          ")
         end
         #Percent Positive start values
         row_count = 0
@@ -456,7 +461,7 @@ def makeGraph(values)
                 row_count = row_count + 1
                 
                 else
-                data_row = $g_data_raw[row_count].to_s.split("   ") # Parses individual rows from sheet
+                data_row = $g_data_raw[row_count].to_s.split("          ") # Parses individual rows from sheet
                 
                 if data_row[4] == "Very Pleasant"
                     positive = positive + 1
@@ -528,7 +533,7 @@ def makeGraph(values)
                 row_count = row_count + 1
                 
                 else
-                data_row = $g_data_raw[row_count].to_s.split("   ") # Parses individual rows from sheet
+                data_row = $g_data_raw[row_count].to_s.split("          ") # Parses individual rows from sheet
                 
              
                 $uniq_seg_names.each do |seg| # see what segment is on the row we're looking at
@@ -594,8 +599,9 @@ def makeGraph(values)
         
         ### That's what seg values looks like it's a hash with the key being the segment name
         #$seg_values[unique_seg_names(seg)] = (per_positive, per_neutral, per_negative, total_used, total)
+
         $seg_values = $seg_values.reject { |k,v| k.nil? }
-        puts "Debugging seg_values hash, #{$seg_values}"
+        
         $ts = [ $per_positive, $per_neutral, $per_negative,  $total, $total]
         title = cworksheet.name[0..2].strip
         $gdata[title] = [$ts]
@@ -645,9 +651,10 @@ $ts_total_used.push("Message Index")
 
 
 $graph_topics_a.each do |topic|
+
     ts_data = $gdata[topic.strip]
     ts_data_a = ts_data[0]
-    puts "ts data [0]  #{ts_data[0]}"
+
     
     $ts_positive.push(ts_data_a[0])
     $ts_neutral.push(ts_data_a[1])
@@ -750,7 +757,11 @@ wb.add_worksheet(:name=> "#{g_worksheet_name}") do |sheet|
           chart.add_series :data => sheet[$neg_cells], :title => "Negative", :colors => ['be0712', 'be0712', 'be0712']
           chart.valAxis.gridlines = false
           chart.catAxis.gridlines = false
-          chart.catAxis.title = "#{$segment_name}"
+          #segment name is an array, this has all the segments in it
+          #so this chart needs to show all the segents and their names
+          #chart.catAxis.title = "#{$segment_name}"
+          
+         
       end
 
 
@@ -765,13 +776,15 @@ end
 #determine how many times to iterate
 $topic_count = 0
 $graph_topics_s.each do |topic|
-    
     ts_data = $gdata[topic.strip]
-    ts_data.delete_at(0)
+      if ts_data[0].class == Array
+        ts_data.delete_at(0)
+      else
+        puts "Not deleting segment titles"
+      end
     count = ts_data.size
     $num_of_segments = count / 2
     $topic_count =+ 1
-    
  end
 puts "Number of segments #{$num_of_segments}"
 $segment_name = Array.new
@@ -782,7 +795,7 @@ $seg_count = 0
 while $seg_count < $num_of_segments
     $graph_topics_s = Array.new
     $graph_topics_s = graph_topics.split(",")
-   
+
    
     #clear out array of ts values
     $ts_positive.clear
@@ -796,14 +809,16 @@ while $seg_count < $num_of_segments
     $ts_total.clear
     $ts_total.push("Total")
     #get values for segment
+
     
-    
+    puts " full gdata before #{$gdata}"
     
     $graph_topics_s.each do |topic|
+        puts "topic being looked at #{topic}"
         $ts_data = $gdata[topic.strip]
         puts "gdata for debuggin #{$gdata[topic.strip]}"
-        puts "TS data #{$ts_data}"
-        
+        puts " full gdata after #{$gdata}"
+        puts "ts data #{$ts_data}"
         if $seg_count == 0
             $g_spot = 1
             
@@ -812,28 +827,28 @@ while $seg_count < $num_of_segments
            $g_spot = ($seg_count * 2) + 1
         
         end
-        puts "SEg count  #{$seg_count}"
-        puts $g_spot
-        puts $ts_data.class
+        
         ts_data_a = $ts_data[$g_spot.to_i]
         puts "TS Data a for segments #{ts_data_a}"
-        
+  
         $ts_positive.push(ts_data_a[0])
         $ts_neutral.push(ts_data_a[1])
         $ts_negative.push(ts_data_a[2])
         $ts_total_used.push(ts_data_a[3])
         $ts_total.push(ts_data_a[4])
-        
+  
         $name_count = $seg_count * 2
-        
+
         $segment_name.push($ts_data[$name_count.to_i])
+
         $segment_name = $segment_name.uniq
+     
 
         puts "segment name array #{$segment_name}"
     end
     $seg_title = "#{g_topic_code} #{$segment_name[$seg_count]} - #{g_topic_title}"
     $seg_title = $seg_title.truncate(30)
-    
+ 
     
 
 #  Per Segments

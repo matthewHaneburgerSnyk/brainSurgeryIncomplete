@@ -28,10 +28,10 @@
   </div>
 
   
- <div class="field form-group">
+  <div class="field form-group">
     <%= f.label :upload_data,  class: 'col-sm-2 control-label' %>
     <div class="col-sm-5">
-      <%= f.file_field :mapping_file, file_field: { hidden: false }, class: 'form-control' %>
+      <%= f.file_field :mapping_file, :required => true ,file_field: { hidden: false }, class: 'form-control' %>
       <%= f.hidden_field :mapping_file_name %>
     </div>
     <%= link_to 'Download Data', "/uploads/#{todo.mapping_file_name}/#{todo.mapping_file_name}", class: 'btn btn-primary btn-xs' %></td>
@@ -6731,6 +6731,7 @@
     <div class="col-sm-offset-2 col-sm-10">
    
       <%= f.submit :Submit %>
+      <%= f.submit :Save %>
     </div>
   </div>
 <% end %>
