@@ -121,19 +121,26 @@ class TodosController < ApplicationController
   # PATCH/PUT /todos/1.json
   def update
       
-      filename = todo_params[:mapping_file].original_filename
-      filename = filename.gsub(" ", "_")
-      filename = filename.gsub("(", "")
-      filename = filename.gsub(")", "")
-      @todo.mapping_file_name = filename
       
       
       respond_to do |format|
       if @todo.update(todo_params)
         format.html { redirect_to @todo, notice: 'Project was successfully updated.' }
         format.json { render :show, status: :ok, location: @todo }
+        
+        puts "params mapping file - #{params[:mapping_file]}"
+        if params[:mapping_file].nil?
+         
+         puts "Skipping save, no file present"
+        else
+        filename = todo_params[:mapping_file].original_filename
+        filename = filename.gsub(" ", "_")
+        filename = filename.gsub("(", "")
+        filename = filename.gsub(")", "")
+        @todo.mapping_file_name = filename
         uploader = MappingUploader.new
         uploader.store!(todo_params[:mapping_file])
+        end
         #uploader.retrieve_from_store!(@todo.mapping_file_name)
       else
         format.html { render :edit }
