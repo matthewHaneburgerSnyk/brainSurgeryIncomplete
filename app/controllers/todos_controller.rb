@@ -56,19 +56,32 @@ class TodosController < ApplicationController
      
      #create new todo
    @todo = Todo.new(todo_params)
-   filename = todo_params[:mapping_file].original_filename
-   filename = filename.gsub(" ", "_")
-   filename = filename.gsub("(", "")
-   filename = filename.gsub(")", "")
-   @todo.mapping_file_name = filename#todo_params[:mapping_file].original_filename
+   # filename = todo_params[:mapping_file].original_filename
+   #filename = filename.gsub(" ", "_")
+   #filename = filename.gsub("(", "")
+   #filename = filename.gsub(")", "")
+   #@todo.mapping_file_name = filename#todo_params[:mapping_file].original_filename
    
    #Generate json/html and insert all the form values into the DB
     respond_to do |format|
       if @todo.save
         format.html { redirect_to @todo, notice: 'Project was successfully created.' }
         format.json { render :show, status: :created, location: @todo }
-        uploader = MappingUploader.new
-        uploader.store!(todo_params[:mapping_file])
+        
+        if params[:mapping_file].nil?
+            
+            puts "Skipping save, no file present"
+            else
+            filename = todo_params[:mapping_file].original_filename
+            filename = filename.gsub(" ", "_")
+            filename = filename.gsub("(", "")
+            filename = filename.gsub(")", "")
+            @todo.mapping_file_name = filename
+            uploader = MappingUploader.new
+            uploader.store!(todo_params[:mapping_file])
+        end
+        
+        
       else
         format.html { render :new }
         format.json { render json: @todo.errors, status: :unprocessable_entity }
