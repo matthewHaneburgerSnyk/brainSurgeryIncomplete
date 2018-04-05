@@ -53,10 +53,22 @@ class TodosController < ApplicationController
   
   
   def create
-     
+   @filename = ""
      #create new todo
    @todo = Todo.new(todo_params)
-   # filename = todo_params[:mapping_file].original_filename
+   if todo_params[:mapping_file].nil?
+       puts "Skipping submit, no file present"
+   else
+   
+   filename = todo_params[:mapping_file].original_filename
+   filename = filename.gsub(" ", "_")
+   filename = filename.gsub("(", "")
+   filename = filename.gsub(")", "")
+   @todo.mapping_file_name = filename#todo_params[:mapping_file].original_filename
+
+   
+   end
+   #filename = todo_params[:mapping_file].original_filename
    #filename = filename.gsub(" ", "_")
    #filename = filename.gsub("(", "")
    #filename = filename.gsub(")", "")
@@ -65,22 +77,24 @@ class TodosController < ApplicationController
    #Generate json/html and insert all the form values into the DB
     respond_to do |format|
       if @todo.save
-        format.html { redirect_to @todo, notice: 'Project was successfully created.' }
-        format.json { render :show, status: :created, location: @todo }
-        
-        if params[:mapping_file].nil?
+          
+        if todo_params[:mapping_file].nil?
             
             puts "Skipping save, no file present"
-            else
-            filename = todo_params[:mapping_file].original_filename
-            filename = filename.gsub(" ", "_")
-            filename = filename.gsub("(", "")
-            filename = filename.gsub(")", "")
-            @todo.mapping_file_name = filename
+           else
+            @filename = todo_params[:mapping_file].original_filename
+            @filename = @filename.gsub(" ", "_")
+            @filename = @filename.gsub("(", "")
+            @filename = @filename.gsub(")", "")
+            @todo.mapping_file_name = @filename
             uploader = MappingUploader.new
             uploader.store!(todo_params[:mapping_file])
+            puts"This is the filename >>>> #{@filename}"
+            
         end
-        
+        format.html { redirect_to @todo, notice: 'Project was successfully created.' }
+        format.json { render :show, status: :created, location: @todo }
+
         
       else
         format.html { render :new }
@@ -91,16 +105,17 @@ class TodosController < ApplicationController
     
     if params[:commit] == "Save"
         puts "Skipping calcs since this is a save"
-    else
-    puts "mapping filename #{todo_params[:mapping_file].original_filename}"
-    foldername = filename.split(".")[0]
-    #put mapping file where it goes
-    map = File.open("././public/uploads/#{filename}/#{filename}")
-    
-    verbatim_path = "././public/uploads/#{filename}/Verbatim_#{filename}"
-    graph_path    = "././public/uploads/#{filename}/Graph_#{filename}"
+    elsif params[:commit] == "Submit"
    
-    p_data = [map, filename]
+    puts "mapping filename #{@todo.mapping_file_name}"
+    foldername = @filename.split(".")[0]
+    #put mapping file where it goes
+    map = File.open("././public/uploads/#{@filename}/#{@filename}")
+    
+    verbatim_path = "././public/uploads/#{@filename}/Verbatim_#{@filename}"
+    graph_path    = "././public/uploads/#{@filename}/Graph_#{@filename}"
+   
+    p_data = [map, @filename]
     
   
     
