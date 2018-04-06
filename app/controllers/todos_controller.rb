@@ -64,15 +64,11 @@ class TodosController < ApplicationController
    filename = filename.gsub(" ", "_")
    filename = filename.gsub("(", "")
    filename = filename.gsub(")", "")
+   filename = filename.gsub("/", "")
    @todo.mapping_file_name = filename#todo_params[:mapping_file].original_filename
 
    
    end
-   #filename = todo_params[:mapping_file].original_filename
-   #filename = filename.gsub(" ", "_")
-   #filename = filename.gsub("(", "")
-   #filename = filename.gsub(")", "")
-   #@todo.mapping_file_name = filename#todo_params[:mapping_file].original_filename
    
    #Generate json/html and insert all the form values into the DB
     respond_to do |format|
@@ -80,12 +76,13 @@ class TodosController < ApplicationController
           
         if todo_params[:mapping_file].nil?
             
-            puts "Skipping save, no file present"
+            puts "Skipping file save, no file present"
            else
             @filename = todo_params[:mapping_file].original_filename
             @filename = @filename.gsub(" ", "_")
             @filename = @filename.gsub("(", "")
             @filename = @filename.gsub(")", "")
+            @filename = @filename.gsub("/", "")
             @todo.mapping_file_name = @filename
             uploader = MappingUploader.new
             uploader.store!(todo_params[:mapping_file])
@@ -148,50 +145,72 @@ class TodosController < ApplicationController
   # PATCH/PUT /todos/1
   # PATCH/PUT /todos/1.json
   def update
+      @filename = ""
+      puts "this is todo params #{todo_params}"
+      puts "this is params #{params}"
+      
+      if todo_params[:mapping_file].nil?
+          puts "Skipping submit, no file present"
+          else
+          
+          @filename = todo_params[:mapping_file].original_filename
+          @filename = @filename.gsub(" ", "_")
+          @filename = @filename.gsub("(", "")
+          @filename = @filename.gsub(")", "")
+          @filename = @filename.gsub("/", "")
+          @todo.mapping_file_name = @filename#todo_params[:mapping_file].original_filename
+          puts "mapping file name #{@todo.mapping_file_name}"
+          puts "original file name #{todo_params[:mapping_file].original_filename}"
+          
+      end
       
       
       
       respond_to do |format|
       if @todo.update(todo_params)
-        format.html { redirect_to @todo, notice: 'Project was successfully updated.' }
-        format.json { render :show, status: :ok, location: @todo }
-        
-        puts "params mapping file - #{params[:mapping_file]}"
-        if params[:mapping_file].nil?
-         
+          
+        puts "params mapping file - #{todo_params[:mapping_file]}"
+        if todo_params[:mapping_file].nil?
+            
          puts "Skipping save, no file present"
+         
         else
-        filename = todo_params[:mapping_file].original_filename
-        filename = filename.gsub(" ", "_")
-        filename = filename.gsub("(", "")
-        filename = filename.gsub(")", "")
-        @todo.mapping_file_name = filename
+        #@filename = todo_params[:mapping_file].original_filename
+        #@filename = @filename.gsub(" ", "_")
+        #@filename = @filename.gsub("(", "")
+        #@filename = @filename.gsub(")", "")
+        #@filename = @filename.gsub("/", "")
+        #@todo.mapping_file_name = @filename
         uploader = MappingUploader.new
         uploader.store!(todo_params[:mapping_file])
         end
-        #uploader.retrieve_from_store!(@todo.mapping_file_name)
+        format.html { redirect_to @todo, notice: 'Project was successfully updated.' }
+        format.json { render :show, status: :ok, location: @todo }
+        
       else
         format.html { render :edit }
         format.json { render json: @todo.errors, status: :unprocessable_entity }
       end
     end
-    puts "this is todo params #{params}"
+   
     
     if params[:commit] == "Save"
         puts "Skipping calcs since this is a save"
+  
     
     elsif params[:commit] == "Submit"
     #Get original filename and put it where it goes
   
-    filename = todo_params[:mapping_file_name]
-    puts " filename #{filename}"
+    @filename = todo_params[:mapping_file_name]
+    puts " filename #{@filename}"
     #put mapping file where it goes
-    map = File.open("././public/uploads/#{filename}/#{filename}")
-   
-    verbatim_path = "././public/uploads/#{filename}/Verbatim_#{filename}"
-    graph_path    = "././public/uploads/#{filename}/Graph_#{filename}"
     
-    p_data = [map, filename]
+    map = File.open("././public/uploads/#{@filename}/#{@filename}")
+   
+    verbatim_path = "././public/uploads/#{@filename}/Verbatim_#{@filename}"
+    graph_path    = "././public/uploads/#{@filename}/Graph_#{@filename}"
+    
+    p_data = [map, @filename]
     
     
     #new Parser and generate verbatim file

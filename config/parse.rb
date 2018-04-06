@@ -45,7 +45,7 @@ cworksheets.each do |cworksheet|
         
     end
   
-    puts "data #{$data}"
+  #puts "data #{$data}"
   
     data_col = Array.new
     col_one = Array.new
@@ -235,6 +235,7 @@ pop_row_count = 0
 
  worksheet_name = "#{topic_code} - #{topic_title}"
  worksheet_name = worksheet_name.truncate(30)
+ worksheet_name = worksheet_name.gsub("/", "_")
  wb.add_worksheet(:name=> "#{worksheet_name}") do |sheet|
      sheet.merge_cells "A1:I1"
      sheet.merge_cells "A2:I2"
@@ -263,9 +264,7 @@ case topic_type
         data_row = $data[row_count].to_s.split("          ") # Parses individual rows from sheet
                               # increments count
         
-        
-        puts "row count #{row_count}"
-        puts "data row count #{data_row}"
+ 
         sheet.add_row [ data_row[s11] , data_row[s12] , data_row[s13] , data_row[s14] , valence_calc(data_row[s14]), mindset_calc(data_row[s14],data_row[s24],data_row[s34]), data_row[segment_calc] , mindset_calc(data_row[p14],data_row[p24],data_row[p34]) , data_row[0] ] , :style=>body
         
         sheet.add_row [ data_row[s21] , data_row[s22] , data_row[s23] , data_row[s24] , valence_calc(data_row[s24]), mindset_calc(data_row[s14],data_row[s24],data_row[s34]), data_row[segment_calc] , mindset_calc(data_row[p14],data_row[p24],data_row[p34]) , data_row[0] ] , :style=>body
@@ -346,6 +345,7 @@ case topic_type
    row_count = 0
    worksheet_name = "#{topic_code} - #{topic_title}_#{s11}"
    worksheet_name = worksheet_name.truncate(30)
+   worksheet_name = worksheet_name.gsub("/", "_")
    wb.add_worksheet(:name=> "#{worksheet_name}") do |sheet|
        
        sheet.add_row [topic_title], :sz => 12, :b => true, :alignment => { :horizontal => :center, :vertical => :center , :wrap_text => true}
@@ -680,6 +680,7 @@ end
 
 g_worksheet_name = "#{g_topic_code} (TS) - #{g_topic_title}"
 g_worksheet_name = g_worksheet_name.truncate(30)
+g_worksheet_name = g_worksheet_name.gsub("/", "_")
 #  TS
 wb.add_worksheet(:name=> "#{g_worksheet_name}") do |sheet|
     
@@ -861,6 +862,7 @@ while $seg_count < $num_of_segments
     end
     $seg_title = "#{g_topic_code} #{$segment_name[$seg_count]} - #{g_topic_title}"
     $seg_title = $seg_title.truncate(30)
+    $seg_title = $seg_title.gsub("/", "_")
  
     
 

@@ -32,7 +32,7 @@
     <%= f.label :upload_data,  class: 'col-sm-2 control-label' %>
     <div class="col-sm-5">
       <%= f.file_field :mapping_file, file_field: { hidden: false }, class: 'form-control' %>
-      <%= f.hidden_field :mapping_file_name %>
+      
     </div>
     <%= link_to 'Download Data', "/uploads/#{todo.mapping_file_name}/#{todo.mapping_file_name}", class: 'btn btn-primary btn-xs' %></td>
   </div>
@@ -56,8 +56,8 @@
             <td>Topic Frame of Reference</td>
             <td>Segment</td>
             <td>Product Mindset</td>
-            <td>Ranking Value</td>
-            <td>Ranking Total</td>
+            <td>Number of Ranking Evaluations</td>
+            <td>Number of Ranking Statements Shown</td>
         </tr>
     </thead>
     <tbody id="verbatim_body">
@@ -126,9 +126,9 @@
             </td>
             
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+            
+            <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
+        
         
         
 
@@ -150,7 +150,7 @@
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
-                <%= f.select :v_topic_type0, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+                <%= f.select :v_topic_type0, ['standard_3x', 'standard_1x', 'ranking'], class: 'form-control' %>
             
             </span>
             
@@ -200,9 +200,7 @@
             </span>
             </td>
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+            <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
         
        
         </tr>
@@ -223,7 +221,7 @@
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
-                <%= f.select :v_topic_type1, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+                <%= f.select :v_topic_type1, ['standard_3x', 'standard_1x', 'ranking'], class: 'form-control' %>
             
             </span>
             
@@ -274,8 +272,14 @@
                 </span>
             </td>
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
+            <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete" onclick="clearText()"></td>
+           
+           <td>
+            
+            <input type="button" class="btn btn-md btn-danger " value="Reset" onclick="clearText()" >
+            
+            
+            
             </td>
         
        
@@ -283,6 +287,19 @@
         
         <% end %>
         
+        <script>
+                function clearText() {
+                document.getElementById("todo_v_topic_code1").value = null;
+                document.getElementById("todo_v_topic_type1").value = "";
+                document.getElementById("todo_v_survey_column1").value = "";
+                document.getElementById("todo_v_topic_title1").value = "";
+                document.getElementById("todo_v_topic_frame1").value = "";
+                document.getElementById("todo_v_segment1").value = "";
+                document.getElementById("todo_v_product_mindset1").value = "";
+                document.getElementById("todo_v_ranking_num1").value = "";
+                document.getElementById("todo_v_ranking_total1").value = "";
+                }
+             </script>   
         
         <% unless @todo.v_topic_code2.nil? %>
         
@@ -298,7 +315,7 @@
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
-                <%= f.select :v_topic_type2, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+                <%= f.select :v_topic_type2, ['standard_3x', 'standard_1x', 'ranking'], class: 'form-control' %>
             
             </span>
             
@@ -372,7 +389,7 @@
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
-                <%= f.select :v_topic_type3, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+                <%= f.select :v_topic_type3, ['standard_3x', 'standard_1x', 'ranking'], class: 'form-control' %>
             
             </span>
             
@@ -446,7 +463,7 @@
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
-                <%= f.select :v_topic_type4, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+                <%= f.select :v_topic_type4, ['standard_3x', 'standard_1x', 'ranking'], class: 'form-control' %>
             
             </span>
             
@@ -520,7 +537,7 @@
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
-                <%= f.select :v_topic_type5, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+                <%= f.select :v_topic_type5, ['standard_3x', 'standard_1x', 'ranking'], class: 'form-control' %>
             
             </span>
             
@@ -594,7 +611,7 @@
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
-                <%= f.select :v_topic_type6, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+                <%= f.select :v_topic_type6, ['standard_3x', 'standard_1x', 'ranking'], class: 'form-control' %>
             
             </span>
             
@@ -669,7 +686,7 @@
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
-                <%= f.select :v_topic_type7, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+                <%= f.select :v_topic_type7, ['standard_3x', 'standard_1x', 'ranking'], class: 'form-control' %>
             
             </span>
             
@@ -744,7 +761,7 @@
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
-                <%= f.select :v_topic_type8, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+                <%= f.select :v_topic_type8, ['standard_3x', 'standard_1x', 'ranking'], class: 'form-control' %>
             
             </span>
             
@@ -819,7 +836,7 @@
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
-                <%= f.select :v_topic_type9, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+                <%= f.select :v_topic_type9, ['standard_3x', 'standard_1x', 'ranking'], class: 'form-control' %>
             
             </span>
             
@@ -894,7 +911,7 @@
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
-                <%= f.select :v_topic_type10, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+                <%= f.select :v_topic_type10, ['standard_3x', 'standard_1x', 'ranking'], class: 'form-control' %>
             
             </span>
             
@@ -968,7 +985,7 @@
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
-                <%= f.select :v_topic_type11, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+                <%= f.select :v_topic_type11, ['standard_3x', 'standard_1x', 'ranking'], class: 'form-control' %>
             
             </span>
             
@@ -1041,7 +1058,7 @@
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
-                <%= f.select :v_topic_type12, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+                <%= f.select :v_topic_type12, ['standard_3x', 'standard_1x', 'ranking'], class: 'form-control' %>
             
             </span>
             
@@ -1116,7 +1133,7 @@
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
-                <%= f.select :v_topic_type13, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+                <%= f.select :v_topic_type13, ['standard_3x', 'standard_1x', 'ranking'], class: 'form-control' %>
             
             </span>
             
@@ -1190,7 +1207,7 @@
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
-                <%= f.select :v_topic_type14, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+                <%= f.select :v_topic_type14, ['standard_3x', 'standard_1x', 'ranking'], class: 'form-control' %>
             
             </span>
             
@@ -1265,7 +1282,7 @@
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
-                <%= f.select :v_topic_type15, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+                <%= f.select :v_topic_type15, ['standard_3x', 'standard_1x', 'ranking'], class: 'form-control' %>
             
             </span>
             
@@ -1339,7 +1356,7 @@
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
-                <%= f.select :v_topic_type16, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+                <%= f.select :v_topic_type16, ['standard_3x', 'standard_1x', 'ranking'], class: 'form-control' %>
             
             </span>
             
@@ -1414,7 +1431,7 @@
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
-                <%= f.select :v_topic_type17, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+                <%= f.select :v_topic_type17, ['standard_3x', 'standard_1x', 'ranking'], class: 'form-control' %>
             
             </span>
             
@@ -1487,7 +1504,7 @@
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
-                <%= f.select :v_topic_type18, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+                <%= f.select :v_topic_type18, ['standard_3x', 'standard_1x', 'ranking'], class: 'form-control' %>
             
             </span>
             
@@ -1560,7 +1577,7 @@
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
-                <%= f.select :v_topic_type19, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+                <%= f.select :v_topic_type19, ['standard_3x', 'standard_1x', 'ranking'], class: 'form-control' %>
             
             </span>
             
@@ -1633,7 +1650,7 @@
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
-                <%= f.select :v_topic_type20, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+                <%= f.select :v_topic_type20, ['standard_3x', 'standard_1x', 'ranking'], class: 'form-control' %>
             
             </span>
             
@@ -1706,7 +1723,7 @@
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
-                <%= f.select :v_topic_type21, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+                <%= f.select :v_topic_type21, ['standard_3x', 'standard_1x', 'ranking'], class: 'form-control' %>
             
             </span>
             
@@ -1779,7 +1796,7 @@
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
-                <%= f.select :v_topic_type22, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+                <%= f.select :v_topic_type22, ['standard_3x', 'standard_1x', 'ranking'], class: 'form-control' %>
             
             </span>
             
@@ -1852,7 +1869,7 @@
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
-                <%= f.select :v_topic_type23, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+                <%= f.select :v_topic_type23, ['standard_3x', 'standard_1x', 'ranking'], class: 'form-control' %>
             
             </span>
             
@@ -1926,7 +1943,7 @@
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
-                <%= f.select :v_topic_type24, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+                <%= f.select :v_topic_type24, ['standard_3x', 'standard_1x', 'ranking'], class: 'form-control' %>
             
             </span>
             
@@ -1998,7 +2015,7 @@
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
-                <%= f.select :v_topic_type25, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+                <%= f.select :v_topic_type25, ['standard_3x', 'standard_1x', 'ranking'], class: 'form-control' %>
             
             </span>
             
@@ -2071,7 +2088,7 @@
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
-                <%= f.select :v_topic_type26, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+                <%= f.select :v_topic_type26, ['standard_3x', 'standard_1x', 'ranking'], class: 'form-control' %>
             
             </span>
             
@@ -2144,7 +2161,7 @@
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
-                <%= f.select :v_topic_type27, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+                <%= f.select :v_topic_type27, ['standard_3x', 'standard_1x', 'ranking'], class: 'form-control' %>
             
             </span>
             
@@ -2217,7 +2234,7 @@
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
-                <%= f.select :v_topic_type28, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+                <%= f.select :v_topic_type28, ['standard_3x', 'standard_1x', 'ranking'], class: 'form-control' %>
             
             </span>
             
@@ -2290,7 +2307,7 @@
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
-                <%= f.select :v_topic_type29, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+                <%= f.select :v_topic_type29, ['standard_3x', 'standard_1x', 'ranking'], class: 'form-control' %>
             
             </span>
             
@@ -2363,7 +2380,7 @@
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
-                <%= f.select :v_topic_type30, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+                <%= f.select :v_topic_type30, ['standard_3x', 'standard_1x', 'ranking'], class: 'form-control' %>
             
             </span>
             
@@ -2436,7 +2453,7 @@
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
-                <%= f.select :v_topic_type31, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+                <%= f.select :v_topic_type31, ['standard_3x', 'standard_1x', 'ranking'], class: 'form-control' %>
             
             </span>
             
@@ -2509,7 +2526,7 @@
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
-                <%= f.select :v_topic_type32, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+                <%= f.select :v_topic_type32, ['standard_3x', 'standard_1x', 'ranking'], class: 'form-control' %>
             
             </span>
             
@@ -2581,7 +2598,7 @@
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
-                <%= f.select :v_topic_type33, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+                <%= f.select :v_topic_type33, ['standard_3x', 'standard_1x', 'ranking'], class: 'form-control' %>
             
             </span>
             
@@ -2654,7 +2671,7 @@
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
-                <%= f.select :v_topic_type34, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+                <%= f.select :v_topic_type34, ['standard_3x', 'standard_1x', 'ranking'], class: 'form-control' %>
             
             </span>
             
@@ -2727,7 +2744,7 @@
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
-                <%= f.select :v_topic_type35, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+                <%= f.select :v_topic_type35, ['standard_3x', 'standard_1x', 'ranking'], class: 'form-control' %>
             
             </span>
             
@@ -2800,7 +2817,7 @@
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
-                <%= f.select :v_topic_type36, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+                <%= f.select :v_topic_type36, ['standard_3x', 'standard_1x', 'ranking'], class: 'form-control' %>
             
             </span>
             
@@ -2874,7 +2891,7 @@
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
-                <%= f.select :v_topic_type37, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+                <%= f.select :v_topic_type37, ['standard_3x', 'standard_1x', 'ranking'], class: 'form-control' %>
             
             </span>
             
@@ -2947,7 +2964,7 @@
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
-                <%= f.select :v_topic_type38, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+                <%= f.select :v_topic_type38, ['standard_3x', 'standard_1x', 'ranking'], class: 'form-control' %>
             
             </span>
             
@@ -3021,7 +3038,7 @@
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
-                <%= f.select :v_topic_type39, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+                <%= f.select :v_topic_type39, ['standard_3x', 'standard_1x', 'ranking'], class: 'form-control' %>
             
             </span>
             
@@ -3095,7 +3112,7 @@
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
-                <%= f.select :v_topic_type40, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+                <%= f.select :v_topic_type40, ['standard_3x', 'standard_1x', 'ranking'], class: 'form-control' %>
             
             </span>
             
@@ -3168,7 +3185,7 @@
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
-                <%= f.select :v_topic_type41, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+                <%= f.select :v_topic_type41, ['standard_3x', 'standard_1x', 'ranking'], class: 'form-control' %>
             
             </span>
             
@@ -3242,7 +3259,7 @@
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
-                <%= f.select :v_topic_type42, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+                <%= f.select :v_topic_type42, ['standard_3x', 'standard_1x', 'ranking'], class: 'form-control' %>
             
             </span>
             
@@ -3315,7 +3332,7 @@
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
-                <%= f.select :v_topic_type43, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+                <%= f.select :v_topic_type43, ['standard_3x', 'standard_1x', 'ranking'], class: 'form-control' %>
             
             </span>
             
@@ -3388,7 +3405,7 @@
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
-                <%= f.select :v_topic_type44, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+                <%= f.select :v_topic_type44, ['standard_3x', 'standard_1x', 'ranking'], class: 'form-control' %>
             
             </span>
             
@@ -3461,7 +3478,7 @@
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
-                <%= f.select :v_topic_type45, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+                <%= f.select :v_topic_type45, ['standard_3x', 'standard_1x', 'ranking'], class: 'form-control' %>
             
             </span>
             
@@ -3534,7 +3551,7 @@
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
-                <%= f.select :v_topic_type46, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+                <%= f.select :v_topic_type46, ['standard_3x', 'standard_1x', 'ranking'], class: 'form-control' %>
             
             </span>
             
@@ -3607,7 +3624,7 @@
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
-                <%= f.select :v_topic_type47, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+                <%= f.select :v_topic_type47, ['standard_3x', 'standard_1x', 'ranking'], class: 'form-control' %>
             
             </span>
             
@@ -3680,7 +3697,7 @@
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
-                <%= f.select :v_topic_type48, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+                <%= f.select :v_topic_type48, ['standard_3x', 'standard_1x', 'ranking'], class: 'form-control' %>
             
             </span>
             
@@ -3753,7 +3770,7 @@
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
-                <%= f.select :v_topic_type49, ['standard_3x', 'standard_1x', 'ranking'], :selected => 'standard_3x' ,class: 'form-control' %>
+                <%= f.select :v_topic_type49, ['standard_3x', 'standard_1x', 'ranking'], class: 'form-control' %>
             
             </span>
             
