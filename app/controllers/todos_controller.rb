@@ -200,9 +200,10 @@ class TodosController < ApplicationController
     
     elsif params[:commit] == "Submit"
     #Get original filename and put it where it goes
-  
-    @filename = todo_params[:mapping_file_name]
-    puts " filename #{@filename}"
+    #puts " filename 1 #{@filename}"
+    #@filename = todo_params[:mapping_file_name]
+    #puts " todo params mapping file name #{params[:mapping_file_name]}  "
+    #puts " filename 2 #{@filename}"
     #put mapping file where it goes
     
     map = File.open("././public/uploads/#{@filename}/#{@filename}")

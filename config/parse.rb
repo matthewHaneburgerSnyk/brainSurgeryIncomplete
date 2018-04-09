@@ -45,7 +45,7 @@ cworksheets.each do |cworksheet|
         
     end
   
-  #puts "data #{$data}"
+
   
     data_col = Array.new
     col_one = Array.new
@@ -96,12 +96,21 @@ $rank_total = ranking_total
 title = wb.styles.add_style(:font_name => "Calibri",
                             :sz=> 16,
                             :border=>Axlsx::STYLE_THIN_BORDER,
-                            :alignment=>{:horizontal => :center})
+                            :alignment=>{:horizontal => :center},
+                            :b=> true )
                             
 body = wb.styles.add_style(:font_name => "Calibri",
                            :sz=> 11,
                            :border=>Axlsx::STYLE_THIN_BORDER,
-                           :alignment=>{:horizontal => :center, :wrap_text => true})
+                           :alignment=>{:horizontal => :center, :wrap_text => true},
+                           :bg_color => "ffffff")
+                           
+header = wb.styles.add_style(:font_name => "Calibri",
+                           :sz=> 11,
+                           :border=>Axlsx::STYLE_THIN_BORDER,
+                           :alignment=>{:horizontal => :center, :wrap_text => true},
+                           :bg_color => "C0C0C0",
+                           :b=> true)
 
 
 def valence_calc(value)
@@ -242,7 +251,7 @@ pop_row_count = 0
      sheet.add_row [topic_title], :style=>title
 
      sheet.add_row [topic_frame_of_reference], :style=>title
-     sheet.add_row ["Emotion", "Intensity", "Why", "S" , "Valence", "Mindset", "Segment", "Product Mindset" ,"Response ID"]
+     sheet.add_row ["Emotion", "Intensity", "Why", "S" , "Valence", "Mindset", "Segment", "Product Mindset" ,"Response ID"], :style=>header
      
      #i_value = $data.size.to_i
      #i_value = i_value - 2
@@ -265,11 +274,11 @@ case topic_type
                               # increments count
         
  
-        sheet.add_row [ data_row[s11] , data_row[s12] , data_row[s13] , data_row[s14] , valence_calc(data_row[s14]), mindset_calc(data_row[s14],data_row[s24],data_row[s34]), data_row[segment_calc] , mindset_calc(data_row[p14],data_row[p24],data_row[p34]) , data_row[0] ] , :style=>body
+        sheet.add_row [ data_row[s11] , data_row[s12] , data_row[s13] , data_row[s14] , valence_calc(data_row[s14]), mindset_calc(data_row[s14],data_row[s24],data_row[s34]), data_row[segment_calc] , mindset_calc(data_row[p14],data_row[p24],data_row[p34]) , data_row[0] ], :style=>body
         
-        sheet.add_row [ data_row[s21] , data_row[s22] , data_row[s23] , data_row[s24] , valence_calc(data_row[s24]), mindset_calc(data_row[s14],data_row[s24],data_row[s34]), data_row[segment_calc] , mindset_calc(data_row[p14],data_row[p24],data_row[p34]) , data_row[0] ] , :style=>body
+        sheet.add_row [ data_row[s21] , data_row[s22] , data_row[s23] , data_row[s24] , valence_calc(data_row[s24]), mindset_calc(data_row[s14],data_row[s24],data_row[s34]), data_row[segment_calc] , mindset_calc(data_row[p14],data_row[p24],data_row[p34]) , data_row[0] ], :style=>body
         
-        sheet.add_row [ data_row[s31] , data_row[s32] , data_row[s33] , data_row[s34] , valence_calc(data_row[s34]), mindset_calc(data_row[s14],data_row[s24],data_row[s34]), data_row[segment_calc] , mindset_calc(data_row[p14],data_row[p24],data_row[p34]) , data_row[0] ] , :style=>body
+        sheet.add_row [ data_row[s31] , data_row[s32] , data_row[s33] , data_row[s34] , valence_calc(data_row[s34]), mindset_calc(data_row[s14],data_row[s24],data_row[s34]), data_row[segment_calc] , mindset_calc(data_row[p14],data_row[p24],data_row[p34]) , data_row[0] ], :style=>body
         row_count = row_count + 1
        end
        
@@ -295,7 +304,7 @@ case topic_type
            
            
            
-           sheet.add_row [ data_row[ss11] , data_row[ss12] , data_row[ss13] , data_row[ss14] , valence_calc(data_row[ss14]), data_row[s14], data_row[segment_calc] , mindset_calc(data_row[p14],data_row[p24],data_row[p34]) , data_row[0] ], :sz => 10, :alignment => { :horizontal => :center, :vertical => :center , :wrap_text => true}
+           sheet.add_row [ data_row[ss11] , data_row[ss12] , data_row[ss13] , data_row[ss14] , valence_calc(data_row[ss14]), data_row[s14], data_row[segment_calc] , mindset_calc(data_row[p14],data_row[p24],data_row[p34]) , data_row[0] ], :style=>body
            
            
            
@@ -333,7 +342,7 @@ case topic_type
                
                
                
-               sheet.add_row [data_row[r_calc(data_row[s11], $rank_total , "emotion" )] , data_row[r_calc(data_row[s11], $rank_total , "intensity" )], data_row[r_calc(data_row[s11], $rank_total , "why" ) ], "", valence_calc(data_row[r_calc(data_row[s11], $rank_total , "valence" )]), r_mindset_calc( $rank_total, $rank_num, row_count), data_row[segment_calc] , mindset_calc(data_row[p14],data_row[p24],data_row[p34]) , data_row[0] ], :sz => 10, :alignment => { :horizontal => :center, :vertical => :center , :wrap_text => true}
+               sheet.add_row [data_row[r_calc(data_row[s11], $rank_total , "emotion" )] , data_row[r_calc(data_row[s11], $rank_total , "intensity" )], data_row[r_calc(data_row[s11], $rank_total , "why" ) ], "", valence_calc(data_row[r_calc(data_row[s11], $rank_total , "valence" )]), r_mindset_calc( $rank_total, $rank_num, row_count), data_row[segment_calc] , mindset_calc(data_row[p14],data_row[p24],data_row[p34]) , data_row[0] ], :style=>body
                
                
                row_count = row_count + 1
@@ -348,9 +357,11 @@ case topic_type
    worksheet_name = worksheet_name.gsub("/", "_")
    wb.add_worksheet(:name=> "#{worksheet_name}") do |sheet|
        
-       sheet.add_row [topic_title], :sz => 12, :b => true, :alignment => { :horizontal => :center, :vertical => :center , :wrap_text => true}
+       sheet.add_row [topic_title], :style=>title
        
-       sheet.add_row [topic_frame_of_reference], :sz => 12, :b => true, :alignment => { :horizontal => :center, :vertical => :center , :wrap_text => true}
+       sheet.add_row [topic_frame_of_reference], :style=>title
+       sheet.merge_cells "A1:I1"
+       sheet.merge_cells "A2:I2"
        sheet.add_row ["Emotion", "Intensity", "Why", "S" , "Valence", "Mindset", "Segment", "Product Mindset" ,"Response ID"]
        
        
@@ -373,7 +384,7 @@ case topic_type
                
                
                
-               sheet.add_row [data_row[r_calc(data_row[s11], $rank_total , "emotion" )] , data_row[r_calc(data_row[s11], $rank_total , "intensity" )], data_row[r_calc(data_row[s11], $rank_total , "why" ) ], "", valence_calc(data_row[r_calc(data_row[s11], $rank_total , "valence" )]), r_mindset_calc( $rank_total, $rank_num, row_count), data_row[segment_calc] , mindset_calc(data_row[p14],data_row[p24],data_row[p34]) , data_row[0] ], :sz => 10, :alignment => { :horizontal => :center, :vertical => :center , :wrap_text => true}
+               sheet.add_row [data_row[r_calc(data_row[s11], $rank_total , "emotion" )] , data_row[r_calc(data_row[s11], $rank_total , "intensity" )], data_row[r_calc(data_row[s11], $rank_total , "why" ) ], "", valence_calc(data_row[r_calc(data_row[s11], $rank_total , "valence" )]), r_mindset_calc( $rank_total, $rank_num, row_count), data_row[segment_calc] , mindset_calc(data_row[p14],data_row[p24],data_row[p34]) , data_row[0] ], :style=>body
                
                
                row_count = row_count + 1
@@ -401,8 +412,8 @@ sheet.column_widths 20, 20, 20, 20, 20, 20, 20, 20, 20
 
 end # end topic type case
 
-#sheet.auto_filter = "A3:I52"
-sheet.add_table "A3:I#{pop_row_count}"
+
+sheet.add_table "A3:I#{pop_row_count-1}"
  end # end worksheet creator
 #test commit number 2
 
