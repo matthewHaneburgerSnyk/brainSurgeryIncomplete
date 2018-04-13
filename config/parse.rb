@@ -246,12 +246,6 @@ pop_row_count = 0
  worksheet_name = worksheet_name.truncate(30)
  worksheet_name = worksheet_name.gsub("/", "_")
  wb.add_worksheet(:name=> "#{worksheet_name}") do |sheet|
-     sheet.merge_cells "A1:I1"
-     sheet.merge_cells "A2:I2"
-     sheet.add_row [topic_title], :style=>title
-
-     sheet.add_row [topic_frame_of_reference], :style=>title
-     sheet.add_row ["Emotion", "Intensity", "Why", "S" , "Valence", "Mindset", "Segment", "Product Mindset" ,"Response ID"], :style=>header
      
      #i_value = $data.size.to_i
      #i_value = i_value - 2
@@ -281,11 +275,29 @@ case topic_type
         sheet.add_row [ data_row[s31] , data_row[s32] , data_row[s33] , data_row[s34] , valence_calc(data_row[s34]), mindset_calc(data_row[s14],data_row[s24],data_row[s34]), data_row[segment_calc] , mindset_calc(data_row[p14],data_row[p24],data_row[p34]) , data_row[0] ], :style=>body
         row_count = row_count + 1
        end
+        
+        
        
     end
    pop_row_count = (row_count * 3) - 2
    sheet.column_widths 20, 20, 20, 20, 20, 20, 20, 20, 20
    
+   
+   sheet.rows.sort_by!{ |row| [row.cells[3].value.to_i, -row.cells[1].value.to_i] }
+
+   sheet.add_row ["Emotion", "Intensity", "Why", "S" , "Valence", "Mindset", "Segment", "Product Mindset" ,"Response ID"], :style=>header
+   sheet.rows.insert 0,  sheet.rows.delete(sheet.rows[sheet.rows.length-1])
+
+   sheet.add_row [topic_frame_of_reference], :style=>title
+   sheet.rows.insert 0,  sheet.rows.delete(sheet.rows[sheet.rows.length-1])
+
+   sheet.add_row [topic_title], :style=>title
+   sheet.rows.insert 0,  sheet.rows.delete(sheet.rows[sheet.rows.length-1])
+   
+   
+   sheet.merge_cells "A1:I1"
+   sheet.merge_cells "A2:I2"
+
    
    # standard_1x
    when "standard_1x"
@@ -314,6 +326,22 @@ case topic_type
    end
    pop_row_count = (row_count * 3) - 2
    sheet.column_widths 20, 20, 20, 20, 20, 20, 20, 20, 20
+   
+   sheet.rows.sort_by!{ |row| [row.cells[3].value.to_i, -row.cells[1].value.to_i] }
+   
+   sheet.add_row ["Emotion", "Intensity", "Why", "S" , "Valence", "Mindset", "Segment", "Product Mindset" ,"Response ID"], :style=>header
+   sheet.rows.insert 0,  sheet.rows.delete(sheet.rows[sheet.rows.length-1])
+   
+   sheet.add_row [topic_frame_of_reference], :style=>title
+   sheet.rows.insert 0,  sheet.rows.delete(sheet.rows[sheet.rows.length-1])
+   
+   sheet.add_row [topic_title], :style=>title
+   sheet.rows.insert 0,  sheet.rows.delete(sheet.rows[sheet.rows.length-1])
+   
+   
+   sheet.merge_cells "A1:I1"
+   sheet.merge_cells "A2:I2"
+   
    
    #Ranking
    when "ranking"
@@ -348,6 +376,25 @@ case topic_type
                row_count = row_count + 1
            end
        end
+       
+       
+       
+       sheet.rows.sort_by!{ |row| [row.cells[3].value.to_i, -row.cells[1].value.to_i] }
+       
+       sheet.add_row ["Emotion", "Intensity", "Why", "S" , "Valence", "Mindset", "Segment", "Product Mindset" ,"Response ID"], :style=>header
+       sheet.rows.insert 0,  sheet.rows.delete(sheet.rows[sheet.rows.length-1])
+       
+       sheet.add_row [topic_frame_of_reference], :style=>title
+       sheet.rows.insert 0,  sheet.rows.delete(sheet.rows[sheet.rows.length-1])
+       
+       sheet.add_row [topic_title], :style=>title
+       sheet.rows.insert 0,  sheet.rows.delete(sheet.rows[sheet.rows.length-1])
+       
+       
+       sheet.merge_cells "A1:I1"
+       sheet.merge_cells "A2:I2"
+       
+       
        
    else
    sheet.column_widths 20, 20, 20, 20, 20, 20, 20, 20, 20
@@ -393,6 +440,21 @@ case topic_type
        
        
        
+       sheet.rows.sort_by!{ |row| [row.cells[3].value.to_i, -row.cells[1].value.to_i] }
+       
+       sheet.add_row ["Emotion", "Intensity", "Why", "S" , "Valence", "Mindset", "Segment", "Product Mindset" ,"Response ID"], :style=>header
+       sheet.rows.insert 0,  sheet.rows.delete(sheet.rows[sheet.rows.length-1])
+       
+       sheet.add_row [topic_frame_of_reference], :style=>title
+       sheet.rows.insert 0,  sheet.rows.delete(sheet.rows[sheet.rows.length-1])
+       
+       sheet.add_row [topic_title], :style=>title
+       sheet.rows.insert 0,  sheet.rows.delete(sheet.rows[sheet.rows.length-1])
+       
+       
+       sheet.merge_cells "A1:I1"
+       sheet.merge_cells "A2:I2"
+       
    end
 sheet.column_widths 20, 20, 20, 20, 20, 20, 20, 20, 20
    
@@ -413,7 +475,13 @@ sheet.column_widths 20, 20, 20, 20, 20, 20, 20, 20, 20
 end # end topic type case
 
 
+
+
+
 sheet.add_table "A3:I#{pop_row_count-1}"
+
+
+
  end # end worksheet creator
 #test commit number 2
 
@@ -423,6 +491,10 @@ end # end while to catch all sheets
 p.serialize($file_name)
 file = $file_name.to_s
 FileUtils.mv $file_name, "./public/uploads/#{$file_name}/verbatim_#{$file_name}"
+
+
+
+
 end
 
 
