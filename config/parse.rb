@@ -114,16 +114,16 @@ header = wb.styles.add_style(:font_name => "Calibri",
 
 
 def valence_calc(value)
-   case value
-    when "1"
+   case value.to_i
+    when 1
       return "Very Pleasant"
-    when "2"
+    when 2
       return "Mildly Pleasant"
-    when "3"
+    when 3
       return "Neutral"
-    when "4"
+    when 4
       return "Mildly Unpleasant"
-    when "5"
+    when 5
       return "Very Unpleasant"
    end
 end
@@ -268,11 +268,11 @@ case topic_type
                               # increments count
         
  
-        sheet.add_row [ data_row[s11] , data_row[s12] , data_row[s13] , data_row[s14] , valence_calc(data_row[s14]), mindset_calc(data_row[s14],data_row[s24],data_row[s34]), data_row[segment_calc] , mindset_calc(data_row[p14],data_row[p24],data_row[p34]) , data_row[0] ], :style=>body
+        sheet.add_row [ data_row[s11] , data_row[s12] , data_row[s13] , data_row[s14].to_i , valence_calc(data_row[s14]), mindset_calc(data_row[s14],data_row[s24],data_row[s34]), data_row[segment_calc] , mindset_calc(data_row[p14],data_row[p24],data_row[p34]) , data_row[0] ], :style=>body
         
-        sheet.add_row [ data_row[s21] , data_row[s22] , data_row[s23] , data_row[s24] , valence_calc(data_row[s24]), mindset_calc(data_row[s14],data_row[s24],data_row[s34]), data_row[segment_calc] , mindset_calc(data_row[p14],data_row[p24],data_row[p34]) , data_row[0] ], :style=>body
+        sheet.add_row [ data_row[s21] , data_row[s22] , data_row[s23] , data_row[s24].to_i , valence_calc(data_row[s24]), mindset_calc(data_row[s14],data_row[s24],data_row[s34]), data_row[segment_calc] , mindset_calc(data_row[p14],data_row[p24],data_row[p34]) , data_row[0] ], :style=>body
         
-        sheet.add_row [ data_row[s31] , data_row[s32] , data_row[s33] , data_row[s34] , valence_calc(data_row[s34]), mindset_calc(data_row[s14],data_row[s24],data_row[s34]), data_row[segment_calc] , mindset_calc(data_row[p14],data_row[p24],data_row[p34]) , data_row[0] ], :style=>body
+        sheet.add_row [ data_row[s31] , data_row[s32] , data_row[s33] , data_row[s34].to_i , valence_calc(data_row[s34]), mindset_calc(data_row[s14],data_row[s24],data_row[s34]), data_row[segment_calc] , mindset_calc(data_row[p14],data_row[p24],data_row[p34]) , data_row[0] ], :style=>body
         row_count = row_count + 1
        end
         
@@ -280,7 +280,7 @@ case topic_type
        
     end
    pop_row_count = (row_count * 3) - 2
-   sheet.column_widths 20, 20, 20, 20, 20, 20, 20, 20, 20
+   
    
    
    sheet.rows.sort_by!{ |row| [row.cells[3].value.to_i, -row.cells[1].value.to_i] }
@@ -297,7 +297,7 @@ case topic_type
    
    sheet.merge_cells "A1:I1"
    sheet.merge_cells "A2:I2"
-
+   sheet.column_widths 20, 20, 20, 20, 20, 20, 20, 20, 20
    
    # standard_1x
    when "standard_1x"
@@ -316,7 +316,7 @@ case topic_type
            
            
            
-           sheet.add_row [ data_row[ss11] , data_row[ss12] , data_row[ss13] , data_row[ss14] , valence_calc(data_row[ss14]), data_row[s14], data_row[segment_calc] , mindset_calc(data_row[p14],data_row[p24],data_row[p34]) , data_row[0] ], :style=>body
+           sheet.add_row [ data_row[ss11] , data_row[ss12] , data_row[ss13] , data_row[ss14].to_i , valence_calc(data_row[ss14]), data_row[s14], data_row[segment_calc] , mindset_calc(data_row[p14],data_row[p24],data_row[p34]) , data_row[0] ], :style=>body
            
            
            
@@ -325,7 +325,7 @@ case topic_type
        
    end
    pop_row_count = (row_count * 3) - 2
-   sheet.column_widths 20, 20, 20, 20, 20, 20, 20, 20, 20
+   
    
    sheet.rows.sort_by!{ |row| [row.cells[3].value.to_i, -row.cells[1].value.to_i] }
    
@@ -341,7 +341,7 @@ case topic_type
    
    sheet.merge_cells "A1:I1"
    sheet.merge_cells "A2:I2"
-   
+   sheet.column_widths 20, 20, 20, 20, 20, 20, 20, 20, 20
    
    #Ranking
    when "ranking"
@@ -370,7 +370,7 @@ case topic_type
                
                
                
-               sheet.add_row [data_row[r_calc(data_row[s11], $rank_total , "emotion" )] , data_row[r_calc(data_row[s11], $rank_total , "intensity" )], data_row[r_calc(data_row[s11], $rank_total , "why" ) ], "", valence_calc(data_row[r_calc(data_row[s11], $rank_total , "valence" )]), r_mindset_calc( $rank_total, $rank_num, row_count), data_row[segment_calc] , mindset_calc(data_row[p14],data_row[p24],data_row[p34]) , data_row[0] ], :style=>body
+               sheet.add_row [data_row[r_calc(data_row[s11], $rank_total , "emotion" )] , data_row[r_calc(data_row[s11], $rank_total , "intensity" )], data_row[r_calc(data_row[s11], $rank_total , "why" ) ].to_i, "", valence_calc(data_row[r_calc(data_row[s11], $rank_total , "valence" )]), r_mindset_calc( $rank_total, $rank_num, row_count), data_row[segment_calc] , mindset_calc(data_row[p14],data_row[p24],data_row[p34]) , data_row[0] ], :style=>body
                
                
                row_count = row_count + 1
@@ -393,11 +393,11 @@ case topic_type
        
        sheet.merge_cells "A1:I1"
        sheet.merge_cells "A2:I2"
-       
+       sheet.column_widths 20, 20, 20, 20, 20, 20, 20, 20, 20
        
        
    else
-   sheet.column_widths 20, 20, 20, 20, 20, 20, 20, 20, 20
+   
    row_count = 0
    worksheet_name = "#{topic_code} - #{topic_title}_#{s11}"
    worksheet_name = worksheet_name.truncate(30)
@@ -431,7 +431,7 @@ case topic_type
                
                
                
-               sheet.add_row [data_row[r_calc(data_row[s11], $rank_total , "emotion" )] , data_row[r_calc(data_row[s11], $rank_total , "intensity" )], data_row[r_calc(data_row[s11], $rank_total , "why" ) ], "", valence_calc(data_row[r_calc(data_row[s11], $rank_total , "valence" )]), r_mindset_calc( $rank_total, $rank_num, row_count), data_row[segment_calc] , mindset_calc(data_row[p14],data_row[p24],data_row[p34]) , data_row[0] ], :style=>body
+               sheet.add_row [data_row[r_calc(data_row[s11], $rank_total , "emotion" )] , data_row[r_calc(data_row[s11], $rank_total , "intensity" )], data_row[r_calc(data_row[s11], $rank_total , "why" ) ].to_i, "", valence_calc(data_row[r_calc(data_row[s11], $rank_total , "valence" )]), r_mindset_calc( $rank_total, $rank_num, row_count), data_row[segment_calc] , mindset_calc(data_row[p14],data_row[p24],data_row[p34]) , data_row[0] ], :style=>body
                
                
                row_count = row_count + 1
@@ -454,9 +454,9 @@ case topic_type
        
        sheet.merge_cells "A1:I1"
        sheet.merge_cells "A2:I2"
-       
+       sheet.column_widths 20, 20, 20, 20, 20, 20, 20, 20, 20
    end
-sheet.column_widths 20, 20, 20, 20, 20, 20, 20, 20, 20
+
    
 
   end
@@ -850,6 +850,8 @@ wb.add_worksheet(:name=> "#{g_worksheet_name}") do |sheet|
      
           sheet.add_chart(Axlsx::Bar3DChart, :start_at => "D9", :end_at => "H21",  :barDir => :col, :grouping => :percentStacked) do |chart|
           chart.add_series :data => sheet[$p_cells], :title => "Positive", :colors => ['365e92', '365e92', '365e92']
+          chart.d_lbls.show_val = true
+          chart.d_lbls.show_percent = true
           chart.add_series :data => sheet[$neu_cells], :title => "Neutral", :colors => ['a5a5a5', 'a5a5a5', 'a5a5a5']
           chart.add_series :data => sheet[$neg_cells], :title => "Negative", :colors => ['be0712', 'be0712', 'be0712']
           chart.valAxis.gridlines = false
