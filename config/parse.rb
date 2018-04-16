@@ -102,14 +102,24 @@ title = wb.styles.add_style(:font_name => "Calibri",
 body = wb.styles.add_style(:font_name => "Calibri",
                            :sz=> 11,
                            :border=>Axlsx::STYLE_THIN_BORDER,
+                           :alignment=>{:horizontal => :left, :wrap_text => true},
+                           :bg_color => "ffffff")
+                           
+                           
+                           
+intensity = wb.styles.add_style(:font_name => "Calibri",
+                           :sz=> 11,
+                           :border=>Axlsx::STYLE_THIN_BORDER,
                            :alignment=>{:horizontal => :center, :wrap_text => true},
                            :bg_color => "ffffff")
+                           
                            
 header = wb.styles.add_style(:font_name => "Calibri",
                            :sz=> 11,
                            :border=>Axlsx::STYLE_THIN_BORDER,
                            :alignment=>{:horizontal => :center, :wrap_text => true},
                            :bg_color => "C0C0C0",
+                           :fg_color => "000000",
                            :b=> true)
 
 
@@ -268,7 +278,7 @@ case topic_type
                               # increments count
         
  
-        sheet.add_row [ data_row[s11] , data_row[s12] , data_row[s13] , data_row[s14].to_i , valence_calc(data_row[s14]), mindset_calc(data_row[s14],data_row[s24],data_row[s34]), data_row[segment_calc] , mindset_calc(data_row[p14],data_row[p24],data_row[p34]) , data_row[0] ], :style=>body
+ sheet.add_row [ data_row[s11] , data_row[s12], data_row[s13] , data_row[s14].to_i , valence_calc(data_row[s14]), mindset_calc(data_row[s14],data_row[s24],data_row[s34]), data_row[segment_calc] , mindset_calc(data_row[p14],data_row[p24],data_row[p34]) , data_row[0] ], :style=>body
         
         sheet.add_row [ data_row[s21] , data_row[s22] , data_row[s23] , data_row[s24].to_i , valence_calc(data_row[s24]), mindset_calc(data_row[s14],data_row[s24],data_row[s34]), data_row[segment_calc] , mindset_calc(data_row[p14],data_row[p24],data_row[p34]) , data_row[0] ], :style=>body
         
@@ -281,7 +291,11 @@ case topic_type
     end
    pop_row_count = (row_count * 3) - 2
    
-   
+   sheet.rows.each do |row|
+      
+      row.cells[1].style = intensity
+      
+   end
    
    sheet.rows.sort_by!{ |row| [row.cells[3].value.to_i, -row.cells[1].value.to_i] }
 
@@ -297,7 +311,7 @@ case topic_type
    
    sheet.merge_cells "A1:I1"
    sheet.merge_cells "A2:I2"
-   sheet.column_widths 20, 20, 20, 20, 20, 20, 20, 20, 20
+   sheet.column_widths 25, 25, 80, 5, 25, 25, 25, 25, 25
    
    # standard_1x
    when "standard_1x"
@@ -326,6 +340,11 @@ case topic_type
    end
    pop_row_count = (row_count * 3) - 2
    
+   sheet.rows.each do |row|
+       
+       row.cells[1].style = intensity
+       
+   end
    
    sheet.rows.sort_by!{ |row| [row.cells[3].value.to_i, -row.cells[1].value.to_i] }
    
@@ -341,7 +360,7 @@ case topic_type
    
    sheet.merge_cells "A1:I1"
    sheet.merge_cells "A2:I2"
-   sheet.column_widths 20, 20, 20, 20, 20, 20, 20, 20, 20
+   sheet.column_widths 25, 25, 80, 5, 25, 25, 25, 25, 25
    
    #Ranking
    when "ranking"
@@ -377,7 +396,11 @@ case topic_type
            end
        end
        
-       
+       sheet.rows.each do |row|
+           
+           row.cells[1].style = intensity
+           
+       end
        
        sheet.rows.sort_by!{ |row| [row.cells[3].value.to_i, -row.cells[1].value.to_i] }
        
@@ -393,7 +416,7 @@ case topic_type
        
        sheet.merge_cells "A1:I1"
        sheet.merge_cells "A2:I2"
-       sheet.column_widths 20, 20, 20, 20, 20, 20, 20, 20, 20
+       sheet.column_widths 25, 25, 80, 5, 25, 25, 25, 25, 25
        
        
    else
@@ -437,7 +460,11 @@ case topic_type
                row_count = row_count + 1
            end
        end
-       
+       sheet.rows.each do |row|
+           
+           row.cells[1].style = intensity
+           
+       end
        
        
        sheet.rows.sort_by!{ |row| [row.cells[3].value.to_i, -row.cells[1].value.to_i] }
@@ -454,7 +481,7 @@ case topic_type
        
        sheet.merge_cells "A1:I1"
        sheet.merge_cells "A2:I2"
-       sheet.column_widths 20, 20, 20, 20, 20, 20, 20, 20, 20
+       sheet.column_widths 25, 25, 80, 5, 25, 25, 25, 25, 25
    end
 
    
