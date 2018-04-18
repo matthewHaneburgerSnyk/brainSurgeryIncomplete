@@ -554,6 +554,11 @@ def makeGraph(values)
     #################################   Percent Positive Calcs   ###############################
     #Parse verbatim by sheet
     cworksheets.each do |cworksheet|
+        
+        
+        
+        
+        
         puts "Reading verbatims for graph generation, sheet: #{cworksheet.name}"
         num_rows = 0
     
@@ -608,9 +613,10 @@ def makeGraph(values)
             
         end # End for parsing calculation
         $total = positive + neutral + negative
-        $per_positive = (positive.to_f / $total.to_f).round(2)
-        $per_neutral  = (neutral.to_f  / $total.to_f).round(2)
-        $per_negative = (negative.to_f / $total.to_f).round(2)
+        $per_positive = (positive.to_f / $total.to_f).round(2) * 100
+        $per_neutral  = (neutral.to_f  / $total.to_f).round(2) * 100
+        $per_negative = (negative.to_f / $total.to_f).round(2) * 100
+    
         puts "per positive #{$per_positive}"
         puts "per negative #{$per_negative}"
         puts "per neutral  #{$per_neutral}"
@@ -703,7 +709,7 @@ def makeGraph(values)
                 $s_per_positive = (positive.to_f / $s_total.to_f).round(2)
                 $s_per_neutral  = (neutral.to_f  / $s_total.to_f).round(2)
                 $s_per_negative = (negative.to_f / $s_total.to_f).round(2)
-               
+       
                 
                 
                
@@ -743,7 +749,10 @@ def makeGraph(values)
     #create new xlsx doc
     p = Axlsx::Package.new
     wb = p.workbook
-    
+    chart_style = wb.styles.add_style(:font_name => "Calibri",
+                                      :sz=> 11,
+                                      :fg_color => "000000",
+                                      :b=> true)
     
     
     values.each do |graph_call|
@@ -794,17 +803,17 @@ g_worksheet_name = g_worksheet_name.gsub("/", "_")
 #  TS
 wb.add_worksheet(:name=> "#{g_worksheet_name}") do |sheet|
     
-    sheet.add_row [g_topic_title], :sz => 12, :b => true, :alignment => { :horizontal => :center, :vertical => :center , :wrap_text => true}
+    sheet.add_row [g_topic_title], :sz => 12, :font_name=>"Calibri", :b => true, :alignment => { :horizontal => :center, :vertical => :center , :wrap_text => true}
     
-    sheet.add_row [g_topic_type], :sz => 12, :b => true, :alignment => { :horizontal => :center, :vertical => :center , :wrap_text => true}
+    sheet.add_row [g_topic_type], :sz => 12, :font_name=>"Calibri", :b => true, :alignment => { :horizontal => :center, :vertical => :center , :wrap_text => true}
 
 
-            sheet.add_row  $graph_topics_a.unshift("")
-            sheet.add_row  $ts_positive #positive
-            sheet.add_row  $ts_neutral #neutral
-            sheet.add_row  $ts_negative #negative
-            sheet.add_row  $ts_total #total
-            sheet.add_row  $ts_total_used #message index
+            sheet.add_row  $graph_topics_a.unshift(""), :style => chart_style
+            sheet.add_row  $ts_positive , :style => chart_style #positive
+            sheet.add_row  $ts_neutral, :style => chart_style #neutral
+            sheet.add_row  $ts_negative, :style => chart_style #negative
+            sheet.add_row  $ts_total, :style => chart_style #total
+            sheet.add_row  $ts_total_used, :style => chart_style #message index
             
             num_of_topics = $graph_topics_a.size - 1
            
@@ -875,15 +884,19 @@ wb.add_worksheet(:name=> "#{g_worksheet_name}") do |sheet|
             end
       
      
-          sheet.add_chart(Axlsx::Bar3DChart, :start_at => "D9", :end_at => "H21",  :barDir => :col, :grouping => :percentStacked) do |chart|
-          chart.add_series :data => sheet[$p_cells], :title => "Positive", :colors => ['365e92', '365e92', '365e92']
-          chart.d_lbls.show_val = true
-          chart.d_lbls.show_percent = true
-          chart.add_series :data => sheet[$neu_cells], :title => "Neutral", :colors => ['a5a5a5', 'a5a5a5', 'a5a5a5']
-          chart.add_series :data => sheet[$neg_cells], :title => "Negative", :colors => ['be0712', 'be0712', 'be0712']
-          chart.valAxis.gridlines = false
-          chart.catAxis.gridlines = false
-          #segment name is an array, this has all the segments in it
+     sheet.add_chart(Axlsx::Bar3DChart, :start_at => "B10", :end_at => "O32", :title=>"", :show_legend => false, :barDir => :col, :grouping => :percentStacked) do |chart|
+              chart.add_series :data => sheet[$p_cells],:fg_color => "ffffff" , :colors => ['365e92', '365e92', '365e92']
+              chart.add_series :data => sheet[$neu_cells], :fg_color => "ffffff" , :colors => ['a5a5a5', 'a5a5a5', 'a5a5a5']
+              chart.add_series :data => sheet[$neg_cells], :fg_color => "ffffff" , :colors => ['be0712', 'be0712', 'be0712']
+              chart.d_lbls.show_val = true
+              chart.d_lbls.show_percent = true
+              chart.d_lbls.show_legend_key = false
+              chart.valAxis.gridlines = false
+              chart.catAxis.gridlines = false
+              chart.valAxis.scaling.orientation = :minMax
+              chart.valAxis.format_code = "Percentage"
+              chart.d_lbls.show_leader_lines = true
+              #segment name is an array, this has all the segments in it
           #so this chart needs to show all the segents and their names
           #chart.catAxis.title = "#{$segment_name}"
           
