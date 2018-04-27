@@ -1461,10 +1461,10 @@ values.each do |graph_call|
             
             
             sheet.add_chart(Axlsx::Bar3DChart, :start_at => "B10", :end_at => "O32",:title=>"   ", :show_legend => false, :barDir => :bar, :grouping => :percentStacked, ) do |chart|
-                chart.add_series :data => sheet[$un_cells], :colors => ['365e92', '365e92', '365e92'], :labels => sheet[$t_cells], :color => "FFFFFF"
+                chart.add_series :data => sheet[$un_cells], :colors => ['be0712', 'be0712', 'be0712'], :labels => sheet[$t_cells], :color => "FFFFFF"
                 chart.add_series :data => sheet[$ap_cells], :fg_color => "ffffff" , :colors => ['a5a5a5', 'a5a5a5', 'a5a5a5']
                 chart.add_series :data => sheet[$att_cells], :fg_color => "ffffff" , :colors => ['ffffff', 'ffffff', 'ffffff']
-                chart.add_series :data => sheet[$imp_cells], :fg_color => "ffffff" , :colors => ['be0712', 'be0712', 'be0712']
+                chart.add_series :data => sheet[$imp_cells], :fg_color => "ffffff" , :colors => ['365e92', '365e92', '365e92']
                 chart.d_lbls.show_val = true
                 chart.d_lbls.show_percent = true
                 chart.valAxis.gridlines = true
@@ -1694,10 +1694,10 @@ values.each do |graph_call|
                 
                 
                 sheet.add_chart(Axlsx::Bar3DChart, :start_at => "B10", :end_at => "O32",:title=>"   ", :show_legend => false, :barDir => :bar, :grouping => :percentStacked, ) do |chart|
-                    chart.add_series :data => sheet[$un_cells], :colors => ['365e92', '365e92', '365e92'], :labels => sheet[$t_cells], :color => "FFFFFF"
+                    chart.add_series :data => sheet[$un_cells], :colors => ['be0712', 'be0712', 'be0712'], :labels => sheet[$t_cells], :color => "FFFFFF"
                     chart.add_series :data => sheet[$ap_cells], :fg_color => "ffffff" , :colors => ['a5a5a5', 'a5a5a5', 'a5a5a5']
                     chart.add_series :data => sheet[$att_cells], :fg_color => "ffffff" , :colors => ['ffffff', 'ffffff', 'ffffff']
-                    chart.add_series :data => sheet[$imp_cells], :fg_color => "ffffff" , :colors => ['be0712', 'be0712', 'be0712']
+                    chart.add_series :data => sheet[$imp_cells], :fg_color => "ffffff" , :colors => ['365e92', '365e92', '365e92']
                     chart.d_lbls.show_val = true
                     chart.d_lbls.show_percent = true
                     chart.valAxis.gridlines = true
