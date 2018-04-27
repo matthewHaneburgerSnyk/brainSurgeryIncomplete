@@ -550,6 +550,9 @@ def makeGraph(values)
     
     # Where everything lives for graphs
     $gdata = Hash.new
+    $o_gdata = Hash.new
+    $m_gdata = Hash.new
+    $om_gdata = Hash.new
     $g_data_raw = Array.new
     #################################   Percent Positive Calcs   ###############################
     #Parse verbatim by sheet
@@ -568,11 +571,19 @@ def makeGraph(values)
             num_rows += 1
             $g_data_raw.push(row.values.join "          ")
         end
+        
+  
+      
+  
         #Percent Positive start values
         row_count = 0
         positive = 0
         neutral = 0
         negative = 0
+        unattracted = 0
+        apathetic = 0
+        attracted = 0
+        impassioned = 0
         #parse array to get values for building graphs
         $g_data_raw.each do |row|
             
@@ -602,6 +613,19 @@ def makeGraph(values)
                     elsif data_row[4] == "Very Unpleasant"
                     negative = negative + 1
                 end
+                
+                if data_row[5] == "Unattracted"
+                    unattracted = unattracted + 1
+                    elsif data_row[5] == "Apathetic"
+                    apathetic = apathetic + 1
+                    elsif data_row[5] == "Attracted"
+                    attracted = attracted + 1
+                    elsif data_row[5] == "Impassioned"
+                    impassioned = impassioned + 1
+                    
+                end
+
+                
                 #add segments to array so you can manipulate it later
                 
                 $segment_a.push(data_row[6])
@@ -612,10 +636,22 @@ def makeGraph(values)
             
             
         end # End for parsing calculation
+        #percent Positive
         $total = positive + neutral + negative
-        $per_positive = (positive.to_f / $total.to_f).round(2) * 100
-        $per_neutral  = (neutral.to_f  / $total.to_f).round(2) * 100
-        $per_negative = (negative.to_f / $total.to_f).round(2) * 100
+        $per_positive = (positive.to_f / $total.to_f).round(2)
+        $per_neutral  = (neutral.to_f  / $total.to_f).round(2)
+        $per_negative = (negative.to_f / $total.to_f).round(2)
+        #mindset
+        $m_total = unattracted + apathetic + attracted + impassioned
+        $per_unattracted = (unattracted.to_f / $m_total.to_f).round(2)
+        $per_apathetic   = (apathetic.to_f  / $m_total.to_f).round(2)
+        $per_attracted   = (attracted.to_f / $m_total.to_f).round(2)
+        $per_impassioned = (impassioned.to_f / $m_total.to_f).round(2)
+        
+        puts "per unattracted #{$per_unattracted}"
+        puts "per apathetic #{$per_apathetic}"
+        puts "per attracted  #{$per_attracted}"
+        puts "per impassioned  #{$per_impassioned}"
     
         puts "per positive #{$per_positive}"
         puts "per negative #{$per_negative}"
@@ -626,21 +662,29 @@ def makeGraph(values)
     
         #################################   Segment Calcs   ###############################
         #Run segment calcs, this is all dynamic and should work with any number of segments
-        row_count       = 0
-        $seg_array      = Array.new
-        $uniq_seg_names = Array.new
-        $uniq_segs      = Array.new
+        row_count         = 0
+        $seg_array        = Array.new
+        $uniq_seg_names   = Array.new
+        $uniq_segs        = Array.new
+        $m_uniq_seg_names = Array.new
+        $m_uniq_segs      = Array.new
         
         
         #how many segments are they and what are the unique vals
-        $num_of_segs     = $segment_a.uniq.length
-        $uniq_seg_names  = $segment_a.uniq
-        
+        $num_of_segs      = $segment_a.uniq.length
+        $uniq_seg_names   = $segment_a.uniq
+        $m_num_of_segs    = $segment_a.uniq.length
+        $m_uniq_seg_names = $segment_a.uniq
         
         #turn segs values into a nested array
         $uniq_seg_names.each do |seg|
             array_spot = $uniq_seg_names.index(seg)
             $uniq_segs[array_spot] = Array.new
+        end
+        
+        $m_uniq_seg_names.each do |seg|
+            array_spot = $m_uniq_seg_names.index(seg)
+            $m_uniq_segs[array_spot] = Array.new
         end
 
 
@@ -668,23 +712,75 @@ def makeGraph(values)
                 $uniq_seg_names.each do |seg| # see what segment is on the row we're looking at
                     array_spot = $uniq_seg_names.index(seg)
                     if seg == data_row[6]
-                        
                        $uniq_segs[array_spot].push(data_row[4]) # Put the valence into an array corresponding to the segment title
                     end
                 
                end
+                $m_uniq_seg_names.each do |seg| # see what segment is on the row we're looking at
+                    array_spot = $m_uniq_seg_names.index(seg)
+                    if seg == data_row[6]
+                        $m_uniq_segs[array_spot].push(data_row[5]) # Put the mindset into an array corresponding to the segment title
+                    end
+                    
+                end
+                
+                
                 row_count = row_count + 1
             end
             
       end # End segment row parsing
       
-            $seg_values = Hash.new
+         $m_seg_values = Hash.new
+         $m_uniq_seg_names.each do |seg|
+             
+             puts "M SEG NAME    =========== #{seg}"
+             
+             array_spot = $m_uniq_seg_names.index(seg)
+             unattracted = 0
+             apathetic = 0
+             attracted = 0
+             impassioned = 0
+             
+             temp_array = Array.new
+             temp_array = $m_uniq_segs[array_spot]
+             #$uniq_segs[array_spot].each do |val|
+             temp_array.each do |val|
+                 if val == "Unattracted"
+                     unattracted = unattracted + 1
+                     elsif val == "Apathetic"
+                     apathetic = apathetic + 1
+                     elsif val == "Attracted"
+                     attracted = attracted + 1
+                     elsif val == "Impassioned"
+                     impassioned = impassioned + 1
+                     
+                 end
+                 
+                 
+             end
+             
+             $s_m_total = unattracted + apathetic + attracted + impassioned
+             $s_per_unattracted = (unattracted.to_f / $s_m_total.to_f).round(2)
+             $s_per_apathetic   = (apathetic.to_f  / $s_m_total.to_f).round(2)
+             $s_per_attracted   = (attracted.to_f / $s_m_total.to_f).round(2)
+             $s_per_impassioned = (impassioned.to_f / $s_m_total.to_f).round(2)
+             
+             $m_seg_values[seg] = [$s_per_unattracted, $s_per_apathetic, $s_per_attracted, $s_per_impassioned, $s_m_total]
+             
+         end
+      
+      puts "m seg values =++++++++++++++++++ #{$m_seg_values}"
+      
+      
+      
+      
+      
+            $seg_values   = Hash.new
             $uniq_seg_names.each do |seg|
                array_spot = $uniq_seg_names.index(seg)
                positive = 0
                neutral = 0
                negative = 0
-               
                
                 temp_array = Array.new
                 temp_array = $uniq_segs[array_spot]
@@ -709,12 +805,11 @@ def makeGraph(values)
                 $s_per_positive = (positive.to_f / $s_total.to_f).round(2)
                 $s_per_neutral  = (neutral.to_f  / $s_total.to_f).round(2)
                 $s_per_negative = (negative.to_f / $s_total.to_f).round(2)
-       
-                
+
                 
                
                 $seg_values[seg] = [$s_per_positive, $s_per_neutral, $s_per_negative, $s_total , $s_total_used]
-                
+    
                 
             end
             
@@ -728,33 +823,70 @@ def makeGraph(values)
         
         ### That's what seg values looks like it's a hash with the key being the segment name
         #$seg_values[unique_seg_names(seg)] = (per_positive, per_neutral, per_negative, total_used, total)
-
-        $seg_values = $seg_values.reject { |k,v| k.nil? }
+  
+        $seg_values         = $seg_values.reject { |k,v| k.nil? }
+        $m_seg_values       = $m_seg_values.reject { |k,v| k.nil? }
+   
         
-        $ts = [ $per_positive, $per_neutral, $per_negative,  $total, $total]
+        $ts   = [ $per_positive, $per_neutral, $per_negative,  $total, $total]
+        $m_ts = [ $per_unattracted, $per_apathetic, $per_attracted, $per_impassioned, $m_total]
+        
+        puts "global ts #{$ts}"
+        puts "global m_ts #{$m_ts}"
+        
+        
         title = cworksheet.name[0..2].strip
-        $gdata[title] = [$ts]
+        m_title = cworksheet.name[0..2].strip
+        $gdata[title]      = [$ts]
+        $m_gdata[m_title]  = [$m_ts]
+        $o_gdata[title]    = [$ts]
+        $om_gdata[m_title] = [$m_ts]
         
        
         ##TODO - Filter out nil values from
          $seg_values.each do |key, value|
              title = cworksheet.name[0..2].strip
              $gdata[title].push(key, value)
+             $o_gdata[title].push(key, value)
+            
              
         end
          
+         $m_seg_values.each do |key, value|
+             m_title = cworksheet.name[0..2].strip
+             $m_gdata[m_title].push(key, value)
+             $om_gdata[m_title].push(key, value)
+                     end
+         
       
       end # End for each worksheet
-    puts $gdata
+
     #create new xlsx doc
     p = Axlsx::Package.new
     wb = p.workbook
     chart_style = wb.styles.add_style(:font_name => "Calibri",
                                       :sz=> 11,
                                       :fg_color => "000000",
+                                      :format_code => "0%",
                                       :b=> true)
+                                      
+    chart_style_1 = wb.styles.add_style(:font_name => "Calibri",
+                                      :sz=> 11,
+                                      :fg_color => "000000",
+                                      :b=> true)
+                                      
+                                      
+                                      
+  chart_style_2 = wb.styles.add_style(:font_name => "Calibri",
+                                      :sz=> 11,
+                                      :fg_color => "ffffff",
+                                      :format_code => "00%",
+                                      :border =>{:color => "00000000", :style => :none},
+                                    
+                                      :b=> true)
+                                      
     
-    
+    puts "Graph Call+_+__+_+_+_+_+_+_+_+_+_+_+_+__+_+    #{values}"
     values.each do |graph_call|
         
         g_topic_code          = graph_call[0]
@@ -763,6 +895,8 @@ def makeGraph(values)
         g_topic_title         = graph_call[3]
         g_ranking_num         = graph_call[4]
         g_ranking_total       = graph_call[5]
+   
+     if g_topic_type == "Percent Positive"
         
         $graph_topics_a = Array.new
         $graph_topics_a = graph_topics.split(",")
@@ -782,99 +916,125 @@ $ts_total_used  = Array.new
 $ts_total_used.push("Message Index")
 
 
-$graph_topics_a.each do |topic|
 
-    ts_data = $gdata[topic.strip]
+
+$graph_topics_a.each do |topic|
+    
+ 
+
+    ts_data = $o_gdata[topic.strip]
+    
     ts_data_a = ts_data[0]
 
-    
+
     $ts_positive.push(ts_data_a[0])
     $ts_neutral.push(ts_data_a[1])
     $ts_negative.push(ts_data_a[2])
     $ts_total_used.push(ts_data_a[3])
     $ts_total.push(ts_data_a[4])
-    
+  
 end
+
+
+
 
 
 g_worksheet_name = "#{g_topic_code} (TS) - #{g_topic_title}"
 g_worksheet_name = g_worksheet_name.truncate(30)
 g_worksheet_name = g_worksheet_name.gsub("/", "_")
 #  TS
+puts "TS Worksheet name percent positive #{g_worksheet_name}"
 wb.add_worksheet(:name=> "#{g_worksheet_name}") do |sheet|
     
     sheet.add_row [g_topic_title], :sz => 12, :font_name=>"Calibri", :b => true, :alignment => { :horizontal => :center, :vertical => :center , :wrap_text => true}
     
     sheet.add_row [g_topic_type], :sz => 12, :font_name=>"Calibri", :b => true, :alignment => { :horizontal => :center, :vertical => :center , :wrap_text => true}
-
+    
+    
 
             sheet.add_row  $graph_topics_a.unshift(""), :style => chart_style
             sheet.add_row  $ts_positive , :style => chart_style #positive
             sheet.add_row  $ts_neutral, :style => chart_style #neutral
             sheet.add_row  $ts_negative, :style => chart_style #negative
-            sheet.add_row  $ts_total, :style => chart_style #total
-            sheet.add_row  $ts_total_used, :style => chart_style #message index
+            sheet.add_row  $ts_total, :style => chart_style_1 #total
+            sheet.add_row  $ts_total_used, :style => chart_style_1 #message index
             
             num_of_topics = $graph_topics_a.size - 1
            
+
             case num_of_topics
                 when 1
+                   $t_cells   = "B3:B3"
                    $p_cells   = "B4:B4"
                    $neu_cells = "B5:B5"
                    $neg_cells = "B6:B6"
                 when 2
+                   $t_cells   = "B3:C3"
                    $p_cells   = "B4:C4"
                    $neu_cells = "B5:C5"
                    $neg_cells = "B6:C6"
                 when 3
+                   $t_cells   = "B3:D3"
                    $p_cells   = "B4:D4"
                    $neu_cells = "B5:D5"
                    $neg_cells = "B6:D6"
                 when 4
+                   $t_cells   = "B3:E3"
                    $p_cells   = "B4:E4"
                    $neu_cells = "B5:E5"
                    $neg_cells = "B6:E6"
                 when 5
+                   $t_cells   = "B3:F3"
                    $p_cells   = "B4:F4"
                    $neu_cells = "B5:F5"
                    $neg_cells = "B6:F6"
                 when 6
+                   $t_cells   = "B3:G3"
                    $p_cells   = "B4:G4"
                    $neu_cells = "B5:G5"
                    $neg_cells = "B6:G6"
                 when 7
+                   $t_cells   = "B3:H3"
                    $p_cells   = "B4:H4"
                    $neu_cells = "B5:H5"
                    $neg_cells = "B6:H6"
                 when 8
+                   $t_cells   = "B3:I3"
                    $p_cells   = "B4:I4"
                    $neu_cells = "B5:I5"
                    $neg_cells = "B6:I6"
                 when 9
+                   $t_cells   = "B3:J3"
                    $p_cells   = "B4:J4"
                    $neu_cells = "B5:J5"
                    $neg_cells = "B6:J6"
                 when 10
+                   $t_cells   = "B3:K3"
                    $p_cells   = "B4:K4"
                    $neu_cells = "B5:K5"
                    $neg_cells = "B6:K6"
                 when 11
+                   $t_cells   = "B3:L3"
                    $p_cells   = "B4:L4"
                    $neu_cells = "B5:L5"
                    $neg_cells = "B6:L6"
                 when 12
+                   $t_cells   = "B3:M3"
                    $p_cells   = "B4:M4"
                    $neu_cells = "B5:M5"
                    $neg_cells = "B6:M6"
                 when 13
+                   $t_cells   = "B3:N3"
                    $p_cells   = "B4:N4"
                    $neu_cells = "B5:N5"
                    $neg_cells = "B6:N6"
                 when 14
+                   $t_cells   = "B3:O3"
                    $p_cells   = "B4:O4"
                    $neu_cells = "B5:O5"
                    $neg_cells = "B6:O6"
                 when 15
+                   $t_cells   = "B3:P3"
                    $p_cells   = "B4:P4"
                    $neu_cells = "B5:P5"
                    $neg_cells = "B6:P6"
@@ -884,24 +1044,23 @@ wb.add_worksheet(:name=> "#{g_worksheet_name}") do |sheet|
             end
       
      
-     sheet.add_chart(Axlsx::Bar3DChart, :start_at => "B10", :end_at => "O32", :title=>"", :show_legend => false, :barDir => :col, :grouping => :percentStacked) do |chart|
-              chart.add_series :data => sheet[$p_cells],:fg_color => "ffffff" , :colors => ['365e92', '365e92', '365e92']
+     sheet.add_chart(Axlsx::Bar3DChart, :start_at => "B10", :end_at => "O32",:title=>"   ", :show_legend => false, :barDir => :col, :grouping => :percentStacked, ) do |chart|
+              chart.add_series :data => sheet[$p_cells], :colors => ['365e92', '365e92', '365e92'], :labels => sheet[$t_cells], :color => "FFFFFF"
               chart.add_series :data => sheet[$neu_cells], :fg_color => "ffffff" , :colors => ['a5a5a5', 'a5a5a5', 'a5a5a5']
               chart.add_series :data => sheet[$neg_cells], :fg_color => "ffffff" , :colors => ['be0712', 'be0712', 'be0712']
               chart.d_lbls.show_val = true
               chart.d_lbls.show_percent = true
-              chart.d_lbls.show_legend_key = false
-              chart.valAxis.gridlines = false
+              chart.valAxis.gridlines = true
               chart.catAxis.gridlines = false
-              chart.valAxis.scaling.orientation = :minMax
               chart.valAxis.format_code = "Percentage"
-              chart.d_lbls.show_leader_lines = true
-              #segment name is an array, this has all the segments in it
-          #so this chart needs to show all the segents and their names
-          #chart.catAxis.title = "#{$segment_name}"
-          
+           
+             
+        
+
+
          
       end
+
 
 
 
@@ -911,20 +1070,28 @@ end
 
 
 
-
 #determine how many times to iterate
 $topic_count = 0
 $graph_topics_s.each do |topic|
+
     ts_data = $gdata[topic.strip]
+
+    
+
       if ts_data[0].class == Array
         ts_data.delete_at(0)
+    
       else
         puts "Not deleting segment titles"
       end
+    
     count = ts_data.size
     $num_of_segments = count / 2
     $topic_count =+ 1
  end
+
+
+
 puts "Number of segments #{$num_of_segments}"
 $segment_name = Array.new
 $ts_data = Array.new
@@ -984,14 +1151,18 @@ while $seg_count < $num_of_segments
      
 
         puts "segment name array #{$segment_name}"
+        puts "segment name count #{$seg_count}"
     end
+    
     $seg_title = "#{g_topic_code} #{$segment_name[$seg_count]} - #{g_topic_title}"
     $seg_title = $seg_title.truncate(30)
     $seg_title = $seg_title.gsub("/", "_")
  
-    
+ 
 
 #  Per Segments
+
+puts "Segment worksheet name percent positive #{$seg_title}"
 wb.add_worksheet(:name=> "#{$seg_title}") do |sheet|
     
     sheet.add_row [g_topic_title], :sz => 12, :b => true, :alignment => { :horizontal => :center, :vertical => :center , :wrap_text => true}
@@ -1002,11 +1173,11 @@ wb.add_worksheet(:name=> "#{$seg_title}") do |sheet|
     
     
     sheet.add_row  $graph_topics_s.unshift("")
-    sheet.add_row  $ts_positive #positive
-    sheet.add_row  $ts_neutral #neutral
-    sheet.add_row  $ts_negative #negative
-    sheet.add_row  $ts_total #total
-    sheet.add_row  $ts_total_used #message index
+    sheet.add_row  $ts_positive, :style => chart_style #positive
+    sheet.add_row  $ts_neutral, :style => chart_style  #neutral
+    sheet.add_row  $ts_negative, :style => chart_style  #negative
+    sheet.add_row  $ts_total, :style => chart_style_1 #total
+    sheet.add_row  $ts_total_used, :style => chart_style_1 #message index
     
     
     
@@ -1080,45 +1251,486 @@ wb.add_worksheet(:name=> "#{$seg_title}") do |sheet|
         puts "Out of bounds, double check number of permitted topics per graph."
     end
   
+  
+
     
-    sheet.add_chart(Axlsx::Bar3DChart, :start_at => "D9", :end_at => "H21",  :barDir => :col, :grouping => :percentStacked) do |chart|
-        chart.add_series :data => sheet[$p_cells], :title => "Positive", :colors => ['365e92', '365e92', '365e92']
-        chart.add_series :data => sheet[$neu_cells], :title => "Neutral", :colors => ['a5a5a5', 'a5a5a5', 'a5a5a5']
-        chart.add_series :data => sheet[$neg_cells], :title => "Negative", :colors => ['be0712', 'be0712', 'be0712']
-        chart.valAxis.gridlines = false
+    sheet.add_chart(Axlsx::Bar3DChart, :start_at => "B10", :end_at => "O32", :title=>"   ", :color => "000000", :show_legend => false, :barDir => :col, :grouping => :percentStacked, ) do |chart|
+        chart.add_series :data => sheet[$p_cells],:fg_color => "ffffff" , :colors => ['365e92', '365e92', '365e92'], :labels => sheet[$t_cells]
+        chart.add_series :data => sheet[$neu_cells], :fg_color => "ffffff" , :colors => ['a5a5a5', 'a5a5a5', 'a5a5a5']
+        chart.add_series :data => sheet[$neg_cells], :fg_color => "ffffff" , :colors => ['be0712', 'be0712', 'be0712']
+        chart.d_lbls.show_val = true
+        chart.d_lbls.show_percent = true
+        chart.valAxis.gridlines = true
         chart.catAxis.gridlines = false
-        chart.catAxis.title = "#{$segment_name[0]}"
+        chart.valAxis.format_code = "Percentage"
+
+$seg_count += 1
+
+    end
+    
+end
+
+
+end
+
+end
+   
+end
+
+
+puts "Graph Call+_+__+_+_+_+_+_+_+_+_+_+_+_+__+_+    #{values}"
+values.each do |graph_call|
+    puts "Graph Call+_+__+_+_+_+_+_+_+_+_+_+_+_+__+_+    #{graph_call}"
+    gm_topic_code          = graph_call[0]
+    gm_topic_type          = graph_call[1]
+    m_graph_topics         = graph_call[2]
+    gm_topic_title         = graph_call[3]
+    gm_ranking_num         = graph_call[4]
+    gm_ranking_total       = graph_call[5]
+    
+    if gm_topic_type == "Mindset"
+        
+        $m_graph_topics_a = Array.new
+        $m_graph_topics_a = m_graph_topics.split(",")
+        $m_graph_topics_s = Array.new
+        $m_graph_topics_s = m_graph_topics.split(",")
+        
+        row_count = 0
+        $ts_unattracted   = Array.new
+        $ts_unattracted.push("Unattracted")
+        $ts_apathetic     = Array.new
+        $ts_apathetic.push("Apathetic")
+        $ts_attracted    = Array.new
+        $ts_attracted.push("Attracted")
+        $ts_impassioned    = Array.new
+        $ts_impassioned.push("Impassioned")
+        $ts_total      = Array.new
+        $ts_total.push("Total")
+        
+        puts "m_graph_topics_a ----------- #{$m_graph_topics_a}"
+        $m_graph_topics_a.each do |topic|
+        
+            ts_data = $om_gdata[topic.strip]
+            ts_data_a = ts_data[0]
+            puts "$$$$$$$$$$$$$$$$$$$$$  #{ts_data} $$$$$$$$$$$$$$$$$$$$$$$$"
+            
+            $ts_unattracted.push(ts_data_a[0])
+            $ts_apathetic.push(ts_data_a[1])
+            $ts_attracted.push(ts_data_a[2])
+            $ts_impassioned.push(ts_data_a[3])
+            $ts_total.push(ts_data_a[4])
+            
        
-       $seg_count += 1
-      
+       puts "Debugging all the mindset graph data"
+       puts "unattracted #{$ts_unattracted}"
+       puts "apathetic #{$ts_apathetic}"
+       puts "attracted #{$ts_attracted}"
+       puts "impassioned #{$ts_impassioned}"
+       puts "total #{$ts_total}"
+       
+       
+       
+        end
+        
+        
+        g_worksheet_name = "#{gm_topic_code} (TS) - #{gm_topic_title}"
+        g_worksheet_name = g_worksheet_name.truncate(30)
+        g_worksheet_name = g_worksheet_name.gsub("/", "_")
+        #  TS
+        
+        puts "Mindset TS Worksheet name #{g_worksheet_name}"
+        wb.add_worksheet(:name=> "#{g_worksheet_name}") do |sheet|
+            
+            sheet.add_row [gm_topic_title], :sz => 12, :font_name=>"Calibri", :b => true, :alignment => { :horizontal => :center, :vertical => :center , :wrap_text => true}
+            
+            sheet.add_row [gm_topic_type], :sz => 12, :font_name=>"Calibri", :b => true, :alignment => { :horizontal => :center, :vertical => :center , :wrap_text => true}
+            
+            
+            #make title value
+            if $m_graph_topics_a[0] == ""
+            $m_graph_title = $m_graph_topics_a
+            else
+            $m_graph_title = $m_graph_topics_a.unshift("")
+            end
+            
+            sheet.add_row  $m_graph_title, :style => chart_style
+            sheet.add_row  $ts_unattracted , :style => chart_style
+            sheet.add_row  $ts_apathetic, :style => chart_style
+            sheet.add_row  $ts_attracted, :style => chart_style
+            sheet.add_row  $ts_impassioned, :style => chart_style
+            sheet.add_row  $ts_total, :style => chart_style_1
+            
+        
+            num_of_topics = $m_graph_title.size - 1
+            
+            case num_of_topics
+                when 1
+                $t_cells   = "B3:B3"
+                $un_cells  = "B4:B4"
+                $ap_cells  = "B5:B5"
+                $att_cells = "B6:B6"
+                $imp_cells = "B7:B7"
+                when 2
+                $t_cells   = "B3:C3"
+                $un_cells  = "B4:C4"
+                $ap_cells  = "B5:C5"
+                $att_cells = "B6:C6"
+                $imp_cells = "B7:C7"
+                when 3
+                $t_cells   = "B3:D3"
+                $un_cells  = "B4:D4"
+                $ap_cells  = "B5:D5"
+                $att_cells = "B6:D6"
+                $imp_cells = "B7:D7"
+                when 4
+                $t_cells   = "B3:E3"
+                $un_cells  = "B4:E4"
+                $ap_cells  = "B5:E5"
+                $att_cells = "B6:E6"
+                $imp_cells = "B7:E7"
+                when 5
+                $t_cells   = "B3:F3"
+                $un_cells  = "B4:F4"
+                $ap_cells  = "B5:F5"
+                $att_cells = "B6:F6"
+                $imp_cells = "B7:F7"
+                when 6
+                $t_cells   = "B3:G3"
+                $un_cells  = "B4:G4"
+                $ap_cells  = "B5:G5"
+                $att_cells = "B6:G6"
+                $imp_cells = "B7:G7"
+                when 7
+                $t_cells   = "B3:H3"
+                $un_cells  = "B4:H4"
+                $ap_cells  = "B5:H5"
+                $att_cells = "B6:H6"
+                $imp_cells = "B7:H7"
+                when 8
+                $t_cells   = "B3:I3"
+                $un_cells  = "B4:I4"
+                $ap_cells  = "B5:I5"
+                $att_cells = "B6:I6"
+                $imp_cells = "B7:I7"
+                when 9
+                $t_cells   = "B3:J3"
+                $un_cells  = "B4:J4"
+                $ap_cells  = "B5:J5"
+                $att_cells = "B6:J6"
+                $imp_cells = "B7:J7"
+                when 10
+                $t_cells   = "B3:K3"
+                $un_cells  = "B4:K4"
+                $ap_cells  = "B5:K5"
+                $att_cells = "B6:K6"
+                $imp_cells = "B7:K7"
+                when 11
+                $t_cells   = "B3:L3"
+                $un_cells  = "B4:L4"
+                $ap_cells  = "B5:L5"
+                $att_cells = "B6:L6"
+                $imp_cells = "B7:L7"
+                when 12
+                $t_cells   = "B3:M3"
+                $un_cells  = "B4:M4"
+                $ap_cells  = "B5:M5"
+                $att_cells = "B6:M6"
+                $imp_cells = "B7:M7"
+                when 13
+                $t_cells   = "B3:N3"
+                $un_cells  = "B4:N4"
+                $ap_cells  = "B5:N5"
+                $att_cells = "B6:N6"
+                $imp_cells = "B7:N7"
+                when 14
+                $t_cells   = "B3:O3"
+                $un_cells  = "B4:O4"
+                $ap_cells  = "B5:O5"
+                $att_cells = "B6:O6"
+                $imp_cells = "B7:O7"
+                when 15
+                $t_cells   = "B3:P3"
+                $un_cells  = "B4:P4"
+                $ap_cells  = "B5:P5"
+                $att_cells = "B6:P6"
+                $imp_cells = "B7:P7"
+                
+                else
+                puts "Out of bounds, double check number of permitted topics per graph."
+            end
+            
+            
+            sheet.add_chart(Axlsx::Bar3DChart, :start_at => "B10", :end_at => "O32",:title=>"   ", :show_legend => false, :barDir => :bar, :grouping => :percentStacked, ) do |chart|
+                chart.add_series :data => sheet[$un_cells], :colors => ['365e92', '365e92', '365e92'], :labels => sheet[$t_cells], :color => "FFFFFF"
+                chart.add_series :data => sheet[$ap_cells], :fg_color => "ffffff" , :colors => ['a5a5a5', 'a5a5a5', 'a5a5a5']
+                chart.add_series :data => sheet[$att_cells], :fg_color => "ffffff" , :colors => ['ffffff', 'ffffff', 'ffffff']
+                chart.add_series :data => sheet[$imp_cells], :fg_color => "ffffff" , :colors => ['be0712', 'be0712', 'be0712']
+                chart.d_lbls.show_val = true
+                chart.d_lbls.show_percent = true
+                chart.valAxis.gridlines = true
+                chart.catAxis.gridlines = false
+                chart.valAxis.format_code = "Percentage"
+                
+                
+                
+                
+                
+            end
+            
+            
+            
+            
+        end
+        
+        
+        
+        
+        
+        #determine how many times to iterate
+        $topic_count = 0
+        $m_graph_topics_s .each do |topic|
+            ts_data = $m_gdata[topic.strip]
+            if ts_data[0].class == Array
+                ts_data.delete_at(0)
+                else
+                puts "Not deleting segment titles"
+            end
+            count = ts_data.size
+            $num_of_segments = count / 2
+            $topic_count =+ 1
+        end
+        puts "Number of segments #{$num_of_segments}"
+        $m_segment_name = Array.new
+        $m_ts_data = Array.new
+        $m_g_spot = 0
+        $m_seg_count = 0
+        
+        while $m_seg_count < $num_of_segments
+            $m_graph_topics_s = Array.new
+            $m_graph_topics_s = m_graph_topics.split(",")
+            
+            
+            #clear out array of ts values
+            
+            
+            $ts_unattracted.clear
+            $ts_unattracted.push("Unattracted")
+            $ts_apathetic.clear
+            $ts_apathetic.push("Apathetic")
+            $ts_attracted.clear
+            $ts_attracted.push("Attracted")
+            $ts_impassioned.clear
+            $ts_impassioned.push("Impassioned")
+            $ts_total.clear
+            $ts_total.push("Total")
+            #get values for segment
+            
+            puts " full gdata before #{$m_gdata}"
+            
+            $m_graph_topics_s.each do |topic|
+                puts "topic being looked at #{topic}"
+                $m_ts_data = $m_gdata[topic.strip]
+                puts "gdata for debuggin #{$m_gdata[topic.strip]}"
+                puts " full gdata after #{$m_gdata}"
+                puts "ts data #{$m_ts_data}"
+                if $m_seg_count == 0
+                    $m_g_spot = 1
+                    
+                    else
+                    
+                    $m_g_spot = ($m_seg_count * 2) + 1
+                    
+                end
+                
+                ts_data_a = $m_ts_data[$m_g_spot.to_i]
+                puts "TS Data a for segments #{ts_data_a}"
+                
+                $ts_unattracted.push(ts_data_a[0])
+                $ts_apathetic.push(ts_data_a[1])
+                $ts_attracted.push(ts_data_a[2])
+                $ts_impassioned.push(ts_data_a[3])
+                $ts_total.push(ts_data_a[4])
+                
+                $name_count = $m_seg_count * 2
+                
+                $m_segment_name.push($m_ts_data[$name_count.to_i])
+                
+                $m_segment_name = $m_segment_name.uniq
+                
+                
+                puts "segment name array #{$m_segment_name}"
+            end
+            $seg_title = "#{gm_topic_code} #{$m_segment_name[$m_seg_count]} - #{gm_topic_title}"
+            $seg_title = $seg_title.truncate(30)
+            $seg_title = $seg_title.gsub("/", "_")
+            
+            
+            
+            #  Per Segments
+             puts "Mindset segment Worksheet name #{$seg_title}"
+            wb.add_worksheet(:name=> "#{$seg_title}") do |sheet|
+                
+                sheet.add_row [gm_topic_title], :sz => 12, :b => true, :alignment => { :horizontal => :center, :vertical => :center , :wrap_text => true}
+                
+                sheet.add_row [$seg_title], :sz => 12, :b => true, :alignment => { :horizontal => :center, :vertical => :center , :wrap_text => true}
+                
+                
+                #make title value
+                if $m_graph_topics_a[0] == ""
+                    $m_graph_title = $m_graph_topics_a
+                    else
+                    $m_graph_title = $m_graph_topics_a.unshift("")
+                end
+                
+                sheet.add_row  $m_graph_title, :style => chart_style
+                sheet.add_row  $ts_unattracted , :style => chart_style
+                sheet.add_row  $ts_apathetic, :style => chart_style
+                sheet.add_row  $ts_attracted, :style => chart_style
+                sheet.add_row  $ts_impassioned, :style => chart_style
+                sheet.add_row  $ts_total, :style => chart_style_1
+                
+                
+                
+                
+                num_of_topics = $m_graph_title.size - 1
+                
+                
+                case num_of_topics
+                    when 1
+                    $t_cells   = "B3:B3"
+                    $un_cells  = "B4:B4"
+                    $ap_cells  = "B5:B5"
+                    $att_cells = "B6:B6"
+                    $imp_cells = "B7:B7"
+                    when 2
+                    $t_cells   = "B3:C3"
+                    $un_cells  = "B4:C4"
+                    $ap_cells  = "B5:C5"
+                    $att_cells = "B6:C6"
+                    $imp_cells = "B7:C7"
+                    when 3
+                    $t_cells   = "B3:D3"
+                    $un_cells  = "B4:D4"
+                    $ap_cells  = "B5:D5"
+                    $att_cells = "B6:D6"
+                    $imp_cells = "B7:D7"
+                    when 4
+                    $t_cells   = "B3:E3"
+                    $un_cells  = "B4:E4"
+                    $ap_cells  = "B5:E5"
+                    $att_cells = "B6:E6"
+                    $imp_cells = "B7:E7"
+                    when 5
+                    $t_cells   = "B3:F3"
+                    $un_cells  = "B4:F4"
+                    $ap_cells  = "B5:F5"
+                    $att_cells = "B6:F6"
+                    $imp_cells = "B7:F7"
+                    when 6
+                    $t_cells   = "B3:G3"
+                    $un_cells  = "B4:G4"
+                    $ap_cells  = "B5:G5"
+                    $att_cells = "B6:G6"
+                    $imp_cells = "B7:G7"
+                    when 7
+                    $t_cells   = "B3:H3"
+                    $un_cells  = "B4:H4"
+                    $ap_cells  = "B5:H5"
+                    $att_cells = "B6:H6"
+                    $imp_cells = "B7:H7"
+                    when 8
+                    $t_cells   = "B3:I3"
+                    $un_cells  = "B4:I4"
+                    $ap_cells  = "B5:I5"
+                    $att_cells = "B6:I6"
+                    $imp_cells = "B7:I7"
+                    when 9
+                    $t_cells   = "B3:J3"
+                    $un_cells  = "B4:J4"
+                    $ap_cells  = "B5:J5"
+                    $att_cells = "B6:J6"
+                    $imp_cells = "B7:J7"
+                    when 10
+                    $t_cells   = "B3:K3"
+                    $un_cells  = "B4:K4"
+                    $ap_cells  = "B5:K5"
+                    $att_cells = "B6:K6"
+                    $imp_cells = "B7:K7"
+                    when 11
+                    $t_cells   = "B3:L3"
+                    $un_cells  = "B4:L4"
+                    $ap_cells  = "B5:L5"
+                    $att_cells = "B6:L6"
+                    $imp_cells = "B7:L7"
+                    when 12
+                    $t_cells   = "B3:M3"
+                    $un_cells  = "B4:M4"
+                    $ap_cells  = "B5:M5"
+                    $att_cells = "B6:M6"
+                    $imp_cells = "B7:M7"
+                    when 13
+                    $t_cells   = "B3:N3"
+                    $un_cells  = "B4:N4"
+                    $ap_cells  = "B5:N5"
+                    $att_cells = "B6:N6"
+                    $imp_cells = "B7:N7"
+                    when 14
+                    $t_cells   = "B3:O3"
+                    $un_cells  = "B4:O4"
+                    $ap_cells  = "B5:O5"
+                    $att_cells = "B6:O6"
+                    $imp_cells = "B7:O7"
+                    when 15
+                    $t_cells   = "B3:P3"
+                    $un_cells  = "B4:P4"
+                    $ap_cells  = "B5:P5"
+                    $att_cells = "B6:P6"
+                    $imp_cells = "B7:P7"
+                    else
+                    puts "Out of bounds, double check number of permitted topics per graph."
+                end
+                
+                
+                
+                
+                sheet.add_chart(Axlsx::Bar3DChart, :start_at => "B10", :end_at => "O32",:title=>"   ", :show_legend => false, :barDir => :bar, :grouping => :percentStacked, ) do |chart|
+                    chart.add_series :data => sheet[$un_cells], :colors => ['365e92', '365e92', '365e92'], :labels => sheet[$t_cells], :color => "FFFFFF"
+                    chart.add_series :data => sheet[$ap_cells], :fg_color => "ffffff" , :colors => ['a5a5a5', 'a5a5a5', 'a5a5a5']
+                    chart.add_series :data => sheet[$att_cells], :fg_color => "ffffff" , :colors => ['ffffff', 'ffffff', 'ffffff']
+                    chart.add_series :data => sheet[$imp_cells], :fg_color => "ffffff" , :colors => ['be0712', 'be0712', 'be0712']
+                    chart.d_lbls.show_val = true
+                    chart.d_lbls.show_percent = true
+                    chart.valAxis.gridlines = true
+                    chart.catAxis.gridlines = false
+                    chart.valAxis.format_code = "Percentage"
+                    
+                    $m_seg_count += 1
+                    
+                end
+                
+            end
+            
+            
+        end
     end
 
 
-end
-
-
-end
-
-
-
-
-
-    #p.serialize('test_graph.xlsx')
-  
-end
+ end #end values.each |do|
     p.serialize($file_name)
     file = $file_name.to_s
     FileUtils.mv $file_name, "./public/uploads/#{$file_name}/graphs_#{$file_name}"
 
-end
+
+
 
 end
-
 
 #makeGraph("P1", "standard_3x", "Q378", "Role in Caring for Patient" , "When I think about my role in caring for my patients with Pseudobulbar affect (PBA), I feel:", "SEG", "Q151")
 
 
 
 
+end
+
 end#end parser
-#end
+
