@@ -54,12 +54,12 @@ cworksheets.each do |cworksheet|
 
 
 end
-#######################################
-######## make verbatim start ##########
-#######################################
+###############################################################################################################################################
+######## make verbatim start ##################################################################################################################
+###############################################################################################################################################
 #def makeVerb(topic_code, topic_type, survey_column, topic_title, topic_frame_of_reference, segment, product_mindset , ranking_num, ranking_total)
 
-def makeVerb( values )
+def makeVerb( values , segments, mindsets, mindset_types, mindset_titles )
 run_count = values.size
 $run_count_table = run_count
 
@@ -68,18 +68,15 @@ wb = p.workbook
 
 values.each do |verbatim_call|
     
+
+
 topic_code               = verbatim_call[0]
 topic_type               = verbatim_call[1]
 survey_column            = verbatim_call[2]
 topic_title              = verbatim_call[3]
 topic_frame_of_reference = verbatim_call[4]
-segment                  = verbatim_call[5]
-product_mindset          = verbatim_call[6]
-ranking_num              = verbatim_call[7]
-ranking_total            = verbatim_call[8]
-
-
-
+ranking_num              = verbatim_call[5]
+ranking_total            = verbatim_call[6]
 
 distance_counter = 0
 distance = 3
@@ -87,10 +84,59 @@ distance = 3
 distance_row = $data[0].to_s.split("          ")
 start_spot = distance_row.index(survey_column)
 $g_start_spot = distance_row.index(survey_column)
-segment_calc = distance_row.index(segment)
-product_start_spot = distance_row.index(product_mindset)
+#segment_calc = distance_row.index(segment)
+#product_start_spot = distance_row.index(product_mindset)
 $rank_num = ranking_num
 $rank_total = ranking_total
+
+
+
+#remove empty segments
+#There can be up to three segments
+$segments        = segments.reject { |v| v.to_s.empty? }
+$segment_count   = $segments.size
+$segment_s_array  = Array.new
+
+$segments.each do |seg|
+   $segment_s_array.push(distance_row.index(seg))
+end
+
+
+
+#remove empty mindsets
+#there can be up to five mindsets
+puts
+$mindsets        = mindsets.reject { |v| v.to_s.empty? }
+$mindset_count   = $mindsets.size
+$mindset_s_array = Array.new
+$mindsets.each do |mindset|
+    $mindset_s_array.push(distance_row.index(mindset))
+end
+
+
+puts "mindsets #{$mindsets}"
+
+
+puts "mindset_s_array #{$mindset_s_array}"
+
+$mindset_types = mindset_types.reject { | v| v.to_s == "Select Type" }
+$mindset_types_array = Array.new
+$mindset_types.each do |type|
+    $mindset_types_array.push(type)
+    
+end
+
+$mindset_titles = mindset_titles.reject { |v| v.to_s.empty? }
+$mindset_titles_array = Array.new
+$mindset_titles.each do |title|
+    $mindset_titles_array.push(title)
+    
+end
+
+
+segment_calc               = $segment_s_array[1]
+product_start_spot         = $mindset_s_array[1]
+
 
 #verbatim styles
 title = wb.styles.add_style(:font_name => "Calibri",
@@ -184,6 +230,8 @@ def r_calc( col_val, statement_rank, type  )
            type_val = 4
         when type = "valence"
            type_val = 5
+        when type = "s"
+           type_val = 5
     end
     #leave that 6 in there, it corresponds to how the mapping files are setup
     find_att   = (col_val.to_i * 6) - 6
@@ -220,6 +268,57 @@ def r_mindset_calc( statement_rank, statement_count, row_num)
     return map_mindset_value(mindsetc)
    
 end
+
+
+
+def many_mindset_calc(column, type, row_num)
+    
+    if column == nil || type == nil || row_num == nil
+        
+      return ""
+    
+    else
+        
+    data_row = $data[row_num].to_s.split("          ") # Parses individual rows from sheet
+    
+    
+    #column is the index in the row, type is standard_3x or standard_1x
+    if type == "standard_3x"
+        p1 = column.to_i + 6
+        p2 = column.to_i + 10
+        p3 = column.to_i + 14
+        
+        mindset = data_row[p1].to_i + data_row[p2].to_i + data_row[p3].to_i
+        mindset = mindset/3
+        return map_mindset_value(mindset)
+        
+    
+    elsif type == "standard_1x"
+        p1 = column.to_i + 6
+        mindset = data_row[p1]
+        return map_mindset_value(mindset)
+        
+    else
+    
+      return ""
+    
+    end
+    end
+end
+
+
+def segment_calc(segment, row_num)
+   if segment.to_s.empty?
+       return ""
+   else
+   data_row = $data[row_num].to_s.split("          ") # Parses individual rows from sheet
+   
+       return data_row[segment]
+       
+   end
+    
+end
+
 
 # this is 3x only 
 s11 = start_spot       # Emotion
@@ -275,14 +374,71 @@ case topic_type
         row_count = row_count + 1
         else
         data_row = $data[row_count].to_s.split("          ") # Parses individual rows from sheet
-                              # increments count
         
- 
- sheet.add_row [ data_row[s11] , data_row[s12], data_row[s13] , data_row[s14].to_i , valence_calc(data_row[s14]), mindset_calc(data_row[s14],data_row[s24],data_row[s34]), data_row[segment_calc] , mindset_calc(data_row[p14],data_row[p24],data_row[p34]) , data_row[0] ], :style=>body
+        #emotion, intensity, why, s, valence, mindset 1, segment 1, mindset 2, mindset 3, mindset 4, mindset 5, segment 2, segment 3, response
         
-        sheet.add_row [ data_row[s21] , data_row[s22] , data_row[s23] , data_row[s24].to_i , valence_calc(data_row[s24]), mindset_calc(data_row[s14],data_row[s24],data_row[s34]), data_row[segment_calc] , mindset_calc(data_row[p14],data_row[p24],data_row[p34]) , data_row[0] ], :style=>body
         
-        sheet.add_row [ data_row[s31] , data_row[s32] , data_row[s33] , data_row[s34].to_i , valence_calc(data_row[s34]), mindset_calc(data_row[s14],data_row[s24],data_row[s34]), data_row[segment_calc] , mindset_calc(data_row[p14],data_row[p24],data_row[p34]) , data_row[0] ], :style=>body
+        
+        #generates rows
+        row_1_raw = [ data_row[s11] , #emotion
+                      data_row[s12] ,  #Intensity
+                      data_row[s13] ,  #Why
+                      data_row[s14].to_i , #s
+                      valence_calc(data_row[s14]) ,  #valence
+                      many_mindset_calc($mindset_s_array[0],$mindset_types_array[0], row_count ), #mindset 1
+                      segment_calc($segment_s_array[0], row_count),                                              #segment 1
+                      many_mindset_calc($mindset_s_array[1],$mindset_types_array[1], row_count ), #mindset 2
+                      many_mindset_calc($mindset_s_array[2],$mindset_types_array[2], row_count ), #mindset 3
+                      many_mindset_calc($mindset_s_array[3],$mindset_types_array[3], row_count ), #mindset 4
+                      many_mindset_calc($mindset_s_array[4],$mindset_types_array[4], row_count ), #mindset 5
+                      segment_calc($segment_s_array[1], row_count),   #segment 2
+                      segment_calc($segment_s_array[2], row_count),   #segment 3
+                      data_row[0]] # response id
+        
+        row_1 = row_1_raw.reject { |r| r.to_s.empty? }
+        
+        
+        row_2_raw = [ data_row[s21] ,
+                      data_row[s22] ,
+                      data_row[s23] ,
+                      data_row[s24].to_i ,
+                      valence_calc(data_row[s24]),
+                      many_mindset_calc($mindset_s_array[0],$mindset_types_array[0], row_count ), #mindset 1
+                      segment_calc($segment_s_array[0], row_count),                                              #segment 1
+                      many_mindset_calc($mindset_s_array[1],$mindset_types_array[1], row_count ), #mindset 2
+                      many_mindset_calc($mindset_s_array[2],$mindset_types_array[2], row_count ), #mindset 3
+                      many_mindset_calc($mindset_s_array[3],$mindset_types_array[3], row_count ), #mindset 4
+                      many_mindset_calc($mindset_s_array[4],$mindset_types_array[4], row_count ), #mindset 5
+                      segment_calc($segment_s_array[1], row_count),   #segment 2
+                      segment_calc($segment_s_array[2], row_count),   #segment 3
+                      data_row[0]] # response id
+                      
+        row_2 = row_2_raw.reject { |r| r.to_s.empty? }
+        
+        row_3_raw =[ data_row[s31] ,
+                     data_row[s32] ,
+                     data_row[s33] ,
+                     data_row[s34].to_i ,
+                     valence_calc(data_row[s34]),
+                     many_mindset_calc($mindset_s_array[0],$mindset_types_array[0], row_count ), #mindset 1
+                     segment_calc($segment_s_array[0], row_count),                                              #segment 1
+                     many_mindset_calc($mindset_s_array[1],$mindset_types_array[1], row_count ), #mindset 2
+                     many_mindset_calc($mindset_s_array[2],$mindset_types_array[2], row_count ), #mindset 3
+                     many_mindset_calc($mindset_s_array[3],$mindset_types_array[3], row_count ), #mindset 4
+                     many_mindset_calc($mindset_s_array[4],$mindset_types_array[4], row_count ), #mindset 5
+                     segment_calc($segment_s_array[1], row_count),   #segment 2
+                     segment_calc($segment_s_array[2], row_count),   #segment 3
+                     data_row[0]] # response id
+        
+         row_3 = row_3_raw.reject { |r| r.to_s.empty? }
+        
+        
+    
+        sheet.add_row row_1, :style=>body
+        
+        sheet.add_row row_2, :style=>body
+        
+        sheet.add_row row_3, :style=>body
         row_count = row_count + 1
        end
         
@@ -299,7 +455,31 @@ case topic_type
    
    sheet.rows.sort_by!{ |row| [row.cells[3].value.to_i, -row.cells[1].value.to_i] }
 
-   sheet.add_row ["Emotion", "Intensity", "Why", "S" , "Valence", "Mindset", "Segment", "Product Mindset" ,"Response ID"], :style=>header
+
+#$mindset_s_array
+#$segment_s_array
+#$mindset_types_array
+puts "Mindset Titles array #{$mindset_titles_array}"
+
+title_row_raw = [ "Emotion", #emotion
+                  "Intensity" ,  #Intensity
+                  "Why" ,  #Why
+                  "S" , #s
+                  "Valence" ,  #valence
+                  if many_mindset_calc($mindset_s_array[0],$mindset_types_array[0], row_count ) == "" then "" else $mindset_titles_array[0] end, #mindset 1
+                  "Segment",                                              #segment 1
+                  if many_mindset_calc($mindset_s_array[1],$mindset_types_array[1], row_count ) == "" then "" else $mindset_titles_array[1] end, #mindset 2
+                  if many_mindset_calc($mindset_s_array[2],$mindset_types_array[2], row_count ) == "" then "" else $mindset_titles_array[2] end, #mindset 3
+                  if many_mindset_calc($mindset_s_array[3],$mindset_types_array[3], row_count ) == "" then "" else $mindset_titles_array[3] end, #mindset 4
+                  if many_mindset_calc($mindset_s_array[4],$mindset_types_array[4], row_count ) == "" then "" else $mindset_titles_array[4] end, #mindset 5
+                  if segment_calc($segment_s_array[1], row_count) == "" then "" else "Segment 2" end,   #segment 2
+                  if segment_calc($segment_s_array[2], row_count) == "" then "" else "Segment 3" end,   #segment 3
+                  "Response ID"] # response id
+                  
+              title_row = title_row_raw.reject { |t| t.to_s.empty? }
+
+
+   sheet.add_row title_row, :style=>header
    sheet.rows.insert 0,  sheet.rows.delete(sheet.rows[sheet.rows.length-1])
 
    sheet.add_row [topic_frame_of_reference], :style=>title
@@ -328,9 +508,25 @@ case topic_type
            data_row = $data[row_count].to_s.split("          ") # Parses individual rows from sheet
            # increments count
            
+           row_1_raw = [ data_row[ss11] , #emotion
+                         data_row[ss12] ,  #Intensity
+                         data_row[ss13] ,  #Why
+                         data_row[ss14].to_i , #s
+                         valence_calc(data_row[ss14]) ,  #valence
+                         many_mindset_calc($mindset_s_array[0],$mindset_types_array[0], row_count ), #mindset 1
+                         segment_calc($segment_s_array[0], row_count),                                              #segment 1
+                         many_mindset_calc($mindset_s_array[1],$mindset_types_array[1], row_count ), #mindset 2
+                         many_mindset_calc($mindset_s_array[2],$mindset_types_array[2], row_count ), #mindset 3
+                         many_mindset_calc($mindset_s_array[3],$mindset_types_array[3], row_count ), #mindset 4
+                         many_mindset_calc($mindset_s_array[4],$mindset_types_array[4], row_count ), #mindset 5
+                         segment_calc($segment_s_array[1], row_count),   #segment 2
+                         segment_calc($segment_s_array[2], row_count),   #segment 3
+                         data_row[0]] # response id
            
-           
-           sheet.add_row [ data_row[ss11] , data_row[ss12] , data_row[ss13] , data_row[ss14].to_i , valence_calc(data_row[ss14]), data_row[s14], data_row[segment_calc] , mindset_calc(data_row[p14],data_row[p24],data_row[p34]) , data_row[0] ], :style=>body
+           row_1 = row_1_raw.reject { |r| r.to_s.empty? }
+
+
+           sheet.add_row row_1, :style=>body
            
            
            
@@ -348,7 +544,27 @@ case topic_type
    
    sheet.rows.sort_by!{ |row| [row.cells[3].value.to_i, -row.cells[1].value.to_i] }
    
-   sheet.add_row ["Emotion", "Intensity", "Why", "S" , "Valence", "Mindset", "Segment", "Product Mindset" ,"Response ID"], :style=>header
+   #sheet.add_row ["Emotion", "Intensity", "Why", "S" , "Valence", "Mindset", "Segment", "Product Mindset" ,"Response ID"], :style=>header
+   
+   title_row_raw = [ "Emotion", #emotion
+                     "Intensity" ,  #Intensity
+                     "Why" ,  #Why
+                     "S" , #s
+                     "Valence" ,  #valence
+                     if many_mindset_calc($mindset_s_array[0],$mindset_types_array[0], row_count ) == "" then "" else $mindset_titles_array[0] end, #mindset 1
+                     "Segment",                                              #segment 1
+                     if many_mindset_calc($mindset_s_array[1],$mindset_types_array[1], row_count ) == "" then "" else $mindset_titles_array[1] end, #mindset 2
+                     if many_mindset_calc($mindset_s_array[2],$mindset_types_array[2], row_count ) == "" then "" else $mindset_titles_array[2] end, #mindset 3
+                     if many_mindset_calc($mindset_s_array[3],$mindset_types_array[3], row_count ) == "" then "" else $mindset_titles_array[3] end, #mindset 4
+                     if many_mindset_calc($mindset_s_array[4],$mindset_types_array[4], row_count ) == "" then "" else $mindset_titles_array[4] end, #mindset 5
+                     if segment_calc($segment_s_array[1], row_count) == "" then "" else "Segment 2" end,   #segment 2
+                     if segment_calc($segment_s_array[2], row_count) == "" then "" else "Segment 3" end,   #segment 3
+                     "Response ID"] # response id
+   
+   title_row = title_row_raw.reject { |t| t.to_s.empty? }
+   
+   
+   sheet.add_row title_row, :style=>header
    sheet.rows.insert 0,  sheet.rows.delete(sheet.rows[sheet.rows.length-1])
    
    sheet.add_row [topic_frame_of_reference], :style=>title
@@ -366,8 +582,8 @@ case topic_type
    when "ranking"
    original_start = s11
    
-   while s11 <= original_start + $rank_total.to_i
-
+   while s11 < original_start + $rank_total.to_i
+   
    if s11 == original_start
        
        $data.each do |row|
@@ -389,7 +605,34 @@ case topic_type
                
                
                
-               sheet.add_row [data_row[r_calc(data_row[s11], $rank_total , "emotion" )] , data_row[r_calc(data_row[s11], $rank_total , "intensity" )], data_row[r_calc(data_row[s11], $rank_total , "why" ) ].to_i, "", valence_calc(data_row[r_calc(data_row[s11], $rank_total , "valence" )]), r_mindset_calc( $rank_total, $rank_num, row_count), data_row[segment_calc] , mindset_calc(data_row[p14],data_row[p24],data_row[p34]) , data_row[0] ], :style=>body
+     
+     
+  
+                
+                            
+
+                            
+                            
+               row_1_raw = [data_row[r_calc(data_row[s11], $rank_total , "emotion" )] ,
+                            data_row[r_calc(data_row[s11], $rank_total , "intensity" )].to_i,
+                            data_row[r_calc(data_row[s11], $rank_total , "why" ) ],
+                            data_row[r_calc(data_row[s11], $rank_total , "s" ) ].to_i,
+                            valence_calc(data_row[r_calc(data_row[s11], $rank_total , "valence" )]),
+                            r_mindset_calc( $rank_total, $rank_num, row_count),
+                            segment_calc($segment_s_array[0], row_count),                               #segment 1
+                            many_mindset_calc($mindset_s_array[1],$mindset_types_array[1], row_count ), #mindset 2
+                            many_mindset_calc($mindset_s_array[2],$mindset_types_array[2], row_count ), #mindset 3
+                            many_mindset_calc($mindset_s_array[3],$mindset_types_array[3], row_count ), #mindset 4
+                            many_mindset_calc($mindset_s_array[4],$mindset_types_array[4], row_count ), #mindset 5
+                            segment_calc($segment_s_array[1], row_count),   #segment 2
+                            segment_calc($segment_s_array[2], row_count),   #segment 3
+                            data_row[0]]
+                            
+               
+               row_1 = row_1_raw.reject { |r| r.to_s.empty? }
+
+               
+               sheet.add_row row_1, :style=>body
                
                
                row_count = row_count + 1
@@ -404,7 +647,25 @@ case topic_type
        
        sheet.rows.sort_by!{ |row| [row.cells[3].value.to_i, -row.cells[1].value.to_i] }
        
-       sheet.add_row ["Emotion", "Intensity", "Why", "S" , "Valence", "Mindset", "Segment", "Product Mindset" ,"Response ID"], :style=>header
+       title_row_raw = [ "Emotion", #emotion
+       "Intensity" ,  #Intensity
+       "Why" ,  #Why
+       "S" , #s
+       "Valence" ,  #valence
+       if many_mindset_calc($mindset_s_array[0],$mindset_types_array[0], row_count ) == "" then "" else $mindset_titles_array[0] end, #mindset 1
+       "Segment",                                              #segment 1
+       if many_mindset_calc($mindset_s_array[1],$mindset_types_array[1], row_count ) == "" then "" else $mindset_titles_array[1] end, #mindset 2
+       if many_mindset_calc($mindset_s_array[2],$mindset_types_array[2], row_count ) == "" then "" else $mindset_titles_array[2] end, #mindset 3
+       if many_mindset_calc($mindset_s_array[3],$mindset_types_array[3], row_count ) == "" then "" else $mindset_titles_array[3] end, #mindset 4
+       if many_mindset_calc($mindset_s_array[4],$mindset_types_array[4], row_count ) == "" then "" else $mindset_titles_array[4] end, #mindset 5
+       if segment_calc($segment_s_array[1], row_count) == "" then "" else "Segment 2" end,   #segment 2
+       if segment_calc($segment_s_array[2], row_count) == "" then "" else "Segment 3" end,   #segment 3
+       "Response ID"] # response id
+       
+       title_row = title_row_raw.reject { |t| t.to_s.empty? }
+       
+       
+       sheet.add_row title_row, :style=>header
        sheet.rows.insert 0,  sheet.rows.delete(sheet.rows[sheet.rows.length-1])
        
        sheet.add_row [topic_frame_of_reference], :style=>title
@@ -427,12 +688,12 @@ case topic_type
    worksheet_name = worksheet_name.gsub("/", "_")
    wb.add_worksheet(:name=> "#{worksheet_name}") do |sheet|
        
-       sheet.add_row [topic_title], :style=>title
+       #sheet.add_row [topic_title], :style=>title
        
-       sheet.add_row [topic_frame_of_reference], :style=>title
-       sheet.merge_cells "A1:I1"
-       sheet.merge_cells "A2:I2"
-       sheet.add_row ["Emotion", "Intensity", "Why", "S" , "Valence", "Mindset", "Segment", "Product Mindset" ,"Response ID"]
+       # sheet.add_row [topic_frame_of_reference], :style=>title
+       #sheet.merge_cells "A1:I1"
+       #sheet.merge_cells "A2:I2"
+       #sheet.add_row ["Emotion", "Intensity", "Why", "S" , "Valence", "Mindset", "Segment", "Product Mindset" ,"Response ID"]
        
        
        $data.each do |row|
@@ -454,7 +715,26 @@ case topic_type
                
                
                
-               sheet.add_row [data_row[r_calc(data_row[s11], $rank_total , "emotion" )] , data_row[r_calc(data_row[s11], $rank_total , "intensity" )], data_row[r_calc(data_row[s11], $rank_total , "why" ) ].to_i, "", valence_calc(data_row[r_calc(data_row[s11], $rank_total , "valence" )]), r_mindset_calc( $rank_total, $rank_num, row_count), data_row[segment_calc] , mindset_calc(data_row[p14],data_row[p24],data_row[p34]) , data_row[0] ], :style=>body
+               row_1_raw = [data_row[r_calc(data_row[s11], $rank_total , "emotion" )] ,
+                            data_row[r_calc(data_row[s11], $rank_total , "intensity" )].to_i,
+                            data_row[r_calc(data_row[s11], $rank_total , "why" ) ],
+                            data_row[r_calc(data_row[s11], $rank_total , "s" ) ].to_i,
+                            valence_calc(data_row[r_calc(data_row[s11], $rank_total , "valence" )]),
+                            r_mindset_calc( $rank_total, $rank_num, row_count),
+                            segment_calc($segment_s_array[0], row_count),                               #segment 1
+                            many_mindset_calc($mindset_s_array[1],$mindset_types_array[1], row_count ), #mindset 2
+                            many_mindset_calc($mindset_s_array[2],$mindset_types_array[2], row_count ), #mindset 3
+                            many_mindset_calc($mindset_s_array[3],$mindset_types_array[3], row_count ), #mindset 4
+                            many_mindset_calc($mindset_s_array[4],$mindset_types_array[4], row_count ), #mindset 5
+                            segment_calc($segment_s_array[1], row_count),   #segment 2
+                            segment_calc($segment_s_array[2], row_count),   #segment 3
+                            data_row[0]]
+               
+               
+               row_1 = row_1_raw.reject { |r| r.to_s.empty? }
+               
+               
+               sheet.add_row row_1, :style=>body
                
                
                row_count = row_count + 1
@@ -469,7 +749,25 @@ case topic_type
        
        sheet.rows.sort_by!{ |row| [row.cells[3].value.to_i, -row.cells[1].value.to_i] }
        
-       sheet.add_row ["Emotion", "Intensity", "Why", "S" , "Valence", "Mindset", "Segment", "Product Mindset" ,"Response ID"], :style=>header
+       title_row_raw = [ "Emotion", #emotion
+       "Intensity" ,  #Intensity
+       "Why" ,  #Why
+       "S" , #s
+       "Valence" ,  #valence
+       if many_mindset_calc($mindset_s_array[0],$mindset_types_array[0], row_count ) == "" then "" else $mindset_titles_array[0] end, #mindset 1
+       "Segment",                                              #segment 1
+       if many_mindset_calc($mindset_s_array[1],$mindset_types_array[1], row_count ) == "" then "" else $mindset_titles_array[1] end, #mindset 2
+       if many_mindset_calc($mindset_s_array[2],$mindset_types_array[2], row_count ) == "" then "" else $mindset_titles_array[2] end, #mindset 3
+       if many_mindset_calc($mindset_s_array[3],$mindset_types_array[3], row_count ) == "" then "" else $mindset_titles_array[3] end, #mindset 4
+       if many_mindset_calc($mindset_s_array[4],$mindset_types_array[4], row_count ) == "" then "" else $mindset_titles_array[4] end, #mindset 5
+       if segment_calc($segment_s_array[1], row_count) == "" then "" else "Segment 2" end,   #segment 2
+       if segment_calc($segment_s_array[2], row_count) == "" then "" else "Segment 3" end,   #segment 3
+       "Response ID"] # response id
+       
+       title_row = title_row_raw.reject { |t| t.to_s.empty? }
+       
+       
+       sheet.add_row title_row, :style=>header
        sheet.rows.insert 0,  sheet.rows.delete(sheet.rows[sheet.rows.length-1])
        
        sheet.add_row [topic_frame_of_reference], :style=>title
@@ -526,12 +824,12 @@ end
 
 
 
-#######################################
-########## make graph start ###########
-#######################################
+###############################################################################################################################################
+########## make graph start ###################################################################################################################
+###############################################################################################################################################
 
 #def makeGraph(g_topic_code, g_topic_type, graph_topics, g_topic_title, g_ranking_num, g_ranking_total )
-def makeGraph(values)
+def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
     
     $segment_a = Array.new
     ######### Array positions of values ########
@@ -554,11 +852,77 @@ def makeGraph(values)
     $m_gdata = Hash.new
     $om_gdata = Hash.new
     $g_data_raw = Array.new
+    
+    
+    
+    
+    
+    
+    
+    ######################### Parse out multiple segments/mindsets and their titles ##########################
+    
+    
+    #remove empty segments
+    #There can be up to three segments
+    $segments        = segments.reject { |v| v.to_s.empty? }
+    $segment_count   = $segments.size
+    $segment_s_array  = Array.new
+    
+    $segments.each do |seg|
+        $segment_s_array.push(distance_row.index(seg))
+    end
+    
+    
+    
+    #remove empty mindsets
+    #there can be up to five mindsets
+    puts
+    $mindsets        = mindsets.reject { |v| v.to_s.empty? }
+    $mindset_count   = $mindsets.size
+    $mindset_s_array = Array.new
+    $mindsets.each do |mindset|
+        $mindset_s_array.push(distance_row.index(mindset))
+    end
+    
+    
+    puts "mindsets #{$mindsets}"
+    
+    
+    puts "mindset_s_array #{$mindset_s_array}"
+    
+    $mindset_types = mindset_types.reject { | v| v.to_s == "Select Type" }
+    $mindset_types_array = Array.new
+    $mindset_types.each do |type|
+        $mindset_types_array.push(type)
+        
+    end
+    
+    $mindset_titles = mindset_titles.reject { |v| v.to_s.empty? }
+    $mindset_titles_array = Array.new
+    $mindset_titles.each do |title|
+        $mindset_titles_array.push(title)
+        
+    end
+    
+    
+    ########################################################################################################
+    
+    
+    
+    
+    
     #################################   Percent Positive Calcs   ###############################
     #Parse verbatim by sheet
+    
+    
+    
+    
+    
+    
     cworksheets.each do |cworksheet|
         
         
+        #emotion, intensity, why, s, valence, mindset 1, segment 1, mindset 2, mindset 3, mindset 4, mindset 5, segment 2, segment 3, response
         
         
         
@@ -600,6 +964,8 @@ def makeGraph(values)
                 row_count = row_count + 1
                 
                 else
+                
+                #emotion, intensity, why, s, valence, mindset 1, segment 1, mindset 2, mindset 3, mindset 4, mindset 5, segment 2, segment 3, response
                 data_row = $g_data_raw[row_count].to_s.split("          ") # Parses individual rows from sheet
                 
                 if data_row[4] == "Very Pleasant"

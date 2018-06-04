@@ -48,8 +48,6 @@ $(document).ready(function () {
         cols += '<td><input type="text" class="form-control" name="todo[v_survey_column' + counter + ']" id="todo_v_survey_column'+ counter + '"/></td>';
         cols += '<td><input maxlength="25" type="text" class="form-control" name="todo[v_topic_title' + counter + ']" id="todo_v_topic_title' + counter + '" /></td>';
         cols += '<td><input type="text" class="form-control" name="todo[v_topic_frame' + counter + ']" id="todo_v_topic_frame' + counter + '" /></td>';
-        cols += '<td><input type="text" class="form-control" name="todo[v_segment' + counter + ']" id="todo_v_segment' + counter + '"/></td>';
-        cols += '<td><input type="text" class="form-control" name="todo[v_product_mindset' + counter + ']" id="todo_v_product_mindset' + counter + '" /></td>';
         cols += '<td><input type="text" class="form-control" name="todo[v_ranking_num' + counter + ']" id="todo_v_ranking_num' +counter + '"/></td>';
         cols += '<td><input type="text" class="form-control" name="todo[v_ranking_total' + counter + ']" id="todo_v_ranking_total' +counter + '"/></td>';
 

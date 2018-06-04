@@ -38,9 +38,121 @@
   </div>
   
  
+    <div class="container">
     
-  
-  
+<h2>Mindset Data</h2>
+<p>*Two mindsets are required, leave the others blank to exclude</p>
+<div class="field form-group">
+    <table id="myTableMind" class="table order-list00">
+    <thead>
+        <tr>
+            <td>Mindset 1</td>
+            <td>Mindset 2</td> 
+            <td>Mindset 3</td>
+            <td>Mindset 4</td>
+            <td>Mindset 5</td>
+        </tr>
+    </thead>
+    <tbody id="mindset_body">
+    
+    <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
+                <%= f.text_field :mindset_1_title,  placeholder: "Title", class: 'form-control' %>
+                <br>
+                <%= f.text_field :mindset_1,  placeholder: "Column", class: 'form-control' %>
+                <br>
+                <%= f.select :mindset_1_type, ['Select Type','standard_3x', 'standard_1x'], class: 'form-control'%>
+                 
+                 </span>
+            
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
+                <%= f.text_field :mindset_2_title,  placeholder: "Title", class: 'form-control' %>
+                <br>
+                <%= f.text_field :mindset_2, placeholder: "Column", class: 'form-control' %>
+                 <br>
+                <%= f.select :mindset_2_type, ['Select Type','standard_3x', 'standard_1x'], class: 'form-control'%>
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
+                <%= f.text_field :mindset_3_title,  placeholder: "Title", class: 'form-control' %>
+                <br>
+                <%= f.text_field :mindset_3, placeholder: "Column", class: 'form-control' %>
+                 <br>
+                <%= f.select :mindset_3_type, ['Select Type','standard_3x', 'standard_1x'], class: 'form-control'%>
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
+                <%= f.text_field :mindset_4_title,  placeholder: "Title", class: 'form-control' %>
+                <br>
+                <%= f.text_field :mindset_4, placeholder: "Column", class: 'form-control' %>
+                 <br>
+                <%= f.select :mindset_4_type, ['Select Type','standard_3x', 'standard_1x'], class: 'form-control'%>
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
+                <%= f.text_field :mindset_5_title,  placeholder: "Title", class: 'form-control' %>
+                <br>
+                <%= f.text_field :mindset_5, placeholder: "Column", class: 'form-control' %>
+                 <br>
+                <%= f.select :mindset_5_type, ['Select Type','standard_3x', 'standard_1x'], class: 'form-control'%>
+                 </span>
+            </td>
+    
+    </tr>
+    </tbody>
+
+</table>
+ </div> 
+ </div>
+      <div class="container">
+      
+<h2>Segment Data</h2>
+<div class="field form-group">
+    <table id="myTableSeg" class="table order-list0">
+    <thead>
+        <tr>
+            <td>Segment 1</td>
+            <td>Segment 2</td> 
+            <td>Segment 3</td>
+        </tr>
+    </thead>
+    <tbody id="segment_body">
+    
+    <tr>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
+       
+                <%= f.text_field :segment_1, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
+       
+                <%= f.text_field :segment_2, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+            <td class="col-sm-1">
+                <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
+       
+                <%= f.text_field :segment_3, class: 'form-control' %>
+                 
+                 </span>
+            </td>
+        
+    
+    </tr>
+    </tbody>
+
+</table>  
+  </div>
+  </div>
   
 <!-- Repeatable Verbatim Data -->
 <div class="container">
@@ -54,8 +166,6 @@
             <td>Survey Column</td> 
             <td>Topic title</td>
             <td>Topic Frame of Reference</td>
-            <td>Segment</td>
-            <td>Product Mindset</td>
             <td>Number of Ranking Evaluations</td>
             <td>Number of Ranking Statements Shown</td>
         </tr>
@@ -63,14 +173,14 @@
     <tbody id="verbatim_body">
         
         <tr>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                 <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
        
                 <%= f.text_field :v_topic_code, class: 'form-control' %>
                  
                  </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
@@ -79,46 +189,35 @@
             </span>
             
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
             
                  <span class="has-tooltip" data-toggle="tooltip" title="Enter the column ID in row 1 of the FIRST emotion column for topic">
        
                 <%= f.text_field :v_survey_column, class: 'form-control' %>
                 </span>
             </td>
-             <td class="col-sm-1">
+             <td class="col-sm-2">
              
                 <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in verbatim.">
        
                 <%= f.text_field :v_topic_title,  class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Paste in full context language">
        
                 <%= f.text_field :v_topic_frame, class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
-                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
-       
-                <%= f.text_field :v_segment, class: 'form-control' %>
-                </span>
-            </td>
-             <td class="col-sm-1">
-                           <span class="has-tooltip" data-toggle="tooltip" title="Enter survey column for client product or baseline topic">
-       
-                <%= f.text_field :v_product_mindset, class: 'form-control' %>
-                </span>
-            </td>
-            <td class="col-sm-1">
+            
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated, enter 0 if none">
        
                 <%= f.text_field :v_ranking_num, class: 'form-control' %>
                 </span>
             </td>
                       
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated, enter 0 if none">
        
                 <%= f.text_field :v_ranking_total, class: 'form-control' %>
@@ -139,14 +238,14 @@
         <% unless @todo.v_topic_code0.nil? %>
         
         <tr>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                 <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
        
                 <%= f.text_field :v_topic_code0, class: 'form-control' %>
                  
                  </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
@@ -155,46 +254,35 @@
             </span>
             
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
             
                  <span class="has-tooltip" data-toggle="tooltip" title="Enter the column ID in row 1 of the FIRST emotion column for topic">
        
                 <%= f.text_field :v_survey_column0, class: 'form-control' %>
                 </span>
             </td>
-             <td class="col-sm-1">
+             <td class="col-sm-2">
              
                 <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in verbatim.">
        
                 <%= f.text_field :v_topic_title0,  class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Paste in full context language">
        
                 <%= f.text_field :v_topic_frame0, class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
-                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
-       
-                <%= f.text_field :v_segment0, class: 'form-control' %>
-                </span>
-            </td>
-             <td class="col-sm-1">
-                           <span class="has-tooltip" data-toggle="tooltip" title="Enter survey column for client product or baseline topic">
-       
-                <%= f.text_field :v_product_mindset0, class: 'form-control' %>
-                </span>
-            </td>
-            <td class="col-sm-1">
+            
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
        
                 <%= f.text_field :v_ranking_num0, class: 'form-control' %>
                 </span>
             </td>
                       
-            <td class="col-sm-1">
+            <td class="col-sm-2">
             <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
                     <%= f.text_field :v_ranking_total0, class: 'form-control' %>
             </span>
@@ -210,14 +298,14 @@
         <% unless @todo.v_topic_code1.nil? %>
         
         <tr>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                 <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
        
                 <%= f.text_field :v_topic_code1, class: 'form-control' %>
                  
                  </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
@@ -226,46 +314,35 @@
             </span>
             
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
             
                  <span class="has-tooltip" data-toggle="tooltip" title="Enter the column ID in row 1 of the FIRST emotion column for topic">
        
                 <%= f.text_field :v_survey_column1, class: 'form-control' %>
                 </span>
             </td>
-             <td class="col-sm-1">
+             <td class="col-sm-2">
              
                 <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in verbatim.">
        
                 <%= f.text_field :v_topic_title1,  class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Paste in full context language">
        
                 <%= f.text_field :v_topic_frame1, class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
-                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
-       
-                <%= f.text_field :v_segment1, class: 'form-control' %>
-                </span>
-            </td>
-             <td class="col-sm-1">
-                           <span class="has-tooltip" data-toggle="tooltip" title="Enter survey column for client product or baseline topic">
-       
-                <%= f.text_field :v_product_mindset1, class: 'form-control' %>
-                </span>
-            </td>
-            <td class="col-sm-1">
+            
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
        
                 <%= f.text_field :v_ranking_num1, class: 'form-control' %>
                 </span>
             </td>
                       
-             <td class="col-sm-1">
+             <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
        
                 <%= f.text_field :v_ranking_total1, class: 'form-control' %>
@@ -274,13 +351,13 @@
             
             <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete" onclick="clearText()"></td>
            
-           <td>
+           <!--<td>
             
             <input type="button" class="btn btn-md btn-danger " value="Reset" onclick="clearText()" >
             
             
             
-            </td>
+            </td> -->
         
        
         </tr>
@@ -294,8 +371,6 @@
                 document.getElementById("todo_v_survey_column1").value = "";
                 document.getElementById("todo_v_topic_title1").value = "";
                 document.getElementById("todo_v_topic_frame1").value = "";
-                document.getElementById("todo_v_segment1").value = "";
-                document.getElementById("todo_v_product_mindset1").value = "";
                 document.getElementById("todo_v_ranking_num1").value = "";
                 document.getElementById("todo_v_ranking_total1").value = "";
                 }
@@ -304,14 +379,14 @@
         <% unless @todo.v_topic_code2.nil? %>
         
         <tr>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                 <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
        
                 <%= f.text_field :v_topic_code2, class: 'form-control' %>
                  
                  </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
@@ -320,53 +395,42 @@
             </span>
             
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
             
                  <span class="has-tooltip" data-toggle="tooltip" title="Enter the column ID in row 1 of the FIRST emotion column for topic">
        
                 <%= f.text_field :v_survey_column2, class: 'form-control' %>
                 </span>
             </td>
-             <td class="col-sm-1">
+             <td class="col-sm-2">
              
                 <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in verbatim.">
        
                 <%= f.text_field :v_topic_title2,  class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Paste in full context language">
        
                 <%= f.text_field :v_topic_frame2, class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
-                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
-       
-                <%= f.text_field :v_segment2, class: 'form-control' %>
-                </span>
-            </td>
-             <td class="col-sm-1">
-                           <span class="has-tooltip" data-toggle="tooltip" title="Enter survey column for client product or baseline topic">
-       
-                <%= f.text_field :v_product_mindset2, class: 'form-control' %>
-                </span>
-            </td>
-            <td class="col-sm-1">
+            
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
        
                 <%= f.text_field :v_ranking_num2, class: 'form-control' %>
                 </span>
             </td>
                       
-             <td class="col-sm-1">
+             <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
        
                 <%= f.text_field :v_ranking_total2, class: 'form-control' %>
                 </span>
             </td>
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
+            <td class="col-sm-2"><a class="deleteRow"></a>
 
             </td>
         
@@ -378,14 +442,14 @@
         <% unless @todo.v_topic_code3.nil? %>
         
         <tr>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                 <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
        
                 <%= f.text_field :v_topic_code3, class: 'form-control' %>
                  
                  </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
@@ -394,53 +458,42 @@
             </span>
             
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
             
                  <span class="has-tooltip" data-toggle="tooltip" title="Enter the column ID in row 1 of the FIRST emotion column for topic">
        
                 <%= f.text_field :v_survey_column3, class: 'form-control' %>
                 </span>
             </td>
-             <td class="col-sm-1">
+             <td class="col-sm-2">
              
                 <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in verbatim.">
        
                 <%= f.text_field :v_topic_title3,  class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Paste in full context language">
        
                 <%= f.text_field :v_topic_frame3, class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
-                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
-       
-                <%= f.text_field :v_segment3, class: 'form-control' %>
-                </span>
-            </td>
-             <td class="col-sm-1">
-                           <span class="has-tooltip" data-toggle="tooltip" title="Enter survey column for client product or baseline topic">
-       
-                <%= f.text_field :v_product_mindset3, class: 'form-control' %>
-                </span>
-            </td>
-            <td class="col-sm-1">
+            
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
        
                 <%= f.text_field :v_ranking_num3, class: 'form-control' %>
                 </span>
             </td>
                       
-             <td class="col-sm-1">
+             <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Total number of ranking statments">
        
                 <%= f.text_field :v_ranking_total3, class: 'form-control' %>
                 </span>
             </td>
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
+            <td class="col-sm-2"><a class="deleteRow"></a>
 
             </td>
         
@@ -452,14 +505,14 @@
         <% unless @todo.v_topic_code4.nil? %>
         
         <tr>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                 <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
        
                 <%= f.text_field :v_topic_code4, class: 'form-control' %>
                  
                  </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
@@ -468,53 +521,42 @@
             </span>
             
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
             
                  <span class="has-tooltip" data-toggle="tooltip" title="Enter the column ID in row 1 of the FIRST emotion column for topic">
        
                 <%= f.text_field :v_survey_column4, class: 'form-control' %>
                 </span>
             </td>
-             <td class="col-sm-1">
+             <td class="col-sm-2">
              
                 <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in verbatim.">
        
                 <%= f.text_field :v_topic_title4,  class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Paste in full context language">
        
                 <%= f.text_field :v_topic_frame4, class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
-                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
-       
-                <%= f.text_field :v_segment4, class: 'form-control' %>
-                </span>
-            </td>
-             <td class="col-sm-1">
-                           <span class="has-tooltip" data-toggle="tooltip" title="Enter survey column for client product or baseline topic">
-       
-                <%= f.text_field :v_product_mindset4, class: 'form-control' %>
-                </span>
-            </td>
-            <td class="col-sm-1">
+            
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
        
                 <%= f.text_field :v_ranking_num4, class: 'form-control' %>
                 </span>
             </td>
                       
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Total number of ranking statments">
        
                 <%= f.text_field :v_ranking_total4, class: 'form-control' %>
                 </span>
             </td>
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
+            <td class="col-sm-2"><a class="deleteRow"></a>
 
             </td>
         
@@ -526,14 +568,14 @@
         <% unless @todo.v_topic_code5.nil? %>
         
         <tr>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                 <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
        
                 <%= f.text_field :v_topic_code5, class: 'form-control' %>
                  
                  </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
@@ -542,53 +584,42 @@
             </span>
             
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
             
                  <span class="has-tooltip" data-toggle="tooltip" title="Enter the column ID in row 1 of the FIRST emotion column for topic">
        
                 <%= f.text_field :v_survey_column5, class: 'form-control' %>
                 </span>
             </td>
-             <td class="col-sm-1">
+             <td class="col-sm-2">
              
                 <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in verbatim.">
        
                 <%= f.text_field :v_topic_title5,  class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Paste in full context language">
        
                 <%= f.text_field :v_topic_frame5, class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
-                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
-       
-                <%= f.text_field :v_segment5, class: 'form-control' %>
-                </span>
-            </td>
-             <td class="col-sm-1">
-                           <span class="has-tooltip" data-toggle="tooltip" title="Enter survey column for client product or baseline topic">
-       
-                <%= f.text_field :v_product_mindset5, class: 'form-control' %>
-                </span>
-            </td>
-            <td class="col-sm-1">
+            
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
        
                 <%= f.text_field :v_ranking_num5, class: 'form-control' %>
                 </span>
             </td>
                       
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Total number of ranking statments">
        
                 <%= f.text_field :v_ranking_total5, class: 'form-control' %>
                 </span>
             </td>
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
+            <td class="col-sm-2"><a class="deleteRow"></a>
 
             </td>
         
@@ -600,14 +631,14 @@
         <% unless @todo.v_topic_code6.nil? %>
         
         <tr>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                 <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
        
                 <%= f.text_field :v_topic_code6, class: 'form-control' %>
                  
                  </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
@@ -616,53 +647,42 @@
             </span>
             
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
             
                  <span class="has-tooltip" data-toggle="tooltip" title="Enter the column ID in row 1 of the FIRST emotion column for topic">
        
                 <%= f.text_field :v_survey_column6, class: 'form-control' %>
                 </span>
             </td>
-             <td class="col-sm-1">
+             <td class="col-sm-2">
              
                 <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in verbatim.">
        
                 <%= f.text_field :v_topic_title6,  class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Paste in full context language">
        
                 <%= f.text_field :v_topic_frame6, class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
-                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
-       
-                <%= f.text_field :v_segment6, class: 'form-control' %>
-                </span>
-            </td>
-             <td class="col-sm-1">
-                           <span class="has-tooltip" data-toggle="tooltip" title="Enter survey column for client product or baseline topic">
-       
-                <%= f.text_field :v_product_mindset6, class: 'form-control' %>
-                </span>
-            </td>
-            <td class="col-sm-1">
+            
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
        
                 <%= f.text_field :v_ranking_num6, class: 'form-control' %>
                 </span>
             </td>
                       
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Total number of ranking statments">
        
                 <%= f.text_field :v_ranking_total6, class: 'form-control' %>
                 </span>
             </td>
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
+            <td class="col-sm-2"><a class="deleteRow"></a>
 
             </td>
         
@@ -675,14 +695,14 @@
         <% unless @todo.v_topic_code7.nil? %>
         
         <tr>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                 <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
        
                 <%= f.text_field :v_topic_code7, class: 'form-control' %>
                  
                  </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
@@ -691,53 +711,42 @@
             </span>
             
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
             
                  <span class="has-tooltip" data-toggle="tooltip" title="Enter the column ID in row 1 of the FIRST emotion column for topic">
        
                 <%= f.text_field :v_survey_column7, class: 'form-control' %>
                 </span>
             </td>
-             <td class="col-sm-1">
+             <td class="col-sm-2">
              
                 <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in verbatim.">
        
                 <%= f.text_field :v_topic_title7,  class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Paste in full context language">
        
                 <%= f.text_field :v_topic_frame7, class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
-                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
-       
-                <%= f.text_field :v_segment7, class: 'form-control' %>
-                </span>
-            </td>
-             <td class="col-sm-1">
-                           <span class="has-tooltip" data-toggle="tooltip" title="Enter survey column for client product or baseline topic">
-       
-                <%= f.text_field :v_product_mindset7, class: 'form-control' %>
-                </span>
-            </td>
-            <td class="col-sm-1">
+            
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
        
                 <%= f.text_field :v_ranking_num7, class: 'form-control' %>
                 </span>
             </td>
                       
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Total number of ranking statments">
        
                 <%= f.text_field :v_ranking_total7, class: 'form-control' %>
                 </span>
             </td>
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
+            <td class="col-sm-2"><a class="deleteRow"></a>
 
             </td>
         
@@ -750,14 +759,14 @@
         <% unless @todo.v_topic_code8.nil? %>
         
         <tr>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                 <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
        
                 <%= f.text_field :v_topic_code8, class: 'form-control' %>
                  
                  </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
@@ -766,53 +775,42 @@
             </span>
             
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
             
                  <span class="has-tooltip" data-toggle="tooltip" title="Enter the column ID in row 1 of the FIRST emotion column for topic">
        
                 <%= f.text_field :v_survey_column8, class: 'form-control' %>
                 </span>
             </td>
-             <td class="col-sm-1">
+             <td class="col-sm-2">
              
                 <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in verbatim.">
        
                 <%= f.text_field :v_topic_title8,  class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Paste in full context language">
        
                 <%= f.text_field :v_topic_frame8, class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
-                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
-       
-                <%= f.text_field :v_segment8, class: 'form-control' %>
-                </span>
-            </td>
-             <td class="col-sm-1">
-                           <span class="has-tooltip" data-toggle="tooltip" title="Enter survey column for client product or baseline topic">
-       
-                <%= f.text_field :v_product_mindset8, class: 'form-control' %>
-                </span>
-            </td>
-            <td class="col-sm-1">
+            
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
        
                 <%= f.text_field :v_ranking_num8, class: 'form-control' %>
                 </span>
             </td>
                       
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Total number of ranking statments">
        
                 <%= f.text_field :v_ranking_total8, class: 'form-control' %>
                 </span>
             </td>
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
+            <td class="col-sm-2"><a class="deleteRow"></a>
 
             </td>
         
@@ -825,14 +823,14 @@
         <% unless @todo.v_topic_code9.nil? %>
         
         <tr>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                 <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
        
                 <%= f.text_field :v_topic_code9, class: 'form-control' %>
                  
                  </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
@@ -841,53 +839,42 @@
             </span>
             
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
             
                  <span class="has-tooltip" data-toggle="tooltip" title="Enter the column ID in row 1 of the FIRST emotion column for topic">
        
                 <%= f.text_field :v_survey_column9, class: 'form-control' %>
                 </span>
             </td>
-             <td class="col-sm-1">
+             <td class="col-sm-2">
              
                 <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in verbatim.">
        
                 <%= f.text_field :v_topic_title9,  class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Paste in full context language">
        
                 <%= f.text_field :v_topic_frame9, class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
-                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
-       
-                <%= f.text_field :v_segment9, class: 'form-control' %>
-                </span>
-            </td>
-             <td class="col-sm-1">
-                           <span class="has-tooltip" data-toggle="tooltip" title="Enter survey column for client product or baseline topic">
-       
-                <%= f.text_field :v_product_mindset9, class: 'form-control' %>
-                </span>
-            </td>
-            <td class="col-sm-1">
+            
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
        
                 <%= f.text_field :v_ranking_num9, class: 'form-control' %>
                 </span>
             </td>
                       
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Total number of ranking statments">
        
                 <%= f.text_field :v_ranking_total9, class: 'form-control' %>
                 </span>
             </td>
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
+            <td class="col-sm-2"><a class="deleteRow"></a>
 
             </td>
         
@@ -900,14 +887,14 @@
         <% unless @todo.v_topic_code10.nil? %>
         
         <tr>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                 <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
        
                 <%= f.text_field :v_topic_code10, class: 'form-control' %>
                  
                  </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
@@ -916,53 +903,42 @@
             </span>
             
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
             
                  <span class="has-tooltip" data-toggle="tooltip" title="Enter the column ID in row 1 of the FIRST emotion column for topic">
        
                 <%= f.text_field :v_survey_column10, class: 'form-control' %>
                 </span>
             </td>
-             <td class="col-sm-1">
+             <td class="col-sm-2">
              
                 <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in verbatim.">
        
                 <%= f.text_field :v_topic_title10,  class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Paste in full context language">
        
                 <%= f.text_field :v_topic_frame10, class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
-                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
-       
-                <%= f.text_field :v_segment10, class: 'form-control' %>
-                </span>
-            </td>
-             <td class="col-sm-1">
-                           <span class="has-tooltip" data-toggle="tooltip" title="Enter survey column for client product or baseline topic">
-       
-                <%= f.text_field :v_product_mindset10, class: 'form-control' %>
-                </span>
-            </td>
-            <td class="col-sm-1">
+           
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
        
                 <%= f.text_field :v_ranking_num10, class: 'form-control' %>
                 </span>
             </td>
                       
-             <td class="col-sm-1">
+             <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Total number of ranking statments">
        
                 <%= f.text_field :v_ranking_total10, class: 'form-control' %>
                 </span>
             </td>         
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
+            <td class="col-sm-2"><a class="deleteRow"></a>
 
             </td>
         
@@ -974,14 +950,14 @@
         <% unless @todo.v_topic_code11.nil? %>
         
         <tr>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                 <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
        
                 <%= f.text_field :v_topic_code11, class: 'form-control' %>
                  
                  </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
@@ -990,52 +966,41 @@
             </span>
             
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
             
                  <span class="has-tooltip" data-toggle="tooltip" title="Enter the column ID in row 1 of the FIRST emotion column for topic">
        
                 <%= f.text_field :v_survey_column11, class: 'form-control' %>
                 </span>
             </td>
-             <td class="col-sm-1">
+             <td class="col-sm-2">
              
                 <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in verbatim.">
        
                 <%= f.text_field :v_topic_title11,  class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Paste in full context language">
        
                 <%= f.text_field :v_topic_frame11, class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
-                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
-       
-                <%= f.text_field :v_segment11, class: 'form-control' %>
-                </span>
-            </td>
-             <td class="col-sm-1">
-                           <span class="has-tooltip" data-toggle="tooltip" title="Enter survey column for client product or baseline topic">
-       
-                <%= f.text_field :v_product_mindset11, class: 'form-control' %>
-                </span>
-            </td>
-            <td class="col-sm-1">
+            
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
        
                 <%= f.text_field :v_ranking_num11, class: 'form-control' %>
                 </span>
             </td>
                       
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Total number of ranking statments">
        
                 <%= f.text_field :v_ranking_total11, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-1"><a class="deleteRow"></a>
+            <td class="col-sm-2"><a class="deleteRow"></a>
 
             </td>
         
@@ -1047,14 +1012,14 @@
         <% unless @todo.v_topic_code12.nil? %>
         
         <tr>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                 <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
        
                 <%= f.text_field :v_topic_code12, class: 'form-control' %>
                  
                  </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
@@ -1063,53 +1028,42 @@
             </span>
             
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
             
                  <span class="has-tooltip" data-toggle="tooltip" title="Enter the column ID in row 1 of the FIRST emotion column for topic">
        
                 <%= f.text_field :v_survey_column12, class: 'form-control' %>
                 </span>
             </td>
-             <td class="col-sm-1">
+             <td class="col-sm-2">
              
                 <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in verbatim.">
        
                 <%= f.text_field :v_topic_title12,  class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Paste in full context language">
        
                 <%= f.text_field :v_topic_frame12, class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
-                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
-       
-                <%= f.text_field :v_segment12, class: 'form-control' %>
-                </span>
-            </td>
-             <td class="col-sm-1">
-                           <span class="has-tooltip" data-toggle="tooltip" title="Enter survey column for client product or baseline topic">
-       
-                <%= f.text_field :v_product_mindset12, class: 'form-control' %>
-                </span>
-            </td>
-            <td class="col-sm-1">
+            
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
        
                 <%= f.text_field :v_ranking_num12, class: 'form-control' %>
                 </span>
             </td>
                       
-             <td class="col-sm-1">
+             <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Total number of ranking statments">
        
                 <%= f.text_field :v_ranking_total12, class: 'form-control' %>
                 </span>
             </td>         
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
+            <td class="col-sm-2"><a class="deleteRow"></a>
 
             </td>
         
@@ -1122,14 +1076,14 @@
         <% unless @todo.v_topic_code13.nil? %>
         
         <tr>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                 <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
        
                 <%= f.text_field :v_topic_code13, class: 'form-control' %>
                  
                  </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
@@ -1138,53 +1092,42 @@
             </span>
             
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
             
                  <span class="has-tooltip" data-toggle="tooltip" title="Enter the column ID in row 1 of the FIRST emotion column for topic">
        
                 <%= f.text_field :v_survey_column13, class: 'form-control' %>
                 </span>
             </td>
-             <td class="col-sm-1">
+             <td class="col-sm-2">
              
                 <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in verbatim.">
        
                 <%= f.text_field :v_topic_title13,  class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Paste in full context language">
        
                 <%= f.text_field :v_topic_frame13, class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
-                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
-       
-                <%= f.text_field :v_segment13, class: 'form-control' %>
-                </span>
-            </td>
-             <td class="col-sm-1">
-                           <span class="has-tooltip" data-toggle="tooltip" title="Enter survey column for client product or baseline topic">
-       
-                <%= f.text_field :v_product_mindset13, class: 'form-control' %>
-                </span>
-            </td>
-            <td class="col-sm-1">
+            
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
        
                 <%= f.text_field :v_ranking_num13, class: 'form-control' %>
                 </span>
             </td>
                       
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Total number of ranking statments">
        
                 <%= f.text_field :v_ranking_total13, class: 'form-control' %>
                 </span>
             </td>
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
+            <td class="col-sm-2"><a class="deleteRow"></a>
 
             </td>
         
@@ -1196,14 +1139,14 @@
         <% unless @todo.v_topic_code14.nil? %>
         
         <tr>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                 <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
        
                 <%= f.text_field :v_topic_code14, class: 'form-control' %>
                  
                  </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
@@ -1212,53 +1155,42 @@
             </span>
             
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
             
                  <span class="has-tooltip" data-toggle="tooltip" title="Enter the column ID in row 1 of the FIRST emotion column for topic">
        
                 <%= f.text_field :v_survey_column14, class: 'form-control' %>
                 </span>
             </td>
-             <td class="col-sm-1">
+             <td class="col-sm-2">
              
                 <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in verbatim.">
        
                 <%= f.text_field :v_topic_title14,  class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Paste in full context language">
        
                 <%= f.text_field :v_topic_frame14, class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
-                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
-       
-                <%= f.text_field :v_segment14, class: 'form-control' %>
-                </span>
-            </td>
-             <td class="col-sm-1">
-                           <span class="has-tooltip" data-toggle="tooltip" title="Enter survey column for client product or baseline topic">
-       
-                <%= f.text_field :v_product_mindset14, class: 'form-control' %>
-                </span>
-            </td>
-            <td class="col-sm-1">
+          
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
        
                 <%= f.text_field :v_ranking_num14, class: 'form-control' %>
                 </span>
             </td>
             
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Total number of ranking statments">
        
                 <%= f.text_field :v_ranking_total14, class: 'form-control' %>
                 </span>
             </td>          
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
+            <td class="col-sm-2"><a class="deleteRow"></a>
 
             </td>
         
@@ -1271,14 +1203,14 @@
         <% unless @todo.v_topic_code15.nil? %>
         
         <tr>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                 <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
        
                 <%= f.text_field :v_topic_code15, class: 'form-control' %>
                  
                  </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
@@ -1287,53 +1219,42 @@
             </span>
             
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
             
                  <span class="has-tooltip" data-toggle="tooltip" title="Enter the column ID in row 1 of the FIRST emotion column for topic">
        
                 <%= f.text_field :v_survey_column15, class: 'form-control' %>
                 </span>
             </td>
-             <td class="col-sm-1">
+             <td class="col-sm-2">
              
                 <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in verbatim.">
        
                 <%= f.text_field :v_topic_title15,  class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Paste in full context language">
        
                 <%= f.text_field :v_topic_frame15, class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
-                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
-       
-                <%= f.text_field :v_segment15, class: 'form-control' %>
-                </span>
-            </td>
-             <td class="col-sm-1">
-                           <span class="has-tooltip" data-toggle="tooltip" title="Enter survey column for client product or baseline topic">
-       
-                <%= f.text_field :v_product_mindset15, class: 'form-control' %>
-                </span>
-            </td>
-            <td class="col-sm-1">
+            
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
        
                 <%= f.text_field :v_ranking_num15, class: 'form-control' %>
                 </span>
             </td>
                      
-             <td class="col-sm-1">
+             <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Total number of ranking statments">
        
                 <%= f.text_field :v_ranking_total15, class: 'form-control' %>
                 </span>
             </td>         
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
+            <td class="col-sm-2"><a class="deleteRow"></a>
 
             </td>
         
@@ -1345,14 +1266,14 @@
         <% unless @todo.v_topic_code16.nil? %>
         
         <tr>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                 <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
        
                 <%= f.text_field :v_topic_code16, class: 'form-control' %>
                  
                  </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
@@ -1361,53 +1282,42 @@
             </span>
             
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
             
                  <span class="has-tooltip" data-toggle="tooltip" title="Enter the column ID in row 1 of the FIRST emotion column for topic">
        
                 <%= f.text_field :v_survey_column16, class: 'form-control' %>
                 </span>
             </td>
-             <td class="col-sm-1">
+             <td class="col-sm-2">
              
                 <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in verbatim.">
        
                 <%= f.text_field :v_topic_title16,  class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Paste in full context language">
        
                 <%= f.text_field :v_topic_frame16, class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
-                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
-       
-                <%= f.text_field :v_segment16, class: 'form-control' %>
-                </span>
-            </td>
-             <td class="col-sm-1">
-                           <span class="has-tooltip" data-toggle="tooltip" title="Enter survey column for client product or baseline topic">
-       
-                <%= f.text_field :v_product_mindset16, class: 'form-control' %>
-                </span>
-            </td>
-            <td class="col-sm-1">
+            
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
        
                 <%= f.text_field :v_ranking_num16, class: 'form-control' %>
                 </span>
             </td>
                 
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Total number of ranking statments">
        
                 <%= f.text_field :v_ranking_total16, class: 'form-control' %>
                 </span>
             </td>          
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
+            <td class="col-sm-2"><a class="deleteRow"></a>
 
             </td>
         
@@ -1420,14 +1330,14 @@
         <% unless @todo.v_topic_code17.nil? %>
         
         <tr>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                 <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
        
                 <%= f.text_field :v_topic_code17, class: 'form-control' %>
                  
                  </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
@@ -1436,52 +1346,41 @@
             </span>
             
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
             
                  <span class="has-tooltip" data-toggle="tooltip" title="Enter the column ID in row 1 of the FIRST emotion column for topic">
        
                 <%= f.text_field :v_survey_column17, class: 'form-control' %>
                 </span>
             </td>
-             <td class="col-sm-1">
+             <td class="col-sm-2">
              
                 <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in verbatim.">
        
                 <%= f.text_field :v_topic_title17,  class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Paste in full context language">
        
                 <%= f.text_field :v_topic_frame17, class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
-                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
-       
-                <%= f.text_field :v_segment17, class: 'form-control' %>
-                </span>
-            </td>
-             <td class="col-sm-1">
-                           <span class="has-tooltip" data-toggle="tooltip" title="Enter survey column for client product or baseline topic">
-       
-                <%= f.text_field :v_product_mindset17, class: 'form-control' %>
-                </span>
-            </td>
-            <td class="col-sm-1">
+            
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
        
                 <%= f.text_field :v_ranking_num17, class: 'form-control' %>
                 </span>
             </td>
                       
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Total number of ranking statments">
        
                 <%= f.text_field :v_ranking_total17, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-1"><a class="deleteRow"></a>
+            <td class="col-sm-2"><a class="deleteRow"></a>
 
             </td>
         
@@ -1493,14 +1392,14 @@
         <% unless @todo.v_topic_code18.nil? %>
         
         <tr>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                 <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
        
                 <%= f.text_field :v_topic_code18, class: 'form-control' %>
                  
                  </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
@@ -1509,52 +1408,41 @@
             </span>
             
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
             
                  <span class="has-tooltip" data-toggle="tooltip" title="Enter the column ID in row 1 of the FIRST emotion column for topic">
        
                 <%= f.text_field :v_survey_column18, class: 'form-control' %>
                 </span>
             </td>
-             <td class="col-sm-1">
+             <td class="col-sm-2">
              
                 <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in verbatim.">
        
                 <%= f.text_field :v_topic_title18,  class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Paste in full context language">
        
                 <%= f.text_field :v_topic_frame18, class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
-                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
-       
-                <%= f.text_field :v_segment18, class: 'form-control' %>
-                </span>
-            </td>
-             <td class="col-sm-1">
-                           <span class="has-tooltip" data-toggle="tooltip" title="Enter survey column for client product or baseline topic">
-       
-                <%= f.text_field :v_product_mindset18, class: 'form-control' %>
-                </span>
-            </td>
-            <td class="col-sm-1">
+            
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
        
                 <%= f.text_field :v_ranking_num18, class: 'form-control' %>
                 </span>
             </td>
                       
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Total number of ranking statments">
        
                 <%= f.text_field :v_ranking_total18, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-1"><a class="deleteRow"></a>
+            <td class="col-sm-2"><a class="deleteRow"></a>
 
             </td>
         
@@ -1566,14 +1454,14 @@
         <% unless @todo.v_topic_code19.nil? %>
         
         <tr>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                 <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
        
                 <%= f.text_field :v_topic_code19, class: 'form-control' %>
                  
                  </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
@@ -1582,52 +1470,41 @@
             </span>
             
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
             
                  <span class="has-tooltip" data-toggle="tooltip" title="Enter the column ID in row 1 of the FIRST emotion column for topic">
        
                 <%= f.text_field :v_survey_column19, class: 'form-control' %>
                 </span>
             </td>
-             <td class="col-sm-1">
+             <td class="col-sm-2">
              
                 <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in verbatim.">
        
                 <%= f.text_field :v_topic_title19,  class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Paste in full context language">
        
                 <%= f.text_field :v_topic_frame19, class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
-                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
-       
-                <%= f.text_field :v_segment19, class: 'form-control' %>
-                </span>
-            </td>
-             <td class="col-sm-1">
-                           <span class="has-tooltip" data-toggle="tooltip" title="Enter survey column for client product or baseline topic">
-       
-                <%= f.text_field :v_product_mindset19, class: 'form-control' %>
-                </span>
-            </td>
-            <td class="col-sm-1">
+            
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
        
                 <%= f.text_field :v_ranking_num19, class: 'form-control' %>
                 </span>
             </td>
                       
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Total number of ranking statments">
        
                 <%= f.text_field :v_ranking_total19, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-1"><a class="deleteRow"></a>
+            <td class="col-sm-2"><a class="deleteRow"></a>
 
             </td>
         
@@ -1639,14 +1516,14 @@
         <% unless @todo.v_topic_code20.nil? %>
         
         <tr>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                 <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
        
                 <%= f.text_field :v_topic_code20, class: 'form-control' %>
                  
                  </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
@@ -1655,52 +1532,41 @@
             </span>
             
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
             
                  <span class="has-tooltip" data-toggle="tooltip" title="Enter the column ID in row 1 of the FIRST emotion column for topic">
        
                 <%= f.text_field :v_survey_column20, class: 'form-control' %>
                 </span>
             </td>
-             <td class="col-sm-1">
+             <td class="col-sm-2">
              
                 <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in verbatim.">
        
                 <%= f.text_field :v_topic_title20,  class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Paste in full context language">
        
                 <%= f.text_field :v_topic_frame20, class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
-                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
-       
-                <%= f.text_field :v_segment20, class: 'form-control' %>
-                </span>
-            </td>
-             <td class="col-sm-1">
-                           <span class="has-tooltip" data-toggle="tooltip" title="Enter survey column for client product or baseline topic">
-       
-                <%= f.text_field :v_product_mindset20, class: 'form-control' %>
-                </span>
-            </td>
-            <td class="col-sm-1">
+            
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
        
                 <%= f.text_field :v_ranking_num20, class: 'form-control' %>
                 </span>
             </td>
                       
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Total number of ranking statments">
        
                 <%= f.text_field :v_ranking_total20, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-1"><a class="deleteRow"></a>
+            <td class="col-sm-2"><a class="deleteRow"></a>
 
             </td>
         
@@ -1712,14 +1578,14 @@
         <% unless @todo.v_topic_code21.nil? %>
         
         <tr>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                 <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
        
                 <%= f.text_field :v_topic_code21, class: 'form-control' %>
                  
                  </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
@@ -1728,52 +1594,41 @@
             </span>
             
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
             
                  <span class="has-tooltip" data-toggle="tooltip" title="Enter the column ID in row 1 of the FIRST emotion column for topic">
        
                 <%= f.text_field :v_survey_column21, class: 'form-control' %>
                 </span>
             </td>
-             <td class="col-sm-1">
+             <td class="col-sm-2">
              
                 <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in verbatim.">
        
                 <%= f.text_field :v_topic_title21,  class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Paste in full context language">
        
                 <%= f.text_field :v_topic_frame21, class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
-                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
-       
-                <%= f.text_field :v_segment21, class: 'form-control' %>
-                </span>
-            </td>
-             <td class="col-sm-1">
-                           <span class="has-tooltip" data-toggle="tooltip" title="Enter survey column for client product or baseline topic">
-       
-                <%= f.text_field :v_product_mindset21, class: 'form-control' %>
-                </span>
-            </td>
-            <td class="col-sm-1">
+            
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
        
                 <%= f.text_field :v_ranking_num21, class: 'form-control' %>
                 </span>
             </td>
                       
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Total number of ranking statments">
        
                 <%= f.text_field :v_ranking_total21, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-1"><a class="deleteRow"></a>
+            <td class="col-sm-2"><a class="deleteRow"></a>
 
             </td>
         
@@ -1785,14 +1640,14 @@
         <% unless @todo.v_topic_code22.nil? %>
         
         <tr>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                 <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
        
                 <%= f.text_field :v_topic_code22, class: 'form-control' %>
                  
                  </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
@@ -1801,52 +1656,41 @@
             </span>
             
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
             
                  <span class="has-tooltip" data-toggle="tooltip" title="Enter the column ID in row 1 of the FIRST emotion column for topic">
        
                 <%= f.text_field :v_survey_column22, class: 'form-control' %>
                 </span>
             </td>
-             <td class="col-sm-1">
+             <td class="col-sm-2">
              
                 <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in verbatim.">
        
                 <%= f.text_field :v_topic_title22,  class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Paste in full context language">
        
                 <%= f.text_field :v_topic_frame22, class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
-                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
-       
-                <%= f.text_field :v_segment22, class: 'form-control' %>
-                </span>
-            </td>
-             <td class="col-sm-1">
-                           <span class="has-tooltip" data-toggle="tooltip" title="Enter survey column for client product or baseline topic">
-       
-                <%= f.text_field :v_product_mindset22, class: 'form-control' %>
-                </span>
-            </td>
-            <td class="col-sm-1">
+            
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
        
                 <%= f.text_field :v_ranking_num22, class: 'form-control' %>
                 </span>
             </td>
                       
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Total number of ranking statments">
        
                 <%= f.text_field :v_ranking_total22, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-1"><a class="deleteRow"></a>
+            <td class="col-sm-2"><a class="deleteRow"></a>
 
             </td>
         
@@ -1858,14 +1702,14 @@
         <% unless @todo.v_topic_code23.nil? %>
         
         <tr>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                 <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
        
                 <%= f.text_field :v_topic_code23, class: 'form-control' %>
                  
                  </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
@@ -1874,52 +1718,41 @@
             </span>
             
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
             
                  <span class="has-tooltip" data-toggle="tooltip" title="Enter the column ID in row 1 of the FIRST emotion column for topic">
        
                 <%= f.text_field :v_survey_column23, class: 'form-control' %>
                 </span>
             </td>
-             <td class="col-sm-1">
+             <td class="col-sm-2">
              
                 <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in verbatim.">
        
                 <%= f.text_field :v_topic_title23,  class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Paste in full context language">
        
                 <%= f.text_field :v_topic_frame23, class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
-                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
-       
-                <%= f.text_field :v_segment23, class: 'form-control' %>
-                </span>
-            </td>
-             <td class="col-sm-1">
-                           <span class="has-tooltip" data-toggle="tooltip" title="Enter survey column for client product or baseline topic">
-       
-                <%= f.text_field :v_product_mindset23, class: 'form-control' %>
-                </span>
-            </td>
-            <td class="col-sm-1">
+            
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
        
                 <%= f.text_field :v_ranking_num23, class: 'form-control' %>
                 </span>
             </td>
                       
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Total number of ranking statments">
        
                 <%= f.text_field :v_ranking_total23, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-1"><a class="deleteRow"></a>
+            <td class="col-sm-2"><a class="deleteRow"></a>
 
             </td>
         
@@ -1932,14 +1765,14 @@
         <% unless @todo.v_topic_code24.nil? %>
         
         <tr>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                 <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
        
                 <%= f.text_field :v_topic_code24, class: 'form-control' %>
                  
                  </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
@@ -1948,52 +1781,41 @@
             </span>
             
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
             
                  <span class="has-tooltip" data-toggle="tooltip" title="Enter the column ID in row 1 of the FIRST emotion column for topic">
        
                 <%= f.text_field :v_survey_column24, class: 'form-control' %>
                 </span>
             </td>
-             <td class="col-sm-1">
+             <td class="col-sm-2">
              
                 <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in verbatim.">
        
                 <%= f.text_field :v_topic_title24,  class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Paste in full context language">
        
                 <%= f.text_field :v_topic_frame24, class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
-                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
-       
-                <%= f.text_field :v_segment24, class: 'form-control' %>
-                </span>
-            </td>
-             <td class="col-sm-1">
-                           <span class="has-tooltip" data-toggle="tooltip" title="Enter survey column for client product or baseline topic">
-       
-                <%= f.text_field :v_product_mindset24, class: 'form-control' %>
-                </span>
-            </td>
-            <td class="col-sm-1">
+            
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
        
                 <%= f.text_field :v_ranking_num24, class: 'form-control' %>
                 </span>
             </td>
                       
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Total number of ranking statments">
        
                 <%= f.text_field :v_ranking_total24, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-1"><a class="deleteRow"></a>
+            <td class="col-sm-2"><a class="deleteRow"></a>
 
             </td>
         
@@ -2004,14 +1826,14 @@
         <% unless @todo.v_topic_code25.nil? %>
         
         <tr>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                 <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
        
                 <%= f.text_field :v_topic_code25, class: 'form-control' %>
                  
                  </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
@@ -2020,52 +1842,41 @@
             </span>
             
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
             
                  <span class="has-tooltip" data-toggle="tooltip" title="Enter the column ID in row 1 of the FIRST emotion column for topic">
        
                 <%= f.text_field :v_survey_column25, class: 'form-control' %>
                 </span>
             </td>
-             <td class="col-sm-1">
+             <td class="col-sm-2">
              
                 <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in verbatim.">
        
                 <%= f.text_field :v_topic_title25,  class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Paste in full context language">
        
                 <%= f.text_field :v_topic_frame25, class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
-                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
-       
-                <%= f.text_field :v_segment25, class: 'form-control' %>
-                </span>
-            </td>
-             <td class="col-sm-1">
-                           <span class="has-tooltip" data-toggle="tooltip" title="Enter survey column for client product or baseline topic">
-       
-                <%= f.text_field :v_product_mindset25, class: 'form-control' %>
-                </span>
-            </td>
-            <td class="col-sm-1">
+            
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
        
                 <%= f.text_field :v_ranking_num25, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                        <span class="has-tooltip" data-toggle="tooltip" title="Total number of ranking statments">
        
              <%= f.text_field :v_ranking_total25, class: 'form-control' %>
             </span>
             </td>    
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
+            <td class="col-sm-2"><a class="deleteRow"></a>
 
             </td>
         
@@ -2077,14 +1888,14 @@
         <% unless @todo.v_topic_code26.nil? %>
         
         <tr>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                 <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
        
                 <%= f.text_field :v_topic_code26, class: 'form-control' %>
                  
                  </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
@@ -2093,52 +1904,41 @@
             </span>
             
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
             
                  <span class="has-tooltip" data-toggle="tooltip" title="Enter the column ID in row 1 of the FIRST emotion column for topic">
        
                 <%= f.text_field :v_survey_column26, class: 'form-control' %>
                 </span>
             </td>
-             <td class="col-sm-1">
+             <td class="col-sm-2">
              
                 <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in verbatim.">
        
                 <%= f.text_field :v_topic_title26,  class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Paste in full context language">
        
                 <%= f.text_field :v_topic_frame26, class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
-                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
-       
-                <%= f.text_field :v_segment26, class: 'form-control' %>
-                </span>
-            </td>
-             <td class="col-sm-1">
-                           <span class="has-tooltip" data-toggle="tooltip" title="Enter survey column for client product or baseline topic">
-       
-                <%= f.text_field :v_product_mindset26, class: 'form-control' %>
-                </span>
-            </td>
-            <td class="col-sm-1">
+            
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
        
                 <%= f.text_field :v_ranking_num26, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Total number of ranking statments">
        
                 <%= f.text_field :v_ranking_total26, class: 'form-control' %>
                 </span>
             </td>          
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
+            <td class="col-sm-2"><a class="deleteRow"></a>
 
             </td>
         
@@ -2150,14 +1950,14 @@
         <% unless @todo.v_topic_code27.nil? %>
         
         <tr>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                 <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
        
                 <%= f.text_field :v_topic_code27, class: 'form-control' %>
                  
                  </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
@@ -2166,52 +1966,41 @@
             </span>
             
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
             
                  <span class="has-tooltip" data-toggle="tooltip" title="Enter the column ID in row 1 of the FIRST emotion column for topic">
        
                 <%= f.text_field :v_survey_column27, class: 'form-control' %>
                 </span>
             </td>
-             <td class="col-sm-1">
+             <td class="col-sm-2">
              
                 <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in verbatim.">
        
                 <%= f.text_field :v_topic_title27,  class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Paste in full context language">
        
                 <%= f.text_field :v_topic_frame27, class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
-                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
-       
-                <%= f.text_field :v_segment27, class: 'form-control' %>
-                </span>
-            </td>
-             <td class="col-sm-1">
-                           <span class="has-tooltip" data-toggle="tooltip" title="Enter survey column for client product or baseline topic">
-       
-                <%= f.text_field :v_product_mindset27, class: 'form-control' %>
-                </span>
-            </td>
-            <td class="col-sm-1">
+            
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
        
                 <%= f.text_field :v_ranking_num27, class: 'form-control' %>
                 </span>
             </td>
                       
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Total number of ranking statments">
        
                 <%= f.text_field :v_ranking_total27, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-1"><a class="deleteRow"></a>
+            <td class="col-sm-2"><a class="deleteRow"></a>
 
             </td>
         
@@ -2223,14 +2012,14 @@
         <% unless @todo.v_topic_code28.nil? %>
         
         <tr>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                 <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
        
                 <%= f.text_field :v_topic_code28, class: 'form-control' %>
                  
                  </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
@@ -2239,52 +2028,41 @@
             </span>
             
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
             
                  <span class="has-tooltip" data-toggle="tooltip" title="Enter the column ID in row 1 of the FIRST emotion column for topic">
        
                 <%= f.text_field :v_survey_column28, class: 'form-control' %>
                 </span>
             </td>
-             <td class="col-sm-1">
+             <td class="col-sm-2">
              
                 <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in verbatim.">
        
                 <%= f.text_field :v_topic_title28,  class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Paste in full context language">
        
                 <%= f.text_field :v_topic_frame28, class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
-                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
-       
-                <%= f.text_field :v_segment28, class: 'form-control' %>
-                </span>
-            </td>
-             <td class="col-sm-1">
-                           <span class="has-tooltip" data-toggle="tooltip" title="Enter survey column for client product or baseline topic">
-       
-                <%= f.text_field :v_product_mindset28, class: 'form-control' %>
-                </span>
-            </td>
-            <td class="col-sm-1">
+            
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
        
                 <%= f.text_field :v_ranking_num28, class: 'form-control' %>
                 </span>
             </td>
                       
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Total number of ranking statments">
        
                 <%= f.text_field :v_ranking_total28, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-1"><a class="deleteRow"></a>
+            <td class="col-sm-2"><a class="deleteRow"></a>
 
             </td>
         
@@ -2296,14 +2074,14 @@
         <% unless @todo.v_topic_code29.nil? %>
         
         <tr>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                 <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
        
                 <%= f.text_field :v_topic_code29, class: 'form-control' %>
                  
                  </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
@@ -2312,52 +2090,41 @@
             </span>
             
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
             
                  <span class="has-tooltip" data-toggle="tooltip" title="Enter the column ID in row 1 of the FIRST emotion column for topic">
        
                 <%= f.text_field :v_survey_column29, class: 'form-control' %>
                 </span>
             </td>
-             <td class="col-sm-1">
+             <td class="col-sm-2">
              
                 <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in verbatim.">
        
                 <%= f.text_field :v_topic_title29,  class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Paste in full context language">
        
                 <%= f.text_field :v_topic_frame29, class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
-                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
-       
-                <%= f.text_field :v_segment29, class: 'form-control' %>
-                </span>
-            </td>
-             <td class="col-sm-1">
-                           <span class="has-tooltip" data-toggle="tooltip" title="Enter survey column for client product or baseline topic">
-       
-                <%= f.text_field :v_product_mindset29, class: 'form-control' %>
-                </span>
-            </td>
-            <td class="col-sm-1">
+            
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
        
                 <%= f.text_field :v_ranking_num29, class: 'form-control' %>
                 </span>
             </td>
                       
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Total number of ranking statments">
        
                 <%= f.text_field :v_ranking_total29, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-1"><a class="deleteRow"></a>
+            <td class="col-sm-2"><a class="deleteRow"></a>
 
             </td>
         
@@ -2369,14 +2136,14 @@
         <% unless @todo.v_topic_code30.nil? %>
         
         <tr>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                 <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
        
                 <%= f.text_field :v_topic_code30, class: 'form-control' %>
                  
                  </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
@@ -2385,52 +2152,41 @@
             </span>
             
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
             
                  <span class="has-tooltip" data-toggle="tooltip" title="Enter the column ID in row 1 of the FIRST emotion column for topic">
        
                 <%= f.text_field :v_survey_column30, class: 'form-control' %>
                 </span>
             </td>
-             <td class="col-sm-1">
+             <td class="col-sm-2">
              
                 <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in verbatim.">
        
                 <%= f.text_field :v_topic_title30,  class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Paste in full context language">
        
                 <%= f.text_field :v_topic_frame30, class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
-                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
-       
-                <%= f.text_field :v_segment30, class: 'form-control' %>
-                </span>
-            </td>
-             <td class="col-sm-1">
-                           <span class="has-tooltip" data-toggle="tooltip" title="Enter survey column for client product or baseline topic">
-       
-                <%= f.text_field :v_product_mindset30, class: 'form-control' %>
-                </span>
-            </td>
-            <td class="col-sm-1">
+            
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
        
                 <%= f.text_field :v_ranking_num30, class: 'form-control' %>
                 </span>
             </td>
                       
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Total number of ranking statments">
        
                 <%= f.text_field :v_ranking_total30, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-1"><a class="deleteRow"></a>
+            <td class="col-sm-2"><a class="deleteRow"></a>
 
             </td>
         
@@ -2442,14 +2198,14 @@
         <% unless @todo.v_topic_code31.nil? %>
         
         <tr>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                 <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
        
                 <%= f.text_field :v_topic_code31, class: 'form-control' %>
                  
                  </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
@@ -2458,52 +2214,41 @@
             </span>
             
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
             
                  <span class="has-tooltip" data-toggle="tooltip" title="Enter the column ID in row 1 of the FIRST emotion column for topic">
        
                 <%= f.text_field :v_survey_column31, class: 'form-control' %>
                 </span>
             </td>
-             <td class="col-sm-1">
+             <td class="col-sm-2">
              
                 <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in verbatim.">
        
                 <%= f.text_field :v_topic_title31,  class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Paste in full context language">
        
                 <%= f.text_field :v_topic_frame31, class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
-                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
-       
-                <%= f.text_field :v_segment31, class: 'form-control' %>
-                </span>
-            </td>
-             <td class="col-sm-1">
-                           <span class="has-tooltip" data-toggle="tooltip" title="Enter survey column for client product or baseline topic">
-       
-                <%= f.text_field :v_product_mindset31, class: 'form-control' %>
-                </span>
-            </td>
-            <td class="col-sm-1">
+            
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
        
                 <%= f.text_field :v_ranking_num31, class: 'form-control' %>
                 </span>
             </td>
                       
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Total number of ranking statments">
        
                 <%= f.text_field :v_ranking_total31, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-1"><a class="deleteRow"></a>
+            <td class="col-sm-2"><a class="deleteRow"></a>
 
             </td>
         
@@ -2515,14 +2260,14 @@
         <% unless @todo.v_topic_code32.nil? %>
         
         <tr>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                 <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
        
                 <%= f.text_field :v_topic_code32, class: 'form-control' %>
                  
                  </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
@@ -2531,51 +2276,40 @@
             </span>
             
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
             
                  <span class="has-tooltip" data-toggle="tooltip" title="Enter the column ID in row 1 of the FIRST emotion column for topic">
        
                 <%= f.text_field :v_survey_column32, class: 'form-control' %>
                 </span>
             </td>
-             <td class="col-sm-1">
+             <td class="col-sm-2">
              
                 <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in verbatim.">
        
                 <%= f.text_field :v_topic_title32,  class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Paste in full context language">
        
                 <%= f.text_field :v_topic_frame32, class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
-                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
-       
-                <%= f.text_field :v_segment32, class: 'form-control' %>
-                </span>
-            </td>
-             <td class="col-sm-1">
-                           <span class="has-tooltip" data-toggle="tooltip" title="Enter survey column for client product or baseline topic">
-       
-                <%= f.text_field :v_product_mindset32, class: 'form-control' %>
-                </span>
-            </td>
-            <td class="col-sm-1">
+            
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
        
                 <%= f.text_field :v_ranking_num32, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Total number of ranking statments">
        
                 <%= f.text_field :v_ranking_total32, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-1"><a class="deleteRow"></a>
+            <td class="col-sm-2"><a class="deleteRow"></a>
 
             </td>
         
@@ -2587,14 +2321,14 @@
         <% unless @todo.v_topic_code33.nil? %>
         
         <tr>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                 <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
        
                 <%= f.text_field :v_topic_code33, class: 'form-control' %>
                  
                  </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
@@ -2603,52 +2337,41 @@
             </span>
             
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
             
                  <span class="has-tooltip" data-toggle="tooltip" title="Enter the column ID in row 1 of the FIRST emotion column for topic">
        
                 <%= f.text_field :v_survey_column33, class: 'form-control' %>
                 </span>
             </td>
-             <td class="col-sm-1">
+             <td class="col-sm-2">
              
                 <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in verbatim.">
        
                 <%= f.text_field :v_topic_title33,  class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Paste in full context language">
        
                 <%= f.text_field :v_topic_frame33, class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
-                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
-       
-                <%= f.text_field :v_segment33, class: 'form-control' %>
-                </span>
-            </td>
-             <td class="col-sm-1">
-                           <span class="has-tooltip" data-toggle="tooltip" title="Enter survey column for client product or baseline topic">
-       
-                <%= f.text_field :v_product_mindset33, class: 'form-control' %>
-                </span>
-            </td>
-            <td class="col-sm-1">
+           
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
        
                 <%= f.text_field :v_ranking_num33, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Total number of ranking statments">
        
                 <%= f.text_field :v_ranking_total33, class: 'form-control' %>
                 </span>
             </td>          
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
+            <td class="col-sm-2"><a class="deleteRow"></a>
 
             </td>
         
@@ -2660,14 +2383,14 @@
         <% unless @todo.v_topic_code34.nil? %>
         
         <tr>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                 <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
        
                 <%= f.text_field :v_topic_code34, class: 'form-control' %>
                  
                  </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
@@ -2676,52 +2399,41 @@
             </span>
             
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
             
                  <span class="has-tooltip" data-toggle="tooltip" title="Enter the column ID in row 1 of the FIRST emotion column for topic">
        
                 <%= f.text_field :v_survey_column34, class: 'form-control' %>
                 </span>
             </td>
-             <td class="col-sm-1">
+             <td class="col-sm-2">
              
                 <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in verbatim.">
        
                 <%= f.text_field :v_topic_title34,  class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Paste in full context language">
        
                 <%= f.text_field :v_topic_frame34, class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
-                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
-       
-                <%= f.text_field :v_segment34, class: 'form-control' %>
-                </span>
-            </td>
-             <td class="col-sm-1">
-                           <span class="has-tooltip" data-toggle="tooltip" title="Enter survey column for client product or baseline topic">
-       
-                <%= f.text_field :v_product_mindset34, class: 'form-control' %>
-                </span>
-            </td>
-            <td class="col-sm-1">
+            
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
        
                 <%= f.text_field :v_ranking_num34, class: 'form-control' %>
                 </span>
             </td>
                       
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Total number of ranking statments">
        
                 <%= f.text_field :v_ranking_total34, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-1"><a class="deleteRow"></a>
+            <td class="col-sm-2"><a class="deleteRow"></a>
 
             </td>
         
@@ -2733,14 +2445,14 @@
         <% unless @todo.v_topic_code35.nil? %>
         
         <tr>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                 <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
        
                 <%= f.text_field :v_topic_code35, class: 'form-control' %>
                  
                  </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
@@ -2749,52 +2461,41 @@
             </span>
             
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
             
                  <span class="has-tooltip" data-toggle="tooltip" title="Enter the column ID in row 1 of the FIRST emotion column for topic">
        
                 <%= f.text_field :v_survey_column35, class: 'form-control' %>
                 </span>
             </td>
-             <td class="col-sm-1">
+             <td class="col-sm-2">
              
                 <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in verbatim.">
        
                 <%= f.text_field :v_topic_title35,  class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Paste in full context language">
        
                 <%= f.text_field :v_topic_frame35, class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
-                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
-       
-                <%= f.text_field :v_segment35, class: 'form-control' %>
-                </span>
-            </td>
-             <td class="col-sm-1">
-                           <span class="has-tooltip" data-toggle="tooltip" title="Enter survey column for client product or baseline topic">
-       
-                <%= f.text_field :v_product_mindset35, class: 'form-control' %>
-                </span>
-            </td>
-            <td class="col-sm-1">
+            
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
        
                 <%= f.text_field :v_ranking_num35, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Total number of ranking statments">
        
                 <%= f.text_field :v_ranking_total35, class: 'form-control' %>
                 </span>
             </td>          
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
+            <td class="col-sm-2"><a class="deleteRow"></a>
 
             </td>
         
@@ -2806,14 +2507,14 @@
         <% unless @todo.v_topic_code36.nil? %>
         
         <tr>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                 <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
        
                 <%= f.text_field :v_topic_code36, class: 'form-control' %>
                  
                  </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
@@ -2822,52 +2523,41 @@
             </span>
             
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
             
                  <span class="has-tooltip" data-toggle="tooltip" title="Enter the column ID in row 1 of the FIRST emotion column for topic">
        
                 <%= f.text_field :v_survey_column36, class: 'form-control' %>
                 </span>
             </td>
-             <td class="col-sm-1">
+             <td class="col-sm-2">
              
                 <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in verbatim.">
        
                 <%= f.text_field :v_topic_title36,  class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Paste in full context language">
        
                 <%= f.text_field :v_topic_frame36, class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
-                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
-       
-                <%= f.text_field :v_segment36, class: 'form-control' %>
-                </span>
-            </td>
-             <td class="col-sm-1">
-                           <span class="has-tooltip" data-toggle="tooltip" title="Enter survey column for client product or baseline topic">
-       
-                <%= f.text_field :v_product_mindset36, class: 'form-control' %>
-                </span>
-            </td>
-            <td class="col-sm-1">
+            
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
        
                 <%= f.text_field :v_ranking_num36, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Total number of ranking statments">
        
                 <%= f.text_field :v_ranking_total36, class: 'form-control' %>
                 </span>
             </td>          
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
+            <td class="col-sm-2"><a class="deleteRow"></a>
 
             </td>
         
@@ -2880,14 +2570,14 @@
         <% unless @todo.v_topic_code37.nil? %>
         
         <tr>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                 <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
        
                 <%= f.text_field :v_topic_code37, class: 'form-control' %>
                  
                  </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
@@ -2896,52 +2586,41 @@
             </span>
             
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
             
                  <span class="has-tooltip" data-toggle="tooltip" title="Enter the column ID in row 1 of the FIRST emotion column for topic">
        
                 <%= f.text_field :v_survey_column37, class: 'form-control' %>
                 </span>
             </td>
-             <td class="col-sm-1">
+             <td class="col-sm-2">
              
                 <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in verbatim.">
        
                 <%= f.text_field :v_topic_title37,  class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Paste in full context language">
        
                 <%= f.text_field :v_topic_frame37, class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
-                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
-       
-                <%= f.text_field :v_segment37, class: 'form-control' %>
-                </span>
-            </td>
-             <td class="col-sm-1">
-                           <span class="has-tooltip" data-toggle="tooltip" title="Enter survey column for client product or baseline topic">
-       
-                <%= f.text_field :v_product_mindset37, class: 'form-control' %>
-                </span>
-            </td>
-            <td class="col-sm-1">
+            
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
        
                 <%= f.text_field :v_ranking_num37, class: 'form-control' %>
                 </span>
             </td>
                       
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Total number of ranking statments">
        
                 <%= f.text_field :v_ranking_total37, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-1"><a class="deleteRow"></a>
+            <td class="col-sm-2"><a class="deleteRow"></a>
 
             </td>
         
@@ -2953,14 +2632,14 @@
         <% unless @todo.v_topic_code38.nil? %>
         
         <tr>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                 <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
        
                 <%= f.text_field :v_topic_code38, class: 'form-control' %>
                  
                  </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
@@ -2969,52 +2648,41 @@
             </span>
             
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
             
                  <span class="has-tooltip" data-toggle="tooltip" title="Enter the column ID in row 1 of the FIRST emotion column for topic">
        
                 <%= f.text_field :v_survey_column38, class: 'form-control' %>
                 </span>
             </td>
-             <td class="col-sm-1">
+             <td class="col-sm-2">
              
                 <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in verbatim.">
        
                 <%= f.text_field :v_topic_title38,  class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Paste in full context language">
        
                 <%= f.text_field :v_topic_frame38, class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
-                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
-       
-                <%= f.text_field :v_segment38, class: 'form-control' %>
-                </span>
-            </td>
-             <td class="col-sm-1">
-                           <span class="has-tooltip" data-toggle="tooltip" title="Enter survey column for client product or baseline topic">
-       
-                <%= f.text_field :v_product_mindset38, class: 'form-control' %>
-                </span>
-            </td>
-            <td class="col-sm-1">
+            
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
        
                 <%= f.text_field :v_ranking_num38, class: 'form-control' %>
                 </span>
             </td>
                       
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Total number of ranking statments">
        
                 <%= f.text_field :v_ranking_total38, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-1"><a class="deleteRow"></a>
+            <td class="col-sm-2"><a class="deleteRow"></a>
 
             </td>
         
@@ -3027,14 +2695,14 @@
         <% unless @todo.v_topic_code39.nil? %>
         
         <tr>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                 <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
        
                 <%= f.text_field :v_topic_code39, class: 'form-control' %>
                  
                  </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
@@ -3043,52 +2711,41 @@
             </span>
             
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
             
                  <span class="has-tooltip" data-toggle="tooltip" title="Enter the column ID in row 1 of the FIRST emotion column for topic">
        
                 <%= f.text_field :v_survey_column39, class: 'form-control' %>
                 </span>
             </td>
-             <td class="col-sm-1">
+             <td class="col-sm-2">
              
                 <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in verbatim.">
        
                 <%= f.text_field :v_topic_title39,  class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Paste in full context language">
        
                 <%= f.text_field :v_topic_frame39, class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
-                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
-       
-                <%= f.text_field :v_segment39, class: 'form-control' %>
-                </span>
-            </td>
-             <td class="col-sm-1">
-                           <span class="has-tooltip" data-toggle="tooltip" title="Enter survey column for client product or baseline topic">
-       
-                <%= f.text_field :v_product_mindset39, class: 'form-control' %>
-                </span>
-            </td>
-            <td class="col-sm-1">
+            
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
        
                 <%= f.text_field :v_ranking_num39, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Total number of ranking statments">
        
                 <%= f.text_field :v_ranking_total39, class: 'form-control' %>
                 </span>
             </td>          
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
+            <td class="col-sm-2"><a class="deleteRow"></a>
 
             </td>
         
@@ -3101,14 +2758,14 @@
         <% unless @todo.v_topic_code40.nil? %>
         
         <tr>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                 <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
        
                 <%= f.text_field :v_topic_code40, class: 'form-control' %>
                  
                  </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
@@ -3117,52 +2774,41 @@
             </span>
             
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
             
                  <span class="has-tooltip" data-toggle="tooltip" title="Enter the column ID in row 1 of the FIRST emotion column for topic">
        
                 <%= f.text_field :v_survey_column40, class: 'form-control' %>
                 </span>
             </td>
-             <td class="col-sm-1">
+             <td class="col-sm-2">
              
                 <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in verbatim.">
        
                 <%= f.text_field :v_topic_title40,  class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Paste in full context language">
        
                 <%= f.text_field :v_topic_frame40, class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
-                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
-       
-                <%= f.text_field :v_segment40, class: 'form-control' %>
-                </span>
-            </td>
-             <td class="col-sm-1">
-                           <span class="has-tooltip" data-toggle="tooltip" title="Enter survey column for client product or baseline topic">
-       
-                <%= f.text_field :v_product_mindset40, class: 'form-control' %>
-                </span>
-            </td>
-            <td class="col-sm-1">
+            
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
        
                 <%= f.text_field :v_ranking_num40, class: 'form-control' %>
                 </span>
             </td>
                       
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Total number of ranking statments">
        
                 <%= f.text_field :v_ranking_total40, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-1"><a class="deleteRow"></a>
+            <td class="col-sm-2"><a class="deleteRow"></a>
 
             </td>
         
@@ -3174,14 +2820,14 @@
         <% unless @todo.v_topic_code41.nil? %>
         
         <tr>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                 <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
        
                 <%= f.text_field :v_topic_code41, class: 'form-control' %>
                  
                  </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
@@ -3190,52 +2836,41 @@
             </span>
             
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
             
                  <span class="has-tooltip" data-toggle="tooltip" title="Enter the column ID in row 1 of the FIRST emotion column for topic">
        
                 <%= f.text_field :v_survey_column41, class: 'form-control' %>
                 </span>
             </td>
-             <td class="col-sm-1">
+             <td class="col-sm-2">
              
                 <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in verbatim.">
        
                 <%= f.text_field :v_topic_title41,  class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Paste in full context language">
        
                 <%= f.text_field :v_topic_frame41, class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
-                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
-       
-                <%= f.text_field :v_segment41, class: 'form-control' %>
-                </span>
-            </td>
-             <td class="col-sm-1">
-                           <span class="has-tooltip" data-toggle="tooltip" title="Enter survey column for client product or baseline topic">
-       
-                <%= f.text_field :v_product_mindset41, class: 'form-control' %>
-                </span>
-            </td>
-            <td class="col-sm-1">
+            
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
        
                 <%= f.text_field :v_ranking_num41, class: 'form-control' %>
                 </span>
             </td>
                       
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Total number of ranking statments">
        
                 <%= f.text_field :v_ranking_total41, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-1"><a class="deleteRow"></a>
+            <td class="col-sm-2"><a class="deleteRow"></a>
 
             </td>
         
@@ -3248,14 +2883,14 @@
         <% unless @todo.v_topic_code42.nil? %>
         
         <tr>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                 <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
        
                 <%= f.text_field :v_topic_code42, class: 'form-control' %>
                  
                  </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
@@ -3264,52 +2899,41 @@
             </span>
             
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
             
                  <span class="has-tooltip" data-toggle="tooltip" title="Enter the column ID in row 1 of the FIRST emotion column for topic">
        
                 <%= f.text_field :v_survey_column42, class: 'form-control' %>
                 </span>
             </td>
-             <td class="col-sm-1">
+             <td class="col-sm-2">
              
                 <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in verbatim.">
        
                 <%= f.text_field :v_topic_title42,  class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Paste in full context language">
        
                 <%= f.text_field :v_topic_frame42, class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
-                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
-       
-                <%= f.text_field :v_segment42, class: 'form-control' %>
-                </span>
-            </td>
-             <td class="col-sm-1">
-                           <span class="has-tooltip" data-toggle="tooltip" title="Enter survey column for client product or baseline topic">
-       
-                <%= f.text_field :v_product_mindset42, class: 'form-control' %>
-                </span>
-            </td>
-            <td class="col-sm-1">
+            
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
        
                 <%= f.text_field :v_ranking_num42, class: 'form-control' %>
                 </span>
             </td>
                       
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Total number of ranking statments">
        
                 <%= f.text_field :v_ranking_total42, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-1"><a class="deleteRow"></a>
+            <td class="col-sm-2"><a class="deleteRow"></a>
 
             </td>
         
@@ -3321,14 +2945,14 @@
         <% unless @todo.v_topic_code43.nil? %>
         
         <tr>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                 <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
        
                 <%= f.text_field :v_topic_code43, class: 'form-control' %>
                  
                  </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
@@ -3337,52 +2961,41 @@
             </span>
             
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
             
                  <span class="has-tooltip" data-toggle="tooltip" title="Enter the column ID in row 1 of the FIRST emotion column for topic">
        
                 <%= f.text_field :v_survey_column43, class: 'form-control' %>
                 </span>
             </td>
-             <td class="col-sm-1">
+             <td class="col-sm-2">
              
                 <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in verbatim.">
        
                 <%= f.text_field :v_topic_title43,  class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Paste in full context language">
        
                 <%= f.text_field :v_topic_frame43, class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
-                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
-       
-                <%= f.text_field :v_segment43, class: 'form-control' %>
-                </span>
-            </td>
-             <td class="col-sm-1">
-                           <span class="has-tooltip" data-toggle="tooltip" title="Enter survey column for client product or baseline topic">
-       
-                <%= f.text_field :v_product_mindset43, class: 'form-control' %>
-                </span>
-            </td>
-            <td class="col-sm-1">
+           
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
        
                 <%= f.text_field :v_ranking_num43, class: 'form-control' %>
                 </span>
             </td>
-             <td class="col-sm-1">
+             <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Total number of ranking statments">
        
                 <%= f.text_field :v_ranking_total43, class: 'form-control' %>
                 </span>
             </td>         
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
+            <td class="col-sm-2"><a class="deleteRow"></a>
 
             </td>
         
@@ -3394,14 +3007,14 @@
         <% unless @todo.v_topic_code44.nil? %>
         
         <tr>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                 <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
        
                 <%= f.text_field :v_topic_code44, class: 'form-control' %>
                  
                  </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
@@ -3410,52 +3023,41 @@
             </span>
             
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
             
                  <span class="has-tooltip" data-toggle="tooltip" title="Enter the column ID in row 1 of the FIRST emotion column for topic">
        
                 <%= f.text_field :v_survey_column44, class: 'form-control' %>
                 </span>
             </td>
-             <td class="col-sm-1">
+             <td class="col-sm-2">
              
                 <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in verbatim.">
        
                 <%= f.text_field :v_topic_title44,  class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Paste in full context language">
        
                 <%= f.text_field :v_topic_frame44, class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
-                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
-       
-                <%= f.text_field :v_segment44, class: 'form-control' %>
-                </span>
-            </td>
-             <td class="col-sm-1">
-                           <span class="has-tooltip" data-toggle="tooltip" title="Enter survey column for client product or baseline topic">
-       
-                <%= f.text_field :v_product_mindset44, class: 'form-control' %>
-                </span>
-            </td>
-            <td class="col-sm-1">
+            
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
        
                 <%= f.text_field :v_ranking_num44, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Total number of ranking statments">
        
                 <%= f.text_field :v_ranking_total44, class: 'form-control' %>
                 </span>
             </td>          
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
+            <td class="col-sm-2"><a class="deleteRow"></a>
 
             </td>
         
@@ -3467,14 +3069,14 @@
         <% unless @todo.v_topic_code45.nil? %>
         
         <tr>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                 <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
        
                 <%= f.text_field :v_topic_code45, class: 'form-control' %>
                  
                  </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
@@ -3483,52 +3085,41 @@
             </span>
             
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
             
                  <span class="has-tooltip" data-toggle="tooltip" title="Enter the column ID in row 1 of the FIRST emotion column for topic">
        
                 <%= f.text_field :v_survey_column45, class: 'form-control' %>
                 </span>
             </td>
-             <td class="col-sm-1">
+             <td class="col-sm-2">
              
                 <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in verbatim.">
        
                 <%= f.text_field :v_topic_title45,  class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Paste in full context language">
        
                 <%= f.text_field :v_topic_frame45, class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
-                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
-       
-                <%= f.text_field :v_segment45, class: 'form-control' %>
-                </span>
-            </td>
-             <td class="col-sm-1">
-                           <span class="has-tooltip" data-toggle="tooltip" title="Enter survey column for client product or baseline topic">
-       
-                <%= f.text_field :v_product_mindset45, class: 'form-control' %>
-                </span>
-            </td>
-            <td class="col-sm-1">
+            
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
        
                 <%= f.text_field :v_ranking_num45, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Total number of ranking statments">
        
                 <%= f.text_field :v_ranking_total45, class: 'form-control' %>
                 </span>
             </td>          
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
+            <td class="col-sm-2"><a class="deleteRow"></a>
 
             </td>
         
@@ -3540,14 +3131,14 @@
         <% unless @todo.v_topic_code46.nil? %>
         
         <tr>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                 <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
        
                 <%= f.text_field :v_topic_code46, class: 'form-control' %>
                  
                  </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
@@ -3556,52 +3147,41 @@
             </span>
             
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
             
                  <span class="has-tooltip" data-toggle="tooltip" title="Enter the column ID in row 1 of the FIRST emotion column for topic">
        
                 <%= f.text_field :v_survey_column46, class: 'form-control' %>
                 </span>
             </td>
-             <td class="col-sm-1">
+             <td class="col-sm-2">
              
                 <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in verbatim.">
        
                 <%= f.text_field :v_topic_title46,  class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Paste in full context language">
        
                 <%= f.text_field :v_topic_frame46, class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
-                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
-       
-                <%= f.text_field :v_segment46, class: 'form-control' %>
-                </span>
-            </td>
-             <td class="col-sm-1">
-                           <span class="has-tooltip" data-toggle="tooltip" title="Enter survey column for client product or baseline topic">
-       
-                <%= f.text_field :v_product_mindset46, class: 'form-control' %>
-                </span>
-            </td>
-            <td class="col-sm-1">
+            
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
        
                 <%= f.text_field :v_ranking_num46, class: 'form-control' %>
                 </span>
             </td>
                       
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Total number of ranking statments">
        
                 <%= f.text_field :v_ranking_total46, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-1"><a class="deleteRow"></a>
+            <td class="col-sm-2"><a class="deleteRow"></a>
 
             </td>
         
@@ -3613,14 +3193,14 @@
         <% unless @todo.v_topic_code47.nil? %>
         
         <tr>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                 <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
        
                 <%= f.text_field :v_topic_code47, class: 'form-control' %>
                  
                  </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
@@ -3629,52 +3209,41 @@
             </span>
             
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
             
                  <span class="has-tooltip" data-toggle="tooltip" title="Enter the column ID in row 1 of the FIRST emotion column for topic">
        
                 <%= f.text_field :v_survey_column47, class: 'form-control' %>
                 </span>
             </td>
-             <td class="col-sm-1">
+             <td class="col-sm-2">
              
                 <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in verbatim.">
        
                 <%= f.text_field :v_topic_title47,  class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Paste in full context language">
        
                 <%= f.text_field :v_topic_frame47, class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
-                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
-       
-                <%= f.text_field :v_segment47, class: 'form-control' %>
-                </span>
-            </td>
-             <td class="col-sm-1">
-                           <span class="has-tooltip" data-toggle="tooltip" title="Enter survey column for client product or baseline topic">
-       
-                <%= f.text_field :v_product_mindset47, class: 'form-control' %>
-                </span>
-            </td>
-            <td class="col-sm-1">
+            
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
        
                 <%= f.text_field :v_ranking_num47, class: 'form-control' %>
                 </span>
             </td>
                       
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Total number of ranking statments">
        
                 <%= f.text_field :v_ranking_total47, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-1"><a class="deleteRow"></a>
+            <td class="col-sm-2"><a class="deleteRow"></a>
 
             </td>
         
@@ -3686,14 +3255,14 @@
         <% unless @todo.v_topic_code48.nil? %>
         
         <tr>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                 <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
        
                 <%= f.text_field :v_topic_code48, class: 'form-control' %>
                  
                  </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
@@ -3702,52 +3271,41 @@
             </span>
             
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
             
                  <span class="has-tooltip" data-toggle="tooltip" title="Enter the column ID in row 1 of the FIRST emotion column for topic">
        
                 <%= f.text_field :v_survey_column48, class: 'form-control' %>
                 </span>
             </td>
-             <td class="col-sm-1">
+             <td class="col-sm-2">
              
                 <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in verbatim.">
        
                 <%= f.text_field :v_topic_title48,  class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Paste in full context language">
        
                 <%= f.text_field :v_topic_frame48, class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
-                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
-       
-                <%= f.text_field :v_segment48, class: 'form-control' %>
-                </span>
-            </td>
-             <td class="col-sm-1">
-                           <span class="has-tooltip" data-toggle="tooltip" title="Enter survey column for client product or baseline topic">
-       
-                <%= f.text_field :v_product_mindset48, class: 'form-control' %>
-                </span>
-            </td>
-            <td class="col-sm-1">
+            
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
        
                 <%= f.text_field :v_ranking_num48, class: 'form-control' %>
                 </span>
             </td>
                       
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Total number of ranking statments">
        
                 <%= f.text_field :v_ranking_total48, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-1"><a class="deleteRow"></a>
+            <td class="col-sm-2"><a class="deleteRow"></a>
 
             </td>
         
@@ -3759,14 +3317,14 @@
         <% unless @todo.v_topic_code49.nil? %>
         
         <tr>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                 <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
        
                 <%= f.text_field :v_topic_code49, class: 'form-control' %>
                  
                  </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                         
                 <span class="has-tooltip" data-toggle="tooltip" title="Is this topic a 3 emotion battery, 1 emotion battery, or ranking.">
        
@@ -3775,52 +3333,41 @@
             </span>
             
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
             
                  <span class="has-tooltip" data-toggle="tooltip" title="Enter the column ID in row 1 of the FIRST emotion column for topic">
        
                 <%= f.text_field :v_survey_column49, class: 'form-control' %>
                 </span>
             </td>
-             <td class="col-sm-1">
+             <td class="col-sm-2">
              
                 <span class="has-tooltip" data-toggle="tooltip" title="Name to display on sheet tab in verbatim.">
        
                 <%= f.text_field :v_topic_title49,  class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Paste in full context language">
        
                 <%= f.text_field :v_topic_frame49, class: 'form-control'  %>
                 </span>
             </td>
-            <td class="col-sm-1">
-                         <span class="has-tooltip" data-toggle="tooltip" title="Column to start segment.">
-       
-                <%= f.text_field :v_segment49, class: 'form-control' %>
-                </span>
-            </td>
-             <td class="col-sm-1">
-                           <span class="has-tooltip" data-toggle="tooltip" title="Enter survey column for client product or baseline topic">
-       
-                <%= f.text_field :v_product_mindset49, class: 'form-control' %>
-                </span>
-            </td>
-            <td class="col-sm-1">
+            
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Number of ranking statments evaluated">
        
                 <%= f.text_field :v_ranking_num49, class: 'form-control' %>
                 </span>
             </td>
                       
-            <td class="col-sm-1">
+            <td class="col-sm-2">
                          <span class="has-tooltip" data-toggle="tooltip" title="Total number of ranking statments">
        
                 <%= f.text_field :v_ranking_total49, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-1"><a class="deleteRow"></a>
+            <td class="col-sm-2"><a class="deleteRow"></a>
 
             </td>
         
