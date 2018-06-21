@@ -81,9 +81,9 @@ ranking_total            = verbatim_call[6]
 distance_counter = 0
 distance = 3
 
-distance_row = $data[0].to_s.split("          ")
-start_spot = distance_row.index(survey_column)
-$g_start_spot = distance_row.index(survey_column)
+$main_distance_row = $data[0].to_s.split("          ")
+start_spot = $main_distance_row.index(survey_column)
+$g_start_spot = $main_distance_row.index(survey_column)
 #segment_calc = distance_row.index(segment)
 #product_start_spot = distance_row.index(product_mindset)
 $rank_num = ranking_num
@@ -98,7 +98,7 @@ $segment_count   = $segments.size
 $segment_s_array  = Array.new
 
 $segments.each do |seg|
-   $segment_s_array.push(distance_row.index(seg))
+   $segment_s_array.push($main_distance_row.index(seg))
 end
 
 
@@ -110,7 +110,7 @@ $mindsets        = mindsets.reject { |v| v.to_s.empty? }
 $mindset_count   = $mindsets.size
 $mindset_s_array = Array.new
 $mindsets.each do |mindset|
-    $mindset_s_array.push(distance_row.index(mindset))
+    $mindset_s_array.push($main_distance_row.index(mindset))
 end
 
 
@@ -334,6 +334,8 @@ s32 = start_spot + 12  # Intensity
 s33 = start_spot + 13  # Why
 s34 = start_spot + 14  # Valence
 
+
+
 # this is 1x only
 ss11 = start_spot       # Emotion
 ss12 = start_spot + 1   # Intensity
@@ -385,12 +387,13 @@ case topic_type
                       data_row[s13] ,  #Why
                       data_row[s14].to_i , #s
                       valence_calc(data_row[s14]) ,  #valence
+                      mindset_calc(data_row[s14], data_row[s24], data_row[s34]), #mindset
                       many_mindset_calc($mindset_s_array[0],$mindset_types_array[0], row_count ), #mindset 1
-                      segment_calc($segment_s_array[0], row_count),                                              #segment 1
                       many_mindset_calc($mindset_s_array[1],$mindset_types_array[1], row_count ), #mindset 2
                       many_mindset_calc($mindset_s_array[2],$mindset_types_array[2], row_count ), #mindset 3
                       many_mindset_calc($mindset_s_array[3],$mindset_types_array[3], row_count ), #mindset 4
                       many_mindset_calc($mindset_s_array[4],$mindset_types_array[4], row_count ), #mindset 5
+                      segment_calc($segment_s_array[0], row_count),   #segment 1
                       segment_calc($segment_s_array[1], row_count),   #segment 2
                       segment_calc($segment_s_array[2], row_count),   #segment 3
                       data_row[0]] # response id
@@ -403,12 +406,13 @@ case topic_type
                       data_row[s23] ,
                       data_row[s24].to_i ,
                       valence_calc(data_row[s24]),
+                      mindset_calc(data_row[s14], data_row[s24], data_row[s34]), #mindset
                       many_mindset_calc($mindset_s_array[0],$mindset_types_array[0], row_count ), #mindset 1
-                      segment_calc($segment_s_array[0], row_count),                                              #segment 1
                       many_mindset_calc($mindset_s_array[1],$mindset_types_array[1], row_count ), #mindset 2
                       many_mindset_calc($mindset_s_array[2],$mindset_types_array[2], row_count ), #mindset 3
                       many_mindset_calc($mindset_s_array[3],$mindset_types_array[3], row_count ), #mindset 4
                       many_mindset_calc($mindset_s_array[4],$mindset_types_array[4], row_count ), #mindset 5
+                      segment_calc($segment_s_array[0], row_count),   #segment 1
                       segment_calc($segment_s_array[1], row_count),   #segment 2
                       segment_calc($segment_s_array[2], row_count),   #segment 3
                       data_row[0]] # response id
@@ -420,12 +424,13 @@ case topic_type
                      data_row[s33] ,
                      data_row[s34].to_i ,
                      valence_calc(data_row[s34]),
+                     mindset_calc(data_row[s14], data_row[s24], data_row[s34]), #mindset
                      many_mindset_calc($mindset_s_array[0],$mindset_types_array[0], row_count ), #mindset 1
-                     segment_calc($segment_s_array[0], row_count),                                              #segment 1
                      many_mindset_calc($mindset_s_array[1],$mindset_types_array[1], row_count ), #mindset 2
                      many_mindset_calc($mindset_s_array[2],$mindset_types_array[2], row_count ), #mindset 3
                      many_mindset_calc($mindset_s_array[3],$mindset_types_array[3], row_count ), #mindset 4
                      many_mindset_calc($mindset_s_array[4],$mindset_types_array[4], row_count ), #mindset 5
+                     segment_calc($segment_s_array[0], row_count),   #segment 1
                      segment_calc($segment_s_array[1], row_count),   #segment 2
                      segment_calc($segment_s_array[2], row_count),   #segment 3
                      data_row[0]] # response id
@@ -466,12 +471,13 @@ title_row_raw = [ "Emotion", #emotion
                   "Why" ,  #Why
                   "S" , #s
                   "Valence" ,  #valence
+                  "Mindset" ,
                   if many_mindset_calc($mindset_s_array[0],$mindset_types_array[0], row_count ) == "" then "" else $mindset_titles_array[0] end, #mindset 1
-                  "Segment",                                              #segment 1
                   if many_mindset_calc($mindset_s_array[1],$mindset_types_array[1], row_count ) == "" then "" else $mindset_titles_array[1] end, #mindset 2
                   if many_mindset_calc($mindset_s_array[2],$mindset_types_array[2], row_count ) == "" then "" else $mindset_titles_array[2] end, #mindset 3
                   if many_mindset_calc($mindset_s_array[3],$mindset_types_array[3], row_count ) == "" then "" else $mindset_titles_array[3] end, #mindset 4
                   if many_mindset_calc($mindset_s_array[4],$mindset_types_array[4], row_count ) == "" then "" else $mindset_titles_array[4] end, #mindset 5
+                  "Segment",
                   if segment_calc($segment_s_array[1], row_count) == "" then "" else "Segment 2" end,   #segment 2
                   if segment_calc($segment_s_array[2], row_count) == "" then "" else "Segment 3" end,   #segment 3
                   "Response ID"] # response id
@@ -513,12 +519,13 @@ title_row_raw = [ "Emotion", #emotion
                          data_row[ss13] ,  #Why
                          data_row[ss14].to_i , #s
                          valence_calc(data_row[ss14]) ,  #valence
+                         map_mindset_value(data_row[ss14]),
                          many_mindset_calc($mindset_s_array[0],$mindset_types_array[0], row_count ), #mindset 1
-                         segment_calc($segment_s_array[0], row_count),                                              #segment 1
                          many_mindset_calc($mindset_s_array[1],$mindset_types_array[1], row_count ), #mindset 2
                          many_mindset_calc($mindset_s_array[2],$mindset_types_array[2], row_count ), #mindset 3
                          many_mindset_calc($mindset_s_array[3],$mindset_types_array[3], row_count ), #mindset 4
                          many_mindset_calc($mindset_s_array[4],$mindset_types_array[4], row_count ), #mindset 5
+                         segment_calc($segment_s_array[0], row_count),   #segment 1
                          segment_calc($segment_s_array[1], row_count),   #segment 2
                          segment_calc($segment_s_array[2], row_count),   #segment 3
                          data_row[0]] # response id
@@ -551,12 +558,13 @@ title_row_raw = [ "Emotion", #emotion
                      "Why" ,  #Why
                      "S" , #s
                      "Valence" ,  #valence
+                     "Mindset", #mindset
                      if many_mindset_calc($mindset_s_array[0],$mindset_types_array[0], row_count ) == "" then "" else $mindset_titles_array[0] end, #mindset 1
-                     "Segment",                                              #segment 1
                      if many_mindset_calc($mindset_s_array[1],$mindset_types_array[1], row_count ) == "" then "" else $mindset_titles_array[1] end, #mindset 2
                      if many_mindset_calc($mindset_s_array[2],$mindset_types_array[2], row_count ) == "" then "" else $mindset_titles_array[2] end, #mindset 3
                      if many_mindset_calc($mindset_s_array[3],$mindset_types_array[3], row_count ) == "" then "" else $mindset_titles_array[3] end, #mindset 4
                      if many_mindset_calc($mindset_s_array[4],$mindset_types_array[4], row_count ) == "" then "" else $mindset_titles_array[4] end, #mindset 5
+                     "Segment",   #segment 1
                      if segment_calc($segment_s_array[1], row_count) == "" then "" else "Segment 2" end,   #segment 2
                      if segment_calc($segment_s_array[2], row_count) == "" then "" else "Segment 3" end,   #segment 3
                      "Response ID"] # response id
@@ -618,12 +626,12 @@ title_row_raw = [ "Emotion", #emotion
                             data_row[r_calc(data_row[s11], $rank_total , "why" ) ],
                             data_row[r_calc(data_row[s11], $rank_total , "s" ) ].to_i,
                             valence_calc(data_row[r_calc(data_row[s11], $rank_total , "valence" )]),
-                            r_mindset_calc( $rank_total, $rank_num, row_count),
-                            segment_calc($segment_s_array[0], row_count),                               #segment 1
+                            r_mindset_calc( $rank_total, $rank_num, row_count), #mindset
                             many_mindset_calc($mindset_s_array[1],$mindset_types_array[1], row_count ), #mindset 2
                             many_mindset_calc($mindset_s_array[2],$mindset_types_array[2], row_count ), #mindset 3
                             many_mindset_calc($mindset_s_array[3],$mindset_types_array[3], row_count ), #mindset 4
                             many_mindset_calc($mindset_s_array[4],$mindset_types_array[4], row_count ), #mindset 5
+                            segment_calc($segment_s_array[0], row_count),   #segment 1
                             segment_calc($segment_s_array[1], row_count),   #segment 2
                             segment_calc($segment_s_array[2], row_count),   #segment 3
                             data_row[0]]
@@ -651,13 +659,14 @@ title_row_raw = [ "Emotion", #emotion
        "Intensity" ,  #Intensity
        "Why" ,  #Why
        "S" , #s
-       "Valence" ,  #valence
+       "Valence" ,  #valence,
+       "Mindset", #mindset
        if many_mindset_calc($mindset_s_array[0],$mindset_types_array[0], row_count ) == "" then "" else $mindset_titles_array[0] end, #mindset 1
-       "Segment",                                              #segment 1
        if many_mindset_calc($mindset_s_array[1],$mindset_types_array[1], row_count ) == "" then "" else $mindset_titles_array[1] end, #mindset 2
        if many_mindset_calc($mindset_s_array[2],$mindset_types_array[2], row_count ) == "" then "" else $mindset_titles_array[2] end, #mindset 3
        if many_mindset_calc($mindset_s_array[3],$mindset_types_array[3], row_count ) == "" then "" else $mindset_titles_array[3] end, #mindset 4
        if many_mindset_calc($mindset_s_array[4],$mindset_types_array[4], row_count ) == "" then "" else $mindset_titles_array[4] end, #mindset 5
+       "Segment",          #segment 1
        if segment_calc($segment_s_array[1], row_count) == "" then "" else "Segment 2" end,   #segment 2
        if segment_calc($segment_s_array[2], row_count) == "" then "" else "Segment 3" end,   #segment 3
        "Response ID"] # response id
@@ -721,11 +730,11 @@ title_row_raw = [ "Emotion", #emotion
                             data_row[r_calc(data_row[s11], $rank_total , "s" ) ].to_i,
                             valence_calc(data_row[r_calc(data_row[s11], $rank_total , "valence" )]),
                             r_mindset_calc( $rank_total, $rank_num, row_count),
-                            segment_calc($segment_s_array[0], row_count),                               #segment 1
                             many_mindset_calc($mindset_s_array[1],$mindset_types_array[1], row_count ), #mindset 2
                             many_mindset_calc($mindset_s_array[2],$mindset_types_array[2], row_count ), #mindset 3
                             many_mindset_calc($mindset_s_array[3],$mindset_types_array[3], row_count ), #mindset 4
                             many_mindset_calc($mindset_s_array[4],$mindset_types_array[4], row_count ), #mindset 5
+                            segment_calc($segment_s_array[0], row_count),   #segment 1
                             segment_calc($segment_s_array[1], row_count),   #segment 2
                             segment_calc($segment_s_array[2], row_count),   #segment 3
                             data_row[0]]
@@ -753,13 +762,14 @@ title_row_raw = [ "Emotion", #emotion
        "Intensity" ,  #Intensity
        "Why" ,  #Why
        "S" , #s
-       "Valence" ,  #valence
+       "Valence" ,  #valence,
+       "Mindset",
        if many_mindset_calc($mindset_s_array[0],$mindset_types_array[0], row_count ) == "" then "" else $mindset_titles_array[0] end, #mindset 1
-       "Segment",                                              #segment 1
        if many_mindset_calc($mindset_s_array[1],$mindset_types_array[1], row_count ) == "" then "" else $mindset_titles_array[1] end, #mindset 2
        if many_mindset_calc($mindset_s_array[2],$mindset_types_array[2], row_count ) == "" then "" else $mindset_titles_array[2] end, #mindset 3
        if many_mindset_calc($mindset_s_array[3],$mindset_types_array[3], row_count ) == "" then "" else $mindset_titles_array[3] end, #mindset 4
        if many_mindset_calc($mindset_s_array[4],$mindset_types_array[4], row_count ) == "" then "" else $mindset_titles_array[4] end, #mindset 5
+       "Segment",                                              #segment 1
        if segment_calc($segment_s_array[1], row_count) == "" then "" else "Segment 2" end,   #segment 2
        if segment_calc($segment_s_array[2], row_count) == "" then "" else "Segment 3" end,   #segment 3
        "Response ID"] # response id
@@ -867,9 +877,10 @@ def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
     $segments        = segments.reject { |v| v.to_s.empty? }
     $segment_count   = $segments.size
     $segment_s_array  = Array.new
+    $main_distance_row = $data[0].to_s.split("          ")
     
     $segments.each do |seg|
-        $segment_s_array.push(distance_row.index(seg))
+        $segment_s_array.push($main_distance_row.index(seg))
     end
     
     
@@ -881,7 +892,7 @@ def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
     $mindset_count   = $mindsets.size
     $mindset_s_array = Array.new
     $mindsets.each do |mindset|
-        $mindset_s_array.push(distance_row.index(mindset))
+        $mindset_s_array.push($main_distance_row.index(mindset))
     end
     
     
@@ -916,18 +927,23 @@ def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
     
     
     
-    
+    $gdata      = Hash.new
+    $m_gdata    = Hash.new
+    $o_gdata    = Hash.new
+    $om_gdata   = Hash.new
     
     
     cworksheets.each do |cworksheet|
         
         
-        #emotion, intensity, why, s, valence, mindset 1, segment 1, mindset 2, mindset 3, mindset 4, mindset 5, segment 2, segment 3, response
-        
+        #emotion, intensity, why, s, valence, mindset,  mindset 1, mindset 2, mindset 3, mindset 4, mindset 5, segment 1, segment 2, segment 3, response
+        #   0         1       2   3     4        5           6        7           8           9          10        11         12        13
         
         
         puts "Reading verbatims for graph generation, sheet: #{cworksheet.name}"
         num_rows = 0
+        
+        
     
         #get the contents of the sheet and put them in an array
         cworksheet.rows.each do |row|
@@ -965,8 +981,15 @@ def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
                 
                 else
                 
-                #emotion, intensity, why, s, valence, mindset 1, segment 1, mindset 2, mindset 3, mindset 4, mindset 5, segment 2, segment 3, response
+                #emotion, intensity, why, s, valence, mindset,  mindset 1, mindset 2, mindset 3, mindset 4, mindset 5, segment1, segment 2, segment 3, response
+                
+                
+                
+                
                 data_row = $g_data_raw[row_count].to_s.split("          ") # Parses individual rows from sheet
+                row_size = data_row[0].size
+                $mindset_count
+                $segment_count
                 
                 if data_row[4] == "Very Pleasant"
                     positive = positive + 1
@@ -991,11 +1014,40 @@ def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
                     
                 end
 
+
+
+
+
+
                 
                 #add segments to array so you can manipulate it later
+                #$segment_a.push(data_row[7])
+                #figure out how many segments there are and where they are
+                #add them to the segments array
+                $seg_spot == 0
+                if $segment_count == 1
+                    $seg_spot = $mindset_count + 6
+                    $segment_a.push(data_row[$seg_spot])
                 
-                $segment_a.push(data_row[6])
                 
+                elsif $segment_count == 2
+                    $seg_spot = $mindset_count + 6
+                    $segment_a.push(data_row[$seg_spot])
+                
+                    $seg_spot_1 = $mindset_count + 7
+                    $segment_a.push(data_row[$seg_spot_1])
+                    
+                elsif $segment_count == 3
+                $seg_spot = $mindset_count + 6
+                $segment_a.push(data_row[$seg_spot])
+                
+                $seg_spot_1 = $mindset_count + 7
+                $segment_a.push(data_row[$seg_spot_1])
+                
+                $seg_spot_3 = $mindset_count + 8
+                $segment_a.push(data_row[$seg_spot_3])
+                
+                end
                 
                 row_count = row_count + 1
             end
@@ -1077,14 +1129,14 @@ def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
              
                 $uniq_seg_names.each do |seg| # see what segment is on the row we're looking at
                     array_spot = $uniq_seg_names.index(seg)
-                    if seg == data_row[6]
+                    if seg == data_row[7]
                        $uniq_segs[array_spot].push(data_row[4]) # Put the valence into an array corresponding to the segment title
                     end
                 
                end
                 $m_uniq_seg_names.each do |seg| # see what segment is on the row we're looking at
                     array_spot = $m_uniq_seg_names.index(seg)
-                    if seg == data_row[6]
+                    if seg == data_row[7]
                         $m_uniq_segs[array_spot].push(data_row[5]) # Put the mindset into an array corresponding to the segment title
                     end
                     
@@ -1204,26 +1256,53 @@ def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
         title = cworksheet.name[0..2].strip
         m_title = cworksheet.name[0..2].strip
         $gdata[title]      = [$ts]
-        $m_gdata[m_title]  = [$m_ts]
         $o_gdata[title]    = [$ts]
+        $m_gdata[m_title]  = [$m_ts]
         $om_gdata[m_title] = [$m_ts]
         
-       
+      
         ##TODO - Filter out nil values from
          $seg_values.each do |key, value|
              title = cworksheet.name[0..2].strip
-             $gdata[title].push(key, value)
-             $o_gdata[title].push(key, value)
+             
+             
+             if $gdata[title].include?(value)
+                 puts "#{title} Already exists in doc, skipping"
+             else
+                 $gdata[title].push(key, value)
+             end
+             
+             if $o_gdata[title].include?(value)
+                 puts "#{title} Already exists in doc, skipping"
+             else
+                 $o_gdata[title].push(key, value)
+             end
+             #$gdata[title].push(key, value)
+             #$o_gdata[title].push(key, value)
             
              
         end
-         
+     
          $m_seg_values.each do |key, value|
              m_title = cworksheet.name[0..2].strip
-             $m_gdata[m_title].push(key, value)
-             $om_gdata[m_title].push(key, value)
-                     end
-         
+             
+             
+             if $m_gdata[m_title].include?(value)
+                 puts "#{m_title} Already exists in doc, skipping"
+                 else
+                 $m_gdata[m_title].push(key, value)
+             end
+             
+             if $om_gdata[m_title].include?(value)
+                 puts "#{m_title} Already exists in doc, skipping"
+                 else
+                 $om_gdata[m_title].push(key, value)
+             end
+             #$m_gdata[m_title].push(key, value)
+             #$om_gdata[m_title].push(key, value)
+            
+            end
+       
       
       end # End for each worksheet
 
@@ -1644,7 +1723,7 @@ end
 end
 
 
-puts "Graph Call+_+__+_+_+_+_+_+_+_+_+_+_+_+__+_+    #{values}"
+puts "Values  +_+__+_+_+_+_+_+_+_+_+_+_+_+__+_+    #{values}"
 values.each do |graph_call|
     puts "Graph Call+_+__+_+_+_+_+_+_+_+_+_+_+_+__+_+    #{graph_call}"
     gm_topic_code          = graph_call[0]
@@ -1674,6 +1753,7 @@ values.each do |graph_call|
         $ts_total.push("Total")
         
         puts "m_graph_topics_a ----------- #{$m_graph_topics_a}"
+        puts "omg data #####   {#$om_gdata}"
         $m_graph_topics_a.each do |topic|
         
             ts_data = $om_gdata[topic.strip]
