@@ -186,11 +186,11 @@ end
 
 
 def map_mindset_value(mindset_value)
-    if mindset_value < 1.5
+    if mindset_value.to_f < 1.5
         mindset = "Impassioned"
-        elsif mindset_value < 2.6
+        elsif mindset_value.to_f < 2.6
         mindset = "Attracted"
-        elsif mindset_value < 3.5
+        elsif mindset_value.to_f < 3.5
         mindset = "Apathetic"
         else
         mindset = "Unattracted"
@@ -2669,8 +2669,22 @@ values.each do |graph_call|
             #make title value
             if $m_graph_topics_a[0] == ""
             $m_graph_title = $m_graph_topics_a
+            
+            #$mindset_titles_array.each do |mindset|
+                
+                #    $m_graph_title.push(mindset)
+                # puts " Graph titles array 1 #{$m_graph_title}"
+                #end
+            
             else
             $m_graph_title = $m_graph_topics_a.unshift("")
+            
+            #$mindset_titles_array.each do |mindset|
+                
+                #   $m_graph_title.push(mindset)
+                #puts " Graph titles array 2 #{$m_graph_title}"
+                #end
+            
             end
             
             sheet.add_row  $m_graph_title, :style => chart_style
@@ -2828,6 +2842,12 @@ values.each do |graph_call|
         puts "Number of segments #{$num_of_segments}"
         $m_segment_name = Array.new
         $m_ts_data = Array.new
+        $m_ts_data_1 = Array.new
+        $m_ts_data_2 = Array.new
+        $m_ts_data_3 = Array.new
+        $m_ts_data_4 = Array.new
+        $m_ts_data_5 = Array.new
+        
         $m_g_spot = 0
         $m_seg_count = 0
         
@@ -2851,14 +2871,73 @@ values.each do |graph_call|
             $ts_total.push("Total")
             #get values for segment
             
+            $ts_unattracted_1.clear
+            $ts_apathetic_1.clear
+            $ts_attracted_1.clear
+            $ts_impassioned_1.clear
+            $ts_total_1.clear
+            
+            $ts_unattracted_2.clear
+            $ts_apathetic_2.clear
+            $ts_attracted_2.clear
+            $ts_impassioned_2.clear
+            $ts_total_2.clear
+            
+            
+            $ts_unattracted_3.clear
+            $ts_apathetic_3.clear
+            $ts_attracted_3.clear
+            $ts_impassioned_3.clear
+            $ts_total_3.clear
+            
+            
+            $ts_unattracted_4.clear
+            $ts_apathetic_4.clear
+            $ts_attracted_4.clear
+            $ts_impassioned_4.clear
+            $ts_total_4.clear
+            
+            
+            $ts_unattracted_5.clear
+            $ts_apathetic_5.clear
+            $ts_attracted_5.clear
+            $ts_impassioned_5.clear
+            $ts_total_5.clear
+            
+            
+            
+            #Need to figure out how to get the mindset values for various segments
+            
             puts " full gdata before #{$m_gdata}"
             
             $m_graph_topics_s.each do |topic|
                 puts "topic being looked at #{topic}"
                 $m_ts_data = $m_gdata[topic.strip]
-                puts "gdata for debuggin #{$m_gdata[topic.strip]}"
-                puts " full gdata after #{$m_gdata}"
-                puts "ts data #{$m_ts_data}"
+               
+                
+                if $mindset_count >= 1
+                  $m_ts_data_1 = $m_gdata_1[topic.strip]
+                end
+                
+                if $mindset_count >= 2
+                  $m_ts_data_2 = $m_gdata_2[topic.strip]
+                end
+                
+                if $mindset_count >= 3
+                  $m_ts_data_3 = $m_gdata_3[topic.strip]
+                end
+                
+                if $mindset_count >= 4
+                    $m_ts_data_4 = $m_gdata_4[topic.strip]
+                end
+                
+                if $mindset_count == 5
+                    $m_ts_data_5 = $m_gdata_5[topic.strip]
+                end
+                
+                
+                
+                
                 if $m_seg_count == 0
                     $m_g_spot = 1
                     
@@ -2876,6 +2955,50 @@ values.each do |graph_call|
                 $ts_attracted.push(ts_data_a[2])
                 $ts_impassioned.push(ts_data_a[3])
                 $ts_total.push(ts_data_a[4])
+                
+                if $mindset_count >= 1
+                    $ts_unattracted_1.push(ts_data_a_1[0])
+                    $ts_apathetic_1.push(ts_data_a_1[1])
+                    $ts_attracted_1.push(ts_data_a_1[2])
+                    $ts_impassioned_1.push(ts_data_a_1[3])
+                    $ts_total_1.push(ts_data_a_1[4])
+                end
+                
+                if $mindset_count >= 2
+                    $ts_unattracted_2.push(ts_data_a_2[0])
+                    $ts_apathetic_2.push(ts_data_a_2[1])
+                    $ts_attracted_2.push(ts_data_a_2[2])
+                    $ts_impassioned_2.push(ts_data_a_2[3])
+                    $ts_total_2.push(ts_data_a_2[4])
+                end
+                
+                if $mindset_count >= 3
+                    $ts_unattracted_3.push(ts_data_a_3[0])
+                    $ts_apathetic_3.push(ts_data_a_3[1])
+                    $ts_attracted_3.push(ts_data_a_3[2])
+                    $ts_impassioned_3.push(ts_data_a_3[3])
+                    $ts_total_3.push(ts_data_a_3[4])
+                end
+                
+                if $mindset_count >= 4
+                    $ts_unattracted_4.push(ts_data_a_4[0])
+                    $ts_apathetic_4.push(ts_data_a_4[1])
+                    $ts_attracted_4.push(ts_data_a_4[2])
+                    $ts_impassioned_4.push(ts_data_a_4[3])
+                    $ts_total_4.push(ts_data_a_4[4])
+                end
+                
+                if $mindset_count == 5
+                    $ts_unattracted_5.push(ts_data_a_5[0])
+                    $ts_apathetic_5.push(ts_data_a_5[1])
+                    $ts_attracted_5.push(ts_data_a_5[2])
+                    $ts_impassioned_5.push(ts_data_a_5[3])
+                    $ts_total_5.push(ts_data_a_5[4])
+                end
+
+                
+                ####### Need to put all the new values in the array like is done up above.
+                
                 
                 $name_count = $m_seg_count * 2
                 
@@ -2904,8 +3027,10 @@ values.each do |graph_call|
                 #make title value
                 if $m_graph_topics_a[0] == ""
                     $m_graph_title = $m_graph_topics_a
+                   
                     else
                     $m_graph_title = $m_graph_topics_a.unshift("")
+                   
                 end
                 
                 sheet.add_row  $m_graph_title, :style => chart_style
