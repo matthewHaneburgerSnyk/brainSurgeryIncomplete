@@ -2123,7 +2123,7 @@ wb.add_worksheet(:name=> "#{$seg_title}") do |sheet|
        
        else
        
-       num_of_topics = $graph_topics_s.size - 1
+       num_of_topics = $graph_topics_s.size
        
        
    end
