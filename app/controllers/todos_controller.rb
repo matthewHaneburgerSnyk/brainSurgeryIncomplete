@@ -155,7 +155,7 @@ class TodosController < ApplicationController
 
   
     #puts todosVH.class
-    #puts todosVH
+    #puts todosVH test
     end
     
   end
