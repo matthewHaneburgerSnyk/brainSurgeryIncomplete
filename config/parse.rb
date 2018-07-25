@@ -852,13 +852,16 @@ end
 def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
     
     $rankings_exist_all = false
+    puts "graphing values #{values}"
     
     values.each do |graph_call|
         
-        g_ranking_num = graph_call[4]
-       
-       if g_ranking_num.to_i > 0
-           $rankings_exist_all = true
+        r_topics = graph_call[2].split(",")
+    
+       r_topics.each do |topic|
+           if topic.upcase.strip.include?("R")
+              $rankings_exist_all = true
+           end
        end
         
         
@@ -1373,20 +1376,25 @@ def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
         $or_gdata[$r_title] = [$ts]
         $rm_gdata[$r_title] = [$m_ts]
         
-        
+        #not getting all the ranking data, need to parse it out the same hre
         
     puts "m gdata #{$m_gdata}"
     puts "m gdata 1 6 #{$m_gdata_2}"
     puts "m ts 2#{$m_ts_2}"
     puts "rg data 1#{$r_gdata}"
     puts "rm gdata 1 ${rm_gdata}"
+    puts "g data -- #{$gdata}"
     
         puts "**  seg values #{$seg_values}"
+        puts "rankings exist all #{$rankings_exist_all}"
       
         ##
          $seg_values.each do |key, value|
              title = cworksheet.name[0..2].strip
              r_title = cworksheet.name.strip
+             puts "Title #{title}"
+             puts "r_title #{r_title}"
+             
              
              if $gdata[title].include?(value)
                  puts "#{title} Already exists in doc, skipping"
@@ -1438,6 +1446,7 @@ def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
                  $om_gdata[m_title].push(key, value)
              end
              if $rankings_exist_all == true
+                 
              if $rm_gdata[r_title].include?(value)
                  puts "#{r_title} Already exists in doc, skipping"
                  else
@@ -1451,7 +1460,9 @@ def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
          end
          
          puts "rg data 2#{$r_gdata}"
+         puts "g data --- #{$gdata}"
          puts "rm gdata 2 #{$rm_gdata}"
+         puts "or gdata 2 #{$or_gdata}"
          #these ^ have all the data including rankings, graph them!
          
          
@@ -1512,7 +1523,8 @@ puts "m gdata #{$m_gdata}"
         
         $graph_topics_a = Array.new
         $graph_topics_a = graph_topics.split(",")
-        $graph_topics_s = Array.new
+       
+       $graph_topics_s = Array.new
         $graph_topics_s = graph_topics.split(",")
         
         $rankings_exist = false
@@ -1555,7 +1567,7 @@ $r_ts_total_used  = Array.new
 
 
 puts "graph topics a #{$graph_topics_a}"
-puts "graph ranking topics #{$graph_topics_ranking}"
+#puts "graph ranking topics #{$graph_topics_ranking}"
 $graph_topics_a.each do |topic|
 
 
@@ -1574,9 +1586,11 @@ $graph_topics_a.each do |topic|
 end
 
 
-puts "$rankings exist #{$rankings_exist}"
+#puts "$rankings exist #{$rankings_exist}"
 
 if $rankings_exist == true
+    
+    
     
 $graph_topics_ranking.each do |topic|
     #$r_gdata = Hash.new
@@ -1637,6 +1651,14 @@ if $rankings_exist == true
     $total_ts_total.push($ts_total)
     $total_ts_total_used.push($ts_total_used)
     $total_ts_graph_titles.push($graph_topics_a)
+    
+    
+    $total_ts_positive = $total_ts_positive.flatten
+    $total_ts_neutral = $total_ts_neutral.flatten
+    $total_ts_negative = $total_ts_negative.flatten
+    $total_ts_total = $total_ts_total.flatten
+    $total_ts_total_used = $total_ts_total_used.flatten
+    $total_ts_graph_titles = $total_ts_graph_titles.flatten
 end
 
 
@@ -1661,6 +1683,17 @@ wb.add_worksheet(:name=> "#{g_worksheet_name}") do |sheet|
             sheet.add_row  $total_ts_total_used, :style => chart_style_1 #message index
             sheet.column_widths 20, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,10, 10, 10,10, 10, 10, 10, 10, 10, 10, 10, 10
             
+   
+            
+            puts "titles #{$total_ts_graph_titles}"
+            puts "positive #{$total_ts_positive}"
+            puts "neutral #{$total_ts_neutral}"
+            puts "negative #{$total_ts_negative}"
+            puts "total #{$total_ts_total}"
+            puts "total used #{$total_ts_total_used}"
+            
+            
+            puts "num of graph topics 1 #{$graph_topics_a.size}"
             num_of_topics = 0
             
             if $rankings_exist == true
@@ -1668,11 +1701,11 @@ wb.add_worksheet(:name=> "#{g_worksheet_name}") do |sheet|
             
             else
             
-            num_of_topics = $graph_topics_a.size - 1
+            num_of_topics = $graph_topics_a.size
             
            
             end
-            
+            puts "rankings exits graph test #{$rankings_exist}"
             case num_of_topics
                 when 1
                    $t_cells   = "B3:B3"
@@ -1820,6 +1853,9 @@ wb.add_worksheet(:name=> "#{g_worksheet_name}") do |sheet|
       
      
      sheet.add_chart(Axlsx::Bar3DChart, :start_at => "B10", :end_at => "O32",:title=>"   ", :show_legend => false, :barDir => :col, :grouping => :percentStacked, ) do |chart|
+              puts "row p cells #{$p_cells}"
+         
+         
               chart.add_series :data => sheet[$p_cells], :colors => ['365e92', '365e92', '365e92'], :labels => sheet[$t_cells], :color => "FFFFFF"
               chart.add_series :data => sheet[$neu_cells], :fg_color => "ffffff" , :colors => ['a5a5a5', 'a5a5a5', 'a5a5a5']
               chart.add_series :data => sheet[$neg_cells], :fg_color => "ffffff" , :colors => ['be0712', 'be0712', 'be0712']
@@ -1900,8 +1936,26 @@ while $seg_count < $num_of_segments
     $r_ts_total.clear
     $r_ts_total_used.clear
     #get values for segment
-
     
+    
+    $s_rankings_exist = false
+    
+    #check to see if there are rankings based on if it starts with an r
+    $graph_topics_s.each do |topic|
+        
+        if topic.upcase.strip.include?("R")
+            $s_rankings_exist = true
+        end
+        
+    end
+    
+    if $s_rankings_exist == true
+        $graph_topics_ranking = Array.new
+        $graph_topics_ranking = $worksheet_names.drop($graph_topics_s.size)
+        puts "ranking topics #{$graph_topics_ranking}"
+    end
+
+
     puts " full gdata before #{$gdata}"
     
     $graph_topics_s.each do |topic|
@@ -1940,8 +1994,8 @@ while $seg_count < $num_of_segments
     end
     
     ######################
-    if $rankings_exist == true
-        
+    if $s_rankings_exist == true
+        puts "r g data 1 #{$r_gdata}"
         
         $graph_topics_ranking.each do |topic|
             #$r_gdata = Hash.new
@@ -1961,7 +2015,7 @@ while $seg_count < $num_of_segments
             end
             
             r_ts_data_a = $r_ts_data[$g_spot.to_i]
-            puts "r ts data a #{r_ts_data_a}"
+            puts "r ts data a 2 #{r_ts_data_a}"
             
             
             $r_ts_positive.push(r_ts_data_a[0])
@@ -1981,7 +2035,7 @@ while $seg_count < $num_of_segments
     $total_ts_total_used.clear
     $total_ts_graph_titles.clear
     
-    if $rankings_exist == true
+    if $s_rankings_exist == true
         $total_ts_positive.push($ts_positive)
         $total_ts_neutral.push($ts_neutral)
         $total_ts_negative.push($ts_negative)
@@ -2012,6 +2066,13 @@ while $seg_count < $num_of_segments
         $total_ts_total.push($ts_total)
         $total_ts_total_used.push($ts_total_used)
         $total_ts_graph_titles.push($graph_topics_a)
+        
+        $total_ts_positive = $total_ts_positive.flatten
+        $total_ts_neutral = $total_ts_neutral.flatten
+        $total_ts_negative = $total_ts_negative.flatten
+        $total_ts_total = $total_ts_total.flatten
+        $total_ts_total_used = $total_ts_total_used.flatten
+        $total_ts_graph_titles = $total_ts_graph_titles.flatten
     end
 
     
@@ -2057,12 +2118,12 @@ wb.add_worksheet(:name=> "#{$seg_title}") do |sheet|
    
    num_of_topics = 0
    
-   if $rankings_exist == true
+   if $s_rankings_exist == true
        num_of_topics = $graph_topics_s.size + $graph_topics_ranking.size
        
        else
        
-       num_of_topics = $graph_topics_sa.size - 1
+       num_of_topics = $graph_topics_s.size - 1
        
        
    end
@@ -2221,6 +2282,28 @@ values.each do |graph_call|
         $m_graph_topics_s = Array.new
         $m_graph_topics_s = m_graph_topics.split(",")
         
+        
+        
+        $rankings_exist = false
+        
+        #check to see if there are rankings based on if it starts with an r
+        $m_graph_topics_a.each do |topic|
+            
+            if topic.upcase.strip.include?("R")
+                $rankings_exist = true
+            end
+            
+        end
+        
+        if $rankings_exist == true
+            $graph_topics_ranking = Array.new
+            $graph_topics_ranking = $worksheet_names.drop($graph_topics_a.size)
+            puts "ranking topics #{$graph_topics_ranking}"
+        end
+        
+        
+        
+        
         row_count = 0
         $ts_unattracted   = Array.new
         $ts_unattracted.push("Unattracted")
@@ -2232,6 +2315,15 @@ values.each do |graph_call|
         $ts_impassioned.push("Impassioned")
         $ts_total      = Array.new
         $ts_total.push("Total")
+        
+        
+        $r_ts_unattracted  = Array.new
+        $r_ts_apathetic    = Array.new
+        $r_ts_attracted    = Array.new
+        $r_ts_impassioned  = Array.new
+        $r_ts_total        = Array.new
+        #$r_ts_total_used   = Array.new
+
         
  
         
@@ -2266,11 +2358,78 @@ values.each do |graph_call|
        
         end
         
+        if $rankings_exist == true
+
+        $graph_topics_ranking.each do |topic|
+            #$r_gdata = Hash.new
+            #$rm_gdata = Hash.new
+            r_ts_data = $rm_gdata[topic]
+            
+            r_ts_data_a = r_ts_data[0]
+            
+            puts "r ts data a #{r_ts_data_a}"
+            
+            
+            
+            $r_ts_unattracted.push(r_ts_data_a[0])
+            $r_ts_apathetic.push(r_ts_data_a[1])
+            $r_ts_attracted.push(r_ts_data_a[2])
+            $r_ts_impassioned.push(r_ts_data_a[3])
+            $r_ts_total.push(r_ts_data_a[4])
+            
+            
+        end
         
+    end
         
-        
+        $total_ts_unattracted  = Array.new
+        $total_ts_apathetic    = Array.new
+        $total_ts_attracted    = Array.new
+        $total_ts_impassioned  = Array.new
+        $total_ts_total        = Array.new
+        $total_ts_graph_titles = Array.new
     
         
+
+if $rankings_exist == true
+    $total_ts_unattracted.push($ts_unattracted)
+    $total_ts_apathetic.push($ts_apathetic)
+    $total_ts_attracted.push($ts_attracted)
+    $total_ts_impassioned.push($ts_impassioned)
+    $total_ts_total.push($ts_total)
+    $total_ts_graph_titles.push($m_graph_topics_a)
+    
+    $total_ts_unattracted.push($r_ts_unattracted)
+    $total_ts_apathetic.push($r_ts_apathetic)
+    $total_ts_attracted.push($r_ts_attracted)
+    $total_ts_impassioned.push($r_ts_impassioned)
+    $total_ts_total.push($r_ts_total)
+    $total_ts_graph_titles.push($graph_topics_ranking)
+    
+    $total_ts_unattracted  = $total_ts_unattracted.flatten
+    $total_ts_apathetic    = $total_ts_apathetic.flatten
+    $total_ts_attracted    = $total_ts_attracted.flatten
+    $total_ts_impassioned  = $total_ts_impassioned.flatten
+    $total_ts_total        = $total_ts_total.flatten
+    $total_ts_graph_titles = $total_ts_graph_titles.flatten
+    
+    else
+    
+    $total_ts_unattracted.push($ts_unattracted)
+    $total_ts_apathetic.push($ts_apathetic)
+    $total_ts_attracted.push($ts_attracted)
+    $total_ts_impassioned.push($ts_impassioned)
+    $total_ts_total.push($ts_total)
+    $total_ts_graph_titles.push($m_graph_topics_a)
+    
+    
+    $total_ts_unattracted  = $total_ts_unattracted.flatten
+    $total_ts_apathetic    = $total_ts_apathetic.flatten
+    $total_ts_attracted    = $total_ts_attracted.flatten
+    $total_ts_impassioned  = $total_ts_impassioned.flatten
+    $total_ts_total        = $total_ts_total.flatten
+    $total_ts_graph_titles = $total_ts_graph_titles.flatten
+end
 
         
         
@@ -2288,32 +2447,42 @@ values.each do |graph_call|
             
             
             #make title value
-            if $m_graph_topics_a[0] == ""
+            
+            
+            
+            
+           
+            
+            if $total_ts_graph_titles[0] != ""
                 
-          
-            $m_graph_title = $m_graph_topics_a
-            
-           
-           
-            else
-            
-            $m_graph_title = $m_graph_topics_a.unshift("")
-           
-           
-            
+                $total_ts_graph_titles = $total_ts_graph_titles.unshift("")
             end
             
-            sheet.add_row  $m_graph_title, :style => chart_style
-            sheet.add_row  $ts_unattracted , :style => chart_style
-            sheet.add_row  $ts_apathetic, :style => chart_style
-            sheet.add_row  $ts_attracted, :style => chart_style
-            sheet.add_row  $ts_impassioned, :style => chart_style
-            sheet.add_row  $ts_total, :style => chart_style_1
-            
+
+            sheet.add_row  $total_ts_graph_titles, :style => chart_style
+            sheet.add_row  $total_ts_unattracted , :style => chart_style
+            sheet.add_row  $total_ts_apathetic, :style => chart_style
+            sheet.add_row  $total_ts_attracted, :style => chart_style
+            sheet.add_row  $total_ts_impassioned, :style => chart_style
+            sheet.add_row  $total_ts_total, :style => chart_style_1
+            sheet.column_widths 20, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,10, 10, 10,10, 10, 10, 10, 10, 10, 10, 10, 10
             
        
         
-            num_of_topics = $m_graph_title.size - 1
+        #num_of_topics = $m_graph_title.size - 1
+            
+            
+            if $rankings_exist == true
+                num_of_topics = $m_graph_topics_a.size + $graph_topics_ranking.size
+                
+                else
+                
+                num_of_topics = $m_graph_topics_a.size
+                
+                
+            end
+            
+            
             
             case num_of_topics
                 when 1
@@ -2515,7 +2684,7 @@ values.each do |graph_call|
         puts "Number of segments #{$num_of_segments}"
         $m_segment_name = Array.new
         $m_ts_data = Array.new
-    
+        $r_m_ts_data = Array.new
         
         $m_g_spot = 0
         $m_seg_count = 0
@@ -2540,7 +2709,11 @@ values.each do |graph_call|
             $ts_total.push("Total")
             #get values for segment
             
-            
+            $r_ts_unattracted.clear
+            $r_ts_apathetic.clear
+            $r_ts_attracted.clear
+            $r_ts_impassioned.clear
+            $r_ts_total.clear
             
             
             #Need to figure out how to get the mindset values for various segments
@@ -2551,20 +2724,34 @@ values.each do |graph_call|
             puts "m gdata 1 9 #{$m_gdata_2}"
             
             
+            
+            $s_rankings_exist = false
+            
+            #check to see if there are rankings based on if it starts with an r
             $m_graph_topics_s.each do |topic|
                 
-
-
-
+                if topic.upcase.strip.include?("R")
+                    $s_rankings_exist = true
+                end
+                
+            end
+            
+            if $s_rankings_exist == true
+                $graph_topics_ranking = Array.new
+                $graph_topics_ranking = $worksheet_names.drop($graph_topics_s.size)
+                puts "ranking topics #{$graph_topics_ranking}"
+            end
+            
+            
+            
+            
+            $m_graph_topics_s.each do |topic|
+                
                 puts "topic being looked at #{topic}"
                 
                 s_topic = topic.strip
                 
                 $m_ts_data = $m_gdata[s_topic]
-               
-                
-            
-                
                 
               
                 
@@ -2605,8 +2792,92 @@ values.each do |graph_call|
                 puts "segment name array #{$m_segment_name}"
             end
             
+            if $s_rankings_exist == true
+                puts "r g data 1 #{$r_gdata}"
+                
+                $graph_topics_ranking.each do |topic|
+                    #$r_gdata = Hash.new
+                    #$rm_gdata = Hash.new
+                    $r_m_ts_data = $rm_gdata[topic]
+                    
+                    $r_m_ts_data = $r_m_ts_data.drop(1)
+                    
+                    puts "r ts data #{$r_ts_data}"
+                    if $m_seg_count == 0
+                        $m_g_spot = 1
+                        #$m_g_spot_1 = 2
+                        
+                        else
+                        
+                        $m_g_spot = ($m_seg_count * 2) + 1
+                        #$m_g_spot_1 = ($m_seg_count * 2) + 2
+                    end
+                    
+                    r_m_ts_data_a = $r_m_ts_data[$m_g_spot.to_i]
+                    puts "r ts data a 2 #{r_m_ts_data_a}"
+                    
+                    $r_ts_unattracted.push(r_m_ts_data_a[0])
+                    $r_ts_apathetic.push(r_m_ts_data_a[1])
+                    $r_ts_attracted.push(r_m_ts_data_a[2])
+                    $r_ts_impassioned.push(r_m_ts_data_a[3])
+                    $r_ts_total.push(r_m_ts_data_a[4])
+                    
+                    
+                end
+                
+            end
             
-            
+          
+          
+          $total_ts_unattracted  = Array.new
+          $total_ts_apathetic    = Array.new
+          $total_ts_attracted    = Array.new
+          $total_ts_impassioned  = Array.new
+          $total_ts_total        = Array.new
+          $total_ts_graph_titles = Array.new
+          
+          
+          
+          if $rankings_exist == true
+              $total_ts_unattracted.push($ts_unattracted)
+              $total_ts_apathetic.push($ts_apathetic)
+              $total_ts_attracted.push($ts_attracted)
+              $total_ts_impassioned.push($ts_impassioned)
+              $total_ts_total.push($ts_total)
+              $total_ts_graph_titles.push($m_graph_topics_a)
+              
+              $total_ts_unattracted.push($r_ts_unattracted)
+              $total_ts_apathetic.push($r_ts_apathetic)
+              $total_ts_attracted.push($r_ts_attracted)
+              $total_ts_impassioned.push($r_ts_impassioned)
+              $total_ts_total.push($r_ts_total)
+              $total_ts_graph_titles.push($graph_topics_ranking)
+              
+              $total_ts_unattracted  = $total_ts_unattracted.flatten
+              $total_ts_apathetic    = $total_ts_apathetic.flatten
+              $total_ts_attracted    = $total_ts_attracted.flatten
+              $total_ts_impassioned  = $total_ts_impassioned.flatten
+              $total_ts_total        = $total_ts_total.flatten
+              $total_ts_graph_titles = $total_ts_graph_titles.flatten
+              
+              else
+              
+              $total_ts_unattracted.push($ts_unattracted)
+              $total_ts_apathetic.push($ts_apathetic)
+              $total_ts_attracted.push($ts_attracted)
+              $total_ts_impassioned.push($ts_impassioned)
+              $total_ts_total.push($ts_total)
+              $total_ts_graph_titles.push($m_graph_topics_a)
+              
+              
+              $total_ts_unattracted  = $total_ts_unattracted.flatten
+              $total_ts_apathetic    = $total_ts_apathetic.flatten
+              $total_ts_attracted    = $total_ts_attracted.flatten
+              $total_ts_impassioned  = $total_ts_impassioned.flatten
+              $total_ts_total        = $total_ts_total.flatten
+              $total_ts_graph_titles = $total_ts_graph_titles.flatten
+          end
+          
           
             
             $seg_title = "#{gm_topic_code} #{$m_segment_name[$m_seg_count]} - #{gm_topic_title}"
@@ -2625,25 +2896,30 @@ values.each do |graph_call|
                 
                 
                 #make title value
-                if $m_graph_topics_a[0] == ""
-                    $m_graph_title = $m_graph_topics_a
-                   
-                    else
-                    $m_graph_title = $m_graph_topics_a.unshift("")
-                   
+                if $total_ts_graph_titles[0] != ""
+                    
+                    $total_ts_graph_titles = $total_ts_graph_titles.unshift("")
                 end
                 
-                 sheet.add_row  $m_graph_title, :style => chart_style
-                 sheet.add_row  $ts_unattracted , :style => chart_style
-                 sheet.add_row  $ts_apathetic, :style => chart_style
-                 sheet.add_row  $ts_attracted, :style => chart_style
-                 sheet.add_row  $ts_impassioned, :style => chart_style
-                 sheet.add_row  $ts_total, :style => chart_style_1
+                sheet.add_row  $total_ts_graph_titles, :style => chart_style
+                sheet.add_row  $total_ts_unattracted , :style => chart_style
+                sheet.add_row  $total_ts_apathetic, :style => chart_style
+                sheet.add_row  $total_ts_attracted, :style => chart_style
+                sheet.add_row  $total_ts_impassioned, :style => chart_style
+                sheet.add_row  $total_ts_total, :style => chart_style_1
+                 sheet.column_widths 20, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,10, 10, 10,10, 10, 10, 10, 10, 10, 10, 10, 10
                 
                 
                 
-                
-                num_of_topics = $m_graph_title.size - 1
+                if $rankings_exist == true
+                    num_of_topics = $m_graph_topics_s.size + $graph_topics_ranking.size
+                    
+                    else
+                    
+                    num_of_topics = $m_graph_topics_s.size
+                    
+                    
+                end
                 
                 
                 case num_of_topics
