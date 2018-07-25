@@ -449,11 +449,7 @@ case topic_type
          row_3 = row_3_raw.reject { |r| r.to_s.empty? }
         
         
-        puts "row 1 #{row_1}"
-        puts "row 2 #{row_2}"
-        puts "row 3 #{row_3}"
-        #puts "row @ #{row}"
-        puts "row count #{row_count}"
+   
         sheet.add_row row_1, :style=>body
         
         sheet.add_row row_2, :style=>body
@@ -855,6 +851,20 @@ end
 #def makeGraph(g_topic_code, g_topic_type, graph_topics, g_topic_title, g_ranking_num, g_ranking_total )
 def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
     
+    $rankings_exist_all = false
+    
+    values.each do |graph_call|
+        
+        g_ranking_num = graph_call[4]
+       
+       if g_ranking_num.to_i > 0
+           $rankings_exist_all = true
+       end
+        
+        
+    end
+    
+    
     $segment_a = Array.new
     ######### Array positions of values ########
      #   valence = 4
@@ -870,26 +880,20 @@ def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
     cworksheets = cworkbook.sheets
     puts "Found #{cworksheets.count} verbatim worksheets"
     
+    $num_of_rankings = cworksheets.count
+    
     # Where everything lives for graphs
     $gdata = Hash.new
     $o_gdata = Hash.new
+    
     $m_gdata = Hash.new
     $om_gdata = Hash.new
     
-    $m_gdata_1 = Hash.new
-    $om_gdata_1 = Hash.new
+    $r_gdata = Hash.new
+    $or_gdata = Hash.new
+    $rm_gdata = Hash.new
     
-    $m_gdata_2 = Hash.new
-    $om_gdata_2 = Hash.new
     
-    $m_gdata_3 = Hash.new
-    $om_gdata_3 = Hash.new
-    
-    $m_gdata_4 = Hash.new
-    $om_gdata_4 = Hash.new
-    
-    $m_gdata_5 = Hash.new
-    $om_gdata_5 = Hash.new
     
     $g_data_raw = Array.new
     
@@ -957,7 +961,7 @@ def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
     
     
     
-
+   $worksheet_names = Array.new
     
     
     cworksheets.each do |cworksheet|
@@ -979,7 +983,7 @@ def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
             $g_data_raw.push(row.values.join "          ")
         end
         
-  
+        $worksheet_names.push(cworksheet.name)
       
   
         #Percent Positive start values
@@ -993,30 +997,7 @@ def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
         $attracted = 0
         $impassioned = 0
         
-        $unattracted_1 = 0
-        $apathetic_1 = 0
-        $attracted_1 = 0
-        $impassioned_1 = 0
-        
-        $unattracted_2 = 0
-        $apathetic_2 = 0
-        $attracted_2 = 0
-        $impassioned_2 = 0
-        
-        $unattracted_3 = 0
-        $apathetic_3 = 0
-        $attracted_3 = 0
-        $impassioned_3 = 0
-        
-        $unattracted_4 = 0
-        $apathetic_4 = 0
-        $attracted_4 = 0
-        $impassioned_4 = 0
-        
-        $unattracted_5 = 0
-        $apathetic_5 = 0
-        $attracted_5 = 0
-        $impassioned_5 = 0
+       
         
         
         
@@ -1072,75 +1053,15 @@ def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
                 end
                 
                 
-                if $mindset_count >= 1
-                    if data_row[6] == "Unattracted"
-
-                    $unattracted_1 = $unattracted_1 + 1
-                    elsif data_row[6] == "Apathetic"
-                    $apathetic_1 = $apathetic_1 + 1
-                    elsif data_row[6] == "Attracted"
-                    $attracted_1 = $attracted_1 + 1
-                    elsif data_row[6] == "Impassioned"
-                    $impassioned_1 = $impassioned_1 + 1
-                  end
-                end
                 
-                if $mindset_count >= 2
-                    if data_row[7] == "Unattracted"
-                    $unattracted_2 = $unattracted_2 + 1
-                    elsif data_row[7] == "Apathetic"
-                    $apathetic_2 = $apathetic_2 + 1
-                    elsif data_row[7] == "Attracted"
-                    $attracted_2 = $attracted_2 + 1
-                    elsif data_row[7] == "Impassioned"
-                    $impassioned_2 = $impassioned_2 + 1
-                    end
-                end
-
-                if $mindset_count >= 3
-                    if data_row[8] == "Unattracted"
-                    $unattracted_3 = $unattracted_3 + 1
-                    elsif data_row[8] == "Apathetic"
-                    $apathetic_3 = $apathetic_3 + 1
-                    elsif data_row[8] == "Attracted"
-                    $attracted_3 = $attracted_3 + 1
-                    elsif data_row[8] == "Impassioned"
-                    $impassioned_3 = $impassioned_3 + 1
-                  end
-                end
-
-                if $mindset_count >= 4
-                    if data_row[9] == "Unattracted"
-                    $unattracted_4 = $unattracted_4 + 1
-                    elsif data_row[9] == "Apathetic"
-                    $apathetic_4 = $apathetic_4 + 1
-                    elsif data_row[9] == "Attracted"
-                    $attracted_4 = $attracted_4 + 1
-                    elsif data_row[9] == "Impassioned"
-                    $impassioned_4 = $impassioned_4 + 1
-                  end
-                end
-                
-                if $mindset_count == 5
-                    if data_row[10] == "Unattracted"
-                    $unattracted_5 = $unattracted_5 + 1
-                    elsif data_row[10] == "Apathetic"
-                    $apathetic_5 = $apathetic_5 + 1
-                    elsif data_row[10] == "Attracted"
-                    $attracted_5 = $attracted_5 + 1
-                    elsif data_row[10] == "Impassioned"
-                    $impassioned_5 = $impassioned_5 + 1
-                   end
-                end
-
-                #Segments in 12 - 14
+               
 
 
 
 
 
                 #add segments to array so you can manipulate it later
-                #$segment_a.push(data_row[7])
+                
                 #figure out how many segments there are and where they are
                 #add them to the segments array
                 $seg_spot == 0
@@ -1189,44 +1110,7 @@ def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
         $per_attracted   = ($attracted.to_f / $m_total.to_f).round(2)
         $per_impassioned = ($impassioned.to_f / $m_total.to_f).round(2)
         
-        #additional Mindsets
-        if $mindset_count >= 1
-            $m_total_1 = $unattracted_1 + $apathetic_1 + $attracted_1 + $impassioned_1
-            $per_unattracted_1 = ($unattracted_1.to_f / $m_total_1.to_f).round(2)
-            $per_apathetic_1   = ($apathetic_1.to_f  / $m_total_1.to_f).round(2)
-            $per_attracted_1   = ($attracted_1.to_f / $m_total_1.to_f).round(2)
-            $per_impassioned_1 = ($impassioned_1.to_f / $m_total_1.to_f).round(2)
-        end
-        if $mindset_count >= 2
-            $m_total_2 = $unattracted_2 + $apathetic_2 + $attracted_2 + $impassioned_2
-            $per_unattracted_2 = ($unattracted_2.to_f / $m_total_2.to_f).round(2)
-            $per_apathetic_2   = ($apathetic_2.to_f  / $m_total_2.to_f).round(2)
-            $per_attracted_2   = ($attracted_2.to_f / $m_total_2.to_f).round(2)
-            $per_impassioned_2 = ($impassioned_2.to_f / $m_total_2.to_f).round(2)
-        end
-        if $mindset_count >= 3
-            $m_total_3 = $unattracted_3 + $apathetic_3 + $attracted_3 + $impassioned_3
-            $per_unattracted_3 = ($unattracted_3.to_f / $m_total_3.to_f).round(2)
-            $per_apathetic_3   = ($apathetic_3.to_f  / $m_total_3.to_f).round(2)
-            $per_attracted_3   = ($attracted_3.to_f / $m_total_3.to_f).round(2)
-            $per_impassioned_3 = ($impassioned_3.to_f / $m_total_3.to_f).round(2)
-        end
-        
-        if $mindset_count >= 4
-            $m_total_4 = $unattracted_4 + $apathetic_4 + $attracted_4 + $impassioned_4
-            $per_unattracted_4 = ($unattracted_4.to_f / $m_total_4.to_f).round(2)
-            $per_apathetic_4   = ($apathetic_4.to_f  / $m_total_4.to_f).round(2)
-            $per_attracted_4   = ($attracted_4.to_f / $m_total_4.to_f).round(2)
-            $per_impassioned_4 = ($impassioned_4.to_f / $m_total_4.to_f).round(2)
-        end
-        
-        if $mindset_count >= 5
-            $m_total_5 = $unattracted_5 + $apathetic_5 + $attracted_5 + $impassioned_5
-            $per_unattracted_5 = ($unattracted_5.to_f / $m_total_5.to_f).round(2)
-            $per_apathetic_5   = ($apathetic_5.to_f  / $m_total_5.to_f).round(2)
-            $per_attracted_5   = ($attracted_5.to_f / $m_total_5.to_f).round(2)
-            $per_impassioned_5 = ($impassioned_5.to_f / $m_total_5.to_f).round(2)
-        end
+       
         
         
         puts "per unattracted #{$per_unattracted}"
@@ -1250,11 +1134,7 @@ def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
         $m_uniq_seg_names = Array.new
         $m_uniq_segs      = Array.new
         
-        $m_uniq_segs_1      = Array.new
-        $m_uniq_segs_2      = Array.new
-        $m_uniq_segs_3      = Array.new
-        $m_uniq_segs_4      = Array.new
-        $m_uniq_segs_5      = Array.new
+
         
         
         #how many segments are they and what are the unique vals
@@ -1263,15 +1143,11 @@ def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
         $m_num_of_segs    = $segment_a.uniq.length
         $m_uniq_seg_names = $segment_a.uniq
         
-        $m_uniq_seg_names_1 = $segment_a.uniq
-        $m_uniq_seg_names_2 = $segment_a.uniq
-        $m_uniq_seg_names_3 = $segment_a.uniq
-        $m_uniq_seg_names_4 = $segment_a.uniq
-        $m_uniq_seg_names_5 = $segment_a.uniq
+ 
         
         
         
-        
+        puts "uniq seg names == #{$uniq_seg_names}"
         
         
         #turn segs values into a nested array
@@ -1287,30 +1163,7 @@ def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
         end
         
         
-        $m_uniq_seg_names_1.each do |seg|
-            array_spot = $m_uniq_seg_names_1.index(seg)
-            $m_uniq_segs_1[array_spot] = Array.new
-        end
-
-        $m_uniq_seg_names_2.each do |seg|
-            array_spot = $m_uniq_seg_names_2.index(seg)
-            $m_uniq_segs_2[array_spot] = Array.new
-        end
-        
-        $m_uniq_seg_names_3.each do |seg|
-            array_spot = $m_uniq_seg_names_3.index(seg)
-            $m_uniq_segs_3[array_spot] = Array.new
-        end
-
-        $m_uniq_seg_names_4.each do |seg|
-            array_spot = $m_uniq_seg_names_4.index(seg)
-            $m_uniq_segs_4[array_spot] = Array.new
-        end
-
-        $m_uniq_seg_names_5.each do |seg|
-            array_spot = $m_uniq_seg_names_5.index(seg)
-            $m_uniq_segs_5[array_spot] = Array.new
-        end
+       
 
       #parse array to get values for building segment graphs
       $g_data_raw.each do |row|
@@ -1338,9 +1191,11 @@ def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
                     
                     if seg == data_row[$mindset_count + 6]
                        $uniq_segs[array_spot].push(data_row[4]) # Put the valence into an array corresponding to the segment title
-                    elsif seg == data_row[$mindset_count + 7]
+                    end
+                    if seg == data_row[$mindset_count + 7]
                        $uniq_segs[array_spot].push(data_row[4])
-                    elsif seg == data_row[$mindset_count + 8]
+                    end
+                    if seg == data_row[$mindset_count + 8]
                         $uniq_segs[array_spot].push(data_row[4])
                     
                     end
@@ -1352,39 +1207,6 @@ def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
                     
                     if seg == data_row[$mindset_count + 6] #compare segs from all seg columns
                         $m_uniq_segs[array_spot].push(data_row[5]) # Put the mindset into an array corresponding to the segment title
-                
-                ## Begin mulitple mindset checks
-                    if $mindset_count == 1
-                       $m_uniq_segs_1[array_spot].push(data_row[6])
-                    
-                    elsif $mindset_count == 2
-                       $m_uniq_segs_1[array_spot].push(data_row[6])
-                       $m_uniq_segs_2[array_spot].push(data_row[7])
-                       #puts "data_row 6 #{data_row[6]}"
-                       #puts "data_row 7 #{data_row[7]}"
-                    
-                    elsif $mindset_count == 3
-                       $m_uniq_segs_1[array_spot].push(data_row[6])
-                       $m_uniq_segs_2[array_spot].push(data_row[7])
-                       $m_uniq_segs_3[array_spot].push(data_row[8])
-                    
-                    elsif $mindset_count == 4
-                       $m_uniq_segs_1[array_spot].push(data_row[6])
-                       $m_uniq_segs_2[array_spot].push(data_row[7])
-                       $m_uniq_segs_3[array_spot].push(data_row[8])
-                       $m_uniq_segs_4[array_spot].push(data_row[9])
-                   
-                    elsif $mindset_count == 5
-                       $m_uniq_segs_1[array_spot].push(data_row[6])
-                       $m_uniq_segs_2[array_spot].push(data_row[7])
-                       $m_uniq_segs_3[array_spot].push(data_row[8])
-                       $m_uniq_segs_4[array_spot].push(data_row[9])
-                       $m_uniq_segs_5[array_spot].push(data_row[10])
-                    
-                    elsif $mindset_count == 0
-                      puts "No additional mindsets"
-                    
-                    end
                     
                     end
                     
@@ -1392,84 +1214,17 @@ def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
                     if seg == data_row[$mindset_count + 7]
                         $m_uniq_segs[array_spot].push(data_row[5])
                     
-                    
-                    if $mindset_count == 1
-                        $m_uniq_segs_1[array_spot].push(data_row[6])
-                        
-                        elsif $mindset_count == 2
-                        $m_uniq_segs_1[array_spot].push(data_row[6])
-                        $m_uniq_segs_2[array_spot].push(data_row[7])
-                        
-                        elsif $mindset_count == 3
-                        $m_uniq_segs_1[array_spot].push(data_row[6])
-                        $m_uniq_segs_2[array_spot].push(data_row[7])
-                        $m_uniq_segs_3[array_spot].push(data_row[8])
-                        
-                        elsif $mindset_count == 4
-                        $m_uniq_segs_1[array_spot].push(data_row[6])
-                        $m_uniq_segs_2[array_spot].push(data_row[7])
-                        $m_uniq_segs_3[array_spot].push(data_row[8])
-                        $m_uniq_segs_4[array_spot].push(data_row[9])
-                        
-                        elsif $mindset_count == 5
-                        $m_uniq_segs_1[array_spot].push(data_row[6])
-                        $m_uniq_segs_2[array_spot].push(data_row[7])
-                        $m_uniq_segs_3[array_spot].push(data_row[8])
-                        $m_uniq_segs_4[array_spot].push(data_row[9])
-                        $m_uniq_segs_5[array_spot].push(data_row[10])
-                        
-                        elsif $mindset_count == 0
-                        puts "No additional mindsets"
-                        
-                    end
-                    
                     end
                     
                     
                     if seg == data_row[$mindset_count + 8]
                         $m_uniq_segs[array_spot].push(data_row[5])
-                    
-                    
-                    
-                    if $mindset_count == 1
-                        $m_uniq_segs_1[array_spot].push(data_row[6])
-                        
-                        elsif $mindset_count == 2
-                        $m_uniq_segs_1[array_spot].push(data_row[6])
-                        $m_uniq_segs_2[array_spot].push(data_row[7])
-                        
-                        elsif $mindset_count == 3
-                        $m_uniq_segs_1[array_spot].push(data_row[6])
-                        $m_uniq_segs_2[array_spot].push(data_row[7])
-                        $m_uniq_segs_3[array_spot].push(data_row[8])
-                        
-                        elsif $mindset_count == 4
-                        $m_uniq_segs_1[array_spot].push(data_row[6])
-                        $m_uniq_segs_2[array_spot].push(data_row[7])
-                        $m_uniq_segs_3[array_spot].push(data_row[8])
-                        $m_uniq_segs_4[array_spot].push(data_row[9])
-                        
-                        elsif $mindset_count == 5
-                        $m_uniq_segs_1[array_spot].push(data_row[6])
-                        $m_uniq_segs_2[array_spot].push(data_row[7])
-                        $m_uniq_segs_3[array_spot].push(data_row[8])
-                        $m_uniq_segs_4[array_spot].push(data_row[9])
-                        $m_uniq_segs_5[array_spot].push(data_row[10])
-                        
-                        elsif $mindset_count == 0
-                        puts "No additional mindsets"
-                        
-                    end
-                    
-                    
-                
-                    
                     end
                     
                     
                     
                     
-                    #Need to calculate which additional mindsets to look at and deal with em'
+                 
                 end
                 
                 
@@ -1479,11 +1234,7 @@ def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
       end # End segment row parsing
       
          $m_seg_values = Hash.new
-         $m_seg_values_1 = Hash.new
-         $m_seg_values_2 = Hash.new
-         $m_seg_values_3 = Hash.new
-         $m_seg_values_4 = Hash.new
-         $m_seg_values_5 = Hash.new
+       
          
          
          puts "all the seg names #{$m_uniq_seg_names}"
@@ -1497,73 +1248,8 @@ def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
              attracted = 0
              impassioned = 0
              
-             unattracted_1 = 0
-             apathetic_1 = 0
-             attracted_1 = 0
-             impassioned_1 = 0
-             
-             unattracted_2 = 0
-             apathetic_2 = 0
-             attracted_2 = 0
-             impassioned_2 = 0
-             
-             unattracted_3 = 0
-             apathetic_3 = 0
-             attracted_3 = 0
-             impassioned_3 = 0
-             
-             unattracted_4 = 0
-             apathetic_4 = 0
-             attracted_4 = 0
-             impassioned_4 = 0
-             
-             unattracted_5 = 0
-             apathetic_5 = 0
-             attracted_5 = 0
-             impassioned_5 = 0
-             
-             
-             if $mindset_count >= 1
-                 $temp_array_1 = Array.new
-                 $temp_array_1 = $m_uniq_segs_1[array_spot]
-                 $temp_array_1 = $temp_array_1.reject { |k,v| k.nil? }
-             end
-             
-             if $mindset_count >= 2
-                 
-                 $temp_array_2 = Array.new
-                 $temp_array_2 = $m_uniq_segs_2[array_spot]
-                 $temp_array_2 = $temp_array_2.reject { |k,v| k.nil? }
-             end
-             
-             if $mindset_count >= 3
-                 
-                 $temp_array_3 = Array.new
-                 $temp_array_3 = $m_uniq_segs_3[array_spot]
-                 $temp_array_3 = $temp_array_3.reject { |k,v| k.nil? }
-             end
-             
-             if $mindset_count >= 4
-                 
-                 $temp_array_4 = Array.new
-                 $temp_array_4 = $m_uniq_segs_4[array_spot]
-                 $temp_array_4 = $temp_array_4.reject { |k,v| k.nil? }
-             end
-             
-             if $mindset_count >= 5
-        
-                 
-                 $temp_array_5 = Array.new
-                 $temp_array_5 = $m_uniq_segs_5[array_spot]
-                 $temp_array_5 = $temp_array_5.reject { |k,v| k.nil? }
-             end
-             
-             
-             puts "temp array 1 #{$temp_array_1}"
-             puts "temp array 2 #{$temp_array_2}"
-             puts "temp array 3 #{$temp_array_3}"
-             puts "temp array 4 #{$temp_array_4}"
-             puts "temp array 5 #{$temp_array_5}"
+          
+    
           
           ##### Figure out how the different mindset arrays are populated, theyr'e all matching the main data array
           
@@ -1585,99 +1271,6 @@ def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
                  
              end
              
-             if $mindset_count >= 1
-             
-             $temp_array_1.each do |val|
-                 if val == "Unattracted"
-                     unattracted_1 = unattracted_1 + 1
-                     elsif val == "Apathetic"
-                     apathetic_1 = apathetic_1 + 1
-                     elsif val == "Attracted"
-                     attracted_1 = attracted_1 + 1
-                     elsif val == "Impassioned"
-                     impassioned_1 = impassioned_1 + 1
-                     
-                 end
-                 
-             end
-             
-             end
-             
-             if $mindset_count >= 2
-             
-             
-             $temp_array_2.each do |val|
-                 if val == "Unattracted"
-                     unattracted_2 = unattracted_2 + 1
-                     elsif val == "Apathetic"
-                     apathetic_2 = apathetic_2 + 1
-                     elsif val == "Attracted"
-                     attracted_2 = attracted_2 + 1
-                     elsif val == "Impassioned"
-                     impassioned_2 = impassioned_2 + 1
-                     
-                 end
-                 
-             end
-            end
-             
-          if $mindset_count >= 3
-             
-             
-             $temp_array_3.each do |val|
-                 if val == "Unattracted"
-                     unattracted_3 = unattracted_3 + 1
-                     elsif val == "Apathetic"
-                     apathetic_3 = apathetic_3 + 1
-                     elsif val == "Attracted"
-                     attracted_3 = attracted_3 + 1
-                     elsif val == "Impassioned"
-                     impassioned_3 = impassioned_3 + 1
-                     
-                 end
-                 
-             end
-             
-             end
-             
-             if $mindset_count >= 4
-             
-           
-             $temp_array_4.each do |val|
-                 if val == "Unattracted"
-                     unattracted_4 = unattracted_4 + 1
-                     elsif val == "Apathetic"
-                     apathetic_4 = apathetic_4 + 1
-                     elsif val == "Attracted"
-                     attracted_4 = attracted_4 + 1
-                     elsif val == "Impassioned"
-                     impassioned_4 = impassioned_4 + 1
-                     
-                 end
-                 
-             end
-
-            end
-
-             if $mindset_count == 5
-             
-             
-             
-             $temp_array_5.each do |val|
-                 if val == "Unattracted"
-                     unattracted_5 = unattracted_5 + 1
-                     elsif val == "Apathetic"
-                     apathetic_5 = apathetic_5 + 1
-                     elsif val == "Attracted"
-                     attracted_5 = attracted_5 + 1
-                     elsif val == "Impassioned"
-                     impassioned_5 = impassioned_5 + 1
-                     
-                 end
-                 
-             end
-             
-             end
              
              
              $s_m_total = unattracted + apathetic + attracted + impassioned
@@ -1687,65 +1280,6 @@ def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
              $s_per_impassioned = (impassioned.to_f / $s_m_total.to_f).round(2)
              
              $m_seg_values[seg] = [$s_per_unattracted, $s_per_apathetic, $s_per_attracted, $s_per_impassioned, $s_m_total]
-             
-             
-             if $mindset_count >= 1
-                 $s_m_total_1 = unattracted_1 + apathetic_1 + attracted_1 + impassioned_1
-                 $s_per_unattracted_1 = (unattracted_1.to_f / $s_m_total_1.to_f).round(2)
-                 $s_per_apathetic_1   = (apathetic_1.to_f  / $s_m_total_1.to_f).round(2)
-                 $s_per_attracted_1   = (attracted_1.to_f / $s_m_total_1.to_f).round(2)
-                 $s_per_impassioned_1 = (impassioned_1.to_f / $s_m_total_1.to_f).round(2)
-                 
-                 $m_seg_values_1[seg] = [$s_per_unattracted_1, $s_per_apathetic_1, $s_per_attracted_1, $s_per_impassioned_1, $s_m_total_1]
-             end
-             
-             if $mindset_count >= 2
-                 
-                 $s_m_total_2 = unattracted_2 + apathetic_2 + attracted_2 + impassioned_2
-                 $s_per_unattracted_2 = (unattracted_2.to_f / $s_m_total_2.to_f).round(2)
-                 $s_per_apathetic_2   = (apathetic_2.to_f  / $s_m_total_2.to_f).round(2)
-                 $s_per_attracted_2   = (attracted_2.to_f / $s_m_total_2.to_f).round(2)
-                 $s_per_impassioned_2 = (impassioned_2.to_f / $s_m_total_2.to_f).round(2)
-                 
-                 $m_seg_values_2[seg] = [$s_per_unattracted_2, $s_per_apathetic_2, $s_per_attracted_2, $s_per_impassioned_2, $s_m_total_2]
-                 
-             end
-             
-             if $mindset_count >= 3
-                 
-                 $s_m_total_3 = unattracted_3 + apathetic_3 + attracted_3 + impassioned_3
-                 $s_per_unattracted_3 = (unattracted_3.to_f / $s_m_total_3.to_f).round(2)
-                 $s_per_apathetic_3   = (apathetic_3.to_f  / $s_m_total_3.to_f).round(2)
-                 $s_per_attracted_3   = (attracted_3.to_f / $s_m_total_3.to_f).round(2)
-                 $s_per_impassioned_3 = (impassioned_3.to_f / $s_m_total_3.to_f).round(2)
-                 
-                 $m_seg_values_3[seg] = [$s_per_unattracted_3, $s_per_apathetic_3, $s_per_attracted_3, $s_per_impassioned_3, $s_m_total_3]
-             end
-             
-             if $mindset_count >= 4
- 
-                 $s_m_total_4 = unattracted_4 + apathetic_4 + attracted_4 + impassioned_4
-                 $s_per_unattracted_4 = (unattracted_4.to_f / $s_m_total_4.to_f).round(2)
-                 $s_per_apathetic_4   = (apathetic_4.to_f  / $s_m_total_4.to_f).round(2)
-                 $s_per_attracted_4   = (attracted_4.to_f / $s_m_total_4.to_f).round(2)
-                 $s_per_impassioned_4 = (impassioned_4.to_f / $s_m_total_4.to_f).round(2)
-                 
-                 $m_seg_values_4[seg] = [$s_per_unattracted_4, $s_per_apathetic_4, $s_per_attracted_4, $s_per_impassioned_4, $s_m_total_4]
-                 
-             end
-             
-             if $mindset_count == 5
-                 
-                 
-                 $s_m_total_5 = unattracted_5 + apathetic_5 + attracted_5 + impassioned_5
-                 $s_per_unattracted_5 = (unattracted_5.to_f / $s_m_total_5.to_f).round(2)
-                 $s_per_apathetic_5   = (apathetic_5.to_f  / $s_m_total_5.to_f).round(2)
-                 $s_per_attracted_5   = (attracted_5.to_f / $s_m_total_5.to_f).round(2)
-                 $s_per_impassioned_5 = (impassioned_5.to_f / $s_m_total_5.to_f).round(2)
-                 
-                 $m_seg_values_5[seg] = [$s_per_unattracted_5, $s_per_apathetic_5, $s_per_attracted_5, $s_per_impassioned_5, $s_m_total_5]
-                 
-             end
              
              
              
@@ -1809,21 +1343,15 @@ def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
   
         $seg_values         = $seg_values.reject { |k,v| k.nil? }
         $m_seg_values       = $m_seg_values.reject { |k,v| k.nil? }
-        $m_seg_values_1     = $m_seg_values_1.reject { |k,v| k.nil? }
-        $m_seg_values_2     = $m_seg_values_2.reject { |k,v| k.nil? }
-        $m_seg_values_3     = $m_seg_values_3.reject { |k,v| k.nil? }
-        $m_seg_values_4     = $m_seg_values_4.reject { |k,v| k.nil? }
-        $m_seg_values_5     = $m_seg_values_5.reject { |k,v| k.nil? }
+  
    
         
         $ts   = [ $per_positive, $per_neutral, $per_negative,  $total, $total]
         $m_ts = [ $per_unattracted, $per_apathetic, $per_attracted, $per_impassioned, $m_total]
         
-        $m_ts_1 = [ $s_per_unattracted_1, $s_per_apathetic_1, $s_per_attracted_1, $s_per_impassioned_1, $s_m_total_1]
-        $m_ts_2 = [ $s_per_unattracted_2, $s_per_apathetic_2, $s_per_attracted_2, $s_per_impassioned_2, $s_m_total_2]
-        $m_ts_3 = [ $s_per_unattracted_3, $s_per_apathetic_3, $s_per_attracted_3, $s_per_impassioned_3, $s_m_total_3]
-        $m_ts_4 = [ $s_per_unattracted_4, $s_per_apathetic_4, $s_per_attracted_4, $s_per_impassioned_4, $s_m_total_4]
-        $m_ts_5 = [ $s_per_unattracted_5, $s_per_apathetic_5, $s_per_attracted_5, $s_per_impassioned_5, $s_m_total_5]
+        
+        puts "seg values #{$seg_values}"
+        puts "m seg values #{$m_seg_values}"
         
         puts "global ts #{$ts}"
         puts "global m_ts #{$m_ts}"
@@ -1833,55 +1361,32 @@ def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
         
         title = cworksheet.name[0..2].strip
         $m_title = cworksheet.name[0..2].strip
+        $r_title = cworksheet.name.strip
+        
         $gdata[title]      = [$ts]
         $o_gdata[title]    = [$ts]
         
         $m_gdata[$m_title]  = [$m_ts]
         $om_gdata[$m_title] = [$m_ts]
         
-        if $mindset_count >= 1
-            $m_gdata_1[$m_title]  = [$m_ts_1]
-            $om_gdata_1[$m_title] = [$m_ts_1]
-        end
+        $r_gdata[$r_title] = [$ts]
+        $or_gdata[$r_title] = [$ts]
+        $rm_gdata[$r_title] = [$m_ts]
         
-        
-        if $mindset_count >= 2
-            
-            $m_gdata_2[$m_title]  = [$m_ts_2]
-            $om_gdata_2[$m_title] = [$m_ts_2]
-            
-        end
-        
-        if $mindset_count >= 3
-  
-            $m_gdata_3[$m_title]  = [$m_ts_3]
-            $om_gdata_3[$m_title] = [$m_ts_3]
-        end
-        
-        if $mindset_count >= 4
-            
-            $m_gdata_4[$m_title]  = [$m_ts_4]
-            $om_gdata_4[$m_title] = [$m_ts_4]
-
-        end
-        
-        if $mindset_count == 5
-            
-            $m_gdata_5[$m_title]  = [$m_ts_5]
-            $om_gdata_5[$m_title] = [$m_ts_5]
-        end
         
         
     puts "m gdata #{$m_gdata}"
     puts "m gdata 1 6 #{$m_gdata_2}"
     puts "m ts 2#{$m_ts_2}"
+    puts "rg data 1#{$r_gdata}"
+    puts "rm gdata 1 ${rm_gdata}"
     
-        
+        puts "**  seg values #{$seg_values}"
       
         ##
          $seg_values.each do |key, value|
              title = cworksheet.name[0..2].strip
-             
+             r_title = cworksheet.name.strip
              
              if $gdata[title].include?(value)
                  puts "#{title} Already exists in doc, skipping"
@@ -1894,6 +1399,23 @@ def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
              else
                  $o_gdata[title].push(key, value)
              end
+             
+             if $rankings_exist_all == true
+             if $or_gdata[r_title].include?(value)
+                 
+                 puts "#{r_title} Already exists in doc, skipping"
+                 else
+                 $or_gdata[r_title].push(key, value)
+                
+             end
+                 
+             if $r_gdata[r_title].include?(value)
+                 puts "#{r_title} Already exists in doc, skipping"
+                 else
+                $r_gdata[r_title].push(key, value)
+                
+             end
+             end
              #$gdata[title].push(key, value)
              #$o_gdata[title].push(key, value)
             
@@ -1902,7 +1424,7 @@ def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
      
          $m_seg_values.each do |key, value|
              m_title = cworksheet.name[0..2].strip
-             
+             r_title = cworksheet.name.strip
              
              if $m_gdata[m_title].include?(value)
                  puts "#{m_title} Already exists in doc, skipping"
@@ -1915,103 +1437,41 @@ def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
                  else
                  $om_gdata[m_title].push(key, value)
              end
-             
+             if $rankings_exist_all == true
+             if $rm_gdata[r_title].include?(value)
+                 puts "#{r_title} Already exists in doc, skipping"
+                 else
+                 $rm_gdata[r_title].push(key, value)
+             end
+             end
              
              #$m_gdata[m_title].push(key, value)
              #$om_gdata[m_title].push(key, value)
             
          end
          
+         puts "rg data 2#{$r_gdata}"
+         puts "rm gdata 2 #{$rm_gdata}"
+         #these ^ have all the data including rankings, graph them!
+         
          
    ####################################################   Need to find a way to isolate the mindset column names ##############################################
          
-         if $mindset_count >= 1
-         $m_seg_values_1.each do |key, value|
-             m_title = cworksheet.name[0..2].strip
-             
-         
-                 $m_gdata_1[m_title].push(key, value)
-                 
-                 $om_gdata_1[m_title].push(key, value)
-        
-             
-         end
-         
-         end
-         
-         if $mindset_count >= 2
-             $m_seg_values_2.each do |key, value|
-                 m_title = cworksheet.name[0..2].strip
-                 
-                   $m_gdata_2[m_title].push(key, value)
-        
-                     $om_gdata_2[m_title].push(key, value)
-                
-             end
-         
-         end
-         
-         
-         
-         if $mindset_count >= 3
-             
-             $m_seg_values_3.each do |key, value|
-                 m_title = cworksheet.name[0..2].strip
-
-                     $m_gdata_3[m_title].push(key, value)
-
-
-                     $om_gdata_3[m_title].push(key, value)
-  
-                 
-             end
-             
-         end
-         
-         if $mindset_count >= 4
-             
-             $m_seg_values_4.each do |key, value|
-                 m_title = cworksheet.name[0..2].strip
-                 
-             
-  
-                     $m_gdata_4[m_title].push(key, value)
-
-                     $om_gdata_4[m_title].push(key, value)
-                
-                 
-             end
-             
-         end
-         if $mindset_count == 5
-             
-             $m_seg_values_5.each do |key, value|
-                 m_title = cworksheet.name[0..2].strip
-                 
-                 
-    
-                     $m_gdata_5[m_title].push(key, value)
-             
-                 
-          
-                     $om_gdata_5[m_title].push(key, value)
-            
-                 
-             end
-             
-             
-         end
          
          
          
       
       end # End for each worksheet
+    
+    puts "worksheet names #{$worksheet_names}"
+    
+    
 
 puts "omg data ##### 5  {#$om_gdata}"
 
-puts "m seg values 1 #{$m_seg_values_1}"
+
 puts "m gdata #{$m_gdata}"
-puts "m gdata 1 7 #{$m_gdata_2}"
+
 
     #create new xlsx doc
     p = Axlsx::Package.new
@@ -2054,6 +1514,23 @@ puts "m gdata 1 7 #{$m_gdata_2}"
         $graph_topics_a = graph_topics.split(",")
         $graph_topics_s = Array.new
         $graph_topics_s = graph_topics.split(",")
+        
+        $rankings_exist = false
+        
+        #check to see if there are rankings based on if it starts with an r
+        $graph_topics_a.each do |topic|
+            
+           if topic.upcase.strip.include?("R")
+               $rankings_exist = true
+           end
+            
+        end
+        
+        if $rankings_exist == true
+        $graph_topics_ranking = Array.new
+        $graph_topics_ranking = $worksheet_names.drop($graph_topics_a.size)
+        puts "ranking topics #{$graph_topics_ranking}"
+        end
 
 row_count = 0
 $ts_positive    = Array.new
@@ -2067,12 +1544,20 @@ $ts_total.push("Total")
 $ts_total_used  = Array.new
 $ts_total_used.push("Message Index")
 
+$r_ts_positive    = Array.new
+$r_ts_neutral     = Array.new
+$r_ts_negative    = Array.new
+$r_ts_total      = Array.new
+$r_ts_total_used  = Array.new
 
 
 
+
+
+puts "graph topics a #{$graph_topics_a}"
+puts "graph ranking topics #{$graph_topics_ranking}"
 $graph_topics_a.each do |topic|
-    
- 
+
 
     ts_data = $o_gdata[topic.strip]
     
@@ -2084,11 +1569,75 @@ $graph_topics_a.each do |topic|
     $ts_negative.push(ts_data_a[2])
     $ts_total_used.push(ts_data_a[3])
     $ts_total.push(ts_data_a[4])
-  
+    
+
 end
 
 
+puts "$rankings exist #{$rankings_exist}"
 
+if $rankings_exist == true
+    
+$graph_topics_ranking.each do |topic|
+    #$r_gdata = Hash.new
+    #$rm_gdata = Hash.new
+    r_ts_data = $or_gdata[topic]
+    
+    r_ts_data_a = r_ts_data[0]
+    
+    puts "r ts data a #{r_ts_data_a}"
+    
+    
+    $r_ts_positive.push(r_ts_data_a[0])
+    $r_ts_neutral.push(r_ts_data_a[1])
+    $r_ts_negative.push(r_ts_data_a[2])
+    $r_ts_total_used.push(r_ts_data_a[3])
+    $r_ts_total.push(r_ts_data_a[4])
+    
+  end
+    
+end
+
+
+   $total_ts_positive = Array.new
+   $total_ts_neutral = Array.new
+   $total_ts_negative = Array.new
+   $total_ts_total = Array.new
+   $total_ts_total_used = Array.new
+   $total_ts_graph_titles = Array.new
+
+if $rankings_exist == true
+    $total_ts_positive.push($ts_positive)
+    $total_ts_neutral.push($ts_neutral)
+    $total_ts_negative.push($ts_negative)
+    $total_ts_total.push($ts_total)
+    $total_ts_total_used.push($ts_total_used)
+    $total_ts_graph_titles.push($graph_topics_a)
+    
+    
+    $total_ts_positive.push($r_ts_positive)
+    $total_ts_neutral.push($r_ts_neutral)
+    $total_ts_negative.push($r_ts_negative)
+    $total_ts_total.push($r_ts_total)
+    $total_ts_total_used.push($r_ts_total_used)
+    $total_ts_graph_titles.push($graph_topics_ranking)
+    
+    $total_ts_positive = $total_ts_positive.flatten
+    $total_ts_neutral = $total_ts_neutral.flatten
+    $total_ts_negative = $total_ts_negative.flatten
+    $total_ts_total = $total_ts_total.flatten
+    $total_ts_total_used = $total_ts_total_used.flatten
+    $total_ts_graph_titles = $total_ts_graph_titles.flatten
+    
+    else
+    
+    $total_ts_positive.push($ts_positive)
+    $total_ts_neutral.push($ts_neutral)
+    $total_ts_negative.push($ts_negative)
+    $total_ts_total.push($ts_total)
+    $total_ts_total_used.push($ts_total_used)
+    $total_ts_graph_titles.push($graph_topics_a)
+end
 
 
 g_worksheet_name = "#{g_topic_code} (TS) - #{g_topic_title}"
@@ -2104,16 +1653,26 @@ wb.add_worksheet(:name=> "#{g_worksheet_name}") do |sheet|
     
     
 
-            sheet.add_row  $graph_topics_a.unshift(""), :style => chart_style
-            sheet.add_row  $ts_positive , :style => chart_style #positive
-            sheet.add_row  $ts_neutral, :style => chart_style #neutral
-            sheet.add_row  $ts_negative, :style => chart_style #negative
-            sheet.add_row  $ts_total, :style => chart_style_1 #total
-            sheet.add_row  $ts_total_used, :style => chart_style_1 #message index
+            sheet.add_row  $total_ts_graph_titles.unshift(""), :style => chart_style
+            sheet.add_row  $total_ts_positive , :style => chart_style #positive
+            sheet.add_row  $total_ts_neutral, :style => chart_style #neutral
+            sheet.add_row  $total_ts_negative, :style => chart_style #negative
+            sheet.add_row  $total_ts_total, :style => chart_style_1 #total
+            sheet.add_row  $total_ts_total_used, :style => chart_style_1 #message index
+            sheet.column_widths 20, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,10, 10, 10,10, 10, 10, 10, 10, 10, 10, 10, 10
+            
+            num_of_topics = 0
+            
+            if $rankings_exist == true
+            num_of_topics = $graph_topics_a.size + $graph_topics_ranking.size
+            
+            else
             
             num_of_topics = $graph_topics_a.size - 1
+            
            
-
+            end
+            
             case num_of_topics
                 when 1
                    $t_cells   = "B3:B3"
@@ -2190,7 +1749,71 @@ wb.add_worksheet(:name=> "#{g_worksheet_name}") do |sheet|
                    $p_cells   = "B4:P4"
                    $neu_cells = "B5:P5"
                    $neg_cells = "B6:P6"
+                
+                when 16
+                   $t_cells   = "B3:Q3"
+                   $p_cells   = "B4:Q4"
+                   $neu_cells = "B5:Q5"
+                   $neg_cells = "B6:Q6"
+                
+                when 17
+                   $t_cells   = "B3:R3"
+                   $p_cells   = "B4:R4"
+                   $neu_cells = "B5:R5"
+                   $neg_cells = "B6:R6"
+
+
+                when 18
+                   $t_cells   = "B3:S3"
+                   $p_cells   = "B4:S4"
+                   $neu_cells = "B5:S5"
+                   $neg_cells = "B6:S6"
+
+
+                when 19
+                   $t_cells   = "B3:T3"
+                   $p_cells   = "B4:T4"
+                   $neu_cells = "B5:T5"
+                   $neg_cells = "B6:T6"
                    
+                   
+                when 20
+                   $t_cells   = "B3:U3"
+                   $p_cells   = "B4:U4"
+                   $neu_cells = "B5:U5"
+                   $neg_cells = "B6:U6"
+                   
+                   
+                when 21
+                   $t_cells   = "B3:V3"
+                   $p_cells   = "B4:V4"
+                   $neu_cells = "B5:V5"
+                   $neg_cells = "B6:V6"
+                   
+                when 22
+                   $t_cells   = "B3:W3"
+                   $p_cells   = "B4:W4"
+                   $neu_cells = "B5:W5"
+                   $neg_cells = "B6:W6"
+                   
+                when 23
+                   $t_cells   = "B3:X3"
+                   $p_cells   = "B4:X4"
+                   $neu_cells = "B5:X5"
+                   $neg_cells = "B6:X6"
+                   
+                when 24
+                   $t_cells   = "B3:Y3"
+                   $p_cells   = "B4:Y4"
+                   $neu_cells = "B5:Y5"
+                   $neg_cells = "B6:Y6"
+                   
+                when 25
+                   $t_cells   = "B3:Z3"
+                   $p_cells   = "B4:Z4"
+                   $neu_cells = "B5:Z5"
+                   $neg_cells = "B6:Z6"
+
                 else
                 puts "Out of bounds, double check number of permitted topics per graph."
             end
@@ -2244,9 +1867,13 @@ $graph_topics_s.each do |topic|
 
 
 
+
+
+
 puts "Number of segments #{$num_of_segments}"
 $segment_name = Array.new
 $ts_data = Array.new
+$r_ts_data = Array.new
 $g_spot = 0
 $seg_count = 0
 
@@ -2266,6 +1893,12 @@ while $seg_count < $num_of_segments
     $ts_total_used.push("Message Index")
     $ts_total.clear
     $ts_total.push("Total")
+    
+    $r_ts_positive.clear
+    $r_ts_neutral.clear
+    $r_ts_negative.clear
+    $r_ts_total.clear
+    $r_ts_total_used.clear
     #get values for segment
 
     
@@ -2306,9 +1939,89 @@ while $seg_count < $num_of_segments
         puts "segment name count #{$seg_count}"
     end
     
+    ######################
+    if $rankings_exist == true
+        
+        
+        $graph_topics_ranking.each do |topic|
+            #$r_gdata = Hash.new
+            #$rm_gdata = Hash.new
+            $r_ts_data = $r_gdata[topic]
+            
+            $r_ts_data = $r_ts_data.drop(1)
+            
+            puts "r ts data #{$r_ts_data}"
+            if $seg_count == 0
+                $g_spot = 1
+                
+                else
+                
+                $g_spot = ($seg_count * 2) + 1
+                
+            end
+            
+            r_ts_data_a = $r_ts_data[$g_spot.to_i]
+            puts "r ts data a #{r_ts_data_a}"
+            
+            
+            $r_ts_positive.push(r_ts_data_a[0])
+            $r_ts_neutral.push(r_ts_data_a[1])
+            $r_ts_negative.push(r_ts_data_a[2])
+            $r_ts_total_used.push(r_ts_data_a[3])
+            $r_ts_total.push(r_ts_data_a[4])
+            
+        end
+        
+    end
+    
+    $total_ts_positive.clear
+    $total_ts_neutral.clear
+    $total_ts_negative.clear
+    $total_ts_total.clear
+    $total_ts_total_used.clear
+    $total_ts_graph_titles.clear
+    
+    if $rankings_exist == true
+        $total_ts_positive.push($ts_positive)
+        $total_ts_neutral.push($ts_neutral)
+        $total_ts_negative.push($ts_negative)
+        $total_ts_total.push($ts_total)
+        $total_ts_total_used.push($ts_total_used)
+        $total_ts_graph_titles.push($graph_topics_a)
+        
+        
+        $total_ts_positive.push($r_ts_positive)
+        $total_ts_neutral.push($r_ts_neutral)
+        $total_ts_negative.push($r_ts_negative)
+        $total_ts_total.push($r_ts_total)
+        $total_ts_total_used.push($r_ts_total_used)
+        $total_ts_graph_titles.push($graph_topics_ranking)
+        
+        $total_ts_positive = $total_ts_positive.flatten
+        $total_ts_neutral = $total_ts_neutral.flatten
+        $total_ts_negative = $total_ts_negative.flatten
+        $total_ts_total = $total_ts_total.flatten
+        $total_ts_total_used = $total_ts_total_used.flatten
+        $total_ts_graph_titles = $total_ts_graph_titles.flatten
+        
+        else
+        
+        $total_ts_positive.push($ts_positive)
+        $total_ts_neutral.push($ts_neutral)
+        $total_ts_negative.push($ts_negative)
+        $total_ts_total.push($ts_total)
+        $total_ts_total_used.push($ts_total_used)
+        $total_ts_graph_titles.push($graph_topics_a)
+    end
+
+    
+    #######################
     $seg_title = "#{g_topic_code} #{$segment_name[$seg_count]} - #{g_topic_title}"
     $seg_title = $seg_title.truncate(30)
     $seg_title = $seg_title.gsub("/", "_")
+ 
+ 
+ 
  
  
 
@@ -2324,19 +2037,37 @@ wb.add_worksheet(:name=> "#{$seg_title}") do |sheet|
     
     
     
-    sheet.add_row  $graph_topics_s.unshift("")
-    sheet.add_row  $ts_positive, :style => chart_style #positive
-    sheet.add_row  $ts_neutral, :style => chart_style  #neutral
-    sheet.add_row  $ts_negative, :style => chart_style  #negative
-    sheet.add_row  $ts_total, :style => chart_style_1 #total
-    sheet.add_row  $ts_total_used, :style => chart_style_1 #message index
+    #sheet.add_row  $graph_topics_s.unshift("")
+    #sheet.add_row  $ts_positive, :style => chart_style #positive
+    #sheet.add_row  $ts_neutral, :style => chart_style  #neutral
+    #sheet.add_row  $ts_negative, :style => chart_style  #negative
+    #sheet.add_row  $ts_total, :style => chart_style_1 #total
+    #sheet.add_row  $ts_total_used, :style => chart_style_1 #message index
+    
+    sheet.add_row  $total_ts_graph_titles.unshift(""), :style => chart_style
+    sheet.add_row  $total_ts_positive , :style => chart_style #positive
+    sheet.add_row  $total_ts_neutral, :style => chart_style #neutral
+    sheet.add_row  $total_ts_negative, :style => chart_style #negative
+    sheet.add_row  $total_ts_total, :style => chart_style_1 #total
+    sheet.add_row  $total_ts_total_used, :style => chart_style_1 #message index
+    sheet.column_widths 20, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,10, 10, 10,10, 10, 10, 10, 10, 10, 10, 10, 10
     
     
     
    
-    num_of_topics = $graph_topics_s.size - 1
+   num_of_topics = 0
+   
+   if $rankings_exist == true
+       num_of_topics = $graph_topics_s.size + $graph_topics_ranking.size
+       
+       else
+       
+       num_of_topics = $graph_topics_sa.size - 1
+       
+       
+   end
 
-    
+
     case num_of_topics
         when 1
         $p_cells   = "B4:B4"
@@ -2398,6 +2129,48 @@ wb.add_worksheet(:name=> "#{$seg_title}") do |sheet|
         $p_cells   = "B4:P4"
         $neu_cells = "B5:P5"
         $neg_cells = "B6:P6"
+        when 16
+        $p_cells   = "B4:Q4"
+        $neu_cells = "B5:Q5"
+        $neg_cells = "B6:Q6"
+        when 17
+        $p_cells   = "B4:R4"
+        $neu_cells = "B5:R5"
+        $neg_cells = "B6:R6"
+        when 18
+        $p_cells   = "B4:S4"
+        $neu_cells = "B5:S5"
+        $neg_cells = "B6:S6"
+        when 19
+        $p_cells   = "B4:T4"
+        $neu_cells = "B5:T5"
+        $neg_cells = "B6:T6"
+        when 20
+        $p_cells   = "B4:U4"
+        $neu_cells = "B5:U5"
+        $neg_cells = "B6:U6"
+        when 21
+        $p_cells   = "B4:V4"
+        $neu_cells = "B5:V5"
+        $neg_cells = "B6:V6"
+        when 22
+        $p_cells   = "B4:W4"
+        $neu_cells = "B5:W5"
+        $neg_cells = "B6:W6"
+        when 23
+        $p_cells   = "B4:X4"
+        $neu_cells = "B5:X5"
+        $neg_cells = "B6:X6"
+        when 24
+        $p_cells   = "B4:Y4"
+        $neu_cells = "B5:Y5"
+        $neg_cells = "B6:Y6"
+        when 25
+        $p_cells   = "B4:Z4"
+        $neu_cells = "B5:Z5"
+        $neg_cells = "B6:Z6"
+        
+        
         
         else
         puts "Out of bounds, double check number of permitted topics per graph."
@@ -2460,38 +2233,7 @@ values.each do |graph_call|
         $ts_total      = Array.new
         $ts_total.push("Total")
         
-        $ts_unattracted_1   = Array.new
-        $ts_apathetic_1     = Array.new
-        $ts_attracted_1    = Array.new
-        $ts_impassioned_1    = Array.new
-        $ts_total_1      = Array.new
-        
-        $ts_unattracted_2   = Array.new
-        $ts_apathetic_2     = Array.new
-        $ts_attracted_2   = Array.new
-        $ts_impassioned_2    = Array.new
-        $ts_total_2      = Array.new
-
-        
-        $ts_unattracted_3   = Array.new
-        $ts_apathetic_3     = Array.new
-        $ts_attracted_3    = Array.new
-        $ts_impassioned_3    = Array.new
-        $ts_total_3      = Array.new
-   
-        
-        $ts_unattracted_4   = Array.new
-        $ts_apathetic_4     = Array.new
-        $ts_attracted_4    = Array.new
-        $ts_impassioned_4    = Array.new
-        $ts_total_4      = Array.new
-      
-        
-        $ts_unattracted_5   = Array.new
-        $ts_apathetic_5     = Array.new
-        $ts_attracted_5    = Array.new
-        $ts_impassioned_5    = Array.new
-        $ts_total_5      = Array.new
+ 
         
         puts "m_graph_topics_a ----------- #{$m_graph_topics_a}"
         puts "omg data ##### end  #{$om_gdata}"
@@ -2509,32 +2251,7 @@ values.each do |graph_call|
             ts_data = $om_gdata[topic.strip]
             $ts_data_a = ts_data[0]
             
-            if $mindset_count >= 1
-            ts_data_1 = $om_gdata_1[topic.strip]
-            $ts_data_a_1 = ts_data_1[0]
-            end
-            
-            if $mindset_count >= 2
-            ts_data_2 = $om_gdata_2[topic.strip]
-            $ts_data_a_2 = ts_data_2[0]
-            end
-            
-            if $mindset_count >= 3
-            ts_data_3 = $om_gdata_3[topic.strip]
-            $ts_data_a_3 = ts_data_3[0]
-            end
-            
-            if $mindset_count >= 4
-            ts_data_4 = $om_gdata_4[topic.strip]
-            $ts_data_a_4 = ts_data_4[0]
-            end
-            
-            if $mindset_count >= 5
-            ts_data_5 = $om_gdata_5[topic.strip]
-            $ts_data_a_5 = ts_data_5[0]
-            end
-            
-            
+
             
             puts "$$$$$$$$$$$$$$$$$$$$$  #{ts_data} $$$$$$$$$$$$$$$$$$$$$$$$"
             
@@ -2550,119 +2267,11 @@ values.each do |graph_call|
         end
         
         
-        if $mindset_count >= 1
-            $ts_unattracted_1.push($ts_data_a_1[0])
-            $ts_apathetic_1.push($ts_data_a_1[1])
-            $ts_attracted_1.push($ts_data_a_1[2])
-            $ts_impassioned_1.push($ts_data_a_1[3])
-            $ts_total_1.push($ts_data_a_1[4])
-        end
-        
-        if $mindset_count >= 2
-            $ts_unattracted_2.push($ts_data_a_2[0])
-            $ts_apathetic_2.push($ts_data_a_2[1])
-            $ts_attracted_2.push($ts_data_a_2[2])
-            $ts_impassioned_2.push($ts_data_a_2[3])
-            $ts_total_2.push($ts_data_a_2[4])
-        end
-        
-        if $mindset_count >= 3
-            $ts_unattracted_3.push($ts_data_a_3[0])
-            $ts_apathetic_3.push($ts_data_a_3[1])
-            $ts_attracted_3.push($ts_data_a_3[2])
-            $ts_impassioned_3.push($ts_data_a_3[3])
-            $ts_total_3.push($ts_data_a_3[4])
-        end
-        
-        if $mindset_count >= 4
-            $ts_unattracted_4.push($ts_data_a_4[0])
-            $ts_apathetic_4.push($ts_data_a_4[1])
-            $ts_attracted_4.push($ts_data_a_4[2])
-            $ts_impassioned_4.push($ts_data_a_4[3])
-            $ts_total_4.push($ts_data_a_4[4])
-        end
-        
-        if $mindset_count == 5
-            $ts_unattracted_5.push($ts_data_a_5[0])
-            $ts_apathetic_5.push($ts_data_a_5[1])
-            $ts_attracted_5.push($ts_data_a_5[2])
-            $ts_impassioned_5.push($ts_data_a_5[3])
-            $ts_total_5.push($ts_data_a_5[4])
-        end
         
         
+    
         
-        
-        
-        
-        
-        
-        
-        
-        
-        puts "Debugging all the mindset graph data"
-        puts "unattracted #{$ts_unattracted}"
-        puts "apathetic #{$ts_apathetic}"
-        puts "attracted #{$ts_attracted}"
-        puts "impassioned #{$ts_impassioned}"
-        puts "total #{$ts_total}"
 
-
-        $total_unattracted.push($ts_unattracted)
-        $total_apathetic.push($ts_apathetic)
-        $total_attracted.push($ts_attracted)
-        $total_impassioned.push($ts_impassioned)
-        $total_total.push($ts_total)
-        
-        
-        
-            if $mindset_count >= 1
-            $total_unattracted.push($ts_unattracted_1)
-            $total_apathetic.push($ts_apathetic_1)
-            $total_attracted.push($ts_attracted_1)
-            $total_impassioned.push($ts_impassioned_1)
-            $total_total.push($ts_total_1)
-            end
-            
-            if $mindset_count >= 2
-            $total_unattracted.push($ts_unattracted_2)
-            $total_apathetic.push($ts_apathetic_2)
-            $total_attracted.push($ts_attracted_2)
-            $total_impassioned.push($ts_impassioned_2)
-            $total_total.push($ts_total_2)
-            end
-            
-            if $mindset_count >= 3
-            $total_unattracted.push($ts_unattracted_3)
-            $total_apathetic.push($ts_apathetic_3)
-            $total_attracted.push($ts_attracted_3)
-            $total_impassioned.push($ts_impassioned_3)
-            $total_total.push($ts_total_3)
-            end
-            
-            if $mindset_count >= 4
-            $total_unattracted.push($ts_unattracted_4)
-            $total_apathetic.push($ts_apathetic_4)
-            $total_attracted.push($ts_attracted_4)
-            $total_impassioned.push($ts_impassioned_4)
-            $total_total.push($ts_total_4)
-            end
-            
-            if $mindset_count == 5
-            $total_unattracted.push($ts_unattracted_5)
-            $total_apathetic.push($ts_apathetic_5)
-            $total_attracted.push($ts_attracted_5)
-            $total_impassioned.push($ts_impassioned_5)
-            $total_total.push($ts_total_5)
-            end
-        
-        
-        puts "<<<<<<<<<<<<<  Graph Data 1  >>>>>>>>>>>>>>"
-        puts "unattracted #{$total_unattracted}"
-        puts "apathetic #{$total_apathetic}"
-        puts "attracted #{$total_attracted}"
-        puts "impassioned #{$total_impassioned}"
-        puts "$ts_unattracted_2  #{$ts_unattracted_2}"
         
         
         g_worksheet_name = "#{gm_topic_code} (TS) - #{gm_topic_title}"
@@ -2683,39 +2292,26 @@ values.each do |graph_call|
                 
           
             $m_graph_title = $m_graph_topics_a
-            $m_graph_title.push($mindset_titles_array)
-           
-            $m_graph_title.flatten!
-            $m_graph_title.shift
-            $m_graph_title.unshift("")
-           
-           
             
+           
+           
             else
             
             $m_graph_title = $m_graph_topics_a.unshift("")
-            $m_graph_title.push($mindset_titles_array)
-            
-            $m_graph_title.flatten!
-            $m_graph_title.shift
-            $m_graph_title.unshift("")
+           
            
             
             end
             
             sheet.add_row  $m_graph_title, :style => chart_style
-            sheet.add_row  $total_unattracted.reduce(:concat) , :style => chart_style
-            sheet.add_row  $total_apathetic.reduce(:concat), :style => chart_style
-            sheet.add_row  $total_attracted.reduce(:concat), :style => chart_style
-            sheet.add_row  $total_impassioned.reduce(:concat), :style => chart_style
-            sheet.add_row  $total_total.reduce(:concat), :style => chart_style_1
+            sheet.add_row  $ts_unattracted , :style => chart_style
+            sheet.add_row  $ts_apathetic, :style => chart_style
+            sheet.add_row  $ts_attracted, :style => chart_style
+            sheet.add_row  $ts_impassioned, :style => chart_style
+            sheet.add_row  $ts_total, :style => chart_style_1
             
             
-            puts "<<<<<<<<<<<<<  Graph Data 2 >>>>>>>>>>>>>>"
-            puts "unattracted #{$total_unattracted}"
-            puts "apathetic #{$total_apathetic}"
-            puts "attracted #{$total_attracted}"
-            puts "impassioned #{$total_impassioned}"
+       
         
             num_of_topics = $m_graph_title.size - 1
             
@@ -2810,6 +2406,66 @@ values.each do |graph_call|
                 $ap_cells  = "B5:P5"
                 $att_cells = "B6:P6"
                 $imp_cells = "B7:P7"
+                when 16
+                $t_cells   = "B3:Q3"
+                $un_cells  = "B4:Q4"
+                $ap_cells  = "B5:Q5"
+                $att_cells = "B6:Q6"
+                $imp_cells = "B7:Q7"
+                when 17
+                $t_cells   = "B3:R3"
+                $un_cells  = "B4:R4"
+                $ap_cells  = "B5:R5"
+                $att_cells = "B6:R6"
+                $imp_cells = "B7:R7"
+                when 18
+                $t_cells   = "B3:S3"
+                $un_cells  = "B4:S4"
+                $ap_cells  = "B5:S5"
+                $att_cells = "B6:S6"
+                $imp_cells = "B7:S7"
+                when 19
+                $t_cells   = "B3:T3"
+                $un_cells  = "B4:T4"
+                $ap_cells  = "B5:T5"
+                $att_cells = "B6:T6"
+                $imp_cells = "B7:T7"
+                when 20
+                $t_cells   = "B3:U3"
+                $un_cells  = "B4:U4"
+                $ap_cells  = "B5:U5"
+                $att_cells = "B6:U6"
+                $imp_cells = "B7:U7"
+                when 21
+                $t_cells   = "B3:V3"
+                $un_cells  = "B4:V4"
+                $ap_cells  = "B5:V5"
+                $att_cells = "B6:V6"
+                $imp_cells = "B7:V7"
+                when 22
+                $t_cells   = "B3:W3"
+                $un_cells  = "B4:W4"
+                $ap_cells  = "B5:W5"
+                $att_cells = "B6:W6"
+                $imp_cells = "B7:W7"
+                when 23
+                $t_cells   = "B3:X3"
+                $un_cells  = "B4:X4"
+                $ap_cells  = "B5:X5"
+                $att_cells = "B6:X6"
+                $imp_cells = "B7:X7"
+                when 24
+                $t_cells   = "B3:Y3"
+                $un_cells  = "B4:Y4"
+                $ap_cells  = "B5:Y5"
+                $att_cells = "B6:Y6"
+                $imp_cells = "B7:Y7"
+                when 25
+                $t_cells   = "B3:Z3"
+                $un_cells  = "B4:Z4"
+                $ap_cells  = "B5:Z5"
+                $att_cells = "B6:Z6"
+                $imp_cells = "B7:Z7"
                 
                 else
                 puts "Out of bounds, double check number of permitted topics per graph."
@@ -2859,11 +2515,7 @@ values.each do |graph_call|
         puts "Number of segments #{$num_of_segments}"
         $m_segment_name = Array.new
         $m_ts_data = Array.new
-        $m_ts_data_1 = Array.new
-        $m_ts_data_2 = Array.new
-        $m_ts_data_3 = Array.new
-        $m_ts_data_4 = Array.new
-        $m_ts_data_5 = Array.new
+    
         
         $m_g_spot = 0
         $m_seg_count = 0
@@ -2901,41 +2553,9 @@ values.each do |graph_call|
             
             $m_graph_topics_s.each do |topic|
                 
-                $ts_unattracted_1.clear
-                $ts_apathetic_1.clear
-                $ts_attracted_1.clear
-                $ts_impassioned_1.clear
-                $ts_total_1.clear
-                
-                $ts_unattracted_2.clear
-                $ts_apathetic_2.clear
-                $ts_attracted_2.clear
-                $ts_impassioned_2.clear
-                $ts_total_2.clear
-                
-                
-                $ts_unattracted_3.clear
-                $ts_apathetic_3.clear
-                $ts_attracted_3.clear
-                $ts_impassioned_3.clear
-                $ts_total_3.clear
-                
-                
-                $ts_unattracted_4.clear
-                $ts_apathetic_4.clear
-                $ts_attracted_4.clear
-                $ts_impassioned_4.clear
-                $ts_total_4.clear
-                
-                
-                $ts_unattracted_5.clear
-                $ts_apathetic_5.clear
-                $ts_attracted_5.clear
-                $ts_impassioned_5.clear
-                $ts_total_5.clear
 
-                
-                
+
+
                 puts "topic being looked at #{topic}"
                 
                 s_topic = topic.strip
@@ -2943,43 +2563,10 @@ values.each do |graph_call|
                 $m_ts_data = $m_gdata[s_topic]
                
                 
-                if $mindset_count >= 1
-                  $m_ts_data_1 = $m_gdata_1[s_topic]
-                  if $m_seg_count == 0
-                  $m_ts_data_1.shift
-                  end
-                end
-                
-                if $mindset_count >= 2
-                  $m_ts_data_2 = $m_gdata_2[s_topic]
-                  if $m_seg_count == 0
-                      $m_ts_data_2.shift
-                  end
-                end
-                
-                if $mindset_count >= 3
-                  $m_ts_data_3 = $m_gdata_3[s_topic]
-                  if $m_seg_count == 0
-                      $m_ts_data_3.shift
-                  end
-                end
-                
-                if $mindset_count >= 4
-                    $m_ts_data_4 = $m_gdata_4[s_topic]
-                    if $m_seg_count == 0
-                        $m_ts_data_4.shift
-                    end
-                end
-                
-                if $mindset_count == 5
-                    $m_ts_data_5 = $m_gdata_5[s_topic]
-                    if $m_seg_count == 0
-                        $m_ts_data_5.shift
-                    end
-                end
+            
                 
                 
-                puts "m gdata 1 4 #{$m_gdata_2}"
+              
                 
                 if $m_seg_count == 0
                     $m_g_spot = 1
@@ -2992,23 +2579,13 @@ values.each do |graph_call|
                 end
                 
                 $ts_data_a = $m_ts_data[$m_g_spot.to_i]
-                $ts_data_a_1 = $m_ts_data_1[$m_g_spot.to_i]
-                $ts_data_a_2 = $m_ts_data_2[$m_g_spot.to_i]
-                $ts_data_a_3 = $m_ts_data_3[$m_g_spot.to_i]
-                $ts_data_a_4 = $m_ts_data_4[$m_g_spot.to_i]
-                $ts_data_a_5 = $m_ts_data_5[$m_g_spot.to_i]
+    
                 
                 puts "seg count #{$m_seg_count}"
                 puts "m g spot #{$m_g_spot}"
-                puts "ts data a 1 before filtering #{$m_ts_data_1}"
-                puts "ts data a 2 before filtering #{$m_ts_data_2}"
+            
                 puts "m ts data before filtering #{$m_ts_data}"
-                puts "TS Data a for segments #{$ts_data_a}"
-                puts "TS Data a for segments 1 #{$ts_data_a_1}"
-                puts "TS Data a for segments 2 #{$ts_data_a_2}"
-                puts "TS Data a for segments 3 #{$ts_data_a_3}"
-                puts "TS Data a for segments 4 #{$ts_data_a_4}"
-                puts "TS Data a for segments 5 #{$ts_data_a_5}"
+          
                 
                 
                 $ts_unattracted.push($ts_data_a[0])
@@ -3017,107 +2594,7 @@ values.each do |graph_call|
                 $ts_impassioned.push($ts_data_a[3])
                 $ts_total.push($ts_data_a[4])
                 
-                if $mindset_count >= 1
-                    $ts_unattracted_1.push($ts_data_a_1[0])
-                    $ts_apathetic_1.push($ts_data_a_1[1])
-                    $ts_attracted_1.push($ts_data_a_1[2])
-                    $ts_impassioned_1.push($ts_data_a_1[3])
-                    $ts_total_1.push($ts_data_a_1[4])
-                end
-                
-                if $mindset_count >= 2
-                    $ts_unattracted_2.push($ts_data_a_2[0])
-                    $ts_apathetic_2.push($ts_data_a_2[1])
-                    $ts_attracted_2.push($ts_data_a_2[2])
-                    $ts_impassioned_2.push($ts_data_a_2[3])
-                    $ts_total_2.push($ts_data_a_2[4])
-                end
-                
-                if $mindset_count >= 3
-                    $ts_unattracted_3.push($ts_data_a_3[0])
-                    $ts_apathetic_3.push($ts_data_a_3[1])
-                    $ts_attracted_3.push($ts_data_a_3[2])
-                    $ts_impassioned_3.push($ts_data_a_3[3])
-                    $ts_total_3.push($ts_data_a_3[4])
-                end
-                
-                if $mindset_count >= 4
-                    $ts_unattracted_4.push($ts_data_a_4[0])
-                    $ts_apathetic_4.push($ts_data_a_4[1])
-                    $ts_attracted_4.push($ts_data_a_4[2])
-                    $ts_impassioned_4.push($ts_data_a_4[3])
-                    $ts_total_4.push($ts_data_a_4[4])
-                end
-                
-                if $mindset_count == 5
-                    $ts_unattracted_5.push($ts_data_a_5[0])
-                    $ts_apathetic_5.push($ts_data_a_5[1])
-                    $ts_attracted_5.push($ts_data_a_5[2])
-                    $ts_impassioned_5.push($ts_data_a_5[3])
-                    $ts_total_5.push($ts_data_a_5[4])
-                end
-
-                
-               
-               
-               $total_unattracted.clear
-               $total_apathetic.clear
-               $total_attracted.clear
-               $total_impassioned.clear
-               $total_total.clear
-               
-               $total_unattracted.push($ts_unattracted)
-               $total_apathetic.push($ts_apathetic)
-               $total_attracted.push($ts_attracted)
-               $total_impassioned.push($ts_impassioned)
-               $total_total.push($ts_total)
-               
-               
-               
-               if $mindset_count >= 1
-                   $total_unattracted.push($ts_unattracted_1)
-                   $total_apathetic.push($ts_apathetic_1)
-                   $total_attracted.push($ts_attracted_1)
-                   $total_impassioned.push($ts_impassioned_1)
-                   $total_total.push($ts_total_1)
-               end
-               
-               if $mindset_count >= 2
-                   $total_unattracted.push($ts_unattracted_2)
-                   $total_apathetic.push($ts_apathetic_2)
-                   $total_attracted.push($ts_attracted_2)
-                   $total_impassioned.push($ts_impassioned_2)
-                   $total_total.push($ts_total_2)
-               end
-               
-               if $mindset_count >= 3
-                   $total_unattracted.push($ts_unattracted_3)
-                   $total_apathetic.push($ts_apathetic_3)
-                   $total_attracted.push($ts_attracted_3)
-                   $total_impassioned.push($ts_impassioned_3)
-                   $total_total.push($ts_total_3)
-               end
-               
-               if $mindset_count >= 4
-                   $total_unattracted.push($ts_unattracted_4)
-                   $total_apathetic.push($ts_apathetic_4)
-                   $total_attracted.push($ts_attracted_4)
-                   $total_impassioned.push($ts_impassioned_4)
-                   $total_total.push($ts_total_4)
-               end
-               
-               if $mindset_count == 5
-                   $total_unattracted.push($ts_unattracted_5)
-                   $total_apathetic.push($ts_apathetic_5)
-                   $total_attracted.push($ts_attracted_5)
-                   $total_impassioned.push($ts_impassioned_5)
-                   $total_total.push($ts_total_5)
-               end
-               
-               puts "total unattracted 1 #{$ts_unattracted_1}"
-               
-                
-                
+  
                 $name_count = $m_seg_count * 2
                 
                 $m_segment_name.push($m_ts_data[$name_count.to_i])
@@ -3156,19 +2633,12 @@ values.each do |graph_call|
                    
                 end
                 
-                #sheet.add_row  $m_graph_title, :style => chart_style
-                #sheet.add_row  $ts_unattracted , :style => chart_style
-                #sheet.add_row  $ts_apathetic, :style => chart_style
-                #sheet.add_row  $ts_attracted, :style => chart_style
-                #sheet.add_row  $ts_impassioned, :style => chart_style
-                #sheet.add_row  $ts_total, :style => chart_style_1
-                
-                sheet.add_row  $m_graph_title, :style => chart_style
-                sheet.add_row  $total_unattracted.reduce(:concat) , :style => chart_style
-                sheet.add_row  $total_apathetic.reduce(:concat), :style => chart_style
-                sheet.add_row  $total_attracted.reduce(:concat), :style => chart_style
-                sheet.add_row  $total_impassioned.reduce(:concat), :style => chart_style
-                sheet.add_row  $total_total.reduce(:concat), :style => chart_style_1
+                 sheet.add_row  $m_graph_title, :style => chart_style
+                 sheet.add_row  $ts_unattracted , :style => chart_style
+                 sheet.add_row  $ts_apathetic, :style => chart_style
+                 sheet.add_row  $ts_attracted, :style => chart_style
+                 sheet.add_row  $ts_impassioned, :style => chart_style
+                 sheet.add_row  $ts_total, :style => chart_style_1
                 
                 
                 
@@ -3267,6 +2737,67 @@ values.each do |graph_call|
                     $ap_cells  = "B5:P5"
                     $att_cells = "B6:P6"
                     $imp_cells = "B7:P7"
+                    
+                    when 16
+                    $t_cells   = "B3:Q3"
+                    $un_cells  = "B4:Q4"
+                    $ap_cells  = "B5:Q5"
+                    $att_cells = "B6:Q6"
+                    $imp_cells = "B7:Q7"
+                    when 17
+                    $t_cells   = "B3:R3"
+                    $un_cells  = "B4:R4"
+                    $ap_cells  = "B5:R5"
+                    $att_cells = "B6:R6"
+                    $imp_cells = "B7:R7"
+                    when 18
+                    $t_cells   = "B3:S3"
+                    $un_cells  = "B4:S4"
+                    $ap_cells  = "B5:S5"
+                    $att_cells = "B6:S6"
+                    $imp_cells = "B7:S7"
+                    when 19
+                    $t_cells   = "B3:T3"
+                    $un_cells  = "B4:T4"
+                    $ap_cells  = "B5:T5"
+                    $att_cells = "B6:T6"
+                    $imp_cells = "B7:T7"
+                    when 20
+                    $t_cells   = "B3:U3"
+                    $un_cells  = "B4:U4"
+                    $ap_cells  = "B5:U5"
+                    $att_cells = "B6:U6"
+                    $imp_cells = "B7:U7"
+                    when 21
+                    $t_cells   = "B3:V3"
+                    $un_cells  = "B4:V4"
+                    $ap_cells  = "B5:V5"
+                    $att_cells = "B6:V6"
+                    $imp_cells = "B7:V7"
+                    when 22
+                    $t_cells   = "B3:W3"
+                    $un_cells  = "B4:W4"
+                    $ap_cells  = "B5:W5"
+                    $att_cells = "B6:W6"
+                    $imp_cells = "B7:W7"
+                    when 23
+                    $t_cells   = "B3:X3"
+                    $un_cells  = "B4:X4"
+                    $ap_cells  = "B5:X5"
+                    $att_cells = "B6:X6"
+                    $imp_cells = "B7:X7"
+                    when 24
+                    $t_cells   = "B3:Y3"
+                    $un_cells  = "B4:Y4"
+                    $ap_cells  = "B5:Y5"
+                    $att_cells = "B6:Y6"
+                    $imp_cells = "B7:Y7"
+                    when 25
+                    $t_cells   = "B3:Z3"
+                    $un_cells  = "B4:Z4"
+                    $ap_cells  = "B5:Z5"
+                    $att_cells = "B6:Z6"
+                    $imp_cells = "B7:Z7"
                     else
                     puts "Out of bounds, double check number of permitted topics per graph."
                 end
