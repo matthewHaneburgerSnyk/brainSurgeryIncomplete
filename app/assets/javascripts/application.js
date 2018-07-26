@@ -42,7 +42,8 @@ $(document).ready(function () {
     $("#addrow").on("click", function () {
         var newRow = $("<tr>");
         var cols = "";
-
+  
+        cols += '<td><input type="checkbox" class="form-control" name="todo[v_mindset_'+ counter + ']" id="todo_v_mindset_'+ counter +'"></td>';  
         cols += '<td><input type="text" class="form-control" name="todo[v_topic_code'+ counter + ']" id="todo_v_topic_code'+ counter +'"></td>';
         cols +='<td> <select name="todo[v_topic_type' + counter + ']" id="todo_v_topic_type' + counter + '"><option value="standard_3x">standard_3x</option>  <option value="standard_1x">standard_1x</option> <option value="ranking">ranking</option></select></td> ';   
         cols += '<td><input type="text" class="form-control" name="todo[v_survey_column' + counter + ']" id="todo_v_survey_column'+ counter + '"/></td>';
