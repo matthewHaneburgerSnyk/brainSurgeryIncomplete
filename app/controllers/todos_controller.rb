@@ -124,21 +124,54 @@ class TodosController < ApplicationController
     todosVH          = todosVH.collect { |k, v| v }
     todosVH          = todosVH.each_slice(7).to_a
     
+    
+    todosMinds        = Array.new
+    todosMindsTypes   = Array.new
+    todosMindsTitles  = Array.new
+    
+    #get mindsets
+    
+    todosVH.each do |values|
+        puts "todos VH values #{values}"
+        count = 0
+        if values[7].to_i == 1
+            puts "minds value #{values[2]}"
+            puts "types value #{values[1]}"
+            puts "titles value #{values[3]}"
+            
+            
+            todosMinds.push(values[2])
+            todosMindsTypes.push(values[1])
+            todosMindsTitles.push(values[3])
+            
+        end
+        count += 1
+    end
+    
+    if todosMinds.size > 5
+        raise Exception.new('Only 5 mindsets can be submitted.  Please uncheck one row as a mindset.')
+        
+    end
+    
     segs             = segment_params
     todosSegs        = eval(segs.to_s)
     todosSegs        = todosSegs.collect { |k, v| v}
     
-    minds            = mindset_params
-    todosMinds       = eval(minds.to_s)
-    todosMinds       = todosMinds.collect { |k, v| v}
+    #minds            = mindset_params
+    #todosMinds       = eval(minds.to_s)
+    #todosMinds       = todosMinds.collect { |k, v| v}
     
-    mind_types       = mindset_params_types
-    todosMindsTypes  = eval(mind_types.to_s)
-    todosMindsTypes  = todosMindsTypes.collect { |k, v| v}
+    #mind_types       = mindset_params_types
+    #todosMindsTypes  = eval(mind_types.to_s)
+    #todosMindsTypes  = todosMindsTypes.collect { |k, v| v}
     
-    mind_titles      = mindset_param_titles
-    todosMindsTitles = eval(mind_titles.to_s)
-    todosMindsTitles = todosMindsTitles.collect { |k, v| v}
+    #mind_titles      = mindset_param_titles
+    #todosMindsTitles = eval(mind_titles.to_s)
+    #todosMindsTitles = todosMindsTitles.collect { |k, v| v}
+    
+    
+    
+    
     
     
     @parser.makeVerb(todosVH, todosSegs, todosMinds, todosMindsTypes, todosMindsTitles)
@@ -239,21 +272,51 @@ class TodosController < ApplicationController
     todosVH          = todosVH.collect { |k, v| v }
     todosVH          = todosVH.each_slice(8).to_a
     
+    
+    todosMinds        = Array.new
+    todosMindsTypes   = Array.new
+    todosMindsTitles  = Array.new
+    
+    #get mindsets
+    
+    todosVH.each do |values|
+        puts "todos VH values #{values}"
+        count = 0
+        if values[7].to_i == 1
+            puts "minds value #{values[2]}"
+            puts "types value #{values[1]}"
+            puts "titles value #{values[3]}"
+            
+            
+            todosMinds.push(values[2])
+            todosMindsTypes.push(values[1])
+            todosMindsTitles.push(values[3])
+            
+        end
+        count += 1
+    end
+    
+    if todosMinds.size > 5
+       raise Exception.new('Only 5 mindsets can be submitted.  Please uncheck one row as a mindset.')
+        
+    end
+    puts "todos Minds #{todosMinds}"
+    
     segs             = segment_params
     todosSegs        = eval(segs.to_s)
     todosSegs        = todosSegs.collect { |k, v| v}
     
-    minds            = mindset_params
-    todosMinds       = eval(minds.to_s)
-    todosMinds       = todosMinds.collect { |k, v| v}
+    #minds            = mindset_params
+    #todosMinds       = eval(minds.to_s)
+    #todosMinds       = todosMinds.collect { |k, v| v}
     
-    mind_types       = mindset_params_types
-    todosMindsTypes  = eval(mind_types.to_s)
-    todosMindsTypes  = todosMindsTypes.collect { |k, v| v}
+    #mind_types       = mindset_params_types
+    #todosMindsTypes  = eval(mind_types.to_s)
+    #todosMindsTypes  = todosMindsTypes.collect { |k, v| v}
     
-    mind_titles      = mindset_param_titles
-    todosMindsTitles = eval(mind_titles.to_s)
-    todosMindsTitles = todosMindsTitles.collect { |k, v| v}
+    #mind_titles      = mindset_param_titles
+    #todosMindsTitles = eval(mind_titles.to_s)
+    #todosMindsTitles = todosMindsTitles.collect { |k, v| v}
     
     
     @parser.makeVerb(todosVH, todosSegs, todosMinds, todosMindsTypes, todosMindsTitles)

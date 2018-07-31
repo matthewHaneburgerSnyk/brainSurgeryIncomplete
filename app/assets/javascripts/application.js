@@ -15,6 +15,8 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require_tree .
+//= require rails.validations
+
 $(document).ready(function() {
   $('.has-tooltip').tooltip();
 });

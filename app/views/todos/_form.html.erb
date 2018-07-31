@@ -38,77 +38,7 @@
   </div>
   
  
-    <div class="container">
     
-<h2>Mindset Data</h2>
-<p>*Two mindsets are required, leave the others blank to exclude</p>
-<div class="field form-group">
-    <table id="myTableMind" class="table order-list00">
-    <thead>
-        <tr>
-            <td>Mindset 1</td>
-            <td>Mindset 2</td> 
-            <td>Mindset 3</td>
-            <td>Mindset 4</td>
-            <td>Mindset 5</td>
-        </tr>
-    </thead>
-    <tbody id="mindset_body">
-    
-    <tr>
-            <td class="col-sm-1">
-                <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
-                <%= f.text_field :mindset_1_title,  placeholder: "Title", class: 'form-control' %>
-                <br>
-                <%= f.text_field :mindset_1,  placeholder: "Column", class: 'form-control' %>
-                <br>
-                <%= f.select :mindset_1_type, ['Select Type','standard_3x', 'standard_1x'], class: 'form-control'%>
-                 
-                 </span>
-            
-            <td class="col-sm-1">
-                <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
-                <%= f.text_field :mindset_2_title,  placeholder: "Title", class: 'form-control' %>
-                <br>
-                <%= f.text_field :mindset_2, placeholder: "Column", class: 'form-control' %>
-                 <br>
-                <%= f.select :mindset_2_type, ['Select Type','standard_3x', 'standard_1x'], class: 'form-control'%>
-                 </span>
-            </td>
-            <td class="col-sm-1">
-                <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
-                <%= f.text_field :mindset_3_title,  placeholder: "Title", class: 'form-control' %>
-                <br>
-                <%= f.text_field :mindset_3, placeholder: "Column", class: 'form-control' %>
-                 <br>
-                <%= f.select :mindset_3_type, ['Select Type','standard_3x', 'standard_1x'], class: 'form-control'%>
-                 </span>
-            </td>
-            <td class="col-sm-1">
-                <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
-                <%= f.text_field :mindset_4_title,  placeholder: "Title", class: 'form-control' %>
-                <br>
-                <%= f.text_field :mindset_4, placeholder: "Column", class: 'form-control' %>
-                 <br>
-                <%= f.select :mindset_4_type, ['Select Type','standard_3x', 'standard_1x'], class: 'form-control'%>
-                 </span>
-            </td>
-            <td class="col-sm-1">
-                <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
-                <%= f.text_field :mindset_5_title,  placeholder: "Title", class: 'form-control' %>
-                <br>
-                <%= f.text_field :mindset_5, placeholder: "Column", class: 'form-control' %>
-                 <br>
-                <%= f.select :mindset_5_type, ['Select Type','standard_3x', 'standard_1x'], class: 'form-control'%>
-                 </span>
-            </td>
-    
-    </tr>
-    </tbody>
-
-</table>
- </div> 
- </div>
       <div class="container">
       
 <h2>Segment Data</h2>
@@ -178,12 +108,12 @@
     <tbody id="verbatim_body">
         
         <tr>
-        
+       
    
-            <td class="col-xm-1">
+            <td>
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
-                <%= f.check_box :v_mindset, class: 'form-control' %>
+                <%= f.check_box :v_mindset, class: 'form-control'  %>
                
                  </span>
             </td>
@@ -254,7 +184,7 @@
         <% unless @todo.v_topic_code0.nil? %>
         
         <tr>
-          <td class="col-xm-1">
+          <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
                 <%= f.check_box :v_mindset_0, class: 'form-control' %>
@@ -321,7 +251,7 @@
         <% unless @todo.v_topic_code1.nil? %>
         
         <tr>
-        <td class="col-xm-1">
+        <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
                 <%= f.check_box :v_mindset_1, class: 'form-control' %>
@@ -409,7 +339,7 @@
         <% unless @todo.v_topic_code2.nil? %>
         
         <tr>
-        <td class="col-xm-1">
+        <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
                 <%= f.check_box :v_mindset_2, class: 'form-control' %>
@@ -479,7 +409,7 @@
         <% unless @todo.v_topic_code3.nil? %>
         
         <tr>
-            <td class="col-xm-1">
+            <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
                 <%= f.check_box :v_mindset_3, class: 'form-control' %>
@@ -549,7 +479,7 @@
         <% unless @todo.v_topic_code4.nil? %>
         
         <tr>
-            <td class="col-xm-1">
+            <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
                 <%= f.check_box :v_mindset_4, class: 'form-control' %>
@@ -619,7 +549,7 @@
         <% unless @todo.v_topic_code5.nil? %>
         
         <tr>
-        <td class="col-xm-1">
+        <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
                 <%= f.check_box :v_mindset_5, class: 'form-control' %>
@@ -689,7 +619,7 @@
         <% unless @todo.v_topic_code6.nil? %>
         
         <tr>
-            <td class="col-xm-1">
+            <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
                 <%= f.check_box :v_mindset_6, class: 'form-control' %>
@@ -760,7 +690,7 @@
         <% unless @todo.v_topic_code7.nil? %>
         
         <tr>
-        <td class="col-xm-1">
+        <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
                 <%= f.check_box :v_mindset_7, class: 'form-control' %>
@@ -831,7 +761,7 @@
         <% unless @todo.v_topic_code8.nil? %>
         
         <tr>
-        <td class="col-xm-1">
+        <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
                 <%= f.check_box :v_mindset_8, class: 'form-control' %>
@@ -902,7 +832,7 @@
         <% unless @todo.v_topic_code9.nil? %>
         
         <tr>
-            <td class="col-xm-1">
+            <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
                 <%= f.check_box :v_mindset_9, class: 'form-control' %>
@@ -973,7 +903,7 @@
         <% unless @todo.v_topic_code10.nil? %>
         
         <tr>
-        <td class="col-xm-1">
+        <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
                 <%= f.check_box :v_mindset_10, class: 'form-control' %>
@@ -1043,7 +973,7 @@
         <% unless @todo.v_topic_code11.nil? %>
         
         <tr>
-            <td class="col-xm-1">
+            <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
                 <%= f.check_box :v_mindset_11, class: 'form-control' %>
@@ -1112,7 +1042,7 @@
         <% unless @todo.v_topic_code12.nil? %>
         
         <tr>
-           <td class="col-xm-1">
+           <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
                 <%= f.check_box :v_mindset_12, class: 'form-control' %>
@@ -1183,7 +1113,7 @@
         <% unless @todo.v_topic_code13.nil? %>
         
         <tr>
-           <td class="col-xm-1">
+           <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
                 <%= f.check_box :v_mindset_13, class: 'form-control' %>
@@ -1253,7 +1183,7 @@
         <% unless @todo.v_topic_code14.nil? %>
         
         <tr>
-            <td class="col-xm-1">
+            <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
                 <%= f.check_box :v_mindset_14, class: 'form-control' %>
@@ -1324,7 +1254,7 @@
         <% unless @todo.v_topic_code15.nil? %>
         
         <tr>
-          <td class="col-xm-1">
+          <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
                 <%= f.check_box :v_mindset_15, class: 'form-control' %>
@@ -1394,7 +1324,7 @@
         <% unless @todo.v_topic_code16.nil? %>
         
         <tr>
-          <td class="col-xm-1">
+          <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
                 <%= f.check_box :v_mindset_16, class: 'form-control' %>
@@ -1465,7 +1395,7 @@
         <% unless @todo.v_topic_code17.nil? %>
         
         <tr>
-          <td class="col-xm-1">
+          <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
                 <%= f.check_box :v_mindset_17, class: 'form-control' %>
@@ -1534,7 +1464,7 @@
         <% unless @todo.v_topic_code18.nil? %>
         
         <tr>
-        <td class="col-xm-1">
+        <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
                 <%= f.check_box :v_mindset_18, class: 'form-control' %>
@@ -1603,7 +1533,7 @@
         <% unless @todo.v_topic_code19.nil? %>
         
         <tr>
-        <td class="col-xm-1">
+        <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
                 <%= f.check_box :v_mindset_19, class: 'form-control' %>
@@ -1672,7 +1602,7 @@
         <% unless @todo.v_topic_code20.nil? %>
         
         <tr>
-        <td class="col-xm-1">
+        <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
                 <%= f.check_box :v_mindset_20, class: 'form-control' %>
@@ -1741,7 +1671,7 @@
         <% unless @todo.v_topic_code21.nil? %>
         
         <tr>
-           <td class="col-xm-1">
+           <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
                 <%= f.check_box :v_mindset_21, class: 'form-control' %>
@@ -1810,7 +1740,7 @@
         <% unless @todo.v_topic_code22.nil? %>
         
         <tr>
-        <td class="col-xm-1">
+        <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
                 <%= f.check_box :v_mindset_22, class: 'form-control' %>
@@ -1879,7 +1809,7 @@
         <% unless @todo.v_topic_code23.nil? %>
         
         <tr>
-          <td class="col-xm-1">
+          <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
                 <%= f.check_box :v_mindset_23, class: 'form-control' %>
@@ -1949,7 +1879,7 @@
         <% unless @todo.v_topic_code24.nil? %>
         
         <tr>
-          <td class="col-xm-1">
+          <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
                 <%= f.check_box :v_mindset_24, class: 'form-control' %>
@@ -2017,7 +1947,7 @@
         <% unless @todo.v_topic_code25.nil? %>
         
         <tr>
-        <td class="col-xm-1">
+        <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
                 <%= f.check_box :v_mindset_25, class: 'form-control' %>
@@ -2086,7 +2016,7 @@
         <% unless @todo.v_topic_code26.nil? %>
         
         <tr>
-        <td class="col-xm-1">
+        <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
                 <%= f.check_box :v_mindset_26, class: 'form-control' %>
@@ -2155,7 +2085,7 @@
         <% unless @todo.v_topic_code27.nil? %>
         
         <tr>
-        <td class="col-xm-1">
+        <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
                 <%= f.check_box :v_mindset_27, class: 'form-control' %>
@@ -2224,7 +2154,7 @@
         <% unless @todo.v_topic_code28.nil? %>
         
         <tr>
-        <td class="col-xm-1">
+        <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
                 <%= f.check_box :v_mindset_28, class: 'form-control' %>
@@ -2293,7 +2223,7 @@
         <% unless @todo.v_topic_code29.nil? %>
         
         <tr>
-        <td class="col-xm-1">
+        <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
                 <%= f.check_box :v_mindset_29, class: 'form-control' %>
@@ -2362,7 +2292,7 @@
         <% unless @todo.v_topic_code30.nil? %>
         
         <tr>
-        <td class="col-xm-1">
+        <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
                 <%= f.check_box :v_mindset_30, class: 'form-control' %>
@@ -2431,7 +2361,7 @@
         <% unless @todo.v_topic_code31.nil? %>
         
         <tr>
-        <td class="col-xm-1">
+        <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
                 <%= f.check_box :v_mindset_31, class: 'form-control' %>
@@ -2500,7 +2430,7 @@
         <% unless @todo.v_topic_code32.nil? %>
         
         <tr>
-        <td class="col-xm-1">
+        <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
                 <%= f.check_box :v_mindset_32, class: 'form-control' %>
@@ -2568,7 +2498,7 @@
         <% unless @todo.v_topic_code33.nil? %>
         
         <tr>
-        <td class="col-xm-1">
+        <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
                 <%= f.check_box :v_mindset_33, class: 'form-control' %>
@@ -2637,7 +2567,7 @@
         <% unless @todo.v_topic_code34.nil? %>
         
         <tr>
-        <td class="col-xm-1">
+        <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
                 <%= f.check_box :v_mindset_34, class: 'form-control' %>
@@ -2706,7 +2636,7 @@
         <% unless @todo.v_topic_code35.nil? %>
         
         <tr>
-        <td class="col-xm-1">
+        <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
                 <%= f.check_box :v_mindset_35, class: 'form-control' %>
@@ -2775,7 +2705,7 @@
         <% unless @todo.v_topic_code36.nil? %>
         
         <tr>
-        <td class="col-xm-1">
+        <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
                 <%= f.check_box :v_mindset_36, class: 'form-control' %>
@@ -2845,7 +2775,7 @@
         <% unless @todo.v_topic_code37.nil? %>
         
         <tr>
-        <td class="col-xm-1">
+        <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
                 <%= f.check_box :v_mindset_37, class: 'form-control' %>
@@ -2914,7 +2844,7 @@
         <% unless @todo.v_topic_code38.nil? %>
         
         <tr>
-        <td class="col-xm-1">
+        <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
                 <%= f.check_box :v_mindset_38, class: 'form-control' %>
@@ -2984,7 +2914,7 @@
         <% unless @todo.v_topic_code39.nil? %>
         
         <tr>
-        <td class="col-xm-1">
+        <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
                 <%= f.check_box :v_mindset_39, class: 'form-control' %>
@@ -3054,7 +2984,7 @@
         <% unless @todo.v_topic_code40.nil? %>
         
         <tr>
-        <td class="col-xm-1">
+        <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
                 <%= f.check_box :v_mindset_40, class: 'form-control' %>
@@ -3123,7 +3053,7 @@
         <% unless @todo.v_topic_code41.nil? %>
         
         <tr>
-        <td class="col-xm-1">
+        <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
                 <%= f.check_box :v_mindset_41, class: 'form-control' %>
@@ -3193,7 +3123,7 @@
         <% unless @todo.v_topic_code42.nil? %>
         
         <tr>
-        <td class="col-xm-1">
+        <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
                 <%= f.check_box :v_mindset_42, class: 'form-control' %>
@@ -3262,7 +3192,7 @@
         <% unless @todo.v_topic_code43.nil? %>
         
         <tr>
-        <td class="col-xm-1">
+        <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
                 <%= f.check_box :v_mindset_43, class: 'form-control' %>
@@ -3331,7 +3261,7 @@
         <% unless @todo.v_topic_code44.nil? %>
         
         <tr>
-        <td class="col-xm-1">
+        <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
                 <%= f.check_box :v_mindset_44, class: 'form-control' %>
@@ -3400,7 +3330,7 @@
         <% unless @todo.v_topic_code45.nil? %>
         
         <tr>
-        <td class="col-xm-1">
+        <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
                 <%= f.check_box :v_mindset_45, class: 'form-control' %>
@@ -3469,7 +3399,7 @@
         <% unless @todo.v_topic_code46.nil? %>
         
         <tr>
-        <td class="col-xm-1">
+        <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
                 <%= f.check_box :v_mindset_46, class: 'form-control' %>
@@ -3538,7 +3468,7 @@
         <% unless @todo.v_topic_code47.nil? %>
         
         <tr>
-        <td class="col-xm-1">
+        <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
                 <%= f.check_box :v_mindset_47, class: 'form-control' %>
@@ -3607,7 +3537,7 @@
         <% unless @todo.v_topic_code48.nil? %>
         
         <tr>
-        <td class="col-xm-1">
+        <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
                 <%= f.check_box :v_mindset_48, class: 'form-control' %>
@@ -3676,7 +3606,7 @@
         <% unless @todo.v_topic_code49.nil? %>
         
         <tr>
-        <td class="col-xm-1">
+        <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
                 <%= f.check_box :v_mindset_49, class: 'form-control' %>
