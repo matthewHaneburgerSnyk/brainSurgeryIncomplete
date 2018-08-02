@@ -46,34 +46,34 @@
     <table id="myTableSeg" class="table order-list0">
     <thead>
         <tr>
-            <td>Segment 1</td>
-            <td>Segment 2</td> 
-            <td>Segment 3</td>
+            <td> 
+            <span class="has-tooltip" data-toggle="tooltip" title="Enter the Column ID of the segment column">Segment 1</span>
+            </td>
+            <td>
+            <span class="has-tooltip" data-toggle="tooltip" title="Enter the Column ID of the segment column">Segment 2</span>
+            </td> 
+            <td>
+            <span class="has-tooltip" data-toggle="tooltip" title="Enter the Column ID of the segment column">Segment 3</span>
+            </td>
         </tr>
     </thead>
     <tbody id="segment_body">
     
     <tr>
             <td class="col-sm-1">
-                <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
-       
+            
                 <%= f.text_field :segment_1, class: 'form-control' %>
-                 
-                 </span>
+        
             </td>
             <td class="col-sm-1">
-                <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
-       
-                <%= f.text_field :segment_2, class: 'form-control' %>
-                 
-                 </span>
+            
+                <%= f.text_field :segment_2, class: 'form-control' %>     
+             
             </td>
             <td class="col-sm-1">
-                <span class="has-tooltip" data-toggle="tooltip" title="Enter T1 or R1 with ascending numbers">
        
                 <%= f.text_field :segment_3, class: 'form-control' %>
                  
-                 </span>
             </td>
         
     
@@ -101,8 +101,12 @@
             <td>Survey Column</td> 
             <td>Topic title</td>
             <td>Topic Frame of Reference</td>
-            <td>Number of Ranking Evaluations</td>
-            <td>Number of Ranking Statements Shown</td>
+            <td>
+            <span class="has-tooltip" data-toggle="tooltip" title="# of top ranked statements evaluated">Number of Ranking Evaluations</span>
+            </td>
+            <td>
+            <span class="has-tooltip" data-toggle="tooltip" title="total # of statements in bucket">Number of Ranking Statements Shown</span>
+            </td>
         </tr>
     </thead>
     <tbody id="verbatim_body">
@@ -111,11 +115,11 @@
        
    
             <td>
-                <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
+                
        
                 <%= f.check_box :v_mindset, class: 'form-control'  %>
                
-                 </span>
+                 
             </td>
             
             
