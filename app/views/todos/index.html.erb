@@ -53,7 +53,7 @@
         </td>
         <td><%= link_to 'Download Verbatim', "/uploads/#{todo.mapping_file_name}/verbatim_#{todo.mapping_file_name}", class: 'btn btn-primary btn-xs' %></td>
         <td><%= link_to 'Download Graphs', "/uploads/#{todo.mapping_file_name}/graphs_#{todo.mapping_file_name}", class: 'btn btn-primary btn-xs' %></td>
-        <td><%= link_to 'Show', todo, class: 'btn btn-primary btn-xs' %></td>
+        <td><%= link_to 'Download User Inputs', "/uploads/#{todo.mapping_file_name}/inputs_#{todo.mapping_file_name}", class: 'btn btn-primary btn-xs' %></td>
         <td><%= link_to 'Edit', edit_todo_path(todo), class: 'btn btn-primary btn-xs' %></td>
         <td><%= link_to 'Destroy', todo, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary btn-xs' %></td>
       </tr>

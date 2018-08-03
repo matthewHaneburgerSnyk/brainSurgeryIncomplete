@@ -3,6 +3,7 @@ require 'json'
 require 'carrierwave'
 require 'carrierwave/orm/activerecord'
 require '././config/parse.rb'
+require '././config/export.rb'
 
 class TodosController < ApplicationController
   
@@ -186,7 +187,7 @@ class TodosController < ApplicationController
     puts "todosGH #{todosGH}"
     @parser.makeGraph(todosGH, todosSegs, todosMinds, todosMindsTypes, todosMindsTitles)
 
-  
+    @export.makeExport(todosVH, todosGH,todosSegs, todosMinds, todosMindsTypes, todosMindsTitles)
     #puts todosVH.class
     #puts todosVH
     end
@@ -267,6 +268,7 @@ class TodosController < ApplicationController
     
     #new Parser and generate verbatim file
     @parser          = Parser.new(p_data)
+    @export          = Export.new(p_data)
     todosV           = v_todo_params
     todosVH          = eval(todosV.to_s)
     todosVH          = todosVH.collect { |k, v| v }
@@ -330,7 +332,7 @@ class TodosController < ApplicationController
     todosGH = todosGH.each_slice(6).to_a
     puts "todosGH #{todosGH}"
     @parser.makeGraph(todosGH, todosSegs, todosMinds, todosMindsTypes, todosMindsTitles)
-    
+    @export.makeExport(todosVH, todosGH,todosSegs, todosMinds, todosMindsTypes, todosMindsTitles)
     end
     
   end

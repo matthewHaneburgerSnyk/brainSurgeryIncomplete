@@ -410,7 +410,8 @@ case topic_type
                       segment_calc($segment_s_array[2], row_count),   #segment 3
                       data_row[0]] # response id
         
-        row_1 = row_1_raw.reject { |r| r.to_s.empty? }
+        #row_1 = row_1_raw.reject { |r| r.to_s.empty? }
+        
         
         
         row_2_raw = [ data_row[s21] ,
@@ -429,7 +430,7 @@ case topic_type
                       segment_calc($segment_s_array[2], row_count),   #segment 3
                       data_row[0]] # response id
                       
-        row_2 = row_2_raw.reject { |r| r.to_s.empty? }
+                      #row_2 = row_2_raw.reject { |r| r.to_s.empty? }
         
         row_3_raw =[ data_row[s31] ,
                      data_row[s32] ,
@@ -447,15 +448,29 @@ case topic_type
                      segment_calc($segment_s_array[2], row_count),   #segment 3
                      data_row[0]] # response id
         
-         row_3 = row_3_raw.reject { |r| r.to_s.empty? }
+        #row_3 = row_3_raw.reject { |r| r.to_s.empty? }
         
-        
+        if row_1_raw[0].empty?
+            puts "Empty row, skipping"
+            else
+            sheet.add_row row_1_raw, :style=>body
+            
+        end
    
-        sheet.add_row row_1, :style=>body
+   
+        if row_2_raw[0].empty?
+            puts "Empty row, skipping"
+            else
+            sheet.add_row row_2_raw, :style=>body
+         end
         
-        sheet.add_row row_2, :style=>body
         
-        sheet.add_row row_3, :style=>body
+        if row_3_raw[0].empty?
+            puts "Empty row, skipping"
+            else
+            sheet.add_row row_3_raw, :style=>body
+        end
+        
         row_count = row_count + 1
        end
         
@@ -542,11 +557,14 @@ title_row_raw = [ "Emotion", #emotion
                          segment_calc($segment_s_array[2], row_count),   #segment 3
                          data_row[0]] # response id
            
-           row_1 = row_1_raw.reject { |r| r.to_s.empty? }
+           #row_1 = row_1_raw.reject { |r| r.to_s.empty? }
 
-
-           sheet.add_row row_1, :style=>body
-           
+           if row_1_raw[0].empty?
+              puts "empty row, skipping"
+           else
+               
+           sheet.add_row row_1_raw, :style=>body
+           end
            
            
            row_count = row_count + 1
@@ -647,10 +665,18 @@ title_row_raw = [ "Emotion", #emotion
     
                             
                
-               row_1 = row_1_raw.reject { |r| r.to_s.empty? }
+               #row_1 = row_1_raw.reject { |r| r.to_s.empty? }
 
                
-               sheet.add_row row_1, :style=>body
+               if row_1_raw[0].empty?
+               
+                   puts "empty row, skipping"
+               
+               else
+                   
+                   sheet.add_row row_1_raw, :style=>body
+               
+               end
                
                
                row_count = row_count + 1
@@ -751,10 +777,15 @@ title_row_raw = [ "Emotion", #emotion
                             data_row[0]]
                
                
-               row_1 = row_1_raw.reject { |r| r.to_s.empty? }
+               #row_1 = row_1_raw.reject { |r| r.to_s.empty? }
                
                
-               sheet.add_row row_1, :style=>body
+               if row_1_raw[0].empty?
+                   puts "empty row, skipping"
+                   else
+                   
+                   sheet.add_row row_1_raw, :style=>body
+               end
                
                
                row_count = row_count + 1
