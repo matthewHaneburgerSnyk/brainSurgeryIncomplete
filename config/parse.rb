@@ -103,8 +103,11 @@ $segment_s_array  = Array.new
 
 $segments.each do |seg|
    $segment_s_array.push($main_distance_row.index(seg))
+   puts "puts segment calc 11 #{$main_distance_row.index(seg)}"
 end
 
+puts "These are all the segments #{$segment_s_array}"
+puts "These are all the segments 1#{$segments}"
 
 
 #remove empty mindsets
@@ -453,7 +456,9 @@ case topic_type
         if row_1_raw[0].empty?
             puts "Empty row, skipping"
             else
-            sheet.add_row row_1_raw, :style=>body
+            row_1 = row_1_raw.reject { |r| r.to_s.empty? }
+            sheet.add_row row_1, :style=>body
+            puts "row_1_raw #{row_1_raw}"
             
         end
    
@@ -461,14 +466,16 @@ case topic_type
         if row_2_raw[0].empty?
             puts "Empty row, skipping"
             else
-            sheet.add_row row_2_raw, :style=>body
+            row_2 = row_2_raw.reject { |r| r.to_s.empty? }
+            sheet.add_row row_2, :style=>body
          end
         
         
         if row_3_raw[0].empty?
             puts "Empty row, skipping"
             else
-            sheet.add_row row_3_raw, :style=>body
+            row_3 = row_3_raw.reject { |r| r.to_s.empty? }
+            sheet.add_row row_3, :style=>body
         end
         
         row_count = row_count + 1
@@ -563,7 +570,8 @@ title_row_raw = [ "Emotion", #emotion
               puts "empty row, skipping"
            else
                
-           sheet.add_row row_1_raw, :style=>body
+               row_1 = row_1_raw.reject { |r| r.to_s.empty? }
+               sheet.add_row row_1, :style=>body
            end
            
            
@@ -674,7 +682,8 @@ title_row_raw = [ "Emotion", #emotion
                
                else
                    
-                   sheet.add_row row_1_raw, :style=>body
+                   row_1 = row_1_raw.reject { |r| r.to_s.empty? }
+                   sheet.add_row row_1, :style=>body
                
                end
                
@@ -784,7 +793,8 @@ title_row_raw = [ "Emotion", #emotion
                    puts "empty row, skipping"
                    else
                    
-                   sheet.add_row row_1_raw, :style=>body
+                   row_1 = row_1_raw.reject { |r| r.to_s.empty? }
+                   sheet.add_row row_1, :style=>body
                end
                
                
@@ -2109,9 +2119,21 @@ while $seg_count < $num_of_segments
 
     
     #######################
-    $seg_title = "#{g_topic_code} #{$segment_name[$seg_count]} - #{g_topic_title}"
+    
+    if $segment_name[$seg_count].size > 9
+        $seg_title = "#{g_topic_code} (#{$segment_name[$seg_count].truncate(10)}) #{$seg_count} - #{g_topic_title}"
+        else
+        $seg_title = "#{g_topic_code} (#{$segment_name[$seg_count]}) - #{g_topic_title}"
+        
+        
+    end
+    
+    
+  
     $seg_title = $seg_title.truncate(30)
     $seg_title = $seg_title.gsub("/", "_")
+    
+    $doc_seg_title = "#{g_topic_code} #{$segment_name[$seg_count]} - #{g_topic_title}"
  
  
  
@@ -2125,7 +2147,7 @@ wb.add_worksheet(:name=> "#{$seg_title}") do |sheet|
   
     sheet.add_row [g_topic_title], :sz => 12, :b => true, :alignment => { :horizontal => :center, :vertical => :center , :wrap_text => true}
     
-    sheet.add_row [$seg_title], :sz => 12, :b => true, :alignment => { :horizontal => :center, :vertical => :center , :wrap_text => true}
+    sheet.add_row [$doc_seg_title], :sz => 12, :b => true, :alignment => { :horizontal => :center, :vertical => :center , :wrap_text => true}
     
     
     
@@ -2910,19 +2932,28 @@ end
               $total_ts_graph_titles = $total_ts_graph_titles.flatten
           end
           
-          
+          if $m_segment_name[$m_seg_count].size > 9
+              $seg_title = "#{gm_topic_code} (#{$m_segment_name[$m_seg_count].truncate(10)}) #{$m_seg_count} - #{gm_topic_title}"
+              else
+              $seg_title = "#{gm_topic_code} (#{$m_segment_name[$m_seg_count]}) - #{gm_topic_title}"
+              
+              
+          end
             
-            $seg_title = "#{gm_topic_code} #{$m_segment_name[$m_seg_count]} - #{gm_topic_title}"
+            
             $seg_title = $seg_title.truncate(30)
             $seg_title = $seg_title.gsub("/", "_")
             
+            
+            
+            $gm_doc_seg_title = "#{gm_topic_code} #{$m_segment_name[$m_seg_count]} - #{gm_topic_title}"
             
             
             #  Per Segments
              puts "Mindset segment Worksheet name #{$seg_title}"
             wb.add_worksheet(:name=> "#{$seg_title}") do |sheet|
                 
-                sheet.add_row [gm_topic_title], :sz => 12, :b => true, :alignment => { :horizontal => :center, :vertical => :center , :wrap_text => true}
+                sheet.add_row [$gm_doc_seg_title], :sz => 12, :b => true, :alignment => { :horizontal => :center, :vertical => :center , :wrap_text => true}
                 
                 sheet.add_row [$seg_title], :sz => 12, :b => true, :alignment => { :horizontal => :center, :vertical => :center , :wrap_text => true}
                 
