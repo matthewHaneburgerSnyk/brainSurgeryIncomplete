@@ -136,7 +136,7 @@ end
 $mindset_titles = mindset_titles.reject { |v| v.to_s.empty? }
 $mindset_titles_array = Array.new
 $mindset_titles.each do |title|
-    $mindset_titles_array.push(title)
+    $mindset_titles_array.push(title + " Mindset")
     
 end
 
@@ -500,6 +500,8 @@ case topic_type
 #$mindset_types_array
 puts "Mindset Titles array #{$mindset_titles_array}"
 
+
+
 title_row_raw = [ "Emotion", #emotion
                   "Intensity" ,  #Intensity
                   "Why" ,  #Why
@@ -516,7 +518,15 @@ title_row_raw = [ "Emotion", #emotion
                   if segment_calc($segment_s_array[2], row_count) == "" then "" else "Segment 3" end,   #segment 3
                   "Response ID"] # response id
                   
+              
+              
+              
+              
               title_row = title_row_raw.reject { |t| t.to_s.empty? }
+           
+             
+             
+             
 
 
    sheet.add_row title_row, :style=>header
@@ -993,7 +1003,7 @@ def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
         $mindset_titles_array.push(title)
         
     end
-    
+  
     
     ########################################################################################################
     
@@ -1424,7 +1434,7 @@ def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
     puts "m gdata 1 6 #{$m_gdata_2}"
     puts "m ts 2#{$m_ts_2}"
     puts "rg data 1#{$r_gdata}"
-    puts "rm gdata 1 ${rm_gdata}"
+    puts "rm gdata 1 #{$rm_gdata}"
     puts "g data -- #{$gdata}"
     
         puts "**  seg values #{$seg_values}"

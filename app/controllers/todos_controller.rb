@@ -45,6 +45,7 @@ class TodosController < ApplicationController
              format.json { render :show, status: :created, location: @todo }
              uploader = MappingUploader.new
              uploader.store!(todo_params[:mapping_file])
+             @export.makeExport(todosVH, todosGH,todosSegs, todosMinds, todosMindsTypes, todosMindsTitles)
              else
              format.html { render :new }
              format.json { render json: @todo.errors, status: :unprocessable_entity }
