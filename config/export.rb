@@ -7,18 +7,9 @@ require 'fileutils'
 
 class Export
 
-def initialize(mapping)
-    #Parse doc incoming
-    $file_name = mapping[1].to_s
-    $file_name = $file_name.gsub(" ", "_")
-    $file_name = $file_name.gsub("(", "")
-    $file_name = $file_name.gsub(")", "")
-    cworkbook = Creek::Book.new mapping[0]
-    cworksheets = cworkbook.sheets
-    
-    
-    
-    
+def initialize(file_name)
+    @file_name = file_name
+    puts "file name ? #{@file_name}"
     
     def makeExport(verbatim_data, graph_data, segment_data, mindset_columns, mindset_types, mindset_titles)
         #verbatim - 9 per row
@@ -29,9 +20,9 @@ def initialize(mapping)
         #titles - 1
         p = Axlsx::Package.new
         wb = p.workbook
-        worksheet_name = $file_name.truncate(30)
-        wb.add_worksheet(:name=> "#{worksheet_name}") do |sheet|
-            
+        worksheet_name = @file_name.truncate(30)
+        wb.add_worksheet(:name=> "#{@file_name.truncate(30)}") do |sheet|
+            puts "verbatim data #{@file_name.truncate(30)}"
             sheet.add_row []
             sheet.add_row []
             
@@ -78,10 +69,10 @@ def initialize(mapping)
             
             
         end # end worksheet do
-    
-    p.serialize($file_name)
-    file = $file_name.to_s
-    FileUtils.mv $file_name, "./public/uploads/#{$file_name}/inputs_#{$file_name}"
+   
+    p.serialize(@file_name)
+    file = @file_name.to_s
+    FileUtils.mv @file_name, "./public/uploads/exports/#{@file_name.truncate(30)}_inputs.xlsx"
     
     
     end # End make export

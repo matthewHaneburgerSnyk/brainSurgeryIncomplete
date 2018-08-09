@@ -34,17 +34,61 @@ class TodosController < ApplicationController
   # POST /todos
   # POST /todos.json
   def save
+      @export = Export.new(todo_params[:project_name])
      
      @todo = Todo.new(todo_params)
      filename = todo_params[:mapping_file].original_filename
      filename = filename.gsub(" ", "_")
      @todo.mapping_file_name = filename
+     
      respond_to do |format|
          if @todo.save
              format.html { redirect_to @todo, notice: 'Project was successfully created.' }
              format.json { render :show, status: :created, location: @todo }
              uploader = MappingUploader.new
              uploader.store!(todo_params[:mapping_file])
+             
+             todosV           = v_todo_params
+             todosVH          = eval(todosV.to_s)
+             todosVH          = todosVH.collect { |k, v| v }
+             todosVH          = todosVH.each_slice(7).to_a
+             
+             todosMinds        = Array.new
+             todosMindsTypes   = Array.new
+             todosMindsTitles  = Array.new
+             
+             todosVH.each do |values|
+                 puts "todos VH values #{values}"
+                 count = 0
+                 if values[7].to_i == 1
+                     puts "minds value #{values[2]}"
+                     puts "types value #{values[1]}"
+                     puts "titles value #{values[3]}"
+                     
+                     
+                     todosMinds.push(values[2])
+                     todosMindsTypes.push(values[1])
+                     todosMindsTitles.push(values[3])
+                     
+                 end
+                 count += 1
+             end
+
+            segs             = segment_params
+            todosSegs        = eval(segs.to_s)
+            todosSegs        = todosSegs.collect { |k, v| v}
+
+            todosG  = g_todo_params
+            todosGH = eval(todosG.to_s)
+            todosGH = todosGH.collect { |k, v| v }
+            todosGH = todosGH.each_slice(6).to_a
+
+
+             
+             
+             
+             
+             
              @export.makeExport(todosVH, todosGH,todosSegs, todosMinds, todosMindsTypes, todosMindsTitles)
              else
              format.html { render :new }
@@ -91,6 +135,9 @@ class TodosController < ApplicationController
             puts"This is the filename >>>> #{@filename}"
             
         end
+        
+        
+        
         format.html { redirect_to @todo, notice: 'Project was successfully created.' }
         format.json { render :show, status: :created, location: @todo }
 
@@ -104,6 +151,47 @@ class TodosController < ApplicationController
     
     if params[:commit] == "Save"
         puts "Skipping calcs since this is a save"
+        
+        
+        @export          = Export.new(todo_params[:project_name])
+        todosV           = v_todo_params
+        todosVH          = eval(todosV.to_s)
+        todosVH          = todosVH.collect { |k, v| v }
+        todosVH          = todosVH.each_slice(7).to_a
+        
+        todosMinds        = Array.new
+        todosMindsTypes   = Array.new
+        todosMindsTitles  = Array.new
+        
+        todosVH.each do |values|
+            puts "todos VH values #{values}"
+            count = 0
+            if values[7].to_i == 1
+                puts "minds value #{values[2]}"
+                puts "types value #{values[1]}"
+                puts "titles value #{values[3]}"
+                
+                
+                todosMinds.push(values[2])
+                todosMindsTypes.push(values[1])
+                todosMindsTitles.push(values[3])
+                
+            end
+            count += 1
+        end
+        
+        segs             = segment_params
+        todosSegs        = eval(segs.to_s)
+        todosSegs        = todosSegs.collect { |k, v| v}
+        
+        todosG  = g_todo_params
+        todosGH = eval(todosG.to_s)
+        todosGH = todosGH.collect { |k, v| v }
+        todosGH = todosGH.each_slice(6).to_a
+        
+        @export.makeExport(todosVH, todosGH,todosSegs, todosMinds, todosMindsTypes, todosMindsTitles)
+        
+
     elsif params[:commit] == "Submit"
    
     puts "mapping filename #{@todo.mapping_file_name}"
@@ -121,6 +209,7 @@ class TodosController < ApplicationController
     
     #new Parser and generate verbatim file
     @parser          = Parser.new(p_data)
+    @export          = Export.new(todo_params[:project_name])
     todosV           = v_todo_params
     todosVH          = eval(todosV.to_s)
     todosVH          = todosVH.collect { |k, v| v }
@@ -237,6 +326,9 @@ class TodosController < ApplicationController
         uploader = MappingUploader.new
         uploader.store!(todo_params[:mapping_file])
         end
+        
+        
+        
         format.html { redirect_to @todo, notice: 'Project was successfully updated.' }
         format.json { render :show, status: :ok, location: @todo }
         
@@ -249,8 +341,52 @@ class TodosController < ApplicationController
     
     if params[:commit] == "Save"
         puts "Skipping calcs since this is a save"
-  
-    
+        
+        @export          = Export.new(todo_params[:project_name])
+        todosV           = v_todo_params
+        todosVH          = eval(todosV.to_s)
+        todosVH          = todosVH.collect { |k, v| v }
+        todosVH          = todosVH.each_slice(7).to_a
+        
+        todosMinds        = Array.new
+        todosMindsTypes   = Array.new
+        todosMindsTitles  = Array.new
+        
+        todosVH.each do |values|
+            puts "todos VH values #{values}"
+            count = 0
+            if values[7].to_i == 1
+                puts "minds value #{values[2]}"
+                puts "types value #{values[1]}"
+                puts "titles value #{values[3]}"
+                
+                
+                todosMinds.push(values[2])
+                todosMindsTypes.push(values[1])
+                todosMindsTitles.push(values[3])
+                
+            end
+            count += 1
+        end
+        
+        segs             = segment_params
+        todosSegs        = eval(segs.to_s)
+        todosSegs        = todosSegs.collect { |k, v| v}
+        
+        todosG  = g_todo_params
+        todosGH = eval(todosG.to_s)
+        todosGH = todosGH.collect { |k, v| v }
+        todosGH = todosGH.each_slice(6).to_a
+        
+        
+        
+        @export.makeExport(todosVH, todosGH,todosSegs, todosMinds, todosMindsTypes, todosMindsTitles)
+        
+        
+        
+
+
+
     elsif params[:commit] == "Submit"
     #Get original filename and put it where it goes
     #puts " filename 1 #{@filename}"
@@ -269,7 +405,7 @@ class TodosController < ApplicationController
     
     #new Parser and generate verbatim file
     @parser          = Parser.new(p_data)
-    @export          = Export.new(p_data)
+    @export          = Export.new(todo_params[:project_name])
     todosV           = v_todo_params
     todosVH          = eval(todosV.to_s)
     todosVH          = todosVH.collect { |k, v| v }
