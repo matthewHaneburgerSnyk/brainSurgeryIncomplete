@@ -51,8 +51,8 @@ class TodosController < ApplicationController
              todosV           = v_todo_params
              todosVH          = eval(todosV.to_s)
              todosVH          = todosVH.collect { |k, v| v }
-             todosVH          = todosVH.each_slice(7).to_a
-             
+             todosVH          = todosVH.each_slice(8).to_a
+             #You're not always going to have 7 of these ^ figure out how to account for that
              todosMinds        = Array.new
              todosMindsTypes   = Array.new
              todosMindsTitles  = Array.new
@@ -157,7 +157,7 @@ class TodosController < ApplicationController
         todosV           = v_todo_params
         todosVH          = eval(todosV.to_s)
         todosVH          = todosVH.collect { |k, v| v }
-        todosVH          = todosVH.each_slice(7).to_a
+        todosVH          = todosVH.each_slice(8).to_a
         
         todosMinds        = Array.new
         todosMindsTypes   = Array.new
@@ -213,7 +213,7 @@ class TodosController < ApplicationController
     todosV           = v_todo_params
     todosVH          = eval(todosV.to_s)
     todosVH          = todosVH.collect { |k, v| v }
-    todosVH          = todosVH.each_slice(7).to_a
+    todosVH          = todosVH.each_slice(8).to_a
     
     
     todosMinds        = Array.new
@@ -346,7 +346,7 @@ class TodosController < ApplicationController
         todosV           = v_todo_params
         todosVH          = eval(todosV.to_s)
         todosVH          = todosVH.collect { |k, v| v }
-        todosVH          = todosVH.each_slice(7).to_a
+        todosVH          = todosVH.each_slice(8).to_a
         
         todosMinds        = Array.new
         todosMindsTypes   = Array.new
