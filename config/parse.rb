@@ -193,11 +193,11 @@ end
 
 
 def map_mindset_value(mindset_value)
-    if mindset_value.to_f < 1.5
+    if mindset_value.to_f < 1.51
         mindset = "Impassioned"
-        elsif mindset_value.to_f < 2.6
+        elsif mindset_value.to_f < 2.51
         mindset = "Attracted"
-        elsif mindset_value.to_f < 3.5
+        elsif mindset_value.to_f < 3.50
         mindset = "Apathetic"
         else
         mindset = "Unattracted"
@@ -1014,7 +1014,8 @@ def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
     #################################   Percent Positive Calcs   ###############################
     #Parse verbatim by sheet
     
-    
+    #$m_total = Array.new
+    #$total = Array.new
     
    $worksheet_names = Array.new
     
@@ -1024,13 +1025,13 @@ def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
         
         #emotion, intensity, why, s, valence, mindset,  mindset 1, mindset 2, mindset 3, mindset 4, mindset 5, segment 1, segment 2, segment 3, response
         #   0         1       2   3     4        5           6        7           8           9          10        11         12        13         14
-        
-        
+        #clear array in between sheets
+        $g_data_raw.clear
         puts "Reading verbatims for graph generation, sheet: #{cworksheet.name}"
         num_rows = 0
         
         
-    
+        puts "g data before i add shit to it #{$g_data_raw}"
         #get the contents of the sheet and put them in an array
         cworksheet.rows.each do |row|
             row_cells = row.values
@@ -1154,11 +1155,17 @@ def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
             
         end # End for parsing calculation
         #percent Positive
+
+
         $total = positive + neutral + negative
+      
+        
+        
         $per_positive = (positive.to_f / $total.to_f).round(2)
         $per_neutral  = (neutral.to_f  / $total.to_f).round(2)
         $per_negative = (negative.to_f / $total.to_f).round(2)
         #mindset
+        
         $m_total = $unattracted + $apathetic + $attracted + $impassioned
         $per_unattracted = ($unattracted.to_f / $m_total.to_f).round(2)
         $per_apathetic   = ($apathetic.to_f  / $m_total.to_f).round(2)
@@ -1166,13 +1173,39 @@ def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
         $per_impassioned = ($impassioned.to_f / $m_total.to_f).round(2)
         
        
-        
-        
+       
+       if $per_positive.to_f.nan? == true
+           $per_positive = 0
+       end
+       if $per_neutral.to_f.nan? == true
+           $per_neutral = 0
+       end
+       if $per_negative.to_f.nan? == true
+           $per_negative = 0
+       end
+       
+       
+       if $per_unattracted.to_f.nan? == true
+           $per_unattracted = 0
+       end
+       
+       if $per_apathetic.to_f.nan? == true
+           $per_apathetic = 0
+       end
+       if $per_attracted.to_f.nan? == true
+           $per_attracted = 0
+       end
+       if $per_impassioned.to_f.nan? == true
+           $per_impassioned = 0
+       end
+       
+        puts "mindset total #{$m_total}"
         puts "per unattracted #{$per_unattracted}"
         puts "per apathetic #{$per_apathetic}"
         puts "per attracted  #{$per_attracted}"
         puts "per impassioned  #{$per_impassioned}"
     
+        puts "pp total #{$total}"
         puts "per positive #{$per_positive}"
         puts "per negative #{$per_negative}"
         puts "per neutral  #{$per_neutral}"
@@ -1290,7 +1323,7 @@ def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
       
          $m_seg_values = Hash.new
        
-         
+         puts "uniq segs #{$uniq_segs}"
          
          puts "all the seg names #{$m_uniq_seg_names}"
          $m_uniq_seg_names.each do |seg|
@@ -1303,7 +1336,7 @@ def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
              attracted = 0
              impassioned = 0
              
-          
+          puts "seg name*** #{seg} array spot #{array_spot}"
     
           
           ##### Figure out how the different mindset arrays are populated, theyr'e all matching the main data array
@@ -1334,11 +1367,25 @@ def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
              $s_per_attracted   = (attracted.to_f / $s_m_total.to_f).round(2)
              $s_per_impassioned = (impassioned.to_f / $s_m_total.to_f).round(2)
              
+             if $s_per_unattracted.to_f.nan?
+                 $s_per_unattracted = 0
+             end
+             
+             if $s_per_apathetic.to_f.nan?
+                 $s_per_apathetic = 0
+             end
+             if $s_per_attracted.to_f.nan?
+                 $s_per_attracted = 0
+             end
+             if $s_per_impassioned.to_f.nan?
+                 $s_per_impassioned = 0
+             end
+             
              $m_seg_values[seg] = [$s_per_unattracted, $s_per_apathetic, $s_per_attracted, $s_per_impassioned, $s_m_total]
              
-             
-             
-             
+           
+           
+           
          end
       
       puts "m seg values =++++++++++++++++++ #{$m_seg_values}"
@@ -1370,17 +1417,28 @@ def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
                         negative = negative + 1
                     end
                 
-                
+                puts "seg #{seg} and array spot #{array_spot} temp_array** #{temp_array}"
                end
+                
                 $s_total = positive + neutral + negative
-                $s_total_used = $total - $s_total
                 $s_per_positive = (positive.to_f / $s_total.to_f).round(2)
                 $s_per_neutral  = (neutral.to_f  / $s_total.to_f).round(2)
                 $s_per_negative = (negative.to_f / $s_total.to_f).round(2)
 
+
+                if $s_per_positive.to_f.nan? == true
+                    $s_per_positive = 0
+                end
                 
+                if $s_per_positive.to_f.nan? == true
+                    $s_per_neutral = 0
+                end
+                if $s_per_positive.to_f.nan? == true
+                    $s_per_negative = 0
+                end
+
                
-                $seg_values[seg] = [$s_per_positive, $s_per_neutral, $s_per_negative, $s_total , $s_total_used]
+               $seg_values[seg] = [$s_per_positive, $s_per_neutral, $s_per_negative, $s_total , $s_total]#$s_total_used
     
                 
             end
@@ -1396,15 +1454,57 @@ def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
         ### That's what seg values looks like it's a hash with the key being the segment name
         #$seg_values[unique_seg_names(seg)] = (per_positive, per_neutral, per_negative, total_used, total)
   
-        $seg_values         = $seg_values.reject { |k,v| k.nil? }
-        $m_seg_values       = $m_seg_values.reject { |k,v| k.nil? }
   
-   
+         #don't allow empty keys
+         $seg_values         = $seg_values.reject { |k,v| k.nil? }
+         $m_seg_values       = $m_seg_values.reject { |k,v| k.nil? }
+
+        
+        
+ 
+     
+        
         
         $ts   = [ $per_positive, $per_neutral, $per_negative,  $total, $total]
         $m_ts = [ $per_unattracted, $per_apathetic, $per_attracted, $per_impassioned, $m_total]
         
+        puts "$TS ** #{$ts}"
         
+        puts "$M_TS ** #{$m_ts}"
+
+        
+        
+         #filter nans out of $ts
+        i = 0
+        $ts.each do |val|
+        
+        
+        if val.to_f.nan? == true
+            
+        $ts[i] = 0
+        
+        end
+        i+=1
+        end
+   
+   #filter nans out of $m_ts
+        i = 0
+        $m_ts.each do |val|
+    
+        if val.to_f.nan? == true
+        
+        $m_ts[i] = 0
+        
+        end
+        i+=1
+        end
+
+
+puts "$TS ** nans gone #{$ts}"
+
+puts "$M_TS ** nans gone #{$m_ts}"
+
+
         puts "seg values #{$seg_values}"
         puts "m seg values #{$m_seg_values}"
         
@@ -1412,11 +1512,21 @@ def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
         puts "global m_ts #{$m_ts}"
         
         puts "<<<<<<<<<<<         m_ts_1     #{$m_ts_1} "
+        puts "og data ##### 3 end  {#$o_gdata}"
         puts "omg data ##### 3 end  {#$om_gdata}"
+        puts "r g data ##### 3 end  {#$r_gdata}"
+        puts "or g data ##### 3 end  {#$or_gdata}"
+        puts "rm g data ##### 3 end  {#$rm_gdata}"
+        
+       
         
         title = cworksheet.name[0..2].strip
         $m_title = cworksheet.name[0..2].strip
         $r_title = cworksheet.name.strip
+        
+        puts "title #{title}"
+        puts "m title #{$m_title}"
+        puts "r title #{$r_title}"
         
         $gdata[title]      = [$ts]
         $o_gdata[title]    = [$ts]
@@ -1436,7 +1546,7 @@ def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
     puts "rg data 1#{$r_gdata}"
     puts "rm gdata 1 #{$rm_gdata}"
     puts "g data -- #{$gdata}"
-    
+    puts "or data butt #{$or_gdata}"
         puts "**  seg values #{$seg_values}"
         puts "rankings exist all #{$rankings_exist_all}"
       
@@ -1448,20 +1558,23 @@ def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
              puts "r_title #{r_title}"
              
              
-             if $gdata[title].include?(value)
-                 puts "#{title} Already exists in doc, skipping"
+             if $gdata[title].include?(key)
+            
+                 puts "gdata title * #{$gdata[title]}"
+                 puts "key and value #{key} #{value}"
+                 puts "#{title} Already exists in doc*, skipping"
              else
                  $gdata[title].push(key, value)
              end
-             
-             if $o_gdata[title].include?(value)
+                 puts "gdata title * end #{$gdata[title]}"
+             if $o_gdata[title].include?(key)
                  puts "#{title} Already exists in doc, skipping"
              else
                  $o_gdata[title].push(key, value)
              end
              
              if $rankings_exist_all == true
-             if $or_gdata[r_title].include?(value)
+             if $or_gdata[r_title].include?(key)
                  
                  puts "#{r_title} Already exists in doc, skipping"
                  else
@@ -1469,7 +1582,7 @@ def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
                 
              end
                  
-             if $r_gdata[r_title].include?(value)
+             if $r_gdata[r_title].include?(key)
                  puts "#{r_title} Already exists in doc, skipping"
                  else
                 $r_gdata[r_title].push(key, value)
@@ -1486,22 +1599,23 @@ def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
              m_title = cworksheet.name[0..2].strip
              r_title = cworksheet.name.strip
              
-             if $m_gdata[m_title].include?(value)
+             if $m_gdata[m_title].include?(key)
                  puts "#{m_title} Already exists in doc, skipping"
                  else
                  $m_gdata[m_title].push(key, value)
              end
              
-             if $om_gdata[m_title].include?(value)
+             if $om_gdata[m_title].include?(key)
                  puts "#{m_title} Already exists in doc, skipping"
                  else
                  $om_gdata[m_title].push(key, value)
              end
              if $rankings_exist_all == true
                  
-             if $rm_gdata[r_title].include?(value)
+             if $rm_gdata[r_title].include?(key)
                  puts "#{r_title} Already exists in doc, skipping"
                  else
+                 
                  $rm_gdata[r_title].push(key, value)
              end
              end
@@ -1590,10 +1704,30 @@ puts "m gdata #{$m_gdata}"
             
         end
         
+        
+        
         if $rankings_exist == true
+            
         $graph_topics_ranking = Array.new
-        $graph_topics_ranking = $worksheet_names.drop($graph_topics_a.size)
+        $worksheet_names.each do |name|
+          puts "graph topics x ** #{$graph_topics_a}"
+          
+          
+          # $graph_topics_a.each do |g_topic|
+            
+            #if g_topic.strip.to_s == name[0..2].upcase.to_s
+               
+               #  $graph_topics_ranking.push(name)
+          if name[0].upcase.strip == "R"
+               $graph_topics_ranking.push(name)
+               
+               #end
+           
+        
+        
+        end
         puts "ranking topics #{$graph_topics_ranking}"
+        end
         end
 
 row_count = 0
@@ -1606,7 +1740,7 @@ $ts_negative.push("Negative")
 $ts_total      = Array.new
 $ts_total.push("Total")
 $ts_total_used  = Array.new
-$ts_total_used.push("Message Index")
+$ts_total_used.push("Total")
 
 $r_ts_positive    = Array.new
 $r_ts_neutral     = Array.new
@@ -1621,7 +1755,7 @@ $r_ts_total_used  = Array.new
 puts "graph topics a #{$graph_topics_a}"
 #puts "graph ranking topics #{$graph_topics_ranking}"
 $graph_topics_a.each do |topic|
-
+    
 
     ts_data = $o_gdata[topic.strip]
     
@@ -1633,7 +1767,7 @@ $graph_topics_a.each do |topic|
     $ts_negative.push(ts_data_a[2])
     $ts_total_used.push(ts_data_a[3])
     $ts_total.push(ts_data_a[4])
-    
+    puts "total debugging positive #{ts_data_a[0]} neutral #{ts_data_a[1]} negative #{ts_data_a[2]} total used #{ts_data_a[3]} total #{ts_data_a[4]}"
 
 end
 
@@ -1647,6 +1781,9 @@ if $rankings_exist == true
 $graph_topics_ranking.each do |topic|
     #$r_gdata = Hash.new
     #$rm_gdata = Hash.new
+    
+    puts "or gdata ass #{$or_gdata[topic]}"
+    
     r_ts_data = $or_gdata[topic]
     
     r_ts_data_a = r_ts_data[0]
@@ -1657,8 +1794,8 @@ $graph_topics_ranking.each do |topic|
     $r_ts_positive.push(r_ts_data_a[0])
     $r_ts_neutral.push(r_ts_data_a[1])
     $r_ts_negative.push(r_ts_data_a[2])
-    $r_ts_total_used.push(r_ts_data_a[3])
-    $r_ts_total.push(r_ts_data_a[4])
+    $r_ts_total.push(r_ts_data_a[3])
+    $r_ts_total_used.push(r_ts_data_a[4])
     
   end
     
@@ -1726,13 +1863,38 @@ wb.add_worksheet(:name=> "#{g_worksheet_name}") do |sheet|
     sheet.add_row [g_topic_type], :sz => 12, :font_name=>"Calibri", :b => true, :alignment => { :horizontal => :center, :vertical => :center , :wrap_text => true}
     
     
+    ##Message index calc ##
+    $message_index = Array.new
+    $message_index[0] = "Message Index"
+    i = 1
+    while i < $total_ts_positive.size
+        
+        if $total_ts_positive[1].to_f.nan? == true || $total_ts_positive[1] == 0
+            $message_index[i] = 0
+            else
+            
+            
+            if $total_ts_positive[i].to_f.nan? == true
+                $total_ts_positive[i] = 0
+            end
+            
+            first_value = $total_ts_positive[1]
+            current_value = $total_ts_positive[i]
+            $message_index[i] = (current_value.to_f / first_value.to_f) * 100
+            $message_index[i] = $message_index[i].round(0)
+        end
+        
+        
+        i+=1
+    end
+    ##end message index calc ##
 
             sheet.add_row  $total_ts_graph_titles.unshift(""), :style => chart_style
             sheet.add_row  $total_ts_positive , :style => chart_style #positive
             sheet.add_row  $total_ts_neutral, :style => chart_style #neutral
             sheet.add_row  $total_ts_negative, :style => chart_style #negative
-            sheet.add_row  $total_ts_total, :style => chart_style_1 #total
-            sheet.add_row  $total_ts_total_used, :style => chart_style_1 #message index
+            sheet.add_row  $total_ts_total_used, :style => chart_style_1 #total
+            sheet.add_row  $message_index, :style => chart_style_1 #message index
             sheet.column_widths 20, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,10, 10, 10,10, 10, 10, 10, 10, 10, 10, 10, 10
             
    
@@ -1938,7 +2100,7 @@ $topic_count = 0
 $graph_topics_s.each do |topic|
 
     ts_data = $gdata[topic.strip]
-
+    puts "ts data where I'm parsing segment titles #{ts_data}"
     
 
       if ts_data[0].class == Array
@@ -1958,6 +2120,10 @@ $graph_topics_s.each do |topic|
 
 
 
+
+
+
+
 puts "Number of segments #{$num_of_segments}"
 $segment_name = Array.new
 $ts_data = Array.new
@@ -1965,7 +2131,8 @@ $r_ts_data = Array.new
 $g_spot = 0
 $seg_count = 0
 
-while $seg_count < $num_of_segments
+  $uniq_seg_names.each do |seg_name|
+#while $seg_count < $num_of_segments
     $graph_topics_s = Array.new
     $graph_topics_s = graph_topics.split(",")
 
@@ -1978,7 +2145,7 @@ while $seg_count < $num_of_segments
     $ts_negative.clear
     $ts_negative.push("Negative")
     $ts_total_used.clear
-    $ts_total_used.push("Message Index")
+    $ts_total_used.push("Total")
     $ts_total.clear
     $ts_total.push("Total")
     
@@ -2001,11 +2168,38 @@ while $seg_count < $num_of_segments
         
     end
     
-    if $s_rankings_exist == true
-        $graph_topics_ranking = Array.new
-        $graph_topics_ranking = $worksheet_names.drop($graph_topics_s.size)
+    #if $s_rankings_exist == true
+    #    $graph_topics_ranking = Array.new
+    #    $graph_topics_ranking = $worksheet_names.drop($graph_topics_s.size)
+    #    puts "ranking topics #{$graph_topics_ranking}"
+    #end
+
+
+if $s_rankings_exist == true
+    
+    $graph_topics_ranking = Array.new
+    $worksheet_names.each do |name|
+        puts "graph topics x ** #{$graph_topics_s}"
+        
+        
+        #$graph_topics_s.each do |g_topic|
+            
+            #if g_topic.strip.to_s == name[0..2].upcase.to_s
+                
+                #$graph_topics_ranking.push(name)
+             if name[0].upcase.strip == "R"
+                $graph_topics_ranking.push(name)
+                
+            end
+            
+            
+            
+            # end
         puts "ranking topics #{$graph_topics_ranking}"
     end
+end
+
+
 
 
     puts " full gdata before #{$gdata}"
@@ -2016,21 +2210,50 @@ while $seg_count < $num_of_segments
         puts "gdata for debuggin #{$gdata[topic.strip]}"
         puts " full gdata after #{$gdata}"
         puts "ts data #{$ts_data}"
-        if $seg_count == 0
-            $g_spot = 1
-            
-            else
-            
-           $g_spot = ($seg_count * 2) + 1
+        #identify which segment to get values from
+        #if $seg_count == 0
+        #    $g_spot = 1
+        #
+        #    else
+        #
+        #   $g_spot = ($seg_count * 2) + 1
+        #
+        #end
+        #$g_start_spot = $main_distance_row.index(survey_column)
         
+        #seg_name
+        if $ts_data.include?(seg_name.to_s)
+           
+           $g_spot = $ts_data.index(seg_name.to_s) + 1
+           ts_data_a = $ts_data[$g_spot.to_i]
+           else
+           ts_data_a = [ 0,0,0,0,0 ]
+           
+           
+        end
+        puts "segment name in progress #{seg_name.to_s}"
+        
+        puts "TS Data a for segments #{ts_data_a}"
+        
+        a = 0
+        b = 0
+        c = 0
+        
+        if ts_data_a[0].to_f.nan? == false
+            a = ts_data_a[0]
         end
         
-        ts_data_a = $ts_data[$g_spot.to_i]
-        puts "TS Data a for segments #{ts_data_a}"
-  
-        $ts_positive.push(ts_data_a[0])
-        $ts_neutral.push(ts_data_a[1])
-        $ts_negative.push(ts_data_a[2])
+        if ts_data_a[1].to_f.nan? == false
+            b = ts_data_a[1]
+        end
+        
+        if ts_data_a[2].to_f.nan? == false
+            b = ts_data_a[2]
+        end
+        
+        $ts_positive.push(a)
+        $ts_neutral.push(b)
+        $ts_negative.push(c)
         $ts_total_used.push(ts_data_a[3])
         $ts_total.push(ts_data_a[4])
   
@@ -2053,26 +2276,56 @@ while $seg_count < $num_of_segments
             #$r_gdata = Hash.new
             #$rm_gdata = Hash.new
             $r_ts_data = $r_gdata[topic]
-            
+            puts "r ts data pre drop #{$r_ts_data}"
             $r_ts_data = $r_ts_data.drop(1)
-            
+            puts "number of graph topics #{$graph_topics_ranking.size}"
             puts "r ts data #{$r_ts_data}"
-            if $seg_count == 0
-                $g_spot = 1
+            puts "seg count #{$seg_count}"
+            #if $seg_count == 0
+            #    $g_spot = 1
+            #
+            #    else
+            #
+            #    $g_spot = ($seg_count * 2) + 1
+            #
+            #
+            #end
+            
+            if $r_ts_data.include?(seg_name.to_s)
                 
+                $g_spot = $r_ts_data.index(seg_name.to_s) + 1
+                r_ts_data_a = $r_ts_data[$g_spot.to_i]
                 else
+                r_ts_data_a = [ 0,0,0,0,0 ]
                 
-                $g_spot = ($seg_count * 2) + 1
                 
             end
             
-            r_ts_data_a = $r_ts_data[$g_spot.to_i]
+            
+           
+            puts "g spot to i #{$g_spot.to_i}"
             puts "r ts data a 2 #{r_ts_data_a}"
             
             
-            $r_ts_positive.push(r_ts_data_a[0])
-            $r_ts_neutral.push(r_ts_data_a[1])
-            $r_ts_negative.push(r_ts_data_a[2])
+            a = 0
+            b = 0
+            c = 0
+            
+            if r_ts_data_a[0].to_f.nan? == false
+                a = r_ts_data_a[0]
+            end
+            
+            if r_ts_data_a[1].to_f.nan? == false
+                b = r_ts_data_a[1]
+            end
+            
+            if r_ts_data_a[2].to_f.nan? == false
+                b = r_ts_data_a[2]
+            end
+            
+            $r_ts_positive.push(a)
+            $r_ts_neutral.push(b)
+            $r_ts_negative.push(c)
             $r_ts_total_used.push(r_ts_data_a[3])
             $r_ts_total.push(r_ts_data_a[4])
             
@@ -2130,10 +2383,10 @@ while $seg_count < $num_of_segments
     
     #######################
     
-    if $segment_name[$seg_count].size > 9
-        $seg_title = "#{g_topic_code} (#{$segment_name[$seg_count].truncate(10)}) #{$seg_count} - #{g_topic_title}"
+    if seg_name.size > 9
+        $seg_title = "#{g_topic_code} (#{seg_name.truncate(10)}) #{$seg_count} - #{g_topic_title}"
         else
-        $seg_title = "#{g_topic_code} (#{$segment_name[$seg_count]}) - #{g_topic_title}"
+        $seg_title = "#{g_topic_code} (#{seg_name}) - #{g_topic_title}"
         
         
     end
@@ -2143,7 +2396,7 @@ while $seg_count < $num_of_segments
     $seg_title = $seg_title.truncate(30)
     $seg_title = $seg_title.gsub("/", "_")
     
-    $doc_seg_title = "#{g_topic_code} #{$segment_name[$seg_count]} - #{g_topic_title}"
+    $doc_seg_title = "#{g_topic_code} #{seg_name} - #{g_topic_title}"
  
  
  
@@ -2162,19 +2415,41 @@ wb.add_worksheet(:name=> "#{$seg_title}") do |sheet|
     
     
     
-    #sheet.add_row  $graph_topics_s.unshift("")
-    #sheet.add_row  $ts_positive, :style => chart_style #positive
-    #sheet.add_row  $ts_neutral, :style => chart_style  #neutral
-    #sheet.add_row  $ts_negative, :style => chart_style  #negative
-    #sheet.add_row  $ts_total, :style => chart_style_1 #total
-    #sheet.add_row  $ts_total_used, :style => chart_style_1 #message index
+    ##Message index calc ##
+    $message_index.clear
+    $message_index[0] = "Message Index"
+    
+    
+    
+    i = 1
+    while i < $total_ts_positive.size
+
+        if $total_ts_positive[1].to_f.nan? == true  || $total_ts_positive[1] == 0
+            $message_index[i] = 0
+        else
+
+        
+        if $total_ts_positive[i].to_f.nan? == true
+            $total_ts_positive[i] = 0
+        end
+
+        first_value = $total_ts_positive[1]
+        current_value = $total_ts_positive[i]
+        $message_index[i] = (current_value.to_f / first_value.to_f) * 100
+        $message_index[i] = $message_index[i].round(0)
+        end
+        
+        
+        i+=1
+    end
+    ##end message index calc ##
     
     sheet.add_row  $total_ts_graph_titles.unshift(""), :style => chart_style
     sheet.add_row  $total_ts_positive , :style => chart_style #positive
     sheet.add_row  $total_ts_neutral, :style => chart_style #neutral
     sheet.add_row  $total_ts_negative, :style => chart_style #negative
-    sheet.add_row  $total_ts_total, :style => chart_style_1 #total
-    sheet.add_row  $total_ts_total_used, :style => chart_style_1 #message index
+    sheet.add_row  $total_ts_total_used, :style => chart_style_1 #total
+    sheet.add_row  $message_index, :style => chart_style_1 #message index
     sheet.column_widths 20, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,10, 10, 10,10, 10, 10, 10, 10, 10, 10, 10, 10
     
     
@@ -2753,7 +3028,8 @@ end
         $m_g_spot = 0
         $m_seg_count = 0
         
-        while $m_seg_count < $num_of_segments
+        #while $m_seg_count < $num_of_segments
+        $m_uniq_seg_names.each do |m_seg_name|
             $m_graph_topics_s = Array.new
             $m_graph_topics_s = m_graph_topics.split(",")
             
@@ -2819,17 +3095,27 @@ end
                 
               
                 
-                if $m_seg_count == 0
-                    $m_g_spot = 1
-                    #$m_g_spot_1 = 2
+                #  if $m_seg_count == 0
+                #    $m_g_spot = 1
+                #
+                #
+                #    else
+                #
+                #    $m_g_spot = ($m_seg_count * 2) + 1
+                #end
+                
+                
+                if $m_ts_data.include?(m_seg_name.to_s)
                     
+                    $m_g_spot = $m_ts_data.index(m_seg_name.to_s) + 1
+                    $ts_data_a = $m_ts_data[$m_g_spot.to_i]
                     else
+                    $ts_data_a = [ 0,0,0,0,0 ]
                     
-                    $m_g_spot = ($m_seg_count * 2) + 1
-                    #$m_g_spot_1 = ($m_seg_count * 2) + 2
+                    
                 end
                 
-                $ts_data_a = $m_ts_data[$m_g_spot.to_i]
+                #$ts_data_a = $m_ts_data[$m_g_spot.to_i]
     
                 
                 puts "seg count #{$m_seg_count}"
@@ -2942,10 +3228,10 @@ end
               $total_ts_graph_titles = $total_ts_graph_titles.flatten
           end
           
-          if $m_segment_name[$m_seg_count].size > 9
-              $seg_title = "#{gm_topic_code} (#{$m_segment_name[$m_seg_count].truncate(10)}) #{$m_seg_count} - #{gm_topic_title}"
+          if m_seg_name.size > 9
+              $seg_title = "#{gm_topic_code} (#{m_seg_name.truncate(10)}) #{$m_seg_count} - #{gm_topic_title}"
               else
-              $seg_title = "#{gm_topic_code} (#{$m_segment_name[$m_seg_count]}) - #{gm_topic_title}"
+              $seg_title = "#{gm_topic_code} (#{m_seg_name}) - #{gm_topic_title}"
               
               
           end
@@ -2956,7 +3242,7 @@ end
             
             
             
-            $gm_doc_seg_title = "#{gm_topic_code} #{$m_segment_name[$m_seg_count]} - #{gm_topic_title}"
+            $gm_doc_seg_title = "#{gm_topic_code} #{m_seg_name} - #{gm_topic_title}"
             
             
             #  Per Segments
