@@ -111,7 +111,7 @@
     </thead>
     <tbody id="verbatim_body">
         
-        <tr>
+        <tr >
        
    
             <td>
@@ -174,10 +174,9 @@
                 </span>
             </td>
             
-            
-            
-            <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
-        
+             
+            <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete" ></td>
+          
         
         
 
@@ -185,9 +184,9 @@
         </tr>
     
         
-        <% unless @todo.v_topic_code0.nil? %>
+        <% unless @todo.v_topic_code0.nil? || @todo.v_topic_code0 == ""%>
         
-        <tr>
+        <tr >
           <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
@@ -245,16 +244,19 @@
             </span>
             </td>
             
-            <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
-        
+            
+        <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete" ></td>
        
         </tr>
         
+        
+        
         <% end %>
         
-        <% unless @todo.v_topic_code1.nil? %>
+        <% unless @todo.v_topic_code1.nil? || @todo.v_topic_code1 == "" %>
+        <!-- || @todo.v_topic_code1 == ""-->
         
-        <tr>
+        <tr >
         <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
@@ -313,36 +315,20 @@
                 </span>
             </td>
             
-            <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete" onclick="clearText()"></td>
+            <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
            
-           <!--<td>
-            
-            <input type="button" class="btn btn-md btn-danger " value="Reset" onclick="clearText()" >
-            
-            
-            
-            </td> -->
+       
         
        
         </tr>
         
         <% end %>
         
-        <script>
-                function clearText() {
-                document.getElementById("todo_v_topic_code1").value = null;
-                document.getElementById("todo_v_topic_type1").value = "";
-                document.getElementById("todo_v_survey_column1").value = "";
-                document.getElementById("todo_v_topic_title1").value = "";
-                document.getElementById("todo_v_topic_frame1").value = "";
-                document.getElementById("todo_v_ranking_num1").value = "";
-                document.getElementById("todo_v_ranking_total1").value = "";
-                }
-             </script>   
+       
         
-        <% unless @todo.v_topic_code2.nil? %>
+        <% unless @todo.v_topic_code2.nil? || @todo.v_topic_code2 == "" %>
         
-        <tr>
+        <tr >
         <td class="col-xs-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="Check box if topic should be added as a column in every verbatim tab">
        
@@ -401,16 +387,14 @@
                 </span>
             </td>
             
-            <td class="col-sm-2"><a class="deleteRow"></a>
-
-            </td>
+            <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
         
        
         </tr>
         
         <% end %>
         
-        <% unless @todo.v_topic_code3.nil? %>
+        <% unless @todo.v_topic_code3.nil? || @todo.v_topic_code3 == ""  %>
         
         <tr>
             <td class="col-xs-1">
@@ -471,16 +455,14 @@
                 </span>
             </td>
             
-            <td class="col-sm-2"><a class="deleteRow"></a>
-
-            </td>
+             <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
         
        
         </tr>
         
         <% end %>
         
-        <% unless @todo.v_topic_code4.nil? %>
+        <% unless @todo.v_topic_code4.nil? || @todo.v_topic_code4 == "" %>
         
         <tr>
             <td class="col-xs-1">
@@ -541,16 +523,14 @@
                 </span>
             </td>
             
-            <td class="col-sm-2"><a class="deleteRow"></a>
-
-            </td>
+             <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
         
        
         </tr>
         
         <% end %>
         
-        <% unless @todo.v_topic_code5.nil? %>
+        <% unless @todo.v_topic_code5.nil? || @todo.v_topic_code5 == ""  %>
         
         <tr>
         <td class="col-xs-1">
@@ -611,16 +591,14 @@
                 </span>
             </td>
             
-            <td class="col-sm-2"><a class="deleteRow"></a>
-
-            </td>
+             <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
         
        
         </tr>
         
         <% end %>
         
-        <% unless @todo.v_topic_code6.nil? %>
+        <% unless @todo.v_topic_code6.nil? || @todo.v_topic_code6 == ""  %>
         
         <tr>
             <td class="col-xs-1">
@@ -681,9 +659,7 @@
                 </span>
             </td>
             
-            <td class="col-sm-2"><a class="deleteRow"></a>
-
-            </td>
+             <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
         
        
         </tr>
@@ -691,7 +667,7 @@
         <% end %>
         
         
-        <% unless @todo.v_topic_code7.nil? %>
+        <% unless @todo.v_topic_code7.nil? || @todo.v_topic_code7 == "" %>
         
         <tr>
         <td class="col-xs-1">
@@ -752,9 +728,7 @@
                 </span>
             </td>
             
-            <td class="col-sm-2"><a class="deleteRow"></a>
-
-            </td>
+             <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
         
        
         </tr>
@@ -762,7 +736,7 @@
         <% end %>
         
         
-        <% unless @todo.v_topic_code8.nil? %>
+        <% unless @todo.v_topic_code8.nil? || @todo.v_topic_code8 == ""  %>
         
         <tr>
         <td class="col-xs-1">
@@ -823,9 +797,7 @@
                 </span>
             </td>
             
-            <td class="col-sm-2"><a class="deleteRow"></a>
-
-            </td>
+             <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
         
        
         </tr>
@@ -833,7 +805,7 @@
         <% end %>
         
         
-        <% unless @todo.v_topic_code9.nil? %>
+        <% unless @todo.v_topic_code9.nil? || @todo.v_topic_code9 == "" %>
         
         <tr>
             <td class="col-xs-1">
@@ -894,9 +866,7 @@
                 </span>
             </td>
             
-            <td class="col-sm-2"><a class="deleteRow"></a>
-
-            </td>
+           <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
         
        
         </tr>
@@ -904,7 +874,7 @@
         <% end %>
         
         
-        <% unless @todo.v_topic_code10.nil? %>
+        <% unless @todo.v_topic_code10.nil? || @todo.v_topic_code10 == "" %>
         
         <tr>
         <td class="col-xs-1">
@@ -965,16 +935,14 @@
                 </span>
             </td>         
             
-            <td class="col-sm-2"><a class="deleteRow"></a>
-
-            </td>
+            <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
         
        
         </tr>
         
         <% end %>
         
-        <% unless @todo.v_topic_code11.nil? %>
+        <% unless @todo.v_topic_code11.nil? || @todo.v_topic_code11 == "" %>
         
         <tr>
             <td class="col-xs-1">
@@ -1034,16 +1002,14 @@
                 <%= f.text_field :v_ranking_total11, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-2"><a class="deleteRow"></a>
-
-            </td>
+             <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
         
        
         </tr>
         
         <% end %>
         
-        <% unless @todo.v_topic_code12.nil? %>
+        <% unless @todo.v_topic_code12.nil? || @todo.v_topic_code12 == "" %>
         
         <tr>
            <td class="col-xs-1">
@@ -1104,9 +1070,7 @@
                 </span>
             </td>         
             
-            <td class="col-sm-2"><a class="deleteRow"></a>
-
-            </td>
+             <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
         
        
         </tr>
@@ -1114,7 +1078,7 @@
         <% end %>
         
         
-        <% unless @todo.v_topic_code13.nil? %>
+        <% unless @todo.v_topic_code13.nil? || @todo.v_topic_code13 == ""  %>
         
         <tr>
            <td class="col-xs-1">
@@ -1175,16 +1139,13 @@
                 </span>
             </td>
             
-            <td class="col-sm-2"><a class="deleteRow"></a>
-
-            </td>
-        
+             <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
        
         </tr>
         
         <% end %>
         
-        <% unless @todo.v_topic_code14.nil? %>
+        <% unless @todo.v_topic_code14.nil? || @todo.v_topic_code14 == "" %>
         
         <tr>
             <td class="col-xs-1">
@@ -1245,9 +1206,7 @@
                 </span>
             </td>          
             
-            <td class="col-sm-2"><a class="deleteRow"></a>
-
-            </td>
+             <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
         
        
         </tr>
@@ -1255,7 +1214,7 @@
         <% end %>
         
         
-        <% unless @todo.v_topic_code15.nil? %>
+        <% unless @todo.v_topic_code15.nil? || @todo.v_topic_code15 == "" %>
         
         <tr>
           <td class="col-xs-1">
@@ -1316,16 +1275,14 @@
                 </span>
             </td>         
             
-            <td class="col-sm-2"><a class="deleteRow"></a>
-
-            </td>
+             <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
         
        
         </tr>
         
         <% end %>
         
-        <% unless @todo.v_topic_code16.nil? %>
+        <% unless @todo.v_topic_code16.nil? || @todo.v_topic_code16 == "" %>
         
         <tr>
           <td class="col-xs-1">
@@ -1386,9 +1343,7 @@
                 </span>
             </td>          
             
-            <td class="col-sm-2"><a class="deleteRow"></a>
-
-            </td>
+            <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
         
        
         </tr>
@@ -1396,7 +1351,7 @@
         <% end %>
         
         
-        <% unless @todo.v_topic_code17.nil? %>
+        <% unless @todo.v_topic_code17.nil? || @todo.v_topic_code17 == "" %>
         
         <tr>
           <td class="col-xs-1">
@@ -1456,16 +1411,14 @@
                 <%= f.text_field :v_ranking_total17, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-2"><a class="deleteRow"></a>
-
-            </td>
+            <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
         
        
         </tr>
         
         <% end %>
         
-        <% unless @todo.v_topic_code18.nil? %>
+        <% unless @todo.v_topic_code18.nil? || @todo.v_topic_code18 == ""  %>
         
         <tr>
         <td class="col-xs-1">
@@ -1525,16 +1478,14 @@
                 <%= f.text_field :v_ranking_total18, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-2"><a class="deleteRow"></a>
-
-            </td>
+             <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
         
        
         </tr>
         
         <% end %>
         
-        <% unless @todo.v_topic_code19.nil? %>
+        <% unless @todo.v_topic_code19.nil? || @todo.v_topic_code19 == "" %>
         
         <tr>
         <td class="col-xs-1">
@@ -1594,16 +1545,14 @@
                 <%= f.text_field :v_ranking_total19, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-2"><a class="deleteRow"></a>
-
-            </td>
+             <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
         
        
         </tr>
         
         <% end %>
         
-        <% unless @todo.v_topic_code20.nil? %>
+        <% unless @todo.v_topic_code20.nil? || @todo.v_topic_code20 == "" %>
         
         <tr>
         <td class="col-xs-1">
@@ -1663,16 +1612,14 @@
                 <%= f.text_field :v_ranking_total20, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-2"><a class="deleteRow"></a>
-
-            </td>
+             <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
         
        
         </tr>
         
         <% end %>
         
-        <% unless @todo.v_topic_code21.nil? %>
+        <% unless @todo.v_topic_code21.nil? || @todo.v_topic_code21 == "" %>
         
         <tr>
            <td class="col-xs-1">
@@ -1732,16 +1679,14 @@
                 <%= f.text_field :v_ranking_total21, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-2"><a class="deleteRow"></a>
-
-            </td>
+             <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
         
        
         </tr>
         
         <% end %>
         
-        <% unless @todo.v_topic_code22.nil? %>
+        <% unless @todo.v_topic_code22.nil? || @todo.v_topic_code22 == "" %>
         
         <tr>
         <td class="col-xs-1">
@@ -1801,16 +1746,14 @@
                 <%= f.text_field :v_ranking_total22, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-2"><a class="deleteRow"></a>
-
-            </td>
+             <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
         
        
         </tr>
         
         <% end %>
         
-        <% unless @todo.v_topic_code23.nil? %>
+        <% unless @todo.v_topic_code23.nil? || @todo.v_topic_code23 == "" %>
         
         <tr>
           <td class="col-xs-1">
@@ -1870,9 +1813,7 @@
                 <%= f.text_field :v_ranking_total23, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-2"><a class="deleteRow"></a>
-
-            </td>
+             <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
         
        
         </tr>
@@ -1880,7 +1821,7 @@
         <% end %>
         
         
-        <% unless @todo.v_topic_code24.nil? %>
+        <% unless @todo.v_topic_code24.nil? || @todo.v_topic_code24 == "" %>
         
         <tr>
           <td class="col-xs-1">
@@ -1940,15 +1881,13 @@
                 <%= f.text_field :v_ranking_total24, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-2"><a class="deleteRow"></a>
-
-            </td>
+             <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
         
        
         </tr>
         
         <% end %>
-        <% unless @todo.v_topic_code25.nil? %>
+        <% unless @todo.v_topic_code25.nil? || @todo.v_topic_code25 == "" %>
         
         <tr>
         <td class="col-xs-1">
@@ -2008,16 +1947,14 @@
             </span>
             </td>    
             
-            <td class="col-sm-2"><a class="deleteRow"></a>
-
-            </td>
+            <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
         
        
         </tr>
         
         <% end %>
         
-        <% unless @todo.v_topic_code26.nil? %>
+        <% unless @todo.v_topic_code26.nil? || @todo.v_topic_code26 == ""  %>
         
         <tr>
         <td class="col-xs-1">
@@ -2077,16 +2014,14 @@
                 </span>
             </td>          
             
-            <td class="col-sm-2"><a class="deleteRow"></a>
-
-            </td>
+             <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
         
        
         </tr>
         
         <% end %>
         
-        <% unless @todo.v_topic_code27.nil? %>
+        <% unless @todo.v_topic_code27.nil? || @todo.v_topic_code27 == "" %>
         
         <tr>
         <td class="col-xs-1">
@@ -2146,16 +2081,14 @@
                 <%= f.text_field :v_ranking_total27, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-2"><a class="deleteRow"></a>
-
-            </td>
+             <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
         
        
         </tr>
         
         <% end %>
         
-        <% unless @todo.v_topic_code28.nil? %>
+        <% unless @todo.v_topic_code28.nil? || @todo.v_topic_code28 == "" %>
         
         <tr>
         <td class="col-xs-1">
@@ -2215,16 +2148,14 @@
                 <%= f.text_field :v_ranking_total28, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-2"><a class="deleteRow"></a>
-
-            </td>
+             <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
         
        
         </tr>
         
         <% end %>
         
-        <% unless @todo.v_topic_code29.nil? %>
+        <% unless @todo.v_topic_code29.nil? || @todo.v_topic_code29 == "" %>
         
         <tr>
         <td class="col-xs-1">
@@ -2284,16 +2215,14 @@
                 <%= f.text_field :v_ranking_total29, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-2"><a class="deleteRow"></a>
-
-            </td>
+            <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
         
        
         </tr>
         
         <% end %>
         
-        <% unless @todo.v_topic_code30.nil? %>
+        <% unless @todo.v_topic_code30.nil? || @todo.v_topic_code30 == "" %>
         
         <tr>
         <td class="col-xs-1">
@@ -2353,16 +2282,14 @@
                 <%= f.text_field :v_ranking_total30, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-2"><a class="deleteRow"></a>
-
-            </td>
+            <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
         
        
         </tr>
         
         <% end %>
         
-        <% unless @todo.v_topic_code31.nil? %>
+        <% unless @todo.v_topic_code31.nil? || @todo.v_topic_code31 == "" %>
         
         <tr>
         <td class="col-xs-1">
@@ -2422,16 +2349,14 @@
                 <%= f.text_field :v_ranking_total31, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-2"><a class="deleteRow"></a>
-
-            </td>
+            <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
         
        
         </tr>
         
         <% end %>
         
-        <% unless @todo.v_topic_code32.nil? %>
+        <% unless @todo.v_topic_code32.nil? || @todo.v_topic_code32 == "" %>
         
         <tr>
         <td class="col-xs-1">
@@ -2490,16 +2415,14 @@
                 <%= f.text_field :v_ranking_total32, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-2"><a class="deleteRow"></a>
-
-            </td>
+             <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
         
        
         </tr>
         
         <% end %>
         
-        <% unless @todo.v_topic_code33.nil? %>
+        <% unless @todo.v_topic_code33.nil? || @todo.v_topic_code33 == "" %>
         
         <tr>
         <td class="col-xs-1">
@@ -2559,16 +2482,14 @@
                 </span>
             </td>          
             
-            <td class="col-sm-2"><a class="deleteRow"></a>
-
-            </td>
+             <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
         
        
         </tr>
         
         <% end %>
         
-        <% unless @todo.v_topic_code34.nil? %>
+        <% unless @todo.v_topic_code34.nil? || @todo.v_topic_code34 == "" %>
         
         <tr>
         <td class="col-xs-1">
@@ -2628,16 +2549,14 @@
                 <%= f.text_field :v_ranking_total34, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-2"><a class="deleteRow"></a>
-
-            </td>
+            <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
         
        
         </tr>
         
         <% end %>
         
-        <% unless @todo.v_topic_code35.nil? %>
+        <% unless @todo.v_topic_code35.nil? || @todo.v_topic_code35 == "" %>
         
         <tr>
         <td class="col-xs-1">
@@ -2697,16 +2616,14 @@
                 </span>
             </td>          
             
-            <td class="col-sm-2"><a class="deleteRow"></a>
-
-            </td>
+            <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
         
        
         </tr>
         
         <% end %>
         
-        <% unless @todo.v_topic_code36.nil? %>
+        <% unless @todo.v_topic_code36.nil? || @todo.v_topic_code36 == "" %>
         
         <tr>
         <td class="col-xs-1">
@@ -2766,9 +2683,7 @@
                 </span>
             </td>          
             
-            <td class="col-sm-2"><a class="deleteRow"></a>
-
-            </td>
+             <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
         
        
         </tr>
@@ -2776,7 +2691,7 @@
         <% end %>
         
         
-        <% unless @todo.v_topic_code37.nil? %>
+        <% unless @todo.v_topic_code37.nil? || @todo.v_topic_code37 == "" %>
         
         <tr>
         <td class="col-xs-1">
@@ -2836,16 +2751,14 @@
                 <%= f.text_field :v_ranking_total37, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-2"><a class="deleteRow"></a>
-
-            </td>
+             <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
         
        
         </tr>
         
         <% end %>
         
-        <% unless @todo.v_topic_code38.nil? %>
+        <% unless @todo.v_topic_code38.nil? || @todo.v_topic_code38 == "" %>
         
         <tr>
         <td class="col-xs-1">
@@ -2905,9 +2818,7 @@
                 <%= f.text_field :v_ranking_total38, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-2"><a class="deleteRow"></a>
-
-            </td>
+           <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
         
        
         </tr>
@@ -2915,7 +2826,7 @@
         <% end %>
         
         
-        <% unless @todo.v_topic_code39.nil? %>
+        <% unless @todo.v_topic_code39.nil? || @todo.v_topic_code39 == "" %>
         
         <tr>
         <td class="col-xs-1">
@@ -2975,9 +2886,7 @@
                 </span>
             </td>          
             
-            <td class="col-sm-2"><a class="deleteRow"></a>
-
-            </td>
+          <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
         
        
         </tr>
@@ -2985,7 +2894,7 @@
         <% end %>
         
         
-        <% unless @todo.v_topic_code40.nil? %>
+        <% unless @todo.v_topic_code40.nil? || @todo.v_topic_code40 == "" %>
         
         <tr>
         <td class="col-xs-1">
@@ -3045,16 +2954,14 @@
                 <%= f.text_field :v_ranking_total40, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-2"><a class="deleteRow"></a>
-
-            </td>
+           <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
         
        
         </tr>
         
         <% end %>
         
-        <% unless @todo.v_topic_code41.nil? %>
+        <% unless @todo.v_topic_code41.nil? || @todo.v_topic_code41 == "" %>
         
         <tr>
         <td class="col-xs-1">
@@ -3114,9 +3021,7 @@
                 <%= f.text_field :v_ranking_total41, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-2"><a class="deleteRow"></a>
-
-            </td>
+           <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
         
        
         </tr>
@@ -3124,7 +3029,7 @@
         <% end %>
         
         
-        <% unless @todo.v_topic_code42.nil? %>
+        <% unless @todo.v_topic_code42.nil? || @todo.v_topic_code42 == "" %>
         
         <tr>
         <td class="col-xs-1">
@@ -3184,16 +3089,14 @@
                 <%= f.text_field :v_ranking_total42, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-2"><a class="deleteRow"></a>
-
-            </td>
+             <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
         
        
         </tr>
         
         <% end %>
         
-        <% unless @todo.v_topic_code43.nil? %>
+        <% unless @todo.v_topic_code43.nil? || @todo.v_topic_code43 == "" %>
         
         <tr>
         <td class="col-xs-1">
@@ -3253,16 +3156,14 @@
                 </span>
             </td>         
             
-            <td class="col-sm-2"><a class="deleteRow"></a>
-
-            </td>
+            <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
         
        
         </tr>
         
         <% end %>
         
-        <% unless @todo.v_topic_code44.nil? %>
+        <% unless @todo.v_topic_code44.nil? || @todo.v_topic_code44 == "" %>
         
         <tr>
         <td class="col-xs-1">
@@ -3322,16 +3223,14 @@
                 </span>
             </td>          
             
-            <td class="col-sm-2"><a class="deleteRow"></a>
-
-            </td>
+             <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
         
        
         </tr>
         
         <% end %>
         
-        <% unless @todo.v_topic_code45.nil? %>
+        <% unless @todo.v_topic_code45.nil? || @todo.v_topic_code45 == "" %>
         
         <tr>
         <td class="col-xs-1">
@@ -3391,16 +3290,14 @@
                 </span>
             </td>          
             
-            <td class="col-sm-2"><a class="deleteRow"></a>
-
-            </td>
+            <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
         
        
         </tr>
         
         <% end %>
         
-        <% unless @todo.v_topic_code46.nil? %>
+        <% unless @todo.v_topic_code46.nil? || @todo.v_topic_code46 == "" %>
         
         <tr>
         <td class="col-xs-1">
@@ -3460,16 +3357,14 @@
                 <%= f.text_field :v_ranking_total46, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-2"><a class="deleteRow"></a>
-
-            </td>
+           <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
         
        
         </tr>
         
         <% end %>
         
-        <% unless @todo.v_topic_code47.nil? %>
+        <% unless @todo.v_topic_code47.nil? || @todo.v_topic_code47 == "" %>
         
         <tr>
         <td class="col-xs-1">
@@ -3529,16 +3424,14 @@
                 <%= f.text_field :v_ranking_total47, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-2"><a class="deleteRow"></a>
-
-            </td>
+             <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
         
        
         </tr>
         
         <% end %>
         
-        <% unless @todo.v_topic_code48.nil? %>
+        <% unless @todo.v_topic_code48.nil? || @todo.v_topic_code48 == "" %>
         
         <tr>
         <td class="col-xs-1">
@@ -3598,16 +3491,14 @@
                 <%= f.text_field :v_ranking_total48, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-2"><a class="deleteRow"></a>
-
-            </td>
+            <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
         
        
         </tr>
         
         <% end %>
         
-        <% unless @todo.v_topic_code49.nil? %>
+        <% unless @todo.v_topic_code49.nil? || @todo.v_topic_code49 == "" %>
         
         <tr>
         <td class="col-xs-1">
@@ -3667,9 +3558,7 @@
                 <%= f.text_field :v_ranking_total49, class: 'form-control' %>
                 </span>
             </td>
-            <td class="col-sm-2"><a class="deleteRow"></a>
-
-            </td>
+          <td><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
         
        
         </tr>
@@ -3757,9 +3646,7 @@
             </td>
             
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+             <td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
         
                
         </tr>
@@ -3812,16 +3699,14 @@
             </td>
             
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+             <td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
                
         </tr>
         
         <% end %>
         
     
-         <% unless @todo.g_topic_code1.nil? %>
+         <% unless @todo.g_topic_code1.nil? || @todo.g_topic_code1 == "" %>
         <tr>
             <td class="col-sm-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="P1, M1, etc.  Note: Lableing it R will not cause it to be a ranking.">
@@ -3869,16 +3754,14 @@
             </td>
             
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+            <td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
                
         </tr>
         
         <% end %>
         
         
-         <% unless @todo.g_topic_code2.nil? %>
+         <% unless @todo.g_topic_code2.nil? || @todo.g_topic_code2 == "" %>
         <tr>
             <td class="col-sm-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="P1, M1, etc.  Note: Lableing it R will not cause it to be a ranking.">
@@ -3926,15 +3809,13 @@
             </td>
             
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+             <td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
                
         </tr>
         
         <% end %>
         
-         <% unless @todo.g_topic_code3.nil? %>
+         <% unless @todo.g_topic_code3.nil? || @todo.g_topic_code3 == "" %>
         <tr>
             <td class="col-sm-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="P1, M1, etc.  Note: Lableing it R will not cause it to be a ranking.">
@@ -3982,9 +3863,7 @@
             </td>
             
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+             <td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
                
         </tr>
         
@@ -3992,7 +3871,7 @@
         
         
         
-         <% unless @todo.g_topic_code4.nil? %>
+         <% unless @todo.g_topic_code4.nil? || @todo.g_topic_code4 == "" %>
         <tr>
             <td class="col-sm-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="P1, M1, etc.  Note: Lableing it R will not cause it to be a ranking.">
@@ -4040,14 +3919,12 @@
             </td>
             
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+             <td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
                
         </tr>
         
         <% end %>
-         <% unless @todo.g_topic_code5.nil? %>
+         <% unless @todo.g_topic_code5.nil? || @todo.g_topic_code5 == "" %>
         <tr>
             <td class="col-sm-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="P1, M1, etc.  Note: Lableing it R will not cause it to be a ranking.">
@@ -4095,9 +3972,7 @@
             </td>
             
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+           <td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
                
         </tr>
         
@@ -4105,7 +3980,7 @@
         
         
         
-         <% unless @todo.g_topic_code6.nil? %>
+         <% unless @todo.g_topic_code6.nil? || @todo.g_topic_code6 == "" %>
         <tr>
             <td class="col-sm-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="P1, M1, etc.  Note: Lableing it R will not cause it to be a ranking.">
@@ -4153,15 +4028,13 @@
             </td>
             
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+            <td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
                
         </tr>
         
         <% end %>
         
-         <% unless @todo.g_topic_code7.nil? %>
+         <% unless @todo.g_topic_code7.nil? || @todo.g_topic_code7 == "" %>
         <tr>
             <td class="col-sm-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="P1, M1, etc.  Note: Lableing it R will not cause it to be a ranking.">
@@ -4209,15 +4082,13 @@
             </td>
             
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+             <td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
                
         </tr>
         
         <% end %>
         
-         <% unless @todo.g_topic_code8.nil? %>
+         <% unless @todo.g_topic_code8.nil? || @todo.g_topic_code8 == "" %>
         <tr>
             <td class="col-sm-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="P1, M1, etc.  Note: Lableing it R will not cause it to be a ranking.">
@@ -4265,16 +4136,14 @@
             </td>
             
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+             <td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
                
         </tr>
         
         <% end %>
         
         
-         <% unless @todo.g_topic_code9.nil? %>
+         <% unless @todo.g_topic_code9.nil? || @todo.g_topic_code9 == "" %>
         <tr>
             <td class="col-sm-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="P1, M1, etc.  Note: Lableing it R will not cause it to be a ranking.">
@@ -4322,15 +4191,13 @@
             </td>
             
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+             <td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
                
         </tr>
         
         <% end %>
         
-         <% unless @todo.g_topic_code10.nil? %>
+         <% unless @todo.g_topic_code10.nil? || @todo.g_topic_code10 == "" %>
         <tr>
             <td class="col-sm-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="P1, M1, etc.  Note: Lableing it R will not cause it to be a ranking.">
@@ -4378,15 +4245,13 @@
             </td>
             
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+             <td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
                
         </tr>
         
         <% end %>
         
-         <% unless @todo.g_topic_code11.nil? %>
+         <% unless @todo.g_topic_code11.nil? || @todo.g_topic_code11 == "" %>
         <tr>
             <td class="col-sm-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="P1, M1, etc.  Note: Lableing it R will not cause it to be a ranking.">
@@ -4434,9 +4299,7 @@
             </td>
             
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+             <td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
                
         </tr>
         
@@ -4444,7 +4307,7 @@
         
         
         
-         <% unless @todo.g_topic_code12.nil? %>
+         <% unless @todo.g_topic_code12.nil? || @todo.g_topic_code12 == "" %>
         <tr>
             <td class="col-sm-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="P1, M1, etc.  Note: Lableing it R will not cause it to be a ranking.">
@@ -4492,15 +4355,13 @@
             </td>
             
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+             <td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
                
         </tr>
         
         <% end %>
         
-         <% unless @todo.g_topic_code13.nil? %>
+         <% unless @todo.g_topic_code13.nil? || @todo.g_topic_code13 == "" %>
         <tr>
             <td class="col-sm-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="P1, M1, etc.  Note: Lableing it R will not cause it to be a ranking.">
@@ -4548,15 +4409,13 @@
             </td>
             
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+            <td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
                
         </tr>
         
         <% end %>
         
-         <% unless @todo.g_topic_code14.nil? %>
+         <% unless @todo.g_topic_code14.nil? || @todo.g_topic_code14 == "" %>
         <tr>
             <td class="col-sm-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="P1, M1, etc.  Note: Lableing it R will not cause it to be a ranking.">
@@ -4604,15 +4463,13 @@
             </td>
             
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+             <td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
                
         </tr>
         
         <% end %>
         
-         <% unless @todo.g_topic_code15.nil? %>
+         <% unless @todo.g_topic_code15.nil? || @todo.g_topic_code15 == "" %>
         <tr>
             <td class="col-sm-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="P1, M1, etc.  Note: Lableing it R will not cause it to be a ranking.">
@@ -4660,14 +4517,12 @@
             </td>
             
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+            <td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
                
         </tr>
         
         <% end %>
-         <% unless @todo.g_topic_code16.nil? %>
+         <% unless @todo.g_topic_code16.nil? || @todo.g_topic_code16 == "" %>
         <tr>
             <td class="col-sm-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="P1, M1, etc.  Note: Lableing it R will not cause it to be a ranking.">
@@ -4715,14 +4570,12 @@
             </td>
             
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+            <td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
                
         </tr>
         
         <% end %>
-         <% unless @todo.g_topic_code17.nil? %>
+         <% unless @todo.g_topic_code17.nil? || @todo.g_topic_code17 == "" %>
         <tr>
             <td class="col-sm-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="P1, M1, etc.  Note: Lableing it R will not cause it to be a ranking.">
@@ -4770,15 +4623,13 @@
             </td>
             
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+             <td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
                
         </tr>
         
         <% end %>
         
-         <% unless @todo.g_topic_code18.nil? %>
+         <% unless @todo.g_topic_code18.nil? || @todo.g_topic_code18 == "" %>
         <tr>
             <td class="col-sm-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="P1, M1, etc.  Note: Lableing it R will not cause it to be a ranking.">
@@ -4826,16 +4677,14 @@
             </td>
             
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+             <td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
                
         </tr>
         
         <% end %>
         
         
-         <% unless @todo.g_topic_code19.nil? %>
+         <% unless @todo.g_topic_code19.nil? || @todo.g_topic_code19 == "" %>
         <tr>
             <td class="col-sm-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="P1, M1, etc.  Note: Lableing it R will not cause it to be a ranking.">
@@ -4883,15 +4732,13 @@
             </td>
             
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+             <td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
                
         </tr>
         
         <% end %>
         
-         <% unless @todo.g_topic_code20.nil? %>
+         <% unless @todo.g_topic_code20.nil? || @todo.g_topic_code20 == "" %>
         <tr>
             <td class="col-sm-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="P1, M1, etc.  Note: Lableing it R will not cause it to be a ranking.">
@@ -4939,15 +4786,13 @@
             </td>
             
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+            <td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
                
         </tr>
         
         <% end %>
         
-         <% unless @todo.g_topic_code21.nil? %>
+         <% unless @todo.g_topic_code21.nil? || @todo.g_topic_code21 == "" %>
         <tr>
             <td class="col-sm-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="P1, M1, etc.  Note: Lableing it R will not cause it to be a ranking.">
@@ -4995,15 +4840,13 @@
             </td>
             
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+            <td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
                
         </tr>
         
         <% end %>
         
-         <% unless @todo.g_topic_code22.nil? %>
+         <% unless @todo.g_topic_code22.nil? || @todo.g_topic_code22 == "" %>
         <tr>
             <td class="col-sm-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="P1, M1, etc.  Note: Lableing it R will not cause it to be a ranking.">
@@ -5051,15 +4894,13 @@
             </td>
             
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+            <td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
                
         </tr>
         
         <% end %>
         
-         <% unless @todo.g_topic_code23.nil? %>
+         <% unless @todo.g_topic_code23.nil? || @todo.g_topic_code23 == "" %>
         <tr>
             <td class="col-sm-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="P1, M1, etc.  Note: Lableing it R will not cause it to be a ranking.">
@@ -5107,15 +4948,13 @@
             </td>
             
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+           <td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
                
         </tr>
         
         <% end %>
         
-         <% unless @todo.g_topic_code24.nil? %>
+         <% unless @todo.g_topic_code24.nil? || @todo.g_topic_code24 == "" %>
         <tr>
             <td class="col-sm-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="P1, M1, etc.  Note: Lableing it R will not cause it to be a ranking.">
@@ -5163,15 +5002,13 @@
             </td>
             
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+             <td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
                
         </tr>
         
         <% end %>
         
-         <% unless @todo.g_topic_code25.nil? %>
+         <% unless @todo.g_topic_code25.nil? || @todo.g_topic_code25 == "" %>
         <tr>
             <td class="col-sm-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="P1, M1, etc.  Note: Lableing it R will not cause it to be a ranking.">
@@ -5219,15 +5056,13 @@
             </td>
             
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+             <td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
                
         </tr>
         
         <% end %>
         
-         <% unless @todo.g_topic_code26.nil? %>
+         <% unless @todo.g_topic_code26.nil? || @todo.g_topic_code26 == "" %>
         <tr>
             <td class="col-sm-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="P1, M1, etc.  Note: Lableing it R will not cause it to be a ranking.">
@@ -5275,14 +5110,12 @@
             </td>
             
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+            <td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
                
         </tr>
         
         <% end %>
-         <% unless @todo.g_topic_code27.nil? %>
+         <% unless @todo.g_topic_code27.nil? || @todo.g_topic_code27 == "" %>
         <tr>
             <td class="col-sm-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="P1, M1, etc.  Note: Lableing it R will not cause it to be a ranking.">
@@ -5330,15 +5163,13 @@
             </td>
             
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+             <td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
                
         </tr>
         
         <% end %>
         
-         <% unless @todo.g_topic_code28.nil? %>
+         <% unless @todo.g_topic_code28.nil? || @todo.g_topic_code28 == "" %>
         <tr>
             <td class="col-sm-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="P1, M1, etc.  Note: Lableing it R will not cause it to be a ranking.">
@@ -5348,12 +5179,13 @@
                  </span>
             </td>
             <td class="col-sm-1">
-                        
+            
                 <span class="has-tooltip" data-toggle="tooltip" title="Select graph type.">
        
-                <%= f.select :g_topic_type28, ['Percent Positive', 'Mindset'], class: 'form-control'%>
+                <%= f.select :g_topic_type28, ['Percent Positive', 'Mindset'], class: 'form-control' %>
+                
      
-            </span>
+                </span>
             
             </td>
             <td class="col-sm-1">
@@ -5386,15 +5218,13 @@
             </td>
             
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+             <td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
                
         </tr>
         
         <% end %>
         
-         <% unless @todo.g_topic_code29.nil? %>
+         <% unless @todo.g_topic_code29.nil? || @todo.g_topic_code29 == "" %>
         <tr>
             <td class="col-sm-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="P1, M1, etc.  Note: Lableing it R will not cause it to be a ranking.">
@@ -5442,15 +5272,13 @@
             </td>
             
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+             <td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
                
         </tr>
         
         <% end %>
         
-         <% unless @todo.g_topic_code30.nil? %>
+         <% unless @todo.g_topic_code30.nil? || @todo.g_topic_code30 == "" %>
         <tr>
             <td class="col-sm-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="P1, M1, etc.  Note: Lableing it R will not cause it to be a ranking.">
@@ -5498,15 +5326,13 @@
             </td>
             
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+             <td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
                
         </tr>
         
         <% end %>
         
-         <% unless @todo.g_topic_code31.nil? %>
+         <% unless @todo.g_topic_code31.nil? || @todo.g_topic_code31 == "" %>
         <tr>
             <td class="col-sm-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="P1, M1, etc.  Note: Lableing it R will not cause it to be a ranking.">
@@ -5554,15 +5380,13 @@
             </td>
             
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+             <td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
                
         </tr>
         
         <% end %>
         
-         <% unless @todo.g_topic_code32.nil? %>
+         <% unless @todo.g_topic_code32.nil? || @todo.g_topic_code32 == "" %>
         <tr>
             <td class="col-sm-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="P1, M1, etc.  Note: Lableing it R will not cause it to be a ranking.">
@@ -5610,15 +5434,13 @@
             </td>
             
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+             <td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
                
         </tr>
         
         <% end %>
         
-         <% unless @todo.g_topic_code33.nil? %>
+         <% unless @todo.g_topic_code33.nil? || @todo.g_topic_code33 == "" %>
         <tr>
             <td class="col-sm-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="P1, M1, etc.  Note: Lableing it R will not cause it to be a ranking.">
@@ -5666,15 +5488,13 @@
             </td>
             
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+             <td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
                
         </tr>
         
         <% end %>
         
-         <% unless @todo.g_topic_code34.nil? %>
+         <% unless @todo.g_topic_code34.nil? || @todo.g_topic_code34 == "" %>
         <tr>
             <td class="col-sm-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="P1, M1, etc.  Note: Lableing it R will not cause it to be a ranking.">
@@ -5722,15 +5542,13 @@
             </td>
             
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+             <td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
                
         </tr>
         
         <% end %>
         
-         <% unless @todo.g_topic_code35.nil? %>
+         <% unless @todo.g_topic_code35.nil? || @todo.g_topic_code35 == "" %>
         <tr>
             <td class="col-sm-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="P1, M1, etc.  Note: Lableing it R will not cause it to be a ranking.">
@@ -5778,15 +5596,13 @@
             </td>
             
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+             <td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
                
         </tr>
         
         <% end %>
         
-         <% unless @todo.g_topic_code36.nil? %>
+         <% unless @todo.g_topic_code36.nil? || @todo.g_topic_code36 == "" %>
         <tr>
             <td class="col-sm-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="P1, M1, etc.  Note: Lableing it R will not cause it to be a ranking.">
@@ -5834,15 +5650,13 @@
             </td>
             
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+            <td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
                
         </tr>
         
         <% end %>
         
-         <% unless @todo.g_topic_code37.nil? %>
+         <% unless @todo.g_topic_code37.nil? || @todo.g_topic_code37 == "" %>
         <tr>
             <td class="col-sm-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="P1, M1, etc.  Note: Lableing it R will not cause it to be a ranking.">
@@ -5890,15 +5704,13 @@
             </td>
             
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+             <td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
                
         </tr>
         
         <% end %>
         
-         <% unless @todo.g_topic_code38.nil? %>
+         <% unless @todo.g_topic_code38.nil? || @todo.g_topic_code38 == "" %>
         <tr>
             <td class="col-sm-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="P1, M1, etc.  Note: Lableing it R will not cause it to be a ranking.">
@@ -5946,15 +5758,13 @@
             </td>
             
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+             <td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
                
         </tr>
         
         <% end %>
         
-         <% unless @todo.g_topic_code39.nil? %>
+         <% unless @todo.g_topic_code39.nil? || @todo.g_topic_code39 == "" %>
         <tr>
             <td class="col-sm-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="P1, M1, etc.  Note: Lableing it R will not cause it to be a ranking.">
@@ -6002,15 +5812,13 @@
             </td>
             
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+            <td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
                
         </tr>
         
         <% end %>
         
-         <% unless @todo.g_topic_code40.nil? %>
+         <% unless @todo.g_topic_code40.nil? || @todo.g_topic_code40 == "" %>
         <tr>
             <td class="col-sm-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="P1, M1, etc.  Note: Lableing it R will not cause it to be a ranking.">
@@ -6058,15 +5866,13 @@
             </td>
             
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+            <td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
                
         </tr>
         
         <% end %>
         
-         <% unless @todo.g_topic_code41.nil? %>
+         <% unless @todo.g_topic_code41.nil? || @todo.g_topic_code41 == "" %>
         <tr>
             <td class="col-sm-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="P1, M1, etc.  Note: Lableing it R will not cause it to be a ranking.">
@@ -6114,15 +5920,13 @@
             </td>
             
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+             <td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
                
         </tr>
         
         <% end %>
         
-         <% unless @todo.g_topic_code42.nil? %>
+         <% unless @todo.g_topic_code42.nil? || @todo.g_topic_code42 == "" %>
         <tr>
             <td class="col-sm-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="P1, M1, etc.  Note: Lableing it R will not cause it to be a ranking.">
@@ -6170,15 +5974,13 @@
             </td>
             
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+            <td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
                
         </tr>
         
         <% end %>
         
-         <% unless @todo.g_topic_code43.nil? %>
+         <% unless @todo.g_topic_code43.nil? || @todo.g_topic_code43 == "" %>
         <tr>
             <td class="col-sm-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="P1, M1, etc.  Note: Lableing it R will not cause it to be a ranking.">
@@ -6226,15 +6028,13 @@
             </td>
             
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+             <td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
                
         </tr>
         
         <% end %>
         
-         <% unless @todo.g_topic_code44.nil? %>
+         <% unless @todo.g_topic_code44.nil? || @todo.g_topic_code44 == "" %>
         <tr>
             <td class="col-sm-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="P1, M1, etc.  Note: Lableing it R will not cause it to be a ranking.">
@@ -6282,15 +6082,13 @@
             </td>
             
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+             <td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
                
         </tr>
         
         <% end %>
         
-         <% unless @todo.g_topic_code45.nil? %>
+         <% unless @todo.g_topic_code45.nil? || @todo.g_topic_code45 == "" %>
         <tr>
             <td class="col-sm-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="P1, M1, etc.  Note: Lableing it R will not cause it to be a ranking.">
@@ -6338,15 +6136,13 @@
             </td>
             
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+             <td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
                
         </tr>
         
         <% end %>
         
-         <% unless @todo.g_topic_code46.nil? %>
+         <% unless @todo.g_topic_code46.nil? || @todo.g_topic_code46 == "" %>
         <tr>
             <td class="col-sm-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="P1, M1, etc.  Note: Lableing it R will not cause it to be a ranking.">
@@ -6394,15 +6190,13 @@
             </td>
             
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+            <td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
                
         </tr>
         
         <% end %>
         
-         <% unless @todo.g_topic_code47.nil? %>
+         <% unless @todo.g_topic_code47.nil? || @todo.g_topic_code47 == "" %>
         <tr>
             <td class="col-sm-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="P1, M1, etc.  Note: Lableing it R will not cause it to be a ranking.">
@@ -6450,15 +6244,13 @@
             </td>
             
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+           <td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
                
         </tr>
         
         <% end %>
         
-         <% unless @todo.g_topic_code48.nil? %>
+         <% unless @todo.g_topic_code48.nil? || @todo.g_topic_code48 == "" %>
         <tr>
             <td class="col-sm-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="P1, M1, etc.  Note: Lableing it R will not cause it to be a ranking.">
@@ -6506,15 +6298,13 @@
             </td>
             
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+             <td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
                
         </tr>
         
         <% end %>
         
-         <% unless @todo.g_topic_code49.nil? %>
+         <% unless @todo.g_topic_code49.nil? || @todo.g_topic_code49 == "" %>
         <tr>
             <td class="col-sm-1">
                 <span class="has-tooltip" data-toggle="tooltip" title="P1, M1, etc.  Note: Lableing it R will not cause it to be a ranking.">
@@ -6562,9 +6352,7 @@
             </td>
             
             
-            <td class="col-sm-1"><a class="deleteRow"></a>
-
-            </td>
+             <td class="col-sm-1"><input type="button" class="ibtnDel btn btn-md btn-danger " value="Delete"></td>
                
         </tr>
         

@@ -36,18 +36,78 @@ $(document).ready(function() {
 //function to load rows on click
 $(document).ready(function () {
     var counter = $('#verbatim_body tr').length;
+    var calcCounter = $('#verbatim_body tr').length;
+    
+    var verbatimRows = $('#verbatim_body tr');
+    var usedRows = [];
+    var existingRows = [];
+   //get max todo value
+    
+
+    i = 0;
+
+    while ( i < 50 ){
+    vmax =  verbatimRows.find('input[id^="todo_v_mindset_'+ i +'"]');
+     if (vmax.length == 1) {
+      existingRows.push(i);
+               i++;
+
+     } else {
+      i++;
+
+     };
+         
+    };
+    
+    highestTodo = Math.max(...existingRows);
+    
+    i = 0;
+    while (i < highestTodo) {
+     test = verbatimRows.find('input[id^="todo_v_mindset_'+ i +'"]');
+     
+     if (test.length == 0){
+      usedRows.push(i);
+     i++;
+     }else{
+      i++;
+     console.log(usedRows);
+     };
+   
+
+
+
+    };
         //$('#counter').html(counter);
 
 
    // var counter = 0;
-
+    a = 0;
     $("#addrow").on("click", function () {
+        
+        if (usedRows != undefined || array.length > 0){
+        
+           if(a < usedRows.length) {
+             counter = usedRows[a];
+             a++;
+              }
+
+           else if (a >= usedRows.length ){
+             counter = $('#verbatim_body tr').length - 1;
+
+
+                             
+             };
+        };
+
+
+
+                    
         var newRow = $("<tr>");
         var cols = "";
   
         cols += '<td><input type="checkbox" class="form-control" name="todo[v_mindset_'+ counter + ']" id="todo_v_mindset_'+ counter +'"></td>';  
         cols += '<td><input type="text" class="form-control" name="todo[v_topic_code'+ counter + ']" id="todo_v_topic_code'+ counter +'"></td>';
-        cols +='<td> <select name="todo[v_topic_type' + counter + ']" id="todo_v_topic_type' + counter + '"><option value="standard_3x">standard_3x</option>  <option value="standard_1x">standard_1x</option> <option value="ranking">ranking</option></select></td> ';   
+        cols += '<td> <select name="todo[v_topic_type' + counter + ']" id="todo_v_topic_type' + counter + '"><option value="standard_3x">standard_3x</option>  <option value="standard_1x">standard_1x</option> <option value="ranking">ranking</option></select></td> ';   
         cols += '<td><input type="text" class="form-control" name="todo[v_survey_column' + counter + ']" id="todo_v_survey_column'+ counter + '"/></td>';
         cols += '<td><input maxlength="25" type="text" class="form-control" name="todo[v_topic_title' + counter + ']" id="todo_v_topic_title' + counter + '" /></td>';
         cols += '<td><input type="text" class="form-control" name="todo[v_topic_frame' + counter + ']" id="todo_v_topic_frame' + counter + '" /></td>';
@@ -63,10 +123,18 @@ $(document).ready(function () {
 
 
 
-    $("table.order-list").on("click", ".ibtnDel", function (event) {
-        $(this).closest("tr").remove();       
-        counter -= 1
-    });
+  //  $("table.order-list").on("click", ".ibtnDel", function (event) {
+  //      $(this).closest("tr").remove();       
+  //      counter -= 1
+  //  });
+
+      $("table.order-list").on("click", ".ibtnDel", function (event) {
+    
+          $(this).closest("tr").find("input").val(null);
+          $(this).closest("tr").hide();       
+          counter -= 1
+      });
+
 
 
 });
@@ -98,8 +166,10 @@ $(document).ready(function () {
 
 
     $("table.order-list1").on("click", ".ibtnDel", function (event) {
-        $(this).closest("tr").remove();       
-        counter -= 1
+        //$(this).closest("tr").remove();       
+         $(this).closest("tr").find("input").val(null);
+         $(this).closest("tr").hide();      
+         counter -= 1
     });
 
 

@@ -485,6 +485,12 @@ class TodosController < ApplicationController
   end
 
 
+def delete
+    # @todo.delete
+    @todo = Todo.find(:all, :conditions => [ "mail = ?", params[:mail]])
+
+end
+
 
 def download_verbatim
 

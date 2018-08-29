@@ -209,6 +209,11 @@ label {
           animation-delay: -0.1s;
 }
 
+.hidden {
+  display: none;
+}
+
+
 @-webkit-keyframes sk-circleFadeDelay {
   0%, 39%, 100% { opacity: 0; }
   40% { opacity: 1; }
