@@ -47,7 +47,7 @@ $(document).ready(function () {
     i = 0;
 
     while ( i < 50 ){
-    vmax =  verbatimRows.find('input[id^="todo_v_mindset_'+ i +'"]');
+    vmax =  verbatimRows.find('input[id^="todo_v_topic_code'+ i +'"]');
      if (vmax.length == 1) {
       existingRows.push(i);
                i++;
@@ -63,7 +63,7 @@ $(document).ready(function () {
     
     i = 0;
     while (i < highestTodo) {
-     test = verbatimRows.find('input[id^="todo_v_mindset_'+ i +'"]');
+     test = verbatimRows.find('input[id^="todo_v_topic_code'+ i +'"]');
      
      if (test.length == 0){
       usedRows.push(i);
@@ -141,11 +141,80 @@ $(document).ready(function () {
 
 
 $(document).ready(function () {
-   // var counter = 0;
-  var counter = $('#graph_body tr').length;
+    var counter = $('#graph_body tr').length;
 
+    var calcCounter = $('#graph_body tr').length;
+    
+    var verbatimRows = $('#graph_body tr');
+    var usedRows = [];
+    var existingRows = [];
+   //get max todo value
+    
+
+    i = 0;
+
+    while ( i < 50 ){
+    vmax =  verbatimRows.find('input[id^="todo_g_topic_code'+ i +'"]');
+     if (vmax.length == 1) {
+      existingRows.push(i);
+               i++;
+
+     } else {
+      i++;
+
+     };
+         
+    };
+    
+    highestTodo = Math.max(...existingRows);
+    
+    i = 0;
+    while (i < highestTodo) {
+     test = verbatimRows.find('input[id^="todo_g_topic_code'+ i +'"]');
+     
+     if (test.length == 0){
+      usedRows.push(i);
+     i++;
+     }else{
+      i++;
+     console.log(usedRows);
+     };
+   
+
+
+
+    };
+        //$('#counter').html(counter);
+
+
+   // var counter = 0;
+    a = 0;
+
+
+
+
+
+
+   // var counter = 0;
+ 
 
     $("#addrow1").on("click", function () {
+        if (usedRows != undefined || array.length > 0){
+        
+           if(a < usedRows.length) {
+             counter = usedRows[a];
+             a++;
+              }
+
+           else if (a >= usedRows.length ){
+             counter = $('#graph_body tr').length - 1;
+
+
+                             
+             };
+        };
+
+
         var newRow = $("<tr>");
         var cols = "";
 
