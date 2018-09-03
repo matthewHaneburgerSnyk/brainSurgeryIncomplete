@@ -91,7 +91,7 @@ $(document).ready(function () {
              a++;
               }
 
-           else if (a >= usedRows.length ){
+           else if (a >= usedRows.length){
              counter = $('#verbatim_body tr').length - 1;
 
 
@@ -104,21 +104,22 @@ $(document).ready(function () {
                     
         var newRow = $("<tr>");
         var cols = "";
-  
+        if (counter < 52) {
         cols += '<td><input type="checkbox" class="form-control" name="todo[v_mindset_'+ counter + ']" id="todo_v_mindset_'+ counter +'"></td>';  
         cols += '<td><input type="text" class="form-control" name="todo[v_topic_code'+ counter + ']" id="todo_v_topic_code'+ counter +'"></td>';
         cols += '<td> <select name="todo[v_topic_type' + counter + ']" id="todo_v_topic_type' + counter + '"><option value="standard_3x">standard_3x</option>  <option value="standard_1x">standard_1x</option> <option value="ranking">ranking</option></select></td> ';   
         cols += '<td><input type="text" class="form-control" name="todo[v_survey_column' + counter + ']" id="todo_v_survey_column'+ counter + '"/></td>';
         cols += '<td><input maxlength="25" type="text" class="form-control" name="todo[v_topic_title' + counter + ']" id="todo_v_topic_title' + counter + '" /></td>';
         cols += '<td><input type="text" class="form-control" name="todo[v_topic_frame' + counter + ']" id="todo_v_topic_frame' + counter + '" /></td>';
-        cols += '<td><input type="text" class="form-control" name="todo[v_ranking_num' + counter + ']" id="todo_v_ranking_num' +counter + '"/></td>';
-        cols += '<td><input type="text" class="form-control" name="todo[v_ranking_total' + counter + ']" id="todo_v_ranking_total' +counter + '"/></td>';
+        cols += '<td><input type="text" class="form-control" name="todo[v_ranking_num' + counter + ']" id="todo_v_ranking_num' +counter + '" value="0"/></td>';
+        cols += '<td><input type="text" class="form-control" name="todo[v_ranking_total' + counter + ']" id="todo_v_ranking_total' +counter + '"  value="0"/></td>';
 
 
         cols += '<td><input type="button" class="ibtnDel btn btn-md btn-danger "  value="Delete"></td>';
         newRow.append(cols);
         $("table.order-list").append(newRow);
         counter++;
+        };
     });
 
 
@@ -217,19 +218,21 @@ $(document).ready(function () {
 
         var newRow = $("<tr>");
         var cols = "";
+      if (counter < 52) {
 
         cols += '<td><input type="text" class="form-control" name="todo[g_topic_code'+ counter + ']" id="todo_g_topic_code'+ counter +'"></td>';
         cols +='<td> <select name="todo[g_topic_type' + counter + ']" id="todo_g_topic_type' + counter + '"><option value="Percent Positive">Percent Positive</option>  <option value="Mindset">Mindset</option> <option value="Ranking">Ranking</option></select></td> ';   
         cols += '<td><input type="text" class="form-control" name="todo[graph_topics' + counter + ']" id="graph_topics'+ counter + '"/></td>';
         cols += '<td><input maxlength="25" type="text" class="form-control" name="todo[g_topic_title' + counter + ']" id="todo_g_topic_title' + counter + '" /></td>'; 
-        cols += '<td><input type="text" class="form-control" name="todo[g_ranking_num' + counter + ']" id="todo_g_ranking_num' +counter + '"/></td>';
-        cols += '<td><input type="text" class="form-control" name="todo[g_ranking_total' + counter + ']" id="todo_g_ranking_total' +counter + '"/></td>';
+    
+   
 
 
         cols += '<td><input type="button" class="ibtnDel btn btn-md btn-danger "  value="Delete"></td>';
         newRow.append(cols);
         $("table.order-list1").append(newRow);
         counter++;
+      };
     });
 
 

@@ -104,7 +104,7 @@ class TodosController < ApplicationController
             todosG  = g_todo_params
             todosGH = eval(todosG.to_s)
             todosGH = todosGH.collect { |k, v| v }
-            todosGH = todosGH.each_slice(6).to_a
+            todosGH = todosGH.each_slice(4).to_a
 
 
              
@@ -210,7 +210,7 @@ class TodosController < ApplicationController
         todosG  = g_todo_params
         todosGH = eval(todosG.to_s)
         todosGH = todosGH.collect { |k, v| v }
-        todosGH = todosGH.each_slice(6).to_a
+        todosGH = todosGH.each_slice(4).to_a
         
         @export.makeExport(todosVH, todosGH,todosSegs, todosMinds, todosMindsTypes, todosMindsTitles)
         
@@ -296,7 +296,7 @@ class TodosController < ApplicationController
     todosG  = g_todo_params
     todosGH = eval(todosG.to_s)
     todosGH = todosGH.collect { |k, v| v }
-    todosGH = todosGH.each_slice(6).to_a
+    todosGH = todosGH.each_slice(4).to_a
     puts "todosGH #{todosGH}"
     @parser.makeGraph(todosGH, todosSegs, todosMinds, todosMindsTypes, todosMindsTitles)
 
@@ -434,7 +434,7 @@ class TodosController < ApplicationController
         todosG  = g_todo_params
         todosGH = eval(todosG.to_s)
         todosGH = todosGH.collect { |k, v| v }
-        todosGH = todosGH.each_slice(6).to_a
+        todosGH = todosGH.each_slice(4).to_a
         
         
         
@@ -524,7 +524,7 @@ class TodosController < ApplicationController
     todosG  = g_todo_params
     todosGH = eval(todosG.to_s)
     todosGH = todosGH.collect { |k, v| v }
-    todosGH = todosGH.each_slice(6).to_a
+    todosGH = todosGH.each_slice(4).to_a
     puts "todosGH #{todosGH}"
     @parser.makeGraph(todosGH, todosSegs, todosMinds, todosMindsTypes, todosMindsTitles)
     @export.makeExport(todosVH, todosGH,todosSegs, todosMinds, todosMindsTypes, todosMindsTitles)
