@@ -8,7 +8,7 @@ require '././config/export.rb'
 class TodosController < ApplicationController
   
   
-  before_action :set_todo, only: [:show, :edit, :update, :destroy, :download_verbatim]
+  before_action :set_todo, only: [:show, :edit, :update, :destroy, :download_verbatim, :copy]
 
   # GET /todos
   # GET /todos.json
@@ -28,6 +28,29 @@ class TodosController < ApplicationController
 
   # GET /todos/1/edit
   def edit
+      
+  end
+  
+  
+  def copy
+      #new_data = @todo.dup
+      #new_data.save
+      #edit_todo_path(new_data)
+      #@todo1 = Todo.new(todo_params)
+      
+      @todo = Todo.new(todo_params)
+      
+      #respond_to do |format|
+      if @todo.copy
+              flash[:success] = 'Todo was successfully created.'
+              format.html { redirect_to @todo }
+              format.json { render :show, status: :created, location: @todo }
+              else
+              flash[:danger] = 'There was a problem creating the Todo.'
+              format.html { render :new }
+              format.json { render json: @todo.errors, status: :unprocessable_entity }
+           end
+      
       
   end
 
@@ -309,6 +332,41 @@ class TodosController < ApplicationController
       
       
       respond_to do |format|
+       
+       if params[:commit] == "Copy Project"
+       @todo1 = Todo.new(todo_params)
+       if @todo1.save
+           
+           if todo_params[:mapping_file].nil?
+               
+               puts "Skipping file save, no file present"
+               else
+               @filename = todo_params[:mapping_file].original_filename
+               @filename = @filename.gsub(" ", "_")
+               @filename = @filename.gsub("(", "")
+               @filename = @filename.gsub(")", "")
+               @filename = @filename.gsub("/", "")
+               @todo1.mapping_file_name = @filename
+               uploader = MappingUploader.new
+               uploader.store!(todo_params[:mapping_file])
+               puts"This is the filename >>>> #{@filename}"
+               
+           end
+           
+           
+           
+           format.html { redirect_to @todo1, notice: 'Project was successfully created.' }
+           format.json { render :show, status: :created, location: @todo }
+           
+           
+           else
+           format.html { render :new }
+           format.json { render json: @todo1.errors, status: :unprocessable_entity }
+       end
+       
+      else
+      
+      
       if @todo.update(todo_params)
           
         puts "params mapping file - #{todo_params[:mapping_file]}"
@@ -337,7 +395,7 @@ class TodosController < ApplicationController
         format.json { render json: @todo.errors, status: :unprocessable_entity }
       end
     end
-   
+  
     
     if params[:commit] == "Save"
         puts "Skipping calcs since this is a save"
@@ -470,6 +528,15 @@ class TodosController < ApplicationController
     puts "todosGH #{todosGH}"
     @parser.makeGraph(todosGH, todosSegs, todosMinds, todosMindsTypes, todosMindsTitles)
     @export.makeExport(todosVH, todosGH,todosSegs, todosMinds, todosMindsTypes, todosMindsTitles)
+    
+    
+    
+    
+    
+    
+    end
+    
+    
     end
     
   end

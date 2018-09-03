@@ -18,6 +18,11 @@
     <div class="col-sm-5">
       <%= f.text_field :project_name, class: 'form-control' %>
     </div>
+    <div class="col-sm-5">
+    <%= f.submit 'Copy Project', class: 'btn btn-primary btn-xs', data: { confirm: 'Clicking this will duplicate all project fields, make sure to update the project name to be unique.  Are you sure you\'re ready to continue?' }  %>
+   
+    </div>
+    
   </div>
   
   <div class="field form-group">
@@ -34,7 +39,9 @@
       <%= f.file_field :mapping_file, file_field: { hidden: false }, class: 'form-control' %>
       
     </div>
+    <div class="col-sm-5">
     <%= link_to 'Download Data', "/uploads/#{todo.mapping_file_name}/#{todo.mapping_file_name}", class: 'btn btn-primary btn-xs' %></td>
+    </div> 
   </div>
   
  
@@ -6362,7 +6369,7 @@
     <tfoot>
         <tr>
             <td colspan="8" style="text-align: left;">
-                <input type="button" class="btn btn-lg btn-block " id="addrow1" value="Add Row" />
+                <input type="button" class="btn btn-lg btn-block" id="addrow1" value="Add Row" />
                 
                 
             </td>
@@ -6384,6 +6391,7 @@
    
       <%= f.submit :Submit %>
       <%= f.submit :Save %>
+      
     </div>
   </div>
 <% end %>
