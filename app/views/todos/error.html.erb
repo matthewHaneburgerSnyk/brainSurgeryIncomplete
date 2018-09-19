@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Error:</strong>
+  
+  
+  
+  <%= @todo.project_name %>
+</p>
+
+<p>
+  <strong>Project Description:</strong>
+  <%= @todo.project_description %>
+</p>
+
+<p>
+<strong>Mapping File:</strong>
+<%= @todo.mapping_file %>
+</p>
+<p>
+<strong>Mapping File:</strong>
+
+<%= link_to 'Download Verbatim', todos_download_verbatim_url %>
+</p>
+
+<%= link_to 'Edit', edit_todo_path(@todo) %> |
+<%= link_to 'Back', todos_path %>

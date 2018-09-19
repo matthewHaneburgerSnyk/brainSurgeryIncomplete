@@ -9,15 +9,39 @@ require 'fileutils'
 
 
 class Parser
+    
+   
  
-def initialize(mapping)
+def initialize(mapping, todo)
 #Parse doc incoming
 $file_name = mapping[1].to_s
 $file_name = $file_name.gsub(" ", "_")
 $file_name = $file_name.gsub("(", "")
 $file_name = $file_name.gsub(")", "")
+
+ $todo2 = todo
+
+begin
 cworkbook = Creek::Book.new mapping[0]
 cworksheets = cworkbook.sheets
+rescue StandardError => e
+print e
+todo1 = TodosController.new
+todo1.request
+todo1.response
+todo1.problem($todo2,"Verbatim File is missing or in an invalid format, please upload or save as the correct format.")
+
+
+return e
+
+end
+
+
+
+
+puts "todos errors in parser  #{$todo_errors.size}"
+
+
 
 
 puts "Found #{cworksheets.count} worksheets"
@@ -392,7 +416,13 @@ case topic_type
         else
         data_row = $data[row_count].to_s.split("          ") # Parses individual rows from sheet
         
+
+        
+        
+        
         #emotion, intensity, why, s, valence, mindset 1, segment 1, mindset 2, mindset 3, mindset 4, mindset 5, segment 2, segment 3, response
+        
+        
         
         
         
@@ -452,6 +482,13 @@ case topic_type
                      data_row[0]] # response id
         
         #row_3 = row_3_raw.reject { |r| r.to_s.empty? }
+        
+        
+        
+        
+  
+        
+        
         
         if row_1_raw[0].empty?
             puts "Empty row, skipping"
@@ -1029,7 +1066,7 @@ def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
         $g_data_raw.clear
         puts "Reading verbatims for graph generation, sheet: #{cworksheet.name}"
         num_rows = 0
-        
+        $error_topic = cworksheet.name
         
         puts "g data before i add shit to it #{$g_data_raw}"
         #get the contents of the sheet and put them in an array
@@ -1150,10 +1187,40 @@ def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
                 end
                 
                 row_count = row_count + 1
+                
+                ### Make sure the data isn't out of whack
+                
+                #calculate column size
+                row_size = 0
+                row_size= $mindset_count + $segment_count + 7
+                row_size = row_size - 1
+                puts "debugging response ID identification #{data_row[row_size]}"
+                
+                if data_row[2].to_i > 0 || data_row[2].nil?
+                    todo3 = TodosController.new
+                    todo3.request
+                    todo3.response
+                    todo3.problem($todo2,"Topic code #{$error_topic} has bad data somewhere, double check the survey column.")
+                    #return e
+                    
+                end
+                ############
+                
+                
             end
             
             
+            
+            
+            
         end # End for parsing calculation
+        
+        
+        
+ 
+        
+        
+        
         #percent Positive
 
 
