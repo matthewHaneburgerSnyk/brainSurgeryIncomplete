@@ -110,6 +110,23 @@ distance_counter = 0
 distance = 3
 
 $main_distance_row = $data[0].to_s.split("          ")
+#### Verify survey column exists
+#custom error handling ¯\\\_(ツ)_/¯
+if $main_distance_row.index(survey_column).nil?
+    
+    todo5 = TodosController.new
+    todo5.request
+    todo5.response
+    todo5.problem($todo2,"Survey column #{survey_column} for topic code #{topic_code} does not exist in data file, confirm value was entered correctly.")
+    return e
+    
+end
+
+
+
+
+
+
 start_spot = $main_distance_row.index(survey_column)
 $g_start_spot = $main_distance_row.index(survey_column)
 #segment_calc = distance_row.index(segment)
@@ -126,8 +143,24 @@ $segment_count   = $segments.size
 $segment_s_array  = Array.new
 
 $segments.each do |seg|
+  
+  #custom error handling ¯\\\_(ツ)_/¯
+  if $main_distance_row.index(seg).nil?
+      
+      todo3 = TodosController.new
+      todo3.request
+      todo3.response
+      todo3.problem($todo2,"Segment #{seg} does not exist in data file, confirm value was entered correctly.")
+      return e
+      
+  end
+
+
+  
    $segment_s_array.push($main_distance_row.index(seg))
    puts "puts segment calc 11 #{$main_distance_row.index(seg)}"
+   
+   
 end
 
 puts "These are all the segments #{$segment_s_array}"
@@ -1197,10 +1230,10 @@ def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
                 puts "debugging response ID identification #{data_row[row_size]}"
                 
                 if data_row[2].to_i > 0 || data_row[2].nil?
-                    todo3 = TodosController.new
-                    todo3.request
-                    todo3.response
-                    todo3.problem($todo2,"Topic code #{$error_topic} has bad data somewhere, double check the survey column.")
+                    todo4 = TodosController.new
+                    todo4.request
+                    todo4.response
+                    todo4.problem($todo2,"Topic code #{$error_topic} has bad data somewhere, double check the survey column.")
                     #return e
                     
                 end
