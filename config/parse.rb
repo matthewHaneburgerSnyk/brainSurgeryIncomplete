@@ -412,9 +412,9 @@ ss12 = start_spot + 1   # Intensity
 ss13 = start_spot + 2   # Why
 ss14 = start_spot + 3   # Valence
 
-p14 = product_start_spot + 6   # Valence
-p24 = product_start_spot + 10  # Valence
-p34 = product_start_spot + 14  # Valence
+#p14 = product_start_spot + 6   # Valence
+#p24 = product_start_spot + 10  # Valence
+#p34 = product_start_spot + 14  # Valence
 
 
 
@@ -1766,13 +1766,20 @@ puts "m gdata #{$m_gdata}"
                                       
                                       
                                       
-  chart_style_2 = wb.styles.add_style(:font_name => "Calibri",
+    chart_style_2 = wb.styles.add_style(:font_name => "Calibri",
                                       :sz=> 11,
                                       :fg_color => "ffffff",
                                       :format_code => "00%",
                                       :border =>{:color => "00000000", :style => :none},
                                     
                                       :b=> true)
+                                      
+    data_label_style = wb.styles.add_style(:font_name => "Calibri",
+                                      :sz=> 14,
+                                      :bg_color => "000000",
+                                      :format_code => "00%",
+                                      :b=> true)
+                                                                            
                                       
     
     puts "Graph Call+_+__+_+_+_+_+_+_+_+_+_+_+_+__+_+    #{values}"
@@ -2164,21 +2171,25 @@ wb.add_worksheet(:name=> "#{g_worksheet_name}") do |sheet|
                 else
                 puts "Out of bounds, double check number of permitted topics per graph."
             end
-      
-     
+            #custom_type = File.open("./graphing_tool/config/PercentPositive.crtx")
+                     # Axlsx::Bar3DChart,
      sheet.add_chart(Axlsx::Bar3DChart, :start_at => "B10", :end_at => "O32",:title=>"   ", :show_legend => false, :barDir => :col, :grouping => :percentStacked, ) do |chart|
               puts "row p cells #{$p_cells}"
          
          
-              chart.add_series :data => sheet[$p_cells], :colors => ['365e92', '365e92', '365e92'], :labels => sheet[$t_cells], :color => "FFFFFF"
+              chart.add_series :data => sheet[$p_cells], :colors => ['365e92', '365e92', '365e92'], :labels => sheet[$t_cells], :fg_color => "000000"
               chart.add_series :data => sheet[$neu_cells], :fg_color => "ffffff" , :colors => ['a5a5a5', 'a5a5a5', 'a5a5a5']
               chart.add_series :data => sheet[$neg_cells], :fg_color => "ffffff" , :colors => ['be0712', 'be0712', 'be0712']
               chart.d_lbls.show_val = true
               chart.d_lbls.show_percent = true
+              #chart.d_lbls :style => data_label_style
               chart.valAxis.gridlines = true
               chart.catAxis.gridlines = false
               chart.valAxis.format_code = "Percentage"
-           
+              #chart.valAxis.scaling =
+              #chart.d_lbls
+              #custom_type = File.open("./graphing_tool/config/PercentPositive.crtx")
+              #chart.render custom_type
              
         
 
@@ -2679,8 +2690,8 @@ wb.add_worksheet(:name=> "#{$seg_title}") do |sheet|
   
 
     
-    sheet.add_chart(Axlsx::Bar3DChart, :start_at => "B10", :end_at => "O32", :title=>"   ", :color => "000000", :show_legend => false, :barDir => :col, :grouping => :percentStacked, ) do |chart|
-        chart.add_series :data => sheet[$p_cells],:fg_color => "ffffff" , :colors => ['365e92', '365e92', '365e92'], :labels => sheet[$t_cells]
+    sheet.add_chart(Axlsx::Bar3DChart, :start_at => "B10", :end_at => "O32", :title=>"   ", :color => "000000", :show_legend => false, :barDir => :col, :grouping => :percentStacked ) do |chart|
+        chart.add_series :data => sheet[$p_cells], :fg_color => "ffffff" , :colors => ['365e92', '365e92', '365e92'], :labels => sheet[$t_cells]
         chart.add_series :data => sheet[$neu_cells], :fg_color => "ffffff" , :colors => ['a5a5a5', 'a5a5a5', 'a5a5a5']
         chart.add_series :data => sheet[$neg_cells], :fg_color => "ffffff" , :colors => ['be0712', 'be0712', 'be0712']
         chart.d_lbls.show_val = true
@@ -2688,6 +2699,9 @@ wb.add_worksheet(:name=> "#{$seg_title}") do |sheet|
         chart.valAxis.gridlines = true
         chart.catAxis.gridlines = false
         chart.valAxis.format_code = "Percentage"
+        
+        
+        
 
 $seg_count += 1
 
@@ -3080,7 +3094,7 @@ end
             end
             
             
-            sheet.add_chart(Axlsx::Bar3DChart, :start_at => "B10", :end_at => "O32",:title=>"   ", :show_legend => false, :barDir => :bar, :grouping => :percentStacked, ) do |chart|
+            sheet.add_chart(Axlsx::Bar3DChart, :start_at => "B10", :end_at => "O32",:title=>"   ", :show_legend => false, :barDir => :bar, :grouping => :percentStacked ) do |chart|
                 chart.add_series :data => sheet[$un_cells], :colors => ['be0712', 'be0712', 'be0712'], :labels => sheet[$t_cells], :color => "FFFFFF"
                 chart.add_series :data => sheet[$ap_cells], :fg_color => "ffffff" , :colors => ['a5a5a5', 'a5a5a5', 'a5a5a5']
                 chart.add_series :data => sheet[$att_cells], :fg_color => "ffffff" , :colors => ['ffffff', 'ffffff', 'ffffff']
@@ -3090,7 +3104,7 @@ end
                 chart.valAxis.gridlines = true
                 chart.catAxis.gridlines = false
                 chart.valAxis.format_code = "Percentage"
-                
+              
                 
                 
                 

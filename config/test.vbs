@@ -1,0 +1,1 @@
+Set objExcel = CreateObject('Excel.Application')Set objWorkbook = objExcel.Workbooks.Open('test.xls')objExcel.Application.Visible = TrueobjWorkbook.WorkSheets(1).ActivateobjWorkbook.WorkSheets(1).Cells(1, 1).Value = 'Test value'objExcel.ActiveWorkbook.Save 'test.xls'objExcel.ActiveWorkbook.Close

@@ -226,13 +226,14 @@ class TodosController < ApplicationController
     verbatim_path = "././public/uploads/#{@filename}/Verbatim_#{@filename}"
     graph_path    = "././public/uploads/#{@filename}/Graph_#{@filename}"
    
+
     p_data = [map, @filename]
     
   
     
     
     #new Parser and generate verbatim file
-    @parser          = Parser.new(p_data)
+    @parser          = Parser.new(p_data, @todo)
     @export          = Export.new(todo_params[:project_name])
     todosV           = v_todo_params
     todosVH          = eval(todosV.to_s)
@@ -267,7 +268,7 @@ class TodosController < ApplicationController
         raise Exception.new('Only 5 mindsets can be submitted.  Please uncheck one row as a mindset.')
         
     end
-    
+    puts "Segment params #{segment_params}"
     segs             = segment_params
     todosSegs        = eval(segs.to_s)
     todosSegs        = todosSegs.collect { |k, v| v}
@@ -397,6 +398,7 @@ class TodosController < ApplicationController
     #put mapping file where it goes
 
     map = File.open("././public/uploads/#{@filename}/#{@filename}")
+ 
     
     verbatim_path = "././public/uploads/#{@filename}/Verbatim_#{@filename}"
     graph_path    = "././public/uploads/#{@filename}/Graph_#{@filename}"
