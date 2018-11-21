@@ -289,6 +289,7 @@ class TodosController < ApplicationController
     
     
     
+    puts "todosSegs for makeVerb #{todosSegs}"
    
     @parser.makeVerb(todosVH, todosSegs, todosMinds, todosMindsTypes, todosMindsTitles)
     
@@ -460,6 +461,7 @@ class TodosController < ApplicationController
     #todosMindsTitles = eval(mind_titles.to_s)
     #todosMindsTitles = todosMindsTitles.collect { |k, v| v}
     
+    puts "Segment params  for update @@#{segment_params}"
     begin
     @parser.makeVerb(todosVH, todosSegs, todosMinds, todosMindsTypes, todosMindsTitles)
     rescue

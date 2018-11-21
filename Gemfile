@@ -38,10 +38,11 @@ gem 'creek'
 gem 'write_xlsx'
 #gem 'rubyXL'
 #gem 'roo', '~> 2.3.1' 
-gem 'rubyzip', '= 1.0.0'
+gem 'rubyzip’, ‘>1.0.0’
 gem 'axlsx', '= 2.0.1'
 gem 'axlsx_rails'
 gem 'carrierwave'
+gem ‘zip-zip’
 gem 'client_side_validations'
 #gem 'ditch'
 

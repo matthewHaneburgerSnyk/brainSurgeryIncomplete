@@ -118,7 +118,7 @@ if $main_distance_row.index(survey_column).nil?
     todo5.request
     todo5.response
     todo5.problem($todo2,"Survey column #{survey_column} for topic code #{topic_code} does not exist in data file, confirm value was entered correctly.")
-    return e
+    #return e
     
 end
 
@@ -151,7 +151,7 @@ $segments.each do |seg|
       todo3.request
       todo3.response
       todo3.problem($todo2,"Segment #{seg} does not exist in data file, confirm value was entered correctly.")
-      return e
+      #return e
       
   end
 
@@ -583,7 +583,7 @@ title_row_raw = [ "Emotion", #emotion
                   if many_mindset_calc($mindset_s_array[2],$mindset_types_array[2], row_count ) == "" then "" else $mindset_titles_array[2] end, #mindset 3
                   if many_mindset_calc($mindset_s_array[3],$mindset_types_array[3], row_count ) == "" then "" else $mindset_titles_array[3] end, #mindset 4
                   if many_mindset_calc($mindset_s_array[4],$mindset_types_array[4], row_count ) == "" then "" else $mindset_titles_array[4] end, #mindset 5
-                  "Segment",
+                  if segment_calc($segment_s_array[0], row_count) == "" then "" else "Segment" end,     #segment 1
                   if segment_calc($segment_s_array[1], row_count) == "" then "" else "Segment 2" end,   #segment 2
                   if segment_calc($segment_s_array[2], row_count) == "" then "" else "Segment 3" end,   #segment 3
                   "Response ID"] # response id
@@ -682,7 +682,7 @@ title_row_raw = [ "Emotion", #emotion
                      if many_mindset_calc($mindset_s_array[2],$mindset_types_array[2], row_count ) == "" then "" else $mindset_titles_array[2] end, #mindset 3
                      if many_mindset_calc($mindset_s_array[3],$mindset_types_array[3], row_count ) == "" then "" else $mindset_titles_array[3] end, #mindset 4
                      if many_mindset_calc($mindset_s_array[4],$mindset_types_array[4], row_count ) == "" then "" else $mindset_titles_array[4] end, #mindset 5
-                     "Segment",   #segment 1
+                     if segment_calc($segment_s_array[0], row_count) == "" then "" else "Segment" end,     #segment 1
                      if segment_calc($segment_s_array[1], row_count) == "" then "" else "Segment 2" end,   #segment 2
                      if segment_calc($segment_s_array[2], row_count) == "" then "" else "Segment 3" end,   #segment 3
                      "Response ID"] # response id
@@ -791,7 +791,7 @@ title_row_raw = [ "Emotion", #emotion
        if many_mindset_calc($mindset_s_array[2],$mindset_types_array[2], row_count ) == "" then "" else $mindset_titles_array[2] end, #mindset 3
        if many_mindset_calc($mindset_s_array[3],$mindset_types_array[3], row_count ) == "" then "" else $mindset_titles_array[3] end, #mindset 4
        if many_mindset_calc($mindset_s_array[4],$mindset_types_array[4], row_count ) == "" then "" else $mindset_titles_array[4] end, #mindset 5
-       "Segment",          #segment 1
+       if segment_calc($segment_s_array[0], row_count) == "" then "" else "Segment" end,     #segment 1
        if segment_calc($segment_s_array[1], row_count) == "" then "" else "Segment 2" end,   #segment 2
        if segment_calc($segment_s_array[2], row_count) == "" then "" else "Segment 3" end,   #segment 3
        "Response ID"] # response id
@@ -901,7 +901,7 @@ title_row_raw = [ "Emotion", #emotion
        if many_mindset_calc($mindset_s_array[2],$mindset_types_array[2], row_count ) == "" then "" else $mindset_titles_array[2] end, #mindset 3
        if many_mindset_calc($mindset_s_array[3],$mindset_types_array[3], row_count ) == "" then "" else $mindset_titles_array[3] end, #mindset 4
        if many_mindset_calc($mindset_s_array[4],$mindset_types_array[4], row_count ) == "" then "" else $mindset_titles_array[4] end, #mindset 5
-       "Segment",                                              #segment 1
+       if segment_calc($segment_s_array[0], row_count) == "" then "" else "Segment" end,     #segment 1
        if segment_calc($segment_s_array[1], row_count) == "" then "" else "Segment 2" end,   #segment 2
        if segment_calc($segment_s_array[2], row_count) == "" then "" else "Segment 3" end,   #segment 3
        "Response ID"] # response id
