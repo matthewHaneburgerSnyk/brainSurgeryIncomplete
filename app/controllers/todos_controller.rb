@@ -462,12 +462,12 @@ class TodosController < ApplicationController
     #todosMindsTitles = todosMindsTitles.collect { |k, v| v}
     
     puts "Segment params  for update @@#{segment_params}"
-    begin
+    #begin
     @parser.makeVerb(todosVH, todosSegs, todosMinds, todosMindsTypes, todosMindsTitles)
-    rescue
+    #rescue
     
-    puts "makeVerb ain't gettin it done today"
-    end
+    # puts "makeVerb ain't gettin it done today, errors #{$todo_errors}"
+    #end
     
     
    

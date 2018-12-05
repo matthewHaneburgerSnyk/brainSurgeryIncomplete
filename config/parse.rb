@@ -30,7 +30,7 @@ todo1 = TodosController.new
 todo1.request
 todo1.response
 todo1.problem($todo2,"Verbatim File is missing or in an invalid format, please upload or save as the correct format.")
-
+puts "rescuing at line 33 in parser"
 
 return e
 
@@ -523,7 +523,8 @@ case topic_type
         
         
         
-        if row_1_raw[0].empty?
+        #if row_1_raw[0].empty?
+         if row_1_raw[0].nil? || row_1_raw[0].empty?
             puts "Empty row, skipping"
             else
             row_1 = row_1_raw.reject { |r| r.to_s.empty? }
@@ -533,7 +534,8 @@ case topic_type
         end
    
    
-        if row_2_raw[0].empty?
+        #if row_2_raw[0].empty?
+        if row_2_raw[0].nil? || row_2_raw[0].empty?
             puts "Empty row, skipping"
             else
             row_2 = row_2_raw.reject { |r| r.to_s.empty? }
@@ -541,7 +543,8 @@ case topic_type
          end
         
         
-        if row_3_raw[0].empty?
+        #if row_3_raw[0].empty?
+        if row_3_raw[0].nil? || row_3_raw[0].empty?
             puts "Empty row, skipping"
             else
             row_3 = row_3_raw.reject { |r| r.to_s.empty? }
@@ -646,7 +649,7 @@ title_row_raw = [ "Emotion", #emotion
            
            #row_1 = row_1_raw.reject { |r| r.to_s.empty? }
 
-           if row_1_raw[0].empty?
+           if  row_1_raw[0].nil? || row_1_raw[0].empty?
               puts "empty row, skipping"
            else
                
@@ -756,8 +759,8 @@ title_row_raw = [ "Emotion", #emotion
                #row_1 = row_1_raw.reject { |r| r.to_s.empty? }
 
                
-               if row_1_raw[0].empty?
-               
+               #if row_1_raw[0].empty?
+               if row_1_raw[0].nil? || row_1_raw[0].empty?
                    puts "empty row, skipping"
                
                else
@@ -869,7 +872,8 @@ title_row_raw = [ "Emotion", #emotion
                #row_1 = row_1_raw.reject { |r| r.to_s.empty? }
                
                
-               if row_1_raw[0].empty?
+               #if row_1_raw[0].empty?
+               if row_1_raw[0].nil? || row_1_raw[0].empty?
                    puts "empty row, skipping"
                    else
                    
@@ -1229,14 +1233,18 @@ def makeGraph(values,segments, mindsets, mindset_types, mindset_titles)
                 row_size = row_size - 1
                 puts "debugging response ID identification #{data_row[row_size]}"
                 
-                if data_row[2].to_i > 0 || data_row[2].nil?
-                    todo4 = TodosController.new
-                    todo4.request
-                    todo4.response
-                    todo4.problem($todo2,"Topic code #{$error_topic} has bad data somewhere, double check the survey column.")
-                    #return e
+                
+                ####
+                #  This is the check on row validity, taking it out temporarily to test
+                #####
+                # if data_row[2].to_i > 0 || data_row[2].nil?
+                #    todo4 = TodosController.new
+                #    todo4.request
+                #    todo4.response
+                #    todo4.problem($todo2,"Topic code #{$error_topic} has bad data somewhere, double check the survey column.")
+                #    #return e
                     
-                end
+                    #end
                 ############
                 
                 
